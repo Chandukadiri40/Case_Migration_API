@@ -12,7 +12,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/config")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class ColumnConfigController {
 
     private final SearchService searchService;

@@ -11,7 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/search")
-@CrossOrigin(origins = "*") // Allow requests from any origin (e.g. your UI frontend)
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class SearchController {
 
     private final SearchService searchService;

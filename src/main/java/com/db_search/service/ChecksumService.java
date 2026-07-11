@@ -3,8 +3,9 @@ package com.db_search.service;
 import com.db_search.dto.ChecksumRecordDTO;
 import com.db_search.dto.ChecksumReportRequest;
 import com.db_search.dto.ChecksumReportResponse;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,15 +16,15 @@ import java.util.Map;
 @Service
 public class ChecksumService {
 
-    private final JdbcTemplate jdbcTemplate;
+    private final EntityManager entityManager;
     private final String checksumTable;
     private final String stagingTable;
 
     public ChecksumService(
-            JdbcTemplate jdbcTemplate,
+            EntityManager entityManager,
             @Value("${checksum.table}") String checksumTable,
             @Value("${search.tables.staging}") String stagingTable) {
-        this.jdbcTemplate = jdbcTemplate;
+        this.entityManager = entityManager;
         this.checksumTable = checksumTable;
         this.stagingTable = stagingTable;
     }
@@ -45,31 +46,40 @@ public class ChecksumService {
            .append("ON c.DOCUMENTID = s.OBJECT_ID ")
            .append("WHERE 1=1");
 
-        List<Object> params = new ArrayList<>();
-
         if (request.getFromDate() != null && !request.getFromDate().trim().isEmpty()) {
-            sql.append(" AND s.MIGRATED_DATE >= ?");
-            params.add(request.getFromDate().trim());
+            sql.append(" AND s.MIGRATED_DATE >= :fromDate");
         }
 
         if (request.getToDate() != null && !request.getToDate().trim().isEmpty()) {
-            sql.append(" AND s.MIGRATED_DATE <= ?");
-            params.add(request.getToDate().trim());
+            sql.append(" AND s.MIGRATED_DATE <= :toDate");
         }
 
-        List<ChecksumRecordDTO> records = jdbcTemplate.query(sql.toString(), (rs, rowNum) -> {
+        Query query = entityManager.createNativeQuery(sql.toString());
+
+        if (request.getFromDate() != null && !request.getFromDate().trim().isEmpty()) {
+            query.setParameter("fromDate", request.getFromDate().trim());
+        }
+        if (request.getToDate() != null && !request.getToDate().trim().isEmpty()) {
+            query.setParameter("toDate", request.getToDate().trim());
+        }
+
+        @SuppressWarnings("unchecked")
+        List<Object[]> results = query.getResultList();
+        
+        List<ChecksumRecordDTO> records = new ArrayList<>();
+        for (Object[] row : results) {
             ChecksumRecordDTO dto = new ChecksumRecordDTO();
-            dto.setDocumentId(rs.getString("DOCUMENTID"));
-            dto.setChecksumBefore(rs.getString("CHECKSUMBEFORE"));
-            dto.setChecksumAfter(rs.getString("CHECKSUMAFTER"));
-            dto.setFileName(rs.getString("FILENAME"));
-            dto.setChecksumStatus(rs.getString("CHECKSUM_STATUS"));
-            dto.setMigrationStatus(rs.getString("MIGRATION_STATUS"));
-            dto.setMigratedDate(rs.getString("MIGRATED_DATE"));
-            dto.setDocumentTitle(rs.getString("U1708_DOCUMENTTITLE"));
-            dto.setDocumentClass(rs.getString("OBJECT_CLASS_ID"));
-            return dto;
-        }, params.toArray());
+            dto.setDocumentId(row[0] != null ? row[0].toString() : null);
+            dto.setChecksumBefore(row[1] != null ? row[1].toString() : null);
+            dto.setChecksumAfter(row[2] != null ? row[2].toString() : null);
+            dto.setFileName(row[3] != null ? row[3].toString() : null);
+            dto.setChecksumStatus(row[4] != null ? row[4].toString() : null);
+            dto.setMigrationStatus(row[5] != null ? row[5].toString() : null);
+            dto.setDocumentTitle(row[6] != null ? row[6].toString() : null);
+            dto.setDocumentClass(row[7] != null ? row[7].toString() : null);
+            dto.setMigratedDate(row[8] != null ? row[8].toString() : null);
+            records.add(dto);
+        }
 
         long total = records.size();
         long completed = records.stream()
