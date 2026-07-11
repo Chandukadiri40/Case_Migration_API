@@ -32,26 +32,26 @@ public class ChecksumService {
     public ChecksumReportResponse getReport(ChecksumReportRequest request) {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT ")
-           .append("c.DOCUMENTID, ")
-           .append("c.CHECKSUMBEFORE, ")
-           .append("c.CHECKSUMAFTER, ")
-           .append("c.FILENAME, ")
-           .append("c.CHECKSUM_STATUS, ")
-           .append("s.MIGRATION_STATUS, ")
-           .append("s.U1708_DOCUMENTTITLE, ")
-           .append("s.OBJECT_CLASS_ID, ")
-           .append("CONVERT(VARCHAR(30), s.MIGRATED_DATE, 126) AS MIGRATED_DATE ")
+           .append("c.documentid, ")
+           .append("c.checksumbefore, ")
+           .append("c.checksumafter, ")
+           .append("c.filename, ")
+           .append("c.checksum_status, ")
+           .append("s.migration_status, ")
+           .append("s.u1708_documenttitle, ")
+           .append("s.object_class_id, ")
+           .append("TO_CHAR(s.migrated_date, 'YYYY-MM-DD HH24:MI:SS') AS MIGRATED_DATE ")
            .append("FROM ").append(checksumTable).append(" c ")
            .append("LEFT JOIN ").append(stagingTable).append(" s ")
-           .append("ON c.DOCUMENTID = s.OBJECT_ID ")
+           .append("ON c.documentid = s.object_id ")
            .append("WHERE 1=1");
 
         if (request.getFromDate() != null && !request.getFromDate().trim().isEmpty()) {
-            sql.append(" AND s.MIGRATED_DATE >= :fromDate");
+            sql.append(" AND s.migrated_date >= :fromDate");
         }
 
         if (request.getToDate() != null && !request.getToDate().trim().isEmpty()) {
-            sql.append(" AND s.MIGRATED_DATE <= :toDate");
+            sql.append(" AND s.migrated_date <= :toDate");
         }
 
         Query query = entityManager.createNativeQuery(sql.toString());
