@@ -62,17 +62,27 @@ public class DiscoveryService {
 
         switch (endpoint) {
             case "doc-count":
-            case "year-class":
-            case "ym-class":
-                sql = "SELECT cd.symbolic_name AS class_name, MIN(CAST(dv.create_date AS TIMESTAMP)) AS earliest_created, MAX(CAST(dv.create_date AS TIMESTAMP)) AS latest_created, " +
+                sql = "SELECT cd.symbolic_name AS class_name, MIN(dv.create_date) AS earliest_created, MAX(dv.create_date) AS latest_created, " +
+                      "COUNT(dv.object_id) AS total_documents, " +
                       "COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) AS total_size_bytes, " +
                       "COALESCE(MIN(CAST(dv.content_size AS numeric)), 0) AS min_size_bytes, " +
-                      "COALESCE(MAX(CAST(dv.content_size AS numeric)), 0) AS max_size_bytes " +
+                      "COALESCE(MAX(CAST(dv.content_size AS numeric)), 0) AS max_size_bytes, " +
+                      "CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1073741824.0 AS numeric(15, 6)) AS total_size_gb " +
                       "FROM " + sourceTable + " dv " +
                       "INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
                       where + " AND dv.create_date IS NOT NULL " +
-                      "GROUP BY cd.symbolic_name, EXTRACT(YEAR FROM CAST(dv.create_date AS TIMESTAMP)), EXTRACT(MONTH FROM CAST(dv.create_date AS TIMESTAMP)) " +
+                      "GROUP BY cd.symbolic_name " +
                       "ORDER BY class_name";
+                break;
+                
+            case "doc-year-wise":
+                sql = "SELECT cd.symbolic_name AS class_name, EXTRACT(YEAR FROM CAST(dv.create_date AS TIMESTAMP)) AS creation_year, " +
+                      "COUNT(dv.object_id) AS total_documents " +
+                      "FROM " + sourceTable + " dv " +
+                      "INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
+                      where + " AND dv.create_date IS NOT NULL " +
+                      "GROUP BY cd.symbolic_name, EXTRACT(YEAR FROM CAST(dv.create_date AS TIMESTAMP)) " +
+                      "ORDER BY cd.symbolic_name, creation_year";
                 break;
                 
             case "doc-year-month":
@@ -94,7 +104,37 @@ public class DiscoveryService {
                 break;
                 
             case "annotation-total":
-                sql = "SELECT COUNT(*) AS total_annotations FROM " + schema + "annotation";
+                sql = "SELECT cd.symbolic_name AS class_name, " +
+                      "COUNT(DISTINCT a.annotated_id) AS total_documents_with_annotations, " +
+                      "COUNT(a.object_id) AS total_annotations " +
+                      "FROM " + schema + "annotation a " +
+                      "INNER JOIN " + sourceTable + " dv ON a.annotated_id = dv.object_id " +
+                      "INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
+                      where + " " +
+                      "GROUP BY cd.symbolic_name ORDER BY total_annotations DESC";
+                break;
+
+            case "annotation-mime":
+                sql = "SELECT COALESCE(dv.mime_type, 'No MIME Type') AS mime_type, " +
+                      "COUNT(DISTINCT a.annotated_id) AS total_documents_with_annotations, " +
+                      "COUNT(a.object_id) AS total_annotations " +
+                      "FROM " + schema + "annotation a " +
+                      "INNER JOIN " + sourceTable + " dv ON a.annotated_id = dv.object_id " +
+                      "INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
+                      where + " " +
+                      "GROUP BY COALESCE(dv.mime_type, 'No MIME Type') ORDER BY total_annotations DESC";
+                break;
+                
+            case "size-total":
+                sql = "SELECT cd.symbolic_name AS class_name, COUNT(dv.object_id) AS total_documents, " +
+                      "COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) AS total_size_bytes, " +
+                      "CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1048576.0 AS numeric(15, 2)) AS total_size_mb, " +
+                      "CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1073741824.0 AS numeric(15, 6)) AS total_size_gb " +
+                      "FROM " + sourceTable + " dv " +
+                      "INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
+                      where + " AND dv.create_date IS NOT NULL " +
+                      "GROUP BY cd.symbolic_name " +
+                      "ORDER BY class_name";
                 break;
                 
             case "size-bucket":
@@ -111,7 +151,8 @@ public class DiscoveryService {
                       "WHEN CAST(dv.content_size AS numeric) BETWEEN 52428800 AND 104857599 THEN '9. 50 MB - 100 MB' " +
                       "ELSE '10. Over 100 MB' END AS size_range, " +
                       "COUNT(dv.object_id) AS total_documents, " +
-                      "COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) AS total_size_bytes " +
+                      "COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) AS total_size_bytes, " +
+                      "CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1073741824.0 AS numeric(15, 6)) AS total_size_gb " +
                       "FROM " + sourceTable + " dv " +
                       "LEFT JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
                       where +
@@ -120,14 +161,11 @@ public class DiscoveryService {
                 
             case "no-content":
                 sql = "SELECT cd.symbolic_name AS class_name, " +
-                      "SUM(CASE WHEN dv.content_size IS NULL THEN 1 ELSE 0 END) AS docs_null_content, " +
-                      "SUM(CASE WHEN CAST(dv.content_size AS numeric) = 0 THEN 1 ELSE 0 END) AS docs_zero_bytes, " +
-                      "SUM(CASE WHEN dv.content_size IS NOT NULL AND CAST(dv.content_size AS numeric) != 0 THEN 1 ELSE 0 END) AS docs_with_content, " +
-                      "COUNT(dv.object_id) AS total_documents " +
+                      "SUM(CASE WHEN dv.content_size IS NULL OR CAST(dv.content_size AS numeric) = 0 THEN 1 ELSE 0 END) AS docs_without_content " +
                       "FROM " + sourceTable + " dv " +
                       "INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
                       where +
-                      " GROUP BY cd.symbolic_name ORDER BY docs_null_content DESC, docs_zero_bytes DESC";
+                      " GROUP BY cd.symbolic_name ORDER BY docs_without_content DESC";
                 break;
                 
             case "version-summary":
@@ -171,65 +209,21 @@ public class DiscoveryService {
                     sql = String.join(" UNION ALL ", unionQueries);
                 }
                 break;
-                
-            case "year-crosstab":
-                sql = "SELECT cd.symbolic_name AS class_name, EXTRACT(YEAR FROM CAST(dv.create_date AS TIMESTAMP)) AS yr, EXTRACT(MONTH FROM CAST(dv.create_date AS TIMESTAMP)) AS mth, " +
-                      "COALESCE(dv.mime_type, 'Unknown') AS mime_type, COUNT(dv.object_id) AS total_documents, " +
-                      "COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) AS total_size_bytes, " +
-                      "CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1048576.0 AS numeric(15, 2)) AS total_size_mb " +
-                      "FROM " + sourceTable + " dv " +
-                      "INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
-                      where + " AND dv.create_date IS NOT NULL " +
-                      "GROUP BY cd.symbolic_name, EXTRACT(YEAR FROM CAST(dv.create_date AS TIMESTAMP)), EXTRACT(MONTH FROM CAST(dv.create_date AS TIMESTAMP)), COALESCE(dv.mime_type, 'Unknown') " +
-                      "ORDER BY cd.symbolic_name, yr, mth, mime_type";
-                break;
-                
-            case "annotation-class":
-                sql = "SELECT cd.symbolic_name AS class_name, COUNT(a.object_id) AS annotation_count " +
-                      "FROM " + schema + "annotation a " +
-                      "INNER JOIN " + sourceTable + " dv ON a.annotated_id = dv.object_id " +
-                      "INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
-                      "GROUP BY cd.symbolic_name ORDER BY annotation_count DESC";
-                break;
-                
-            case "size-mime":
-            case "year-mime":
-            case "ym-mime":
-                sql = "SELECT COALESCE(dv.mime_type, 'No MIME Type') AS mime_type, COUNT(*) AS doc_count, " +
-                      "COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) AS total_bytes, " +
-                      "CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1048576.0 AS numeric(15, 2)) AS total_mb " +
-                      "FROM " + sourceTable + " dv " +
-                      "LEFT JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
-                      where + " GROUP BY COALESCE(dv.mime_type, 'No MIME Type') ORDER BY total_bytes DESC";
-                break;
-                
             case "version-distribution":
-                sql = "WITH VersionCounts AS (SELECT version_series_id, object_class_id, COUNT(*) AS version_count FROM " + sourceTable + " GROUP BY version_series_id, object_class_id) " +
-                      "SELECT cd.symbolic_name AS class_name, " +
-                      "CASE WHEN vc.version_count = 1 THEN '1 Version' " +
-                      "WHEN vc.version_count = 2 THEN '2 Versions' " +
-                      "WHEN vc.version_count BETWEEN 3 AND 5 THEN '3-5 Versions' " +
-                      "WHEN vc.version_count BETWEEN 6 AND 10 THEN '6-10 Versions' " +
-                      "WHEN vc.version_count BETWEEN 11 AND 20 THEN '11-20 Versions' " +
+                sql = "WITH VersionCounts AS (SELECT dv.version_series_id, cd.symbolic_name AS class_name, COUNT(*) AS version_count " +
+                      "FROM " + sourceTable + " dv INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
+                      where + " GROUP BY dv.version_series_id, cd.symbolic_name) " +
+                      "SELECT class_name, " +
+                      "CASE WHEN version_count = 1 THEN '1 Version' " +
+                      "WHEN version_count = 2 THEN '2 Versions' " +
+                      "WHEN version_count BETWEEN 3 AND 5 THEN '3-5 Versions' " +
+                      "WHEN version_count BETWEEN 6 AND 10 THEN '6-10 Versions' " +
+                      "WHEN version_count BETWEEN 11 AND 20 THEN '11-20 Versions' " +
                       "ELSE '20+ Versions' END AS version_bucket, " +
-                      "COUNT(vc.version_series_id) AS doc_count " +
-                      "FROM VersionCounts vc INNER JOIN " + schema + "classdef cd ON vc.object_class_id = cd.object_id " +
-                      "GROUP BY cd.symbolic_name, version_bucket ORDER BY cd.symbolic_name, version_bucket";
+                      "COUNT(version_series_id) AS doc_count " +
+                      "FROM VersionCounts " +
+                      "GROUP BY class_name, version_bucket ORDER BY class_name, version_bucket";
                 break;
-                
-            case "year-size-bucket":
-                sql = "SELECT EXTRACT(YEAR FROM CAST(dv.create_date AS TIMESTAMP)) AS yr, " +
-                      "CASE WHEN CAST(dv.content_size AS numeric) IS NULL THEN '0. No Content' " +
-                      "WHEN CAST(dv.content_size AS numeric) = 0 THEN '1. Zero Bytes' " +
-                      "WHEN CAST(dv.content_size AS numeric) BETWEEN 1 AND 102399 THEN '2. Under 100 KB' " +
-                      "ELSE '9. Over 50 MB' END AS size_bucket, " +
-                      "COUNT(*) AS doc_count, COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) AS total_bytes " +
-                      "FROM " + sourceTable + " dv " +
-                      "LEFT JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
-                      where + " AND dv.create_date IS NOT NULL " +
-                      "GROUP BY EXTRACT(YEAR FROM CAST(dv.create_date AS TIMESTAMP)), size_bucket ORDER BY yr, size_bucket";
-                break;
-
             case "retrieval-hex-blob":
                 sql = "SELECT SUM(CASE WHEN LENGTH(COALESCE(retrieval_names, '')) > 0 AND LENGTH(COALESCE(retrieval_names, '')) <= 500 THEN 1 ELSE 0 END) AS RN1_Hex_Format_Count, " +
                       "SUM(CASE WHEN LENGTH(COALESCE(retrieval_names, '')) > 500 THEN 1 ELSE 0 END) AS RN1_Blob_Format_Count " +
