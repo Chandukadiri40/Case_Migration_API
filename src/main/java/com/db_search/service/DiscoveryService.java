@@ -138,8 +138,7 @@ public class DiscoveryService {
                 break;
                 
             case "size-bucket":
-                sql = "SELECT COALESCE(dv.mime_type, 'No MIME Type') AS mime_type, " +
-                      "CASE WHEN CAST(dv.content_size AS numeric) IS NULL THEN '0. No Content' " +
+                sql = "SELECT CASE WHEN CAST(dv.content_size AS numeric) IS NULL THEN '0. No Content' " +
                       "WHEN CAST(dv.content_size AS numeric) = 0 THEN '1. Zero Bytes' " +
                       "WHEN CAST(dv.content_size AS numeric) BETWEEN 1 AND 102399 THEN '2. Under 100 KB' " +
                       "WHEN CAST(dv.content_size AS numeric) BETWEEN 102400 AND 511999 THEN '3. 100 KB - 500 KB' " +
@@ -152,11 +151,12 @@ public class DiscoveryService {
                       "ELSE '10. Over 100 MB' END AS size_range, " +
                       "COUNT(dv.object_id) AS total_documents, " +
                       "COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) AS total_size_bytes, " +
+                      "CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1048576.0 AS numeric(15, 6)) AS total_size_mb, " +
                       "CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1073741824.0 AS numeric(15, 6)) AS total_size_gb " +
                       "FROM " + sourceTable + " dv " +
                       "LEFT JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
                       where +
-                      " GROUP BY COALESCE(dv.mime_type, 'No MIME Type'), size_range ORDER BY mime_type, size_range";
+                      " GROUP BY size_range ORDER BY size_range";
                 break;
                 
             case "no-content":

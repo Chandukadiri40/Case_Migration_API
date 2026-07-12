@@ -86,14 +86,19 @@ public class DeliverableService {
     }
 
     private List<DeliverableRowDTO> queryApp(String table, String appDisplayName, DeliverableRequest req) {
-        String sc = statusColumn;
-        String cs = contentSizeColumn;
+        String sc = "dv." + statusColumn;
+        String cs = "dv." + contentSizeColumn;
+        
+        String schema = "";
+        if (table.contains(".")) {
+            schema = table.substring(0, table.indexOf('.') + 1);
+        }
 
         String sizeSum = "COALESCE(SUM(COALESCE(CAST(" + cs + " AS numeric),0))/1073741824.0,0)";
         String sizeOk  = "COALESCE(SUM(CASE WHEN " + sc + "='Success' THEN COALESCE(CAST(" + cs + " AS numeric),0) ELSE 0 END)/1073741824.0,0)";
 
         StringBuilder sql = new StringBuilder(
-            "SELECT object_class_id AS documentClass," +
+            "SELECT COALESCE(cd.symbolic_name, CAST(dv.object_class_id AS VARCHAR)) AS documentClass," +
             " COUNT(*) AS totalDocuments," +
             " " + sizeSum + " AS totalFileSizeGb," +
             " COUNT(CASE WHEN " + sc + "='Success' THEN 1 END) AS extractedFileNet," +
@@ -102,25 +107,27 @@ public class DeliverableService {
             " " + sizeOk + " AS extractedFileSizeGb," +
             " CASE WHEN COUNT(*)>0 THEN ROUND(COUNT(CASE WHEN " + sc + "='Success' THEN 1 END)*100.0/COUNT(*),2) ELSE 0 END AS percentCompletion," +
             " CASE WHEN COUNT(*)>0 THEN ROUND(COUNT(CASE WHEN " + sc + "='Failed' THEN 1 END)*100.0/COUNT(*),2) ELSE 0 END AS percentFailed" +
-            " FROM " + table + " WHERE 1=1"
+            " FROM " + table + " dv " +
+            " LEFT JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
+            " WHERE 1=1"
         );
 
         List<Object> params = new ArrayList<>();
 
         if (req.getDocumentClass() != null && !req.getDocumentClass().trim().isEmpty()) {
-            sql.append(" AND LOWER(CAST(object_class_id AS VARCHAR)) LIKE LOWER(?)");
+            sql.append(" AND LOWER(COALESCE(cd.symbolic_name, CAST(dv.object_class_id AS VARCHAR))) LIKE LOWER(?)");
             params.add("%" + req.getDocumentClass().trim() + "%");
         }
         if (req.getCreatedDate() != null && !req.getCreatedDate().trim().isEmpty()) {
-            sql.append(" AND CAST(" + createdDateColumn + " AS date) = CAST(? AS date)");
+            sql.append(" AND CAST(dv." + createdDateColumn + " AS date) = CAST(? AS date)");
             params.add(req.getCreatedDate().trim());
         }
         if (req.getStartDate() != null && !req.getStartDate().trim().isEmpty()) {
-            sql.append(" AND " + dateColumn + " >= ?");
+            sql.append(" AND dv." + dateColumn + " >= ?");
             params.add(req.getStartDate().trim());
         }
         if (req.getEndDate() != null && !req.getEndDate().trim().isEmpty()) {
-            sql.append(" AND " + dateColumn + " <= ?");
+            sql.append(" AND dv." + dateColumn + " <= ?");
             params.add(req.getEndDate().trim());
         }
         if (req.getMigrationStatus() != null && !req.getMigrationStatus().trim().isEmpty()
@@ -129,7 +136,7 @@ public class DeliverableService {
             params.add(req.getMigrationStatus().trim());
         }
 
-        sql.append(" GROUP BY object_class_id ORDER BY object_class_id");
+        sql.append(" GROUP BY COALESCE(cd.symbolic_name, CAST(dv.object_class_id AS VARCHAR)) ORDER BY COALESCE(cd.symbolic_name, CAST(dv.object_class_id AS VARCHAR))");
 
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql.toString(), params.toArray());
         List<DeliverableRowDTO> result = new ArrayList<>();
