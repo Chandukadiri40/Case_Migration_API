@@ -45,7 +45,7 @@ public class MonitorService {
             return paths
                 .filter(Files::isRegularFile)
                 .map(p -> p.getFileName().toString())
-                .filter(name -> name.matches(".*\\d{4}-\\d{2}-\\d{2}\\.log$") || name.endsWith(".log"))
+                .filter(name -> name.toLowerCase().matches(".*\\d{4}-\\d{2}-\\d{2}\\.log$") || name.toLowerCase().endsWith(".log"))
                 .map(this::extractDateFromFilename)
                 .distinct()
                 .sorted((a, b) -> b.compareTo(a))
@@ -79,9 +79,11 @@ public class MonitorService {
                     String line;
                     LogEntryDTO currentEntry = null;
                     StringBuilder messageBuilder = new StringBuilder();
+                    Pattern customPattern = Pattern.compile("^(\\d{2}-\\d{2}-\\d{4}\\s+\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?\\s+[AP]M)\\s+-\\s+(.*)$");
                     
                     while ((line = reader.readLine()) != null) {
                         Matcher matcher = LOG_PATTERN.matcher(line);
+                        Matcher customMatcher = customPattern.matcher(line);
                         if (matcher.matches()) {
                             if (currentEntry != null) {
                                 currentEntry.setMessage(messageBuilder.toString().trim());
@@ -92,8 +94,34 @@ public class MonitorService {
                             currentEntry.setLevel(matcher.group(2));
                             currentEntry.setThread(matcher.group(3).trim());
                             currentEntry.setLogger(matcher.group(4).trim());
-                            
                             messageBuilder = new StringBuilder(matcher.group(5));
+                        } else if (customMatcher.matches()) {
+                            if (currentEntry != null) {
+                                currentEntry.setMessage(messageBuilder.toString().trim());
+                                logs.add(currentEntry);
+                            }
+                            currentEntry = new LogEntryDTO();
+                            currentEntry.setTimestamp(customMatcher.group(1));
+                            
+                            String fullMsg = customMatcher.group(2);
+                            String level = fullMsg.toLowerCase().startsWith("error") ? "ERROR" : "INFO";
+                            currentEntry.setLevel(level);
+                            currentEntry.setThread("");
+                            
+                            String logger = "AppLog";
+                            String msg = fullMsg;
+                            int idx = fullMsg.indexOf(" ====:");
+                            if (idx != -1) {
+                                logger = fullMsg.substring(idx + 6);
+                                msg = fullMsg.substring(0, idx);
+                            } else {
+                                int idx2 = fullMsg.indexOf("====");
+                                if (idx2 != -1 && idx2 > fullMsg.length() - 20) {
+                                    msg = fullMsg.substring(0, idx2);
+                                }
+                            }
+                            currentEntry.setLogger(logger);
+                            messageBuilder = new StringBuilder(msg);
                         } else {
                             if (currentEntry != null) {
                                 messageBuilder.append("\n").append(line);

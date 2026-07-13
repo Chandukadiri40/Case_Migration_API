@@ -1,0 +1,1 @@
+const { Client } = require('pg'); const c = new Client({ connectionString: 'postgresql://postgres:postgres@localhost:5432/P8Migration' }); c.connect().then(() => c.query('SELECT column_name FROM information_schema.columns WHERE table_name = ''ischecksumtable''').then(r => console.log(r.rows)).finally(() => c.end()));

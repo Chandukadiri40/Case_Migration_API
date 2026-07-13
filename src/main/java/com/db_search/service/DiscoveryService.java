@@ -179,10 +179,28 @@ public class DiscoveryService {
                 break;
                 
             case "property-defs":
-                sql = "SELECT pd.dbg_class_name AS class_name, gpd.symbolic_name AS property_name, pd.dbg_display_name AS display_name, gpd.max_length_string AS data_length " +
+                params.clear();
+                sql = "SELECT pd.dbg_class_name AS class_name, gpd.symbolic_name AS property_name, pd.dbg_display_name AS display_name, " +
+                      "CASE CAST(pd.datatype AS VARCHAR) " +
+                      "WHEN '0' THEN 'Unspecified' " +
+                      "WHEN '1' THEN 'Binary' " +
+                      "WHEN '2' THEN 'Boolean' " +
+                      "WHEN '3' THEN 'DateTime' " +
+                      "WHEN '4' THEN 'Float64' " +
+                      "WHEN '5' THEN 'ID' " +
+                      "WHEN '6' THEN 'Integer32' " +
+                      "WHEN '7' THEN 'Object' " +
+                      "WHEN '8' THEN 'String' " +
+                      "ELSE 'Unknown (' || CAST(pd.datatype AS VARCHAR) || ')' END AS type, " +
+                      "gpd.max_length_string AS data_length " +
                       "FROM " + schema + "propertydefinition pd " +
-                      "INNER JOIN " + schema + "globalpropertydef gpd ON pd.parent_prop_id = gpd.object_id " +
-                      "ORDER BY class_name, property_name";
+                      "INNER JOIN " + schema + "globalpropertydef gpd ON pd.global_prop_id = gpd.object_id " +
+                      "WHERE 1=1 ";
+                if (criteria.getDocumentClasses() != null && !criteria.getDocumentClasses().isEmpty()) {
+                    sql += "AND pd.dbg_class_name IN (" + criteria.getDocumentClasses().stream().map(c -> "?").collect(Collectors.joining(",")) + ") ";
+                    params.addAll(criteria.getDocumentClasses());
+                }
+                sql += "ORDER BY class_name, property_name";
                 break;
                 
             case "element-total":
@@ -192,7 +210,7 @@ public class DiscoveryService {
             case "element-properties":
                 java.util.List<String> listTables = java.util.Arrays.asList("listofinteger32", "listofstring", "listofbinary", "listofboolean", "listofdatetime", "listoffloat64", "listofid");
                 java.util.List<String> unionQueries = new java.util.ArrayList<>();
-                String schemaName = schema.replace(".", "");
+                String schemaName = schema.replace(".", "").toLowerCase();
                 for (String table : listTables) {
                     try {
                         Integer exists = jdbcTemplate.queryForObject("SELECT 1 FROM information_schema.tables WHERE table_schema = ? AND table_name = ?", Integer.class, schemaName, table);
