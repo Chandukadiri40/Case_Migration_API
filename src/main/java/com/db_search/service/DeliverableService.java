@@ -1,7 +1,6 @@
 package com.db_search.service;
 
 import com.db_search.dto.DeliverableRequest;
-import com.db_search.dto.DeliverableRowDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
