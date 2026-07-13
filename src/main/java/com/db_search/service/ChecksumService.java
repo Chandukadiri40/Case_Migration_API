@@ -1,11 +1,9 @@
 package com.db_search.service;
 
-import com.db_search.dto.ChecksumRecordDTO;
 import com.db_search.dto.ChecksumReportRequest;
 import com.db_search.dto.ChecksumReportResponse;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,20 +14,23 @@ import java.util.Map;
 @Service
 public class ChecksumService {
 
-    private final EntityManager entityManager;
+    private final JdbcTemplate jdbcTemplate;
     private final String checksumTable;
-    private final String stagingTable;
 
     public ChecksumService(
-            EntityManager entityManager,
-            @Value("${checksum.table}") String checksumTable,
-            @Value("${search.tables.staging}") String stagingTable) {
-        this.entityManager = entityManager;
+            JdbcTemplate jdbcTemplate,
+            @Value("${checksum.table}") String checksumTable) {
+        this.jdbcTemplate = jdbcTemplate;
         this.checksumTable = checksumTable;
-        this.stagingTable = stagingTable;
     }
 
     public ChecksumReportResponse getReport(ChecksumReportRequest request) {
+        if (request.getAppId() == null || request.getAppId().trim().isEmpty()) {
+            throw new IllegalArgumentException("Application (Object Store) is required.");
+        }
+
+        String targetStagingTable = request.getAppId().trim() + ".docversion_staging";
+
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT ")
            .append("c.documentid, ")
@@ -37,60 +38,75 @@ public class ChecksumService {
            .append("c.checksumafter, ")
            .append("c.filename, ")
            .append("c.checksum_status, ")
-           .append("s.migration_status, ")
-           .append("s.u1708_documenttitle, ")
-           .append("s.object_class_id, ")
-           .append("TO_CHAR(s.migrated_date, 'YYYY-MM-DD HH24:MI:SS') AS MIGRATED_DATE ")
+           .append("s.* ")
            .append("FROM ").append(checksumTable).append(" c ")
-           .append("LEFT JOIN ").append(stagingTable).append(" s ")
+           .append("INNER JOIN ").append(targetStagingTable).append(" s ")
            .append("ON c.documentid = s.object_id ")
            .append("WHERE 1=1");
 
+        List<Object> params = new ArrayList<>();
+
+        if (request.getMigrationStatus() != null && !request.getMigrationStatus().trim().isEmpty() && !request.getMigrationStatus().equalsIgnoreCase("All")) {
+            if (request.getMigrationStatus().equalsIgnoreCase("Success")) {
+                sql.append(" AND LOWER(s.migration_status) IN ('success', 'migrated')");
+            } else if (request.getMigrationStatus().equalsIgnoreCase("Failed")) {
+                sql.append(" AND LOWER(s.migration_status) = 'failed'");
+            } else {
+                sql.append(" AND LOWER(s.migration_status) = LOWER(?)");
+                params.add(request.getMigrationStatus().trim());
+            }
+        }
+
+        if (request.getDocumentClass() != null && !request.getDocumentClass().trim().isEmpty() && !request.getDocumentClass().equalsIgnoreCase("All")) {
+            String classId = findClassIdBySymbolicName(request.getAppId(), request.getDocumentClass());
+            sql.append(" AND s.object_class_id = ?");
+            params.add(classId);
+        }
+
         if (request.getFromDate() != null && !request.getFromDate().trim().isEmpty()) {
-            sql.append(" AND s.migrated_date >= :fromDate");
+            sql.append(" AND s.migrated_date >= CAST(? AS timestamp)");
+            params.add(request.getFromDate().trim());
         }
 
         if (request.getToDate() != null && !request.getToDate().trim().isEmpty()) {
-            sql.append(" AND s.migrated_date <= :toDate");
+            sql.append(" AND s.migrated_date <= CAST(? AS timestamp)");
+            params.add(request.getToDate().trim());
         }
 
-        Query query = entityManager.createNativeQuery(sql.toString());
+        List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql.toString(), params.toArray());
 
-        if (request.getFromDate() != null && !request.getFromDate().trim().isEmpty()) {
-            query.setParameter("fromDate", request.getFromDate().trim());
-        }
-        if (request.getToDate() != null && !request.getToDate().trim().isEmpty()) {
-            query.setParameter("toDate", request.getToDate().trim());
-        }
+        List<Map<String, Object>> records = new ArrayList<>();
+        long total = rows.size();
+        long completed = 0;
+        long pending = 0;
+        long migratedInStaging = 0;
 
-        @SuppressWarnings("unchecked")
-        List<Object[]> results = query.getResultList();
-        
-        List<ChecksumRecordDTO> records = new ArrayList<>();
-        for (Object[] row : results) {
-            ChecksumRecordDTO dto = new ChecksumRecordDTO();
-            dto.setDocumentId(row[0] != null ? row[0].toString() : null);
-            dto.setChecksumBefore(row[1] != null ? row[1].toString() : null);
-            dto.setChecksumAfter(row[2] != null ? row[2].toString() : null);
-            dto.setFileName(row[3] != null ? row[3].toString() : null);
-            dto.setChecksumStatus(row[4] != null ? row[4].toString() : null);
-            dto.setMigrationStatus(row[5] != null ? row[5].toString() : null);
-            dto.setDocumentTitle(row[6] != null ? row[6].toString() : null);
-            dto.setDocumentClass(row[7] != null ? row[7].toString() : null);
-            dto.setMigratedDate(row[8] != null ? row[8].toString() : null);
-            records.add(dto);
-        }
+        Map<String, String> classMap = getClassIdToSymbolicNameMap(request.getAppId());
+        for (Map<String, Object> row : rows) {
+            Map<String, Object> record = new HashMap<>();
+            for (Map.Entry<String, Object> entry : row.entrySet()) {
+                String key = entry.getKey();
+                Object val = entry.getValue();
+                if (key.equalsIgnoreCase("object_class_id") && val != null) {
+                    val = classMap.getOrDefault(val.toString().toUpperCase(), val.toString());
+                }
+                record.put(key.toLowerCase(), val);
+                record.put(key, val);
+            }
+            records.add(record);
 
-        long total = records.size();
-        long completed = records.stream()
-                .filter(r -> "Completed".equalsIgnoreCase(r.getChecksumStatus()))
-                .count();
-        long pending = records.stream()
-                .filter(r -> !"Completed".equalsIgnoreCase(r.getChecksumStatus()))
-                .count();
-        long migratedInStaging = records.stream()
-                .filter(r -> "Migrated".equalsIgnoreCase(r.getMigrationStatus()))
-                .count();
+            String chkStatus = (String) record.get("checksum_status");
+            if ("Completed".equalsIgnoreCase(chkStatus)) {
+                completed++;
+            } else {
+                pending++;
+            }
+
+            String migStatus = (String) record.get("migration_status");
+            if ("Migrated".equalsIgnoreCase(migStatus) || "Success".equalsIgnoreCase(migStatus)) {
+                migratedInStaging++;
+            }
+        }
 
         Map<String, Long> summary = new HashMap<>();
         summary.put("total", total);
@@ -103,5 +119,33 @@ public class ChecksumService {
         response.setSummary(summary);
 
         return response;
+    }
+    private String findClassIdBySymbolicName(String appId, String symbolicName) {
+        if (symbolicName == null || symbolicName.trim().isEmpty() || symbolicName.equalsIgnoreCase("All")) {
+            return null;
+        }
+        try {
+            String sql = "SELECT object_id FROM " + appId + ".classdef WHERE LOWER(symbolic_name) = LOWER(?) LIMIT 1";
+            return jdbcTemplate.queryForObject(sql, String.class, symbolicName.trim());
+        } catch (Exception e) {
+            return symbolicName;
+        }
+    }
+    private Map<String, String> getClassIdToSymbolicNameMap(String appId) {
+        Map<String, String> map = new java.util.HashMap<>();
+        try {
+            String sql = "SELECT object_id, symbolic_name FROM " + appId + ".classdef";
+            List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+            for (Map<String, Object> row : rows) {
+                String id = row.get("object_id") != null ? row.get("object_id").toString().toUpperCase() : "";
+                String name = row.get("symbolic_name") != null ? row.get("symbolic_name").toString() : "";
+                if (!id.isEmpty() && !name.isEmpty()) {
+                    map.put(id, name);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("getClassIdToSymbolicNameMap error: " + e.getMessage());
+        }
+        return map;
     }
 }

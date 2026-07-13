@@ -20,7 +20,7 @@ public class DeliverableController {
     }
 
     @PostMapping("/migration-report")
-    public ResponseEntity<List<DeliverableRowDTO>> getMigrationReport(
+    public ResponseEntity<List<java.util.Map<String, Object>>> getMigrationReport(
             @RequestBody DeliverableRequest request) {
         return ResponseEntity.ok(deliverableService.getMigrationReport(request));
     }

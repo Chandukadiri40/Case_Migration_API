@@ -7,5 +7,5 @@ import java.util.Map;
 @Data
 public class ChecksumReportResponse {
     private Map<String, Long> summary;
-    private List<ChecksumRecordDTO> records;
+    private List<Map<String, Object>> records;
 }

@@ -62,7 +62,16 @@ public class ColumnConfigController {
             .body(searchService.getAvailableFields());
     }
 
-
+    /**
+     * Returns the configured reconciliation system properties and custom metadata columns.
+     */
+    @GetMapping("/reconciliation-properties")
+    public ResponseEntity<Map<String, List<String>>> getReconciliationProperties() {
+        return ResponseEntity.ok(Map.of(
+            "systemProperties", searchService.getReconciliationSystemProperties(),
+            "customMetadata", searchService.getReconciliationCustomMetadata()
+        ));
+    }
 }
 
 

@@ -46,6 +46,9 @@ public class SearchService {
     private final Set<String> targetCustomColumns;
     private final List<String> targetCustomColumnsList;
 
+    private final List<String> reconciliationSystemProperties;
+    private final List<String> reconciliationCustomMetadata;
+
     // Dynamic metadata fields mapping loaded from database (with static fallback)
     private final List<com.db_search.dto.MetadataFieldDTO> availableFields = new ArrayList<>();
     private final Map<String, String> displayNameToColumnName = new java.util.concurrent.ConcurrentHashMap<>();
@@ -153,7 +156,9 @@ public class SearchService {
             @Value("${search.tables.source.custom-columns}") String sourceCustomColumnsStr,
             @Value("${search.tables.staging.custom-columns}") String stagingCustomColumnsStr,
             @Value("${search.tables.target.custom-columns}") String targetCustomColumnsStr,
-            @Value("${search.date-column:CREATE_DATE}") String dateColumn) {
+            @Value("${search.date-column:CREATE_DATE}") String dateColumn,
+            @Value("${reconciliation.system-properties:mime_type,create_date,modify_date,object_class_id}") String recSystemPropertiesStr,
+            @Value("${reconciliation.custom-metadata:u1708_documenttitle,ua8c8_user_name,ud5e8_address,uc7a6_order_no}") String recCustomMetadataStr) {
         this.jdbcTemplate = jdbcTemplate;
         this.queryValidator = queryValidator;
         this.targetTable = targetTable;
@@ -211,6 +216,30 @@ public class SearchService {
             this.targetCustomColumnsList = Collections.emptyList();
             this.targetCustomColumns = Collections.emptySet();
         }
+
+        if (recSystemPropertiesStr != null && !recSystemPropertiesStr.trim().isEmpty()) {
+            this.reconciliationSystemProperties = Arrays.stream(recSystemPropertiesStr.split(","))
+                    .map(String::trim)
+                    .collect(Collectors.toList());
+        } else {
+            this.reconciliationSystemProperties = Arrays.asList("mime_type", "create_date", "modify_date", "object_class_id");
+        }
+
+        if (recCustomMetadataStr != null && !recCustomMetadataStr.trim().isEmpty()) {
+            this.reconciliationCustomMetadata = Arrays.stream(recCustomMetadataStr.split(","))
+                    .map(String::trim)
+                    .collect(Collectors.toList());
+        } else {
+            this.reconciliationCustomMetadata = Arrays.asList("u1708_documenttitle", "ua8c8_user_name", "ud5e8_address", "uc7a6_order_no");
+        }
+    }
+
+    public List<String> getReconciliationSystemProperties() {
+        return reconciliationSystemProperties;
+    }
+
+    public List<String> getReconciliationCustomMetadata() {
+        return reconciliationCustomMetadata;
     }
 
 
