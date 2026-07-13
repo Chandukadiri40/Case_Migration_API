@@ -16,6 +16,9 @@ public class DiscoveryService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @org.springframework.beans.factory.annotation.Value("${search.system-columns.created-date:CREATE_DATE}")
+    private String createdDateColumn;
+
     private String buildWhereClause(DiscoveryCriteria criteria, List<Object> params, String tableAlias) {
         StringBuilder where = new StringBuilder(" WHERE 1=1");
         
@@ -27,12 +30,12 @@ public class DiscoveryService {
         }
         
         if (criteria.getCreatedFrom() != null) {
-            where.append(" AND CAST(").append(tableAlias).append(".create_date AS TIMESTAMP) >= ?");
+            where.append(" AND CAST(").append(tableAlias).append(".").append(createdDateColumn).append(" AS TIMESTAMP) >= ?");
             params.add(java.sql.Timestamp.valueOf(criteria.getCreatedFrom() + " 00:00:00"));
         }
         
         if (criteria.getCreatedTo() != null) {
-            where.append(" AND CAST(").append(tableAlias).append(".create_date AS TIMESTAMP) <= ?");
+            where.append(" AND CAST(").append(tableAlias).append(".").append(createdDateColumn).append(" AS TIMESTAMP) <= ?");
             params.add(java.sql.Timestamp.valueOf(criteria.getCreatedTo() + " 23:59:59"));
         }
         
@@ -62,7 +65,7 @@ public class DiscoveryService {
 
         switch (endpoint) {
             case "doc-count":
-                sql = "SELECT cd.symbolic_name AS class_name, MIN(dv.create_date) AS earliest_created, MAX(dv.create_date) AS latest_created, " +
+                sql = "SELECT cd.symbolic_name AS class_name, MIN(dv." + createdDateColumn + ") AS earliest_created, MAX(dv." + createdDateColumn + ") AS latest_created, " +
                       "COUNT(dv.object_id) AS total_documents, " +
                       "COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) AS total_size_bytes, " +
                       "COALESCE(MIN(CAST(dv.content_size AS numeric)), 0) AS min_size_bytes, " +
@@ -70,30 +73,30 @@ public class DiscoveryService {
                       "CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1073741824.0 AS numeric(15, 6)) AS total_size_gb " +
                       "FROM " + sourceTable + " dv " +
                       "INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
-                      where + " AND dv.create_date IS NOT NULL " +
+                      where + " AND dv." + createdDateColumn + " IS NOT NULL " +
                       "GROUP BY cd.symbolic_name " +
                       "ORDER BY class_name";
                 break;
                 
             case "doc-year-wise":
-                sql = "SELECT cd.symbolic_name AS class_name, EXTRACT(YEAR FROM CAST(dv.create_date AS TIMESTAMP)) AS creation_year, " +
+                sql = "SELECT cd.symbolic_name AS class_name, EXTRACT(YEAR FROM CAST(dv." + createdDateColumn + " AS TIMESTAMP)) AS creation_year, " +
                       "COUNT(dv.object_id) AS total_documents " +
                       "FROM " + sourceTable + " dv " +
                       "INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
-                      where + " AND dv.create_date IS NOT NULL " +
-                      "GROUP BY cd.symbolic_name, EXTRACT(YEAR FROM CAST(dv.create_date AS TIMESTAMP)) " +
+                      where + " AND dv." + createdDateColumn + " IS NOT NULL " +
+                      "GROUP BY cd.symbolic_name, EXTRACT(YEAR FROM CAST(dv." + createdDateColumn + " AS TIMESTAMP)) " +
                       "ORDER BY cd.symbolic_name, creation_year";
                 break;
                 
             case "doc-year-month":
             case "custom-object-trend":
                 String baseTable = endpoint.equals("custom-object-trend") ? (schema + "customobject") : sourceTable;
-                sql = "SELECT cd.symbolic_name AS class_name, EXTRACT(YEAR FROM CAST(dv.create_date AS TIMESTAMP)) AS creation_year, " +
-                      "EXTRACT(MONTH FROM CAST(dv.create_date AS TIMESTAMP)) AS creation_month, COUNT(dv.object_id) AS total_documents " +
+                sql = "SELECT cd.symbolic_name AS class_name, EXTRACT(YEAR FROM CAST(dv." + createdDateColumn + " AS TIMESTAMP)) AS creation_year, " +
+                      "EXTRACT(MONTH FROM CAST(dv." + createdDateColumn + " AS TIMESTAMP)) AS creation_month, COUNT(dv.object_id) AS total_documents " +
                       "FROM " + baseTable + " dv " +
                       "INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
-                      where + " AND dv.create_date IS NOT NULL " +
-                      "GROUP BY cd.symbolic_name, EXTRACT(YEAR FROM CAST(dv.create_date AS TIMESTAMP)), EXTRACT(MONTH FROM CAST(dv.create_date AS TIMESTAMP)) " +
+                      where + " AND dv." + createdDateColumn + " IS NOT NULL " +
+                      "GROUP BY cd.symbolic_name, EXTRACT(YEAR FROM CAST(dv." + createdDateColumn + " AS TIMESTAMP)), EXTRACT(MONTH FROM CAST(dv." + createdDateColumn + " AS TIMESTAMP)) " +
                       "ORDER BY cd.symbolic_name, creation_year, creation_month";
                 break;
                 
@@ -132,7 +135,7 @@ public class DiscoveryService {
                       "CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1073741824.0 AS numeric(15, 6)) AS total_size_gb " +
                       "FROM " + sourceTable + " dv " +
                       "INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
-                      where + " AND dv.create_date IS NOT NULL " +
+                      where + " AND dv." + createdDateColumn + " IS NOT NULL " +
                       "GROUP BY cd.symbolic_name " +
                       "ORDER BY class_name";
                 break;

@@ -376,11 +376,11 @@ public class SearchService {
 
         // 3. Date Range Filters
         if (request.getFromDate() != null && !request.getFromDate().isBlank()) {
-            sql.append(" AND ").append(dateColumn).append(" >= ?");
+            sql.append(" AND CAST(").append(dateColumn).append(" AS timestamp) >= CAST(? AS timestamp)");
             params.add(request.getFromDate().trim());
         }
         if (request.getToDate() != null && !request.getToDate().isBlank()) {
-            sql.append(" AND ").append(dateColumn).append(" <= ?");
+            sql.append(" AND CAST(").append(dateColumn).append(" AS timestamp) <= CAST(? AS timestamp)");
             params.add(request.getToDate().trim());
         }
 

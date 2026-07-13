@@ -126,11 +126,11 @@ public class DeliverableService {
             params.add(req.getCreatedDate().trim());
         }
         if (req.getStartDate() != null && !req.getStartDate().trim().isEmpty()) {
-            sql.append(" AND " + dateColumn + " >= CAST(? AS timestamp)");
+            sql.append(" AND CAST(" + dateColumn + " AS timestamp) >= CAST(? AS timestamp)");
             params.add(req.getStartDate().trim());
         }
         if (req.getEndDate() != null && !req.getEndDate().trim().isEmpty()) {
-            sql.append(" AND " + dateColumn + " <= CAST(? AS timestamp)");
+            sql.append(" AND CAST(" + dateColumn + " AS timestamp) <= CAST(? AS timestamp)");
             params.add(req.getEndDate().trim());
         }
 
@@ -177,11 +177,11 @@ public class DeliverableService {
             params.add(req.getCreatedDate().trim());
         }
         if (req.getStartDate() != null && !req.getStartDate().trim().isEmpty()) {
-            sql.append(" AND " + dateColumn + " >= CAST(? AS timestamp)");
+            sql.append(" AND CAST(" + dateColumn + " AS timestamp) >= CAST(? AS timestamp)");
             params.add(req.getStartDate().trim());
         }
         if (req.getEndDate() != null && !req.getEndDate().trim().isEmpty()) {
-            sql.append(" AND " + dateColumn + " <= CAST(? AS timestamp)");
+            sql.append(" AND CAST(" + dateColumn + " AS timestamp) <= CAST(? AS timestamp)");
             params.add(req.getEndDate().trim());
         }
         if (req.getMigrationStatus() != null && !req.getMigrationStatus().trim().isEmpty()

@@ -16,12 +16,15 @@ public class ChecksumService {
 
     private final JdbcTemplate jdbcTemplate;
     private final String checksumTable;
+    private final String dateColumn;
 
     public ChecksumService(
             JdbcTemplate jdbcTemplate,
-            @Value("${checksum.table}") String checksumTable) {
+            @Value("${checksum.table}") String checksumTable,
+            @Value("${search.date-column:CREATE_DATE}") String dateColumn) {
         this.jdbcTemplate = jdbcTemplate;
         this.checksumTable = checksumTable;
+        this.dateColumn = dateColumn.toLowerCase();
     }
 
     public ChecksumReportResponse getReport(ChecksumReportRequest request) {
@@ -55,12 +58,12 @@ public class ChecksumService {
         }
 
         if (request.getFromDate() != null && !request.getFromDate().trim().isEmpty()) {
-            sql.append(" AND s.migrated_date >= CAST(? AS timestamp)");
+            sql.append(" AND CAST(s." + dateColumn + " AS timestamp) >= CAST(? AS timestamp)");
             params.add(request.getFromDate().trim());
         }
 
         if (request.getToDate() != null && !request.getToDate().trim().isEmpty()) {
-            sql.append(" AND s.migrated_date <= CAST(? AS timestamp)");
+            sql.append(" AND CAST(s." + dateColumn + " AS timestamp) <= CAST(? AS timestamp)");
             params.add(request.getToDate().trim());
         }
 

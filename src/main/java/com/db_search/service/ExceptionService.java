@@ -16,6 +16,9 @@ public class ExceptionService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @org.springframework.beans.factory.annotation.Value("${search.system-columns.created-date:CREATE_DATE}")
+    private String createdDateColumn;
+
     public Map<String, List<Map<String, Object>>> checkExceptions(ExceptionCriteria criteria) {
         String schema = criteria.getAppId() != null && !criteria.getAppId().isEmpty() ? criteria.getAppId() + "." : "";
         String sourceTable = schema + "docversion_source";
@@ -41,12 +44,12 @@ public class ExceptionService {
         }
         
         if (criteria.getCreatedFrom() != null) {
-            where.append(" AND CAST(dv.create_date AS DATE) >= ?");
+            where.append(" AND CAST(dv.").append(createdDateColumn).append(" AS DATE) >= ?");
             params.add(java.sql.Date.valueOf(criteria.getCreatedFrom()));
         }
         
         if (criteria.getCreatedTo() != null) {
-            where.append(" AND CAST(dv.create_date AS DATE) <= ?");
+            where.append(" AND CAST(dv.").append(createdDateColumn).append(" AS DATE) <= ?");
             params.add(java.sql.Date.valueOf(criteria.getCreatedTo()));
         }
 
