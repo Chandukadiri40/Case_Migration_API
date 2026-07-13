@@ -39,23 +39,14 @@ public class ChecksumService {
            .append("c.filename, ")
            .append("c.checksum_status, ")
            .append("s.* ")
-           .append("FROM ").append(checksumTable).append(" c ")
+           .append("FROM ").append(request.getAppId().trim()).append(".").append(checksumTable).append(" c ")
            .append("INNER JOIN ").append(targetStagingTable).append(" s ")
            .append("ON c.documentid = s.object_id ")
            .append("WHERE 1=1");
 
         List<Object> params = new ArrayList<>();
 
-        if (request.getMigrationStatus() != null && !request.getMigrationStatus().trim().isEmpty() && !request.getMigrationStatus().equalsIgnoreCase("All")) {
-            if (request.getMigrationStatus().equalsIgnoreCase("Success")) {
-                sql.append(" AND LOWER(s.migration_status) IN ('success', 'migrated')");
-            } else if (request.getMigrationStatus().equalsIgnoreCase("Failed")) {
-                sql.append(" AND LOWER(s.migration_status) = 'failed'");
-            } else {
-                sql.append(" AND LOWER(s.migration_status) = LOWER(?)");
-                params.add(request.getMigrationStatus().trim());
-            }
-        }
+        sql.append(" AND LOWER(s.migration_status) IN ('success', 'migrated')");
 
         if (request.getDocumentClass() != null && !request.getDocumentClass().trim().isEmpty() && !request.getDocumentClass().equalsIgnoreCase("All")) {
             String classId = findClassIdBySymbolicName(request.getAppId(), request.getDocumentClass());
