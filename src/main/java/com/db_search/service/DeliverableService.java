@@ -18,6 +18,7 @@ public class DeliverableService {
     private final String dateColumn;
     private final String createdDateColumn;
     private final String contentSizeColumn;
+    private final SearchService searchService;
 
     // apps.json appId -> appName mapping (same as frontend apps.json)
     private static final Map<String, String> APP_NAMES = Map.of(
@@ -38,13 +39,15 @@ public class DeliverableService {
             @Value("${search.status-column}") String statusColumn,
             @Value("${search.date-column:MIGRATED_DATE}") String dateColumn,
             @Value("${search.system-columns.created-date:CREATE_DATE}") String createdDateColumn,
-            @Value("${search.system-columns.content-size:CONTENT_SIZE}") String contentSizeColumn) {
-        this.jdbcTemplate       = jdbcTemplate;
-        this.baseStagingTable   = baseStagingTable;
-        this.statusColumn       = statusColumn.toLowerCase();
-        this.dateColumn         = dateColumn.toLowerCase();
-        this.createdDateColumn  = createdDateColumn.toLowerCase();
-        this.contentSizeColumn  = contentSizeColumn.toLowerCase();
+            @Value("${search.system-columns.content-size:CONTENT_SIZE}") String contentSizeColumn,
+            SearchService searchService) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.baseStagingTable = baseStagingTable;
+        this.statusColumn = statusColumn.toLowerCase();
+        this.dateColumn = dateColumn.toLowerCase();
+        this.createdDateColumn = createdDateColumn.toLowerCase();
+        this.contentSizeColumn = contentSizeColumn.toLowerCase();
+        this.searchService = searchService;
     }
 
     public List<Map<String, Object>> getMigrationReport(DeliverableRequest req) {
@@ -162,8 +165,9 @@ public class DeliverableService {
 
     private List<Map<String, Object>> queryAppRecords(String table, String appDisplayName, DeliverableRequest req) {
         String sc = statusColumn;
+        String selectCols = searchService.buildSelectClauseForTable(table, null);
 
-        StringBuilder sql = new StringBuilder("SELECT * FROM " + table + " WHERE 1=1");
+        StringBuilder sql = new StringBuilder("SELECT " + selectCols + " FROM " + table + " WHERE 1=1");
         List<Object> params = new ArrayList<>();
 
         if (req.getDocumentClass() != null && !req.getDocumentClass().trim().isEmpty() && !req.getDocumentClass().equalsIgnoreCase("All")) {

@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class DiscoveryService {
 
@@ -210,6 +212,15 @@ public class DiscoveryService {
                 sql = "SELECT COUNT(*) AS total_content_elements FROM " + schema + "content";
                 break;
                 
+            case "element-class":
+                sql = "SELECT cd.symbolic_name AS class_name, COUNT(DISTINCT dv.object_id) AS total_documents, COUNT(c.doc_id) AS total_content_elements " +
+                      "FROM " + schema + "content c " +
+                      "INNER JOIN " + sourceTable + " dv ON c.doc_id = dv.object_id " +
+                      "INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
+                      where + " " +
+                      "GROUP BY cd.symbolic_name ORDER BY total_content_elements DESC";
+                break;
+                
             case "element-properties":
                 java.util.List<String> listTables = java.util.Arrays.asList("listofinteger32", "listofstring", "listofbinary", "listofboolean", "listofdatetime", "listoffloat64", "listofid");
                 java.util.List<String> unionQueries = new java.util.ArrayList<>();
@@ -231,19 +242,14 @@ public class DiscoveryService {
                 }
                 break;
             case "version-distribution":
-                sql = "WITH VersionCounts AS (SELECT dv.version_series_id, cd.symbolic_name AS class_name, COUNT(*) AS version_count " +
-                      "FROM " + sourceTable + " dv INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
-                      where + " GROUP BY dv.version_series_id, cd.symbolic_name) " +
-                      "SELECT class_name, " +
-                      "CASE WHEN version_count = 1 THEN '1 Version' " +
-                      "WHEN version_count = 2 THEN '2 Versions' " +
-                      "WHEN version_count BETWEEN 3 AND 5 THEN '3-5 Versions' " +
-                      "WHEN version_count BETWEEN 6 AND 10 THEN '6-10 Versions' " +
-                      "WHEN version_count BETWEEN 11 AND 20 THEN '11-20 Versions' " +
-                      "ELSE '20+ Versions' END AS version_bucket, " +
-                      "COUNT(version_series_id) AS doc_count " +
-                      "FROM VersionCounts " +
-                      "GROUP BY class_name, version_bucket ORDER BY class_name, version_bucket";
+                sql = "SELECT cd.symbolic_name AS class_name, " +
+                      "COALESCE(dv.major_version_number, '1') || '.' || COALESCE(dv.minor_version_number, '0') AS version_bucket, " +
+                      "COUNT(dv.object_id) AS doc_count " +
+                      "FROM " + sourceTable + " dv " +
+                      "INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
+                      where + " " +
+                      "GROUP BY cd.symbolic_name, COALESCE(dv.major_version_number, '1') || '.' || COALESCE(dv.minor_version_number, '0') " +
+                      "ORDER BY cd.symbolic_name, version_bucket";
                 break;
             case "retrieval-hex-blob":
                 sql = "SELECT SUM(CASE WHEN LENGTH(COALESCE(retrieval_names, '')) > 0 AND LENGTH(COALESCE(retrieval_names, '')) <= 500 THEN 1 ELSE 0 END) AS RN1_Hex_Format_Count, " +
@@ -275,8 +281,7 @@ public class DiscoveryService {
             }
             return jdbcTemplate.queryForList(sql, params.toArray());
         } catch (Exception e) {
-            System.err.println("Error executing dynamic SQL: " + sql);
-            e.printStackTrace();
+            log.error("Error executing dynamic SQL: {}", sql, e);
             throw e;
         }
     }

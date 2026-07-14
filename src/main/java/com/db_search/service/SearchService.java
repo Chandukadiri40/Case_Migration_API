@@ -2,6 +2,7 @@ package com.db_search.service;
 
 import com.db_search.dto.SearchRequest;
 import com.db_search.security.QueryValidator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class SearchService {
 
@@ -106,12 +108,12 @@ public class SearchService {
                         displayNameToColumnName.put(normName, field.getColumnName().trim());
                     }
                 }
-                System.out.println("Loaded " + availableFields.size() + " unique metadata fields mapping from database.");
+                log.info("Loaded {} unique metadata fields mapping from database.", availableFields.size());
             } else {
                 loadStaticFallbackFields();
             }
         } catch (Exception e) {
-            System.err.println("Failed to query DB metadata mapping tables: " + e.getMessage() + ". Using fallback static mapping.");
+            log.error("Failed to query DB metadata mapping tables: {}. Using fallback static mapping.", e.getMessage(), e);
             loadStaticFallbackFields();
         } finally {
             fieldsLoaded = true;
@@ -157,8 +159,9 @@ public class SearchService {
             @Value("${search.tables.staging.custom-columns}") String stagingCustomColumnsStr,
             @Value("${search.tables.target.custom-columns}") String targetCustomColumnsStr,
             @Value("${search.date-column:CREATE_DATE}") String dateColumn,
-            @Value("${reconciliation.system-properties:mime_type,create_date,modify_date,object_class_id}") String recSystemPropertiesStr,
-            @Value("${reconciliation.custom-metadata:u1708_documenttitle,ua8c8_user_name,ud5e8_address,uc7a6_order_no}") String recCustomMetadataStr) {
+            @Value("${search.report.system-properties:object_id,mime_type,content_size}") String recSystemPropertiesStr,
+            @Value("${search.report.custom-metadata:*}") String recCustomMetadataStr,
+            @Value("${search.report.extra-properties:}") String recExtraPropertiesStr) {
         this.jdbcTemplate = jdbcTemplate;
         this.queryValidator = queryValidator;
         this.targetTable = targetTable;
@@ -222,7 +225,7 @@ public class SearchService {
                     .map(String::trim)
                     .collect(Collectors.toList());
         } else {
-            this.reconciliationSystemProperties = Arrays.asList("mime_type", "create_date", "modify_date", "object_class_id");
+            this.reconciliationSystemProperties = Arrays.asList("object_id", "mime_type", "content_size");
         }
 
         if (recCustomMetadataStr != null && !recCustomMetadataStr.trim().isEmpty()) {
@@ -230,9 +233,19 @@ public class SearchService {
                     .map(String::trim)
                     .collect(Collectors.toList());
         } else {
-            this.reconciliationCustomMetadata = Arrays.asList("u1708_documenttitle", "ua8c8_user_name", "ud5e8_address", "uc7a6_order_no");
+            this.reconciliationCustomMetadata = Collections.singletonList("*");
+        }
+
+        if (recExtraPropertiesStr != null && !recExtraPropertiesStr.trim().isEmpty()) {
+            this.reconciliationExtraProperties = Arrays.stream(recExtraPropertiesStr.split(","))
+                    .map(String::trim)
+                    .collect(Collectors.toList());
+        } else {
+            this.reconciliationExtraProperties = Collections.emptyList();
         }
     }
+
+    private List<String> reconciliationExtraProperties;
 
     public List<String> getReconciliationSystemProperties() {
         return reconciliationSystemProperties;
@@ -354,7 +367,8 @@ public class SearchService {
             throw new IllegalArgumentException("Please fill at least one field in System Properties to search.");
         }
 
-        StringBuilder sql = new StringBuilder("SELECT * FROM ").append(physicalTable).append(" WHERE 1=1");
+        String selectCols = buildSelectClauseForTable(physicalTable, request.getTable());
+        StringBuilder sql = new StringBuilder("SELECT " + selectCols + " FROM ").append(physicalTable).append(" WHERE 1=1");
         List<Object> params = new ArrayList<>();
 
         // 1. Bulk Document IDs Search
@@ -480,6 +494,62 @@ public class SearchService {
             default:
                 return null;
         }
+    }
+
+    public String buildSelectClauseForTable(String tableString, String tableKey) {
+        String schema = "public";
+        String tableName = tableString;
+        if (tableString != null && tableString.contains(".")) {
+            schema = tableString.substring(0, tableString.indexOf("."));
+            tableName = tableString.substring(tableString.indexOf(".") + 1);
+        }
+        
+        String sql = "SELECT LOWER(column_name) FROM information_schema.columns WHERE table_schema = ? AND table_name = ?";
+        List<String> dbCols = jdbcTemplate.queryForList(sql, new Object[]{schema, tableName}, String.class);
+        java.util.Set<String> dbColsSet = new java.util.HashSet<>(dbCols);
+        
+        List<String> cols = new ArrayList<>();
+        
+        if (reconciliationSystemProperties != null) {
+            for (String prop : reconciliationSystemProperties) {
+                if (dbColsSet.contains(prop.toLowerCase())) {
+                    cols.add(prop);
+                }
+            }
+        }
+        
+        if (reconciliationCustomMetadata != null && !reconciliationCustomMetadata.isEmpty()) {
+            if (reconciliationCustomMetadata.contains("*")) {
+                if (tableKey != null) {
+                    List<String> mappedCols = getCustomColumnsForTable(tableKey);
+                    for (String mc : mappedCols) {
+                        if (dbColsSet.contains(mc.toLowerCase())) cols.add(mc);
+                    }
+                } else {
+                    dbColsSet.stream()
+                             .filter(dbCol -> dbCol.matches("u[0-9a-fA-F]+_.*"))
+                             .sorted()
+                             .forEach(cols::add);
+                }
+            } else {
+                for (String cmd : reconciliationCustomMetadata) {
+                    if (dbColsSet.contains(cmd.toLowerCase())) cols.add(cmd);
+                }
+            }
+        }
+        
+        if (reconciliationExtraProperties != null) {
+            for (String prop : reconciliationExtraProperties) {
+                if (dbColsSet.contains(prop.toLowerCase())) {
+                    cols.add(prop);
+                }
+            }
+        }
+        
+        if (cols.isEmpty()) {
+            return "*";
+        }
+        return String.join(", ", cols);
     }
 }
 

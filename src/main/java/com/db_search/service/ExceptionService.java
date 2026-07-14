@@ -19,6 +19,9 @@ public class ExceptionService {
     @org.springframework.beans.factory.annotation.Value("${search.system-columns.created-date:CREATE_DATE}")
     private String createdDateColumn;
 
+    @Autowired
+    private SearchService searchService;
+
     public Map<String, List<Map<String, Object>>> checkExceptions(ExceptionCriteria criteria) {
         String schema = criteria.getAppId() != null && !criteria.getAppId().isEmpty() ? criteria.getAppId() + "." : "";
         String sourceTable = schema + "docversion_source";
@@ -105,10 +108,13 @@ public class ExceptionService {
         
         String inClause = objectIds.stream().map(id -> "?").collect(Collectors.joining(","));
         Object[] inParams = objectIds.toArray();
+        String selectColsSource = searchService.buildSelectClauseForTable(sourceTable, null);
+        String selectColsStaging = searchService.buildSelectClauseForTable(stagingTable, null);
+        String selectColsTarget = searchService.buildSelectClauseForTable(targetTable, null);
         
-        List<Map<String, Object>> sourceData = jdbcTemplate.queryForList("SELECT * FROM " + sourceTable + " WHERE object_id IN (" + inClause + ")", inParams);
-        List<Map<String, Object>> stagingData = jdbcTemplate.queryForList("SELECT * FROM " + stagingTable + " WHERE object_id IN (" + inClause + ")", inParams);
-        List<Map<String, Object>> targetData = jdbcTemplate.queryForList("SELECT * FROM " + targetTable + " WHERE object_id IN (" + inClause + ")", inParams);
+        List<Map<String, Object>> sourceData = jdbcTemplate.queryForList("SELECT " + selectColsSource + " FROM " + sourceTable + " WHERE object_id IN (" + inClause + ")", inParams);
+        List<Map<String, Object>> stagingData = jdbcTemplate.queryForList("SELECT " + selectColsStaging + " FROM " + stagingTable + " WHERE object_id IN (" + inClause + ")", inParams);
+        List<Map<String, Object>> targetData = jdbcTemplate.queryForList("SELECT " + selectColsTarget + " FROM " + targetTable + " WHERE object_id IN (" + inClause + ")", inParams);
         
         result.put("source", sourceData);
         result.put("staging", stagingData);
