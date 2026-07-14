@@ -103,6 +103,11 @@ public class DeliverableService {
         String sizeSum = "COALESCE(SUM(COALESCE(CAST(" + cs + " AS numeric),0))/1073741824.0,0)";
         String sizeOk  = "COALESCE(SUM(CASE WHEN LOWER(" + sc + ") IN ('success','migrated') THEN COALESCE(CAST(" + cs + " AS numeric),0) ELSE 0 END)/1073741824.0,0)";
 
+        String runtimeExpr = "0.0 AS migrationruntimedays";
+        if (req.getEndDate() != null && !req.getEndDate().trim().isEmpty()) {
+            runtimeExpr = "COALESCE(EXTRACT(EPOCH FROM (MAX(CAST(migrated_date AS timestamp)) - MIN(CAST(migrated_date AS timestamp)))) / 72000.0, 0) AS migrationruntimedays";
+        }
+
         StringBuilder sql = new StringBuilder(
             "SELECT object_class_id AS documentclass," +
             " COUNT(*) AS totaldocuments," +
@@ -112,7 +117,8 @@ public class DeliverableService {
             " COUNT(CASE WHEN LOWER(" + sc + ") NOT IN ('success','migrated','failed') THEN 1 END) AS remaining," +
             " " + sizeOk + " AS extractedfilesizegb," +
             " CASE WHEN COUNT(*)>0 THEN ROUND(COUNT(CASE WHEN LOWER(" + sc + ") IN ('success','migrated') THEN 1 END)*100.0/COUNT(*),2) ELSE 0 END AS percentcompletion," +
-            " CASE WHEN COUNT(*)>0 THEN ROUND(COUNT(CASE WHEN LOWER(" + sc + ") = 'failed' THEN 1 END)*100.0/COUNT(*),2) ELSE 0 END AS percentfailed" +
+            " CASE WHEN COUNT(*)>0 THEN ROUND(COUNT(CASE WHEN LOWER(" + sc + ") = 'failed' THEN 1 END)*100.0/COUNT(*),2) ELSE 0 END AS percentfailed," +
+            " " + runtimeExpr +
             " FROM " + table + " WHERE 1=1"
         );
 
@@ -120,9 +126,8 @@ public class DeliverableService {
 
         if (req.getDocumentClass() != null && !req.getDocumentClass().trim().isEmpty() && !req.getDocumentClass().equalsIgnoreCase("All")) {
             String appId = table.substring(0, table.indexOf("."));
-            String classId = findClassIdBySymbolicName(appId, req.getDocumentClass());
-            sql.append(" AND object_class_id = ?");
-            params.add(classId);
+            sql.append(" AND object_class_id IN (SELECT object_id FROM ").append(appId).append(".classdef WHERE LOWER(symbolic_name) = LOWER(?))");
+            params.add(req.getDocumentClass().trim());
         }
         if (req.getCreatedDate() != null && !req.getCreatedDate().trim().isEmpty()) {
             sql.append(" AND CAST(" + createdDateColumn + " AS date) = CAST(? AS date)");
@@ -158,6 +163,7 @@ public class DeliverableService {
             map.put("extractedFileSizeGb", toDouble(row.get("extractedfilesizegb")));
             map.put("percentCompletion", toDouble(row.get("percentcompletion")));
             map.put("percentFailed", toDouble(row.get("percentfailed")));
+            map.put("runTimeDays", toDouble(row.get("migrationruntimedays")));
             result.add(map);
         }
         return result;
@@ -172,9 +178,8 @@ public class DeliverableService {
 
         if (req.getDocumentClass() != null && !req.getDocumentClass().trim().isEmpty() && !req.getDocumentClass().equalsIgnoreCase("All")) {
             String appId = table.substring(0, table.indexOf("."));
-            String classId = findClassIdBySymbolicName(appId, req.getDocumentClass());
-            sql.append(" AND object_class_id = ?");
-            params.add(classId);
+            sql.append(" AND object_class_id IN (SELECT object_id FROM ").append(appId).append(".classdef WHERE LOWER(symbolic_name) = LOWER(?))");
+            params.add(req.getDocumentClass().trim());
         }
         if (req.getCreatedDate() != null && !req.getCreatedDate().trim().isEmpty()) {
             sql.append(" AND CAST(" + createdDateColumn + " AS date) = CAST(? AS date)");

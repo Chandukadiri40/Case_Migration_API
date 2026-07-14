@@ -52,9 +52,8 @@ public class ChecksumService {
         sql.append(" AND LOWER(s.migration_status) IN ('success', 'migrated')");
 
         if (request.getDocumentClass() != null && !request.getDocumentClass().trim().isEmpty() && !request.getDocumentClass().equalsIgnoreCase("All")) {
-            String classId = findClassIdBySymbolicName(request.getAppId(), request.getDocumentClass());
-            sql.append(" AND s.object_class_id = ?");
-            params.add(classId);
+            sql.append(" AND s.object_class_id IN (SELECT object_id FROM ").append(request.getAppId().trim()).append(".classdef WHERE LOWER(symbolic_name) = LOWER(?))");
+            params.add(request.getDocumentClass().trim());
         }
 
         if (request.getFromDate() != null && !request.getFromDate().trim().isEmpty()) {
