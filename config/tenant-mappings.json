@@ -1,0 +1,60 @@
+{
+  "applications" : [ {
+    "appId" : "ccol",
+    "appName" : "Ccol",
+    "objectStore" : "FNOS",
+    "schema" : "ccol",
+    "tables" : {
+      "source" : {
+        "tableName" : "docversion_source",
+        "columns" : {
+          "docId" : "object_id",
+          "classId" : "object_class_id"
+        }
+      },
+      "staging" : {
+        "tableName" : "docversion_staging",
+        "columns" : {
+          "docId" : "stg_object_id"
+        }
+      },
+      "target" : {
+        "tableName" : "docversion_target",
+        "columns" : {
+          "docId" : "p8_doc_id",
+          "classId" : "object_class_id"
+        }
+      },
+      "checksum" : {
+        "tableName" : "checksum",
+        "columns" : {
+          "docId" : "documentid"
+        }
+      }
+    },
+    "systemColumns" : {
+      "date" : "create_date",
+      "status" : "migration_status",
+      "doc-id" : "object_id",
+      "content-size" : "content_size",
+      "mime-type" : "mime_type"
+    },
+    "classifiedTables" : {
+      "source" : [ "docversion_source" ],
+      "staging" : [ "docversion_staging" ],
+      "target" : [ "docversion_target" ],
+      "product" : [ "annotation", "ischecksumtable", "globalpropertydef", "propertydefinition", "classdef", "content", "casefolder", "customobject", "columndefinition", "versionseries" ]
+    },
+    "propertyMappings" : [ {
+      "sourceTable" : "docversion_source",
+      "sourceColumn" : "object_id",
+      "targetTable" : "docversion_target",
+      "targetColumn" : "object_class_id"
+    }, {
+      "sourceTable" : "docversion_source",
+      "sourceColumn" : "create_date",
+      "targetTable" : "docversion_target",
+      "targetColumn" : "u3463_date"
+    } ]
+  } ]
+}

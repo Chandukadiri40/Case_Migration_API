@@ -1,20 +1,28 @@
-2026-07-14 14:51:04.421 INFO  [main] com.db_search.DbSearchApplication : Starting DbSearchApplication using Java 21.0.1 with PID 36248 (D:\MigrationReportTool\Backend\MigrationReport\target\classes started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
-2026-07-14 14:51:04.424 DEBUG [main] com.db_search.DbSearchApplication : Running with Spring Boot v4.1.0, Spring v7.0.8
-2026-07-14 14:51:04.424 INFO  [main] com.db_search.DbSearchApplication : No active profile set, falling back to 1 default profile: "default"
-2026-07-14 14:51:04.919 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-07-14 14:51:04.962 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 35 ms. Found 2 JPA repository interfaces.
-2026-07-14 14:51:05.294 INFO  [main] o.s.boot.tomcat.TomcatWebServer : Tomcat initialized with port 8080 (http)
-2026-07-14 14:51:05.306 INFO  [main] o.a.coyote.http11.Http11NioProtocol : Initializing ProtocolHandler ["http-nio-8080"]
-2026-07-14 14:51:05.308 INFO  [main] o.apache.catalina.core.StandardService : Starting service [Tomcat]
-2026-07-14 14:51:05.308 INFO  [main] o.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/11.0.22]
-2026-07-14 14:51:05.372 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 905 ms
-2026-07-14 14:51:05.525 INFO  [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-07-14 14:51:05.596 INFO  [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
-2026-07-14 14:51:05.978 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-07-14 14:51:06.012 INFO  [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
-2026-07-14 14:51:06.173 INFO  [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@6a38e3d1
-2026-07-14 14:51:06.175 INFO  [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
-2026-07-14 14:51:06.250 INFO  [main] org.hibernate.orm.connections.pooling : HHH10001005: Database info:
+2026-07-15 00:13:36.208 INFO  [RMI TCP Connection(113)-127.0.0.1] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2026-07-15 00:13:36.359 INFO  [RMI TCP Connection(113)-127.0.0.1] o.s.boot.tomcat.GracefulShutdown : Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-15 00:13:36.378 INFO  [tomcat-shutdown] o.a.coyote.http11.Http11NioProtocol : Pausing ProtocolHandler ["http-nio-8080"]
+2026-07-15 00:13:36.400 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown : Graceful shutdown complete
+2026-07-15 00:13:36.408 INFO  [RMI TCP Connection(113)-127.0.0.1] o.a.coyote.http11.Http11NioProtocol : Stopping ProtocolHandler ["http-nio-8080"]
+2026-07-15 00:13:36.438 INFO  [RMI TCP Connection(113)-127.0.0.1] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-15 00:13:36.523 INFO  [RMI TCP Connection(113)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-07-15 00:13:36.549 INFO  [RMI TCP Connection(113)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-07-15 00:13:40.784 INFO  [main] com.db_search.DbSearchApplication : Starting DbSearchApplication using Java 21.0.1 with PID 43896 (D:\MigrationReportTool\Backend\MigrationReport\target\classes started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
+2026-07-15 00:13:40.787 DEBUG [main] com.db_search.DbSearchApplication : Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-07-15 00:13:40.788 INFO  [main] com.db_search.DbSearchApplication : No active profile set, falling back to 1 default profile: "default"
+2026-07-15 00:13:41.592 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-15 00:13:41.672 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 62 ms. Found 2 JPA repository interfaces.
+2026-07-15 00:13:42.140 INFO  [main] o.s.boot.tomcat.TomcatWebServer : Tomcat initialized with port 8080 (http)
+2026-07-15 00:13:42.156 INFO  [main] o.a.coyote.http11.Http11NioProtocol : Initializing ProtocolHandler ["http-nio-8080"]
+2026-07-15 00:13:42.158 INFO  [main] o.apache.catalina.core.StandardService : Starting service [Tomcat]
+2026-07-15 00:13:42.158 INFO  [main] o.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-15 00:13:42.247 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1403 ms
+2026-07-15 00:13:42.464 INFO  [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-15 00:13:42.561 INFO  [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-15 00:13:43.221 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-15 00:13:43.285 INFO  [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2026-07-15 00:13:43.528 INFO  [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7a021f49
+2026-07-15 00:13:43.531 INFO  [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2026-07-15 00:13:43.645 INFO  [main] org.hibernate.orm.connections.pooling : HHH10001005: Database info:
 	Database JDBC URL [jdbc:postgresql://localhost:5432/P8Migration]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
@@ -26,38 +34,41 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-07-14 14:51:07.182 INFO  [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-07-14 14:51:07.243 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-07-14 14:51:07.299 INFO  [main] o.s.d.j.r.query.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-07-14 14:51:07.418 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-07-14 14:51:07.684 INFO  [main] o.a.coyote.http11.Http11NioProtocol : Starting ProtocolHandler ["http-nio-8080"]
-2026-07-14 14:51:07.704 INFO  [main] o.s.boot.tomcat.TomcatWebServer : Tomcat started on port 8080 (http) with context path '/'
-2026-07-14 14:51:07.709 INFO  [main] com.db_search.DbSearchApplication : Started DbSearchApplication in 3.774 seconds (process running for 4.415)
-2026-07-14 15:05:11.256 INFO  [RMI TCP Connection(16)-127.0.0.1] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2026-07-14 15:05:11.259 INFO  [RMI TCP Connection(16)-127.0.0.1] o.s.boot.tomcat.GracefulShutdown : Commencing graceful shutdown. Waiting for active requests to complete
-2026-07-14 15:05:11.260 INFO  [tomcat-shutdown] o.a.coyote.http11.Http11NioProtocol : Pausing ProtocolHandler ["http-nio-8080"]
-2026-07-14 15:05:11.271 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown : Graceful shutdown complete
-2026-07-14 15:05:11.272 INFO  [RMI TCP Connection(16)-127.0.0.1] o.a.coyote.http11.Http11NioProtocol : Stopping ProtocolHandler ["http-nio-8080"]
-2026-07-14 15:05:11.275 INFO  [RMI TCP Connection(16)-127.0.0.1] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-07-14 15:05:11.277 INFO  [RMI TCP Connection(16)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
-2026-07-14 15:05:11.281 INFO  [RMI TCP Connection(16)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
-2026-07-14 15:05:13.674 INFO  [main] com.db_search.DbSearchApplication : Starting DbSearchApplication using Java 21.0.1 with PID 43268 (D:\MigrationReportTool\Backend\MigrationReport\target\classes started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
-2026-07-14 15:05:13.681 DEBUG [main] com.db_search.DbSearchApplication : Running with Spring Boot v4.1.0, Spring v7.0.8
-2026-07-14 15:05:13.681 INFO  [main] com.db_search.DbSearchApplication : No active profile set, falling back to 1 default profile: "default"
-2026-07-14 15:05:14.331 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-07-14 15:05:14.382 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 41 ms. Found 2 JPA repository interfaces.
-2026-07-14 15:05:14.687 INFO  [main] o.s.boot.tomcat.TomcatWebServer : Tomcat initialized with port 8080 (http)
-2026-07-14 15:05:14.698 INFO  [main] o.a.coyote.http11.Http11NioProtocol : Initializing ProtocolHandler ["http-nio-8080"]
-2026-07-14 15:05:14.699 INFO  [main] o.apache.catalina.core.StandardService : Starting service [Tomcat]
-2026-07-14 15:05:14.700 INFO  [main] o.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/11.0.22]
-2026-07-14 15:05:14.741 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1020 ms
-2026-07-14 15:05:14.870 INFO  [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-07-14 15:05:14.909 INFO  [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
-2026-07-14 15:05:15.214 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-07-14 15:05:15.240 INFO  [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
-2026-07-14 15:05:15.397 INFO  [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4ce18cec
-2026-07-14 15:05:15.399 INFO  [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
-2026-07-14 15:05:15.462 INFO  [main] org.hibernate.orm.connections.pooling : HHH10001005: Database info:
+2026-07-15 00:13:45.123 INFO  [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-15 00:13:45.207 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-15 00:13:45.290 INFO  [main] o.s.d.j.r.query.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-15 00:13:45.520 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-15 00:13:45.912 INFO  [main] o.a.coyote.http11.Http11NioProtocol : Starting ProtocolHandler ["http-nio-8080"]
+2026-07-15 00:13:45.942 INFO  [main] o.s.boot.tomcat.TomcatWebServer : Tomcat started on port 8080 (http) with context path '/'
+2026-07-15 00:13:45.951 INFO  [main] com.db_search.DbSearchApplication : Started DbSearchApplication in 5.772 seconds (process running for 6.864)
+2026-07-15 00:14:46.657 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-15 00:14:46.660 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2026-07-15 00:14:46.674 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Completed initialization in 9 ms
+2026-07-15 00:37:25.267 INFO  [RMI TCP Connection(27)-127.0.0.1] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2026-07-15 00:37:25.284 INFO  [RMI TCP Connection(27)-127.0.0.1] o.s.boot.tomcat.GracefulShutdown : Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-15 00:37:25.287 INFO  [tomcat-shutdown] o.a.coyote.http11.Http11NioProtocol : Pausing ProtocolHandler ["http-nio-8080"]
+2026-07-15 00:37:25.302 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown : Graceful shutdown complete
+2026-07-15 00:37:25.303 INFO  [RMI TCP Connection(27)-127.0.0.1] o.a.coyote.http11.Http11NioProtocol : Stopping ProtocolHandler ["http-nio-8080"]
+2026-07-15 00:37:25.325 INFO  [RMI TCP Connection(27)-127.0.0.1] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-15 00:37:25.333 INFO  [RMI TCP Connection(27)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-07-15 00:37:25.338 INFO  [RMI TCP Connection(27)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-07-15 00:37:28.715 INFO  [main] com.db_search.DbSearchApplication : Starting DbSearchApplication using Java 21.0.1 with PID 18924 (D:\MigrationReportTool\Backend\MigrationReport\target\classes started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
+2026-07-15 00:37:28.716 DEBUG [main] com.db_search.DbSearchApplication : Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-07-15 00:37:28.718 INFO  [main] com.db_search.DbSearchApplication : No active profile set, falling back to 1 default profile: "default"
+2026-07-15 00:37:29.403 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-15 00:37:29.463 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 49 ms. Found 2 JPA repository interfaces.
+2026-07-15 00:37:29.924 INFO  [main] o.s.boot.tomcat.TomcatWebServer : Tomcat initialized with port 8080 (http)
+2026-07-15 00:37:29.941 INFO  [main] o.a.coyote.http11.Http11NioProtocol : Initializing ProtocolHandler ["http-nio-8080"]
+2026-07-15 00:37:29.943 INFO  [main] o.apache.catalina.core.StandardService : Starting service [Tomcat]
+2026-07-15 00:37:29.943 INFO  [main] o.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-15 00:37:30.037 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1270 ms
+2026-07-15 00:37:30.264 INFO  [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-15 00:37:30.358 INFO  [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-15 00:37:30.871 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-15 00:37:30.907 INFO  [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2026-07-15 00:37:31.096 INFO  [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5a9051fd
+2026-07-15 00:37:31.098 INFO  [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2026-07-15 00:37:31.205 INFO  [main] org.hibernate.orm.connections.pooling : HHH10001005: Database info:
 	Database JDBC URL [jdbc:postgresql://localhost:5432/P8Migration]
 	Database driver: PostgreSQL JDBC Driver
 	Database dialect: PostgreSQLDialect
@@ -69,22 +80,82 @@
 	Pool: DataSourceConnectionProvider
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-07-14 15:05:16.226 INFO  [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-07-14 15:05:16.275 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-07-14 15:05:16.326 INFO  [main] o.s.d.j.r.query.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-07-14 15:05:16.438 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-07-14 15:05:16.678 INFO  [main] o.a.coyote.http11.Http11NioProtocol : Starting ProtocolHandler ["http-nio-8080"]
-2026-07-14 15:05:16.696 INFO  [main] o.s.boot.tomcat.TomcatWebServer : Tomcat started on port 8080 (http) with context path '/'
-2026-07-14 15:05:16.700 INFO  [main] com.db_search.DbSearchApplication : Started DbSearchApplication in 3.426 seconds (process running for 4.09)
-2026-07-14 15:10:04.617 INFO  [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-07-14 15:10:04.617 INFO  [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
-2026-07-14 15:10:04.617 INFO  [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet : Completed initialization in 0 ms
-2026-07-14 15:10:10.712 DEBUG [http-nio-8080-exec-6] c.d.controller.DiscoveryController : Fetching document classes for appId: ccol
-2026-07-14 15:29:38.513 INFO  [RMI TCP Connection(28)-127.0.0.1] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2026-07-14 15:29:38.517 INFO  [RMI TCP Connection(28)-127.0.0.1] o.s.boot.tomcat.GracefulShutdown : Commencing graceful shutdown. Waiting for active requests to complete
-2026-07-14 15:29:38.519 INFO  [tomcat-shutdown] o.a.coyote.http11.Http11NioProtocol : Pausing ProtocolHandler ["http-nio-8080"]
-2026-07-14 15:29:38.530 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown : Graceful shutdown complete
-2026-07-14 15:29:38.530 INFO  [RMI TCP Connection(28)-127.0.0.1] o.a.coyote.http11.Http11NioProtocol : Stopping ProtocolHandler ["http-nio-8080"]
-2026-07-14 15:29:38.536 INFO  [RMI TCP Connection(28)-127.0.0.1] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-07-14 15:29:38.541 INFO  [RMI TCP Connection(28)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
-2026-07-14 15:29:38.552 INFO  [RMI TCP Connection(28)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-07-15 00:37:32.518 INFO  [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-15 00:37:32.579 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-15 00:37:32.653 INFO  [main] o.s.d.j.r.query.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-15 00:37:32.880 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-15 00:37:33.212 INFO  [main] o.a.coyote.http11.Http11NioProtocol : Starting ProtocolHandler ["http-nio-8080"]
+2026-07-15 00:37:33.254 INFO  [main] o.s.boot.tomcat.TomcatWebServer : Tomcat started on port 8080 (http) with context path '/'
+2026-07-15 00:37:33.260 INFO  [main] com.db_search.DbSearchApplication : Started DbSearchApplication in 5.051 seconds (process running for 5.878)
+2026-07-15 00:38:49.519 INFO  [RMI TCP Connection(5)-127.0.0.1] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2026-07-15 00:38:49.523 INFO  [RMI TCP Connection(5)-127.0.0.1] o.s.boot.tomcat.GracefulShutdown : Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-15 00:38:49.524 INFO  [tomcat-shutdown] o.a.coyote.http11.Http11NioProtocol : Pausing ProtocolHandler ["http-nio-8080"]
+2026-07-15 00:38:49.538 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown : Graceful shutdown complete
+2026-07-15 00:38:49.538 INFO  [RMI TCP Connection(5)-127.0.0.1] o.a.coyote.http11.Http11NioProtocol : Stopping ProtocolHandler ["http-nio-8080"]
+2026-07-15 00:38:49.541 INFO  [RMI TCP Connection(5)-127.0.0.1] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-15 00:38:49.544 INFO  [RMI TCP Connection(5)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-07-15 00:38:49.549 INFO  [RMI TCP Connection(5)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-07-15 00:38:52.592 INFO  [main] com.db_search.DbSearchApplication : Starting DbSearchApplication using Java 21.0.1 with PID 3184 (D:\MigrationReportTool\Backend\MigrationReport\target\classes started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
+2026-07-15 00:38:52.594 DEBUG [main] com.db_search.DbSearchApplication : Running with Spring Boot v4.1.0, Spring v7.0.8
+2026-07-15 00:38:52.594 INFO  [main] com.db_search.DbSearchApplication : No active profile set, falling back to 1 default profile: "default"
+2026-07-15 00:38:53.173 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-15 00:38:53.230 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 47 ms. Found 2 JPA repository interfaces.
+2026-07-15 00:38:53.631 INFO  [main] o.s.boot.tomcat.TomcatWebServer : Tomcat initialized with port 8080 (http)
+2026-07-15 00:38:53.645 INFO  [main] o.a.coyote.http11.Http11NioProtocol : Initializing ProtocolHandler ["http-nio-8080"]
+2026-07-15 00:38:53.647 INFO  [main] o.apache.catalina.core.StandardService : Starting service [Tomcat]
+2026-07-15 00:38:53.648 INFO  [main] o.apache.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/11.0.22]
+2026-07-15 00:38:53.722 INFO  [main] o.s.b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1077 ms
+2026-07-15 00:38:53.877 INFO  [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-15 00:38:53.924 INFO  [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-15 00:38:54.420 INFO  [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-15 00:38:54.453 INFO  [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2026-07-15 00:38:54.655 INFO  [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4e79c25
+2026-07-15 00:38:54.658 INFO  [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2026-07-15 00:38:54.735 INFO  [main] org.hibernate.orm.connections.pooling : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/P8Migration]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.9
+	Default catalog/schema: P8Migration/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-15 00:38:55.822 INFO  [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-15 00:38:55.886 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-15 00:38:55.957 INFO  [main] o.s.d.j.r.query.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-15 00:38:56.183 WARN  [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-15 00:38:56.491 INFO  [main] o.a.coyote.http11.Http11NioProtocol : Starting ProtocolHandler ["http-nio-8080"]
+2026-07-15 00:38:56.514 INFO  [main] o.s.boot.tomcat.TomcatWebServer : Tomcat started on port 8080 (http) with context path '/'
+2026-07-15 00:38:56.519 INFO  [main] com.db_search.DbSearchApplication : Started DbSearchApplication in 4.41 seconds (process running for 5.24)
+2026-07-15 00:39:03.570 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-15 00:39:03.570 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2026-07-15 00:39:03.579 INFO  [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Completed initialization in 8 ms
+2026-07-15 00:39:06.626 DEBUG [http-nio-8080-exec-5] c.d.controller.DiscoveryController : Fetching document classes for appId: ccol
+2026-07-15 00:39:15.890 INFO  [http-nio-8080-exec-7] c.d.controller.DiscoveryController : Executing report for endpoint: custom-object-trend, appId: ccol
+2026-07-15 00:39:21.152 INFO  [http-nio-8080-exec-9] c.d.controller.DiscoveryController : Executing report for endpoint: doc-count, appId: ccol
+2026-07-15 00:39:23.805 INFO  [http-nio-8080-exec-1] c.d.controller.DiscoveryController : Executing report for endpoint: doc-mime, appId: ccol
+2026-07-15 00:39:30.465 INFO  [http-nio-8080-exec-3] c.d.controller.DiscoveryController : Executing report for endpoint: size-bucket, appId: ccol
+2026-07-15 00:39:33.177 INFO  [http-nio-8080-exec-5] c.d.controller.DiscoveryController : Executing report for endpoint: doc-year-wise, appId: ccol
+2026-07-15 00:39:35.831 INFO  [http-nio-8080-exec-7] c.d.controller.DiscoveryController : Executing report for endpoint: doc-year-month, appId: ccol
+2026-07-15 00:39:43.533 INFO  [http-nio-8080-exec-9] c.d.controller.DiscoveryController : Executing report for endpoint: annotation-total, appId: ccol
+2026-07-15 00:39:46.087 INFO  [http-nio-8080-exec-1] c.d.controller.DiscoveryController : Executing report for endpoint: annotation-mime, appId: ccol
+2026-07-15 00:39:49.397 INFO  [http-nio-8080-exec-3] c.d.controller.DiscoveryController : Executing report for endpoint: size-total, appId: ccol
+2026-07-15 00:39:51.263 INFO  [http-nio-8080-exec-5] c.d.controller.DiscoveryController : Executing report for endpoint: no-content, appId: ccol
+2026-07-15 00:39:54.944 INFO  [http-nio-8080-exec-7] c.d.controller.DiscoveryController : Executing report for endpoint: element-total, appId: ccol
+2026-07-15 00:39:57.137 INFO  [http-nio-8080-exec-9] c.d.controller.DiscoveryController : Executing report for endpoint: element-class, appId: ccol
+2026-07-15 00:39:59.507 INFO  [http-nio-8080-exec-1] c.d.controller.DiscoveryController : Executing report for endpoint: element-properties, appId: ccol
+2026-07-15 00:40:07.016 INFO  [http-nio-8080-exec-4] c.d.controller.DiscoveryController : Executing report for endpoint: version-distribution, appId: ccol
+2026-07-15 00:40:11.764 INFO  [http-nio-8080-exec-6] c.d.controller.DiscoveryController : Executing report for endpoint: property-defs, appId: ccol
+2026-07-15 00:40:17.318 DEBUG [http-nio-8080-exec-9] c.d.controller.DiscoveryController : Fetching document classes for appId: ccol
+2026-07-15 00:41:23.466 DEBUG [http-nio-8080-exec-10] c.d.controller.DiscoveryController : Fetching document classes for appId: ccol
+2026-07-15 01:10:02.853 INFO  [RMI TCP Connection(34)-127.0.0.1] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2026-07-15 01:10:02.888 INFO  [RMI TCP Connection(34)-127.0.0.1] o.s.boot.tomcat.GracefulShutdown : Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-15 01:10:02.894 INFO  [tomcat-shutdown] o.a.coyote.http11.Http11NioProtocol : Pausing ProtocolHandler ["http-nio-8080"]
+2026-07-15 01:10:02.927 INFO  [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown : Graceful shutdown complete
+2026-07-15 01:10:02.929 INFO  [RMI TCP Connection(34)-127.0.0.1] o.a.coyote.http11.Http11NioProtocol : Stopping ProtocolHandler ["http-nio-8080"]
+2026-07-15 01:10:02.943 INFO  [RMI TCP Connection(34)-127.0.0.1] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-15 01:10:02.959 INFO  [RMI TCP Connection(34)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-07-15 01:10:02.971 INFO  [RMI TCP Connection(34)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
