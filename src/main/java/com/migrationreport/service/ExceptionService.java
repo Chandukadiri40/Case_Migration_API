@@ -173,10 +173,10 @@ public class ExceptionService {
         
         String schema = appConfig.getSchema() != null && !appConfig.getSchema().isEmpty() ? appConfig.getSchema() : "public";
         String tableName = appConfig.getClassifiedTables().get("source").get(0);
-        String sql = "SELECT column_name FROM information_schema.columns WHERE table_schema = ? AND table_name = ?";
+        String sql = "SELECT LOWER(column_name) FROM information_schema.columns WHERE LOWER(table_schema) = LOWER(?) AND LOWER(table_name) = LOWER(?)";
         List<String> cols = jdbcTemplate.queryForList(sql, new Object[]{schema, tableName}, String.class);
         return cols.stream()
-                   .filter(c -> c.matches("u[0-9a-fA-F]+_.*"))
+                   .filter(c -> c != null && c.matches("(?i)u[0-9a-f]+_.*"))
                    .map(c -> c.substring(c.indexOf('_') + 1))
                    .sorted()
                    .collect(Collectors.toList());
@@ -186,10 +186,10 @@ public class ExceptionService {
         String[] parts = table.split("\\.");
         String schema = parts.length > 1 ? parts[0] : "public";
         String tableName = parts.length > 1 ? parts[1] : table;
-        String sql = "SELECT column_name FROM information_schema.columns WHERE table_schema = ? AND table_name = ?";
+        String sql = "SELECT LOWER(column_name) FROM information_schema.columns WHERE LOWER(table_schema) = LOWER(?) AND LOWER(table_name) = LOWER(?)";
         List<String> cols = jdbcTemplate.queryForList(sql, new Object[]{schema, tableName}, String.class);
         for (String c : cols) {
-            if (c.matches("u[0-9a-fA-F]+_" + field)) {
+            if (c != null && c.matches("(?i)u[0-9a-f]+_" + field.toLowerCase())) {
                 return c;
             }
         }

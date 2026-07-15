@@ -537,7 +537,7 @@ public class SearchService {
             tableName = tableString.substring(tableString.indexOf(".") + 1);
         }
         
-        String sql = "SELECT LOWER(column_name) FROM information_schema.columns WHERE table_schema = ? AND table_name = ?";
+        String sql = "SELECT LOWER(column_name) FROM information_schema.columns WHERE LOWER(table_schema) = LOWER(?) AND LOWER(table_name) = LOWER(?)";
         List<String> dbCols = jdbcTemplate.queryForList(sql, new Object[]{schema, tableName}, String.class);
         java.util.Set<String> dbColsSet = new java.util.HashSet<>(dbCols);
         
@@ -559,8 +559,8 @@ public class SearchService {
                         if (dbColsSet.contains(mc.toLowerCase())) cols.add(mc);
                     }
                 } else {
-                    dbColsSet.stream()
-                             .filter(dbCol -> dbCol.matches("u[0-9a-fA-F]+_.*"))
+                     dbColsSet.stream()
+                              .filter(dbCol -> dbCol != null && dbCol.matches("(?i)u[0-9a-f]+_.*"))
                              .sorted()
                              .forEach(cols::add);
                 }

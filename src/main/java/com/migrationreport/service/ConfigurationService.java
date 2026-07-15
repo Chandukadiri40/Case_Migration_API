@@ -107,7 +107,7 @@ public class ConfigurationService {
     }
 
     public Map<String, List<String>> getDatabaseMetadata(String schemaName) {
-        String query = "SELECT table_name, column_name FROM information_schema.columns WHERE table_schema = ?";
+        String query = "SELECT table_name, column_name FROM information_schema.columns WHERE LOWER(table_schema) = LOWER(?)";
         
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(query, schemaName);
         
