@@ -4,7 +4,7 @@ public class SqlServerDialect implements SqlDialect {
 
     @Override
     public String getLimitSql(int limit) {
-        return " OFFSET 0 ROWS FETCH NEXT " + limit + " ROWS ONLY";
+        return " ORDER BY (SELECT NULL) OFFSET 0 ROWS FETCH NEXT " + limit + " ROWS ONLY";
     }
 
     @Override
