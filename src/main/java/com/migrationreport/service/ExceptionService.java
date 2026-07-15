@@ -70,9 +70,9 @@ public class ExceptionService {
         
         String fromClause = sourceTable + " dv";
         
-        if (criteria.getObjectId() != null && !criteria.getObjectId().isEmpty()) {
-            where.append(" AND dv.object_id = ?");
-            params.add(criteria.getObjectId());
+        if (criteria.getObjectId() != null && !criteria.getObjectId().trim().isEmpty()) {
+            where.append(" AND LOWER(dv.object_id) = LOWER(?)");
+            params.add(criteria.getObjectId().trim());
         }
         
         if (criteria.getDocumentClasses() != null && !criteria.getDocumentClasses().isEmpty()) {
@@ -154,9 +154,34 @@ public class ExceptionService {
         
         log.info("[EXCEPTIONS] Querying Source, Staging, Target tables for {} object IDs", objectIds.size());
         long startData = System.currentTimeMillis();
-        List<Map<String, Object>> sourceData = jdbcTemplate.queryForList("SELECT " + selectColsSource + " FROM " + sourceTable + " WHERE object_id IN (" + inClause + ")", inParams);
-        List<Map<String, Object>> stagingData = jdbcTemplate.queryForList("SELECT " + selectColsStaging + " FROM " + stagingTable + " WHERE object_id IN (" + inClause + ")", inParams);
-        List<Map<String, Object>> targetData = jdbcTemplate.queryForList("SELECT " + selectColsTarget + " FROM " + targetTable + " WHERE object_id IN (" + inClause + ")", inParams);
+        
+        String sourceIdCol = configurationService.getSystemColumn(criteria.getAppId(), "doc-id", "object_id");
+        String stagingIdCol = "object_id";
+        String targetIdCol = "object_id";
+        
+        TenantConfig.ApplicationConfig currentAppConfig = configurationService.getApplicationConfig(criteria.getAppId());
+        if (currentAppConfig != null && currentAppConfig.getPrimaryColumns() != null) {
+            if (currentAppConfig.getPrimaryColumns().containsKey("source")) sourceIdCol = currentAppConfig.getPrimaryColumns().get("source");
+            if (currentAppConfig.getPrimaryColumns().containsKey("staging")) stagingIdCol = currentAppConfig.getPrimaryColumns().get("staging");
+            if (currentAppConfig.getPrimaryColumns().containsKey("target")) targetIdCol = currentAppConfig.getPrimaryColumns().get("target");
+        }
+
+        List<Map<String, Object>> sourceData = jdbcTemplate.queryForList("SELECT " + selectColsSource + " FROM " + sourceTable + " WHERE " + sourceIdCol + " IN (" + inClause + ")", inParams);
+        
+        List<Map<String, Object>> stagingData = new ArrayList<>();
+        try {
+             stagingData = jdbcTemplate.queryForList("SELECT " + selectColsStaging + " FROM " + stagingTable + " WHERE " + stagingIdCol + " IN (" + inClause + ")", inParams);
+        } catch (Exception e) {
+             log.warn("Failed to query staging table with id col {}: {}", stagingIdCol, e.getMessage());
+        }
+        
+        List<Map<String, Object>> targetData = new ArrayList<>();
+        try {
+             targetData = jdbcTemplate.queryForList("SELECT " + selectColsTarget + " FROM " + targetTable + " WHERE " + targetIdCol + " IN (" + inClause + ")", inParams);
+        } catch (Exception e) {
+             log.warn("Failed to query target table with id col {}: {}", targetIdCol, e.getMessage());
+        }
+        
         log.info("[EXCEPTIONS] Data retrieval completed in {}ms. Source: {}, Staging: {}, Target: {}", System.currentTimeMillis() - startData, sourceData.size(), stagingData.size(), targetData.size());
         
         result.put("source", sourceData);

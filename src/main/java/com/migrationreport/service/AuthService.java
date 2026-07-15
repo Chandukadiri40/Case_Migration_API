@@ -22,7 +22,9 @@ public class AuthService {
 
         Optional<User> userOpt = userRepository.findById(username.trim());
         if (userOpt.isPresent()) {
-            return password.equals(userOpt.get().getPassword());
+            // Hash the incoming password and compare to the DB stored hash
+            String hashedInput = com.migrationreport.util.EncryptionUtil.hashPassword(password);
+            return hashedInput.equals(userOpt.get().getPassword());
         }
         return false;
     }

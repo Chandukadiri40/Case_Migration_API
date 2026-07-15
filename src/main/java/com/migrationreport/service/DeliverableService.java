@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class DeliverableService {
 
@@ -141,6 +144,7 @@ public class DeliverableService {
 
         sql.append(" GROUP BY object_class_id ORDER BY object_class_id");
 
+        log.info("[DELIVERABLE] Executing Aggregated Query | SQL: {} | Params: {}", sql.toString(), params);
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql.toString(), params.toArray());
         List<Map<String, Object>> result = new ArrayList<>();
         String appId = table.substring(0, table.indexOf("."));
@@ -207,6 +211,7 @@ public class DeliverableService {
 
         sql.append(dialect.getLimitSql(5000));
 
+        log.info("[DELIVERABLE] Executing Detailed Query | SQL: {} | Params: {}", sql.toString(), params);
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql.toString(), params.toArray());
         List<Map<String, Object>> result = new ArrayList<>();
         String appId = table.substring(0, table.indexOf("."));

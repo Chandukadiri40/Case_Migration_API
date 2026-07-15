@@ -250,8 +250,8 @@ public class DiscoveryService {
                 String schemaName = schema.replace(".", "").toLowerCase();
                 for (String table : listTables) {
                     try {
-                        Integer exists = jdbcTemplate.queryForObject("SELECT 1 FROM information_schema.tables WHERE table_schema = ? AND table_name = ?", Integer.class, schemaName, table);
-                        if (exists != null && exists == 1) {
+                        List<Integer> existsList = jdbcTemplate.queryForList("SELECT 1 FROM information_schema.tables WHERE table_schema = ? AND table_name = ?", Integer.class, schemaName, table);
+                        if (!existsList.isEmpty()) {
                             unionQueries.add("SELECT '" + table + "' AS list_table, COUNT(parent_id) AS row_count FROM " + schema + table);
                         }
                     } catch (Exception ex) {
