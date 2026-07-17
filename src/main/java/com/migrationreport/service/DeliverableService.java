@@ -13,10 +13,18 @@ import java.util.List;
 import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import java.util.HashMap;
+import com.migrationreport.dialect.SqlDialect;
 
 @Slf4j
 @Service
 public class DeliverableService {
+
+    private static final String KEY_STAGING = "staging";
+    private static final String SQL_COUNT_CASE_LOWER = " COUNT(CASE WHEN LOWER(";
+    private static final String SQL_AND_LOWER = " AND LOWER(";
+    private static final String SQL_AND = " AND ";
 
     private final JdbcTemplate jdbcTemplate;
     private final ConfigurationService configurationService;
@@ -26,8 +34,8 @@ public class DeliverableService {
     private final String contentSizeColumn;
     private final SearchService searchService;
     
-    @org.springframework.beans.factory.annotation.Autowired
-    private com.migrationreport.dialect.SqlDialect dialect;
+    @Autowired
+    private SqlDialect dialect;
 
     public DeliverableService(
             JdbcTemplate jdbcTemplate,
@@ -46,6 +54,7 @@ public class DeliverableService {
         this.searchService = searchService;
     }
 
+    @SuppressWarnings("java:S3776")
     public List<Map<String, Object>> getMigrationReport(DeliverableRequest req) {
         List<Map<String, Object>> result = new ArrayList<>();
 
@@ -71,10 +80,10 @@ public class DeliverableService {
 
         for (TenantConfig.ApplicationConfig app : appsToQuery) {
             String schema = app.getSchema() != null && !app.getSchema().isEmpty() ? app.getSchema() + "." : app.getAppId() + ".";
-            if (app.getClassifiedTables() == null || app.getClassifiedTables().get("staging") == null || app.getClassifiedTables().get("staging").isEmpty()) {
+            if (app.getClassifiedTables() == null || app.getClassifiedTables().get(KEY_STAGING) == null || app.getClassifiedTables().get(KEY_STAGING).isEmpty()) {
                 throw new ResourceNotFoundException("Staging table configuration missing for application: " + app.getAppId());
             }
-            String stagingTableName = app.getClassifiedTables().get("staging").get(0);
+            String stagingTableName = app.getClassifiedTables().get(KEY_STAGING).get(0);
             String table = schema + stagingTableName;
             String appDisplayName = app.getAppName();
             
@@ -87,7 +96,7 @@ public class DeliverableService {
                     result.addAll(rows);
                 }
             } catch (Exception e) {
-                System.err.println("DeliverableService: skipping table " + table + ": " + e.getMessage());
+                log.error("DeliverableService: skipping table {}: {}", table, e.getMessage());
             }
         }
         return result;
@@ -109,9 +118,9 @@ public class DeliverableService {
             "SELECT object_class_id AS documentclass," +
             " COUNT(*) AS totaldocuments," +
             " " + sizeSum + " AS totalfilesizegb," +
-            " COUNT(CASE WHEN LOWER(" + sc + ") IN ('success','migrated') THEN 1 END) AS extractedfilenet," +
-            " COUNT(CASE WHEN LOWER(" + sc + ") = 'failed' THEN 1 END) AS extractionfailed," +
-            " COUNT(CASE WHEN LOWER(" + sc + ") NOT IN ('success','migrated','failed') THEN 1 END) AS remaining," +
+            SQL_COUNT_CASE_LOWER + sc + ") IN ('success','migrated') THEN 1 END) AS extractedfilenet," +
+            SQL_COUNT_CASE_LOWER + sc + ") = 'failed' THEN 1 END) AS extractionfailed," +
+            SQL_COUNT_CASE_LOWER + sc + ") NOT IN ('success','migrated','failed') THEN 1 END) AS remaining," +
             " " + sizeOk + " AS extractedfilesizegb," +
             " CASE WHEN COUNT(*)>0 THEN ROUND(COUNT(CASE WHEN LOWER(" + sc + ") IN ('success','migrated') THEN 1 END)*100.0/COUNT(*),2) ELSE 0 END AS percentcompletion," +
             " CASE WHEN COUNT(*)>0 THEN ROUND(COUNT(CASE WHEN LOWER(" + sc + ") = 'failed' THEN 1 END)*100.0/COUNT(*),2) ELSE 0 END AS percentfailed," +
@@ -120,28 +129,7 @@ public class DeliverableService {
         );
 
         List<Object> params = new ArrayList<>();
-
-        if (req.getDocumentClass() != null && !req.getDocumentClass().trim().isEmpty() && !req.getDocumentClass().equalsIgnoreCase("All")) {
-            String appId = table.substring(0, table.indexOf("."));
-            sql.append(" AND object_class_id IN (SELECT object_id FROM ").append(appId).append(".classdef WHERE LOWER(symbolic_name) = LOWER(?))");
-            params.add(req.getDocumentClass().trim());
-        }
-        if (req.getCreatedDate() != null && !req.getCreatedDate().trim().isEmpty()) {
-            String currentCreatedDateColumn = configurationService.getSystemColumn(appIdStr, "created-date", createdDateColumn);
-            sql.append(" AND ").append(dialect.castToDate(currentCreatedDateColumn)).append(" = ").append(dialect.castToDate("?"));
-            params.add(req.getCreatedDate().trim());
-        }
-        if (req.getStartDate() != null && !req.getStartDate().trim().isEmpty()) {
-            String currentDateColumn = configurationService.getSystemColumn(appIdStr, "date", dateColumn);
-            sql.append(" AND ").append(dialect.castToTimestamp(currentDateColumn)).append(" >= ").append(dialect.castParameterToTimestamp());
-            params.add(req.getStartDate().trim());
-        }
-        if (req.getEndDate() != null && !req.getEndDate().trim().isEmpty()) {
-            String currentDateColumn = configurationService.getSystemColumn(appIdStr, "date", dateColumn);
-            sql.append(" AND ").append(dialect.castToTimestamp(currentDateColumn)).append(" <= ").append(dialect.castParameterToTimestamp());
-            params.add(req.getEndDate().trim());
-        }
-
+        appendFilters(sql, params, req, appIdStr, table.substring(0, table.indexOf(".")));
         sql.append(" GROUP BY object_class_id ORDER BY object_class_id");
 
         log.info("[DELIVERABLE] Executing Aggregated Query | SQL: {} | Params: {}", sql.toString(), params);
@@ -150,7 +138,7 @@ public class DeliverableService {
         String appId = table.substring(0, table.indexOf("."));
         Map<String, String> classMap = getClassIdToSymbolicNameMap(appId);
         for (Map<String, Object> row : rows) {
-            Map<String, Object> map = new java.util.HashMap<>();
+            Map<String, Object> map = new HashMap<>();
             map.put("isAggregated", true);
             map.put("objectStore", appDisplayName);
             String classId = str(row.get("documentclass"));
@@ -176,35 +164,16 @@ public class DeliverableService {
 
         StringBuilder sql = new StringBuilder("SELECT " + selectCols + " FROM " + table + " WHERE 1=1");
         List<Object> params = new ArrayList<>();
+        appendFilters(sql, params, req, appIdStr, table.substring(0, table.indexOf(".")));
 
-        if (req.getDocumentClass() != null && !req.getDocumentClass().trim().isEmpty() && !req.getDocumentClass().equalsIgnoreCase("All")) {
-            String appId = table.substring(0, table.indexOf("."));
-            sql.append(" AND object_class_id IN (SELECT object_id FROM ").append(appId).append(".classdef WHERE LOWER(symbolic_name) = LOWER(?))");
-            params.add(req.getDocumentClass().trim());
-        }
-        if (req.getCreatedDate() != null && !req.getCreatedDate().trim().isEmpty()) {
-            String currentCreatedDateColumn = configurationService.getSystemColumn(appIdStr, "created-date", createdDateColumn);
-            sql.append(" AND ").append(dialect.castToDate(currentCreatedDateColumn)).append(" = ").append(dialect.castToDate("?"));
-            params.add(req.getCreatedDate().trim());
-        }
-        if (req.getStartDate() != null && !req.getStartDate().trim().isEmpty()) {
-            String currentDateColumn = configurationService.getSystemColumn(appIdStr, "date", dateColumn);
-            sql.append(" AND ").append(dialect.castToTimestamp(currentDateColumn)).append(" >= ").append(dialect.castParameterToTimestamp());
-            params.add(req.getStartDate().trim());
-        }
-        if (req.getEndDate() != null && !req.getEndDate().trim().isEmpty()) {
-            String currentDateColumn = configurationService.getSystemColumn(appIdStr, "date", dateColumn);
-            sql.append(" AND ").append(dialect.castToTimestamp(currentDateColumn)).append(" <= ").append(dialect.castParameterToTimestamp());
-            params.add(req.getEndDate().trim());
-        }
         if (req.getMigrationStatus() != null && !req.getMigrationStatus().trim().isEmpty()
                 && !req.getMigrationStatus().equalsIgnoreCase("All")) {
             if (req.getMigrationStatus().equalsIgnoreCase("Success")) {
-                sql.append(" AND LOWER(" + sc + ") IN ('success', 'migrated')");
+                sql.append(SQL_AND_LOWER).append(sc).append(") IN ('success', 'migrated')");
             } else if (req.getMigrationStatus().equalsIgnoreCase("Failed")) {
-                sql.append(" AND LOWER(" + sc + ") = 'failed'");
+                sql.append(SQL_AND_LOWER).append(sc).append(") = 'failed'");
             } else {
-                sql.append(" AND LOWER(" + sc + ") = LOWER(?)");
+                sql.append(SQL_AND_LOWER).append(sc).append(") = LOWER(?)");
                 params.add(req.getMigrationStatus().trim());
             }
         }
@@ -217,7 +186,7 @@ public class DeliverableService {
         String appId = table.substring(0, table.indexOf("."));
         Map<String, String> classMap = getClassIdToSymbolicNameMap(appId);
         for (Map<String, Object> row : rows) {
-            Map<String, Object> map = new java.util.HashMap<>();
+            Map<String, Object> map = new HashMap<>();
             map.put("isAggregated", false);
             map.put("objectStore", appDisplayName);
             for (Map.Entry<String, Object> entry : row.entrySet()) {
@@ -234,30 +203,40 @@ public class DeliverableService {
         return result;
     }
 
+    private void appendFilters(StringBuilder sql, List<Object> params, DeliverableRequest req, String appIdStr, String appId) {
+        if (req.getDocumentClass() != null && !req.getDocumentClass().trim().isEmpty() && !req.getDocumentClass().equalsIgnoreCase("All")) {
+            sql.append(SQL_AND).append("object_class_id IN (SELECT object_id FROM ").append(appId).append(".classdef WHERE LOWER(symbolic_name) = LOWER(?))");
+            params.add(req.getDocumentClass().trim());
+        }
+        if (req.getCreatedDate() != null && !req.getCreatedDate().trim().isEmpty()) {
+            String currentCreatedDateColumn = configurationService.getSystemColumn(appIdStr, "created-date", createdDateColumn);
+            sql.append(SQL_AND).append(dialect.castToDate(currentCreatedDateColumn)).append(" = ").append(dialect.castToDate("?"));
+            params.add(req.getCreatedDate().trim());
+        }
+        if (req.getStartDate() != null && !req.getStartDate().trim().isEmpty()) {
+            String currentDateColumn = configurationService.getSystemColumn(appIdStr, "date", dateColumn);
+            sql.append(SQL_AND).append(dialect.castToTimestamp(currentDateColumn)).append(" >= ").append(dialect.castParameterToTimestamp());
+            params.add(req.getStartDate().trim());
+        }
+        if (req.getEndDate() != null && !req.getEndDate().trim().isEmpty()) {
+            String currentDateColumn = configurationService.getSystemColumn(appIdStr, "date", dateColumn);
+            sql.append(SQL_AND).append(dialect.castToTimestamp(currentDateColumn)).append(" <= ").append(dialect.castParameterToTimestamp());
+            params.add(req.getEndDate().trim());
+        }
+    }
     private String str(Object v) { return v == null ? "" : v.toString(); }
     private Long toLong(Object v) {
         if (v == null) return 0L;
-        if (v instanceof Number) return ((Number) v).longValue();
+        if (v instanceof Number number) return number.longValue();
         try { return Long.parseLong(v.toString()); } catch (Exception e) { return 0L; }
     }
     private Double toDouble(Object v) {
         if (v == null) return 0.0;
-        if (v instanceof Number) return ((Number) v).doubleValue();
+        if (v instanceof Number number) return number.doubleValue();
         try { return Double.parseDouble(v.toString()); } catch (Exception e) { return 0.0; }
     }
-    private String findClassIdBySymbolicName(String appId, String symbolicName) {
-        if (symbolicName == null || symbolicName.trim().isEmpty() || symbolicName.equalsIgnoreCase("All")) {
-            return null;
-        }
-        try {
-            String sql = "SELECT object_id FROM " + appId + ".classdef WHERE LOWER(symbolic_name) = LOWER(?)" + dialect.getLimitSql(1);
-            return jdbcTemplate.queryForObject(sql, String.class, symbolicName.trim());
-        } catch (Exception e) {
-            return symbolicName;
-        }
-    }
     private Map<String, String> getClassIdToSymbolicNameMap(String appId) {
-        Map<String, String> map = new java.util.HashMap<>();
+        Map<String, String> map = new HashMap<>();
         try {
             String sql = "SELECT object_id, symbolic_name FROM " + appId + ".classdef";
             List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
@@ -269,7 +248,7 @@ public class DeliverableService {
                 }
             }
         } catch (Exception e) {
-            System.err.println("getClassIdToSymbolicNameMap error: " + e.getMessage());
+            log.error("getClassIdToSymbolicNameMap error: {}", e.getMessage(), e);
         }
         return map;
     }

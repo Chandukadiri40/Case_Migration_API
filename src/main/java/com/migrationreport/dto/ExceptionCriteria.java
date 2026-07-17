@@ -11,7 +11,9 @@ public class ExceptionCriteria {
     private LocalDate createdTo;
     private List<CustomMetadataFilter> customMetadata;
 
-    public ExceptionCriteria() {}
+    public ExceptionCriteria() {
+        // default constructor
+    }
 
     public String getAppId() { return appId; }
     public void setAppId(String appId) { this.appId = appId; }

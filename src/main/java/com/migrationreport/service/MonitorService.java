@@ -3,7 +3,9 @@ package com.migrationreport.service;
 import com.migrationreport.dto.LogConfigDTO;
 import com.migrationreport.dto.LogEntryDTO;
 import com.migrationreport.security.PathValidator;
+import com.migrationreport.exception.LogParsingException;
 import org.springframework.stereotype.Service;
+import java.util.concurrent.atomic.AtomicReference;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -15,31 +17,34 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.io.IOException;
 
 @Service
 public class MonitorService {
 
-    private volatile LogConfigDTO currentConfig;
+    private final AtomicReference<LogConfigDTO> currentConfig = new AtomicReference<>();
 
-    private static final Pattern LOG_PATTERN = Pattern.compile("^(\\d{4}-\\d{2}-\\d{2}\\s+\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?)\\s+([A-Z]+)\\s+(?:.*?)\\s+---\\s+\\[(.*?)\\]\\s+(.*?)\\s+:\\s+(.*)$");
+    private static final Pattern LOG_PATTERN = Pattern.compile("^(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?) +([A-Z]+) +.*? --- \\[(.*?)\\] +(.*?) : (.*)$");
+    private static final Pattern CUSTOM_LOG_PATTERN = Pattern.compile("^(\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})? [AP]M) - (.*)$");
 
     public LogConfigDTO saveConfig(LogConfigDTO config) {
-        Path path = PathValidator.validateAndNormalize(config.getLogPath());
+        Path path = PathValidator.validateAndNormalize(config.getLogPath(), System.getProperty("user.dir"));
         LogConfigDTO validatedConfig = new LogConfigDTO(path.toString());
-        this.currentConfig = validatedConfig;
+        this.currentConfig.set(validatedConfig);
         return validatedConfig;
     }
 
     public LogConfigDTO getConfig() {
-        return this.currentConfig;
+        return this.currentConfig.get();
     }
 
     public List<String> getAvailableDates() {
-        if (this.currentConfig == null) {
+        LogConfigDTO cfg = this.currentConfig.get();
+        if (cfg == null) {
             return new ArrayList<>();
         }
         
-        Path dirPath = PathValidator.validateAndNormalize(this.currentConfig.getLogPath());
+        Path dirPath = PathValidator.validateAndNormalize(cfg.getLogPath(), System.getProperty("user.dir"));
         
         try (Stream<Path> paths = Files.list(dirPath)) {
             return paths
@@ -49,24 +54,24 @@ public class MonitorService {
                 .map(this::extractDateFromFilename)
                 .distinct()
                 .sorted((a, b) -> b.compareTo(a))
-                .collect(Collectors.toList());
+                .toList();
         } catch (Exception e) {
-            throw new RuntimeException("Failed to scan log directory", e);
+            throw new LogParsingException("Failed to scan log directory", e);
         }
     }
 
     public List<LogEntryDTO> getLogsByDate(String date) {
-        if (this.currentConfig == null) {
+        LogConfigDTO cfg = this.currentConfig.get();
+        if (cfg == null) {
             return new ArrayList<>();
         }
         
-        Path dirPath = PathValidator.validateAndNormalize(this.currentConfig.getLogPath());
+        Path dirPath = PathValidator.validateAndNormalize(cfg.getLogPath(), System.getProperty("user.dir"));
         
         if (date == null || date.contains("/") || date.contains("\\") || date.contains("..")) {
             throw new IllegalArgumentException("Invalid date format");
         }
         
-        List<LogEntryDTO> logs = new ArrayList<>();
         try (Stream<Path> paths = Files.list(dirPath)) {
             Path targetFile = paths
                 .filter(Files::isRegularFile)
@@ -75,82 +80,77 @@ public class MonitorService {
                 .orElse(null);
                 
             if (targetFile != null) {
-                try (BufferedReader reader = new BufferedReader(new FileReader(targetFile.toFile()))) {
-                    String line;
-                    LogEntryDTO currentEntry = null;
-                    StringBuilder messageBuilder = new StringBuilder();
-                    Pattern customPattern = Pattern.compile("^(\\d{2}-\\d{2}-\\d{4}\\s+\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?\\s+[AP]M)\\s+-\\s+(.*)$");
-                    
-                    while ((line = reader.readLine()) != null) {
-                        Matcher matcher = LOG_PATTERN.matcher(line);
-                        Matcher customMatcher = customPattern.matcher(line);
-                        if (matcher.matches()) {
-                            if (currentEntry != null) {
-                                currentEntry.setMessage(messageBuilder.toString().trim());
-                                logs.add(currentEntry);
-                            }
-                            currentEntry = new LogEntryDTO();
-                            currentEntry.setTimestamp(matcher.group(1));
-                            currentEntry.setLevel(matcher.group(2));
-                            currentEntry.setThread(matcher.group(3).trim());
-                            currentEntry.setLogger(matcher.group(4).trim());
-                            messageBuilder = new StringBuilder(matcher.group(5));
-                        } else if (customMatcher.matches()) {
-                            if (currentEntry != null) {
-                                currentEntry.setMessage(messageBuilder.toString().trim());
-                                logs.add(currentEntry);
-                            }
-                            currentEntry = new LogEntryDTO();
-                            currentEntry.setTimestamp(customMatcher.group(1));
-                            
-                            String fullMsg = customMatcher.group(2);
-                            String level = fullMsg.toLowerCase().startsWith("error") ? "ERROR" : "INFO";
-                            currentEntry.setLevel(level);
-                            currentEntry.setThread("");
-                            
-                            String logger = "AppLog";
-                            String msg = fullMsg;
-                            int idx = fullMsg.indexOf(" ====:");
-                            if (idx != -1) {
-                                logger = fullMsg.substring(idx + 6);
-                                msg = fullMsg.substring(0, idx);
-                            } else {
-                                int idx2 = fullMsg.indexOf("====");
-                                if (idx2 != -1 && idx2 > fullMsg.length() - 20) {
-                                    msg = fullMsg.substring(0, idx2);
-                                }
-                            }
-                            currentEntry.setLogger(logger);
-                            messageBuilder = new StringBuilder(msg);
-                        } else {
-                            if (currentEntry != null) {
-                                messageBuilder.append("\n").append(line);
-                            } else {
-                                currentEntry = new LogEntryDTO("", "UNKNOWN", "", "", line);
-                                logs.add(currentEntry);
-                                currentEntry = null;
-                            }
-                        }
-                    }
-                    
-                    if (currentEntry != null) {
-                        currentEntry.setMessage(messageBuilder.toString().trim());
-                        logs.add(currentEntry);
-                    }
-                }
+                return parseLogFile(targetFile);
             }
         } catch (Exception e) {
-            throw new RuntimeException("Failed to read log file", e);
+            throw new LogParsingException("Failed to read logs", e);
         }
         
+        return new ArrayList<>();
+    }
+
+    private List<LogEntryDTO> parseLogFile(Path targetFile) throws IOException {
+        List<LogEntryDTO> logs = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(targetFile.toFile()))) {
+            String line;
+            LogEntryDTO currentEntry = null;
+            StringBuilder messageBuilder = new StringBuilder();
+            
+            while ((line = reader.readLine()) != null) {
+                currentEntry = processLogLine(line, logs, currentEntry, messageBuilder);
+            }
+            if (currentEntry != null) {
+                currentEntry.setMessage(messageBuilder.toString().trim());
+                logs.add(currentEntry);
+            }
+        }
         return logs;
     }
 
+    private LogEntryDTO processLogLine(String line, List<LogEntryDTO> logs, LogEntryDTO currentEntry, StringBuilder messageBuilder) {
+        Matcher matcher = LOG_PATTERN.matcher(line);
+        Matcher customMatcher = CUSTOM_LOG_PATTERN.matcher(line);
+        if (matcher.matches()) {
+            if (currentEntry != null) {
+                currentEntry.setMessage(messageBuilder.toString().trim());
+                logs.add(currentEntry);
+            }
+            currentEntry = new LogEntryDTO();
+            currentEntry.setTimestamp(matcher.group(1));
+            currentEntry.setLevel(matcher.group(2));
+            currentEntry.setThread(matcher.group(3).trim());
+            currentEntry.setLogger(matcher.group(4).trim());
+            messageBuilder.setLength(0);
+            messageBuilder.append(matcher.group(5));
+        } else if (customMatcher.matches()) {
+            if (currentEntry != null) {
+                currentEntry.setMessage(messageBuilder.toString().trim());
+                logs.add(currentEntry);
+            }
+            currentEntry = new LogEntryDTO();
+            currentEntry.setTimestamp(customMatcher.group(1));
+            currentEntry.setLevel("INFO");
+            currentEntry.setThread("");
+            currentEntry.setLogger("");
+            messageBuilder.setLength(0);
+            messageBuilder.append(customMatcher.group(2));
+        } else {
+            if (currentEntry != null) {
+                messageBuilder.append("\n").append(line);
+            } else {
+                currentEntry = new LogEntryDTO("", "UNKNOWN", "", "", line);
+                logs.add(currentEntry);
+                currentEntry = null;
+            }
+        }
+        return currentEntry;
+    }
+
     private String extractDateFromFilename(String filename) {
-        Pattern p = Pattern.compile("(\\d{4}-\\d{2}-\\d{2})");
+        Pattern p = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
         Matcher m = p.matcher(filename);
         if (m.find()) {
-            return m.group(1);
+            return m.group();
         }
         return filename;
     }

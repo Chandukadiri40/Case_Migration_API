@@ -16,7 +16,9 @@ public class DiscoveryCriteria {
     private String versionCountBucket;
     private String contentLocatorType;
 
-    public DiscoveryCriteria() {}
+    public DiscoveryCriteria() {
+        // default constructor
+    }
 
     // Getters and Setters
     public String getAppId() { return appId; }

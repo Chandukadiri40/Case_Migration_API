@@ -5,7 +5,9 @@ public class CustomMetadataFilter {
     private String operator;
     private String value;
 
-    public CustomMetadataFilter() {}
+    public CustomMetadataFilter() {
+        // default constructor
+    }
 
     public String getField() {
         return field;

@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/monitor")
 @CrossOrigin(origins = "*")
@@ -23,26 +25,38 @@ public class MonitorController {
 
     @PostMapping("/config")
     public ResponseEntity<LogConfigDTO> saveConfig(@RequestBody LogConfigDTO configDTO) {
-        return ResponseEntity.ok(monitorService.saveConfig(configDTO));
+        log.info("Starting method: saveConfig with arguments: configDTO={}", configDTO);
+        ResponseEntity<LogConfigDTO> result = ResponseEntity.ok(monitorService.saveConfig(configDTO));
+        log.info("Ending method: saveConfig");
+        return result;
     }
 
     @GetMapping("/config")
     public ResponseEntity<LogConfigDTO> getConfig() {
+        log.info("Starting method: getConfig");
         LogConfigDTO config = monitorService.getConfig();
         if (config == null) {
+            log.info("Ending method: getConfig");
             return ResponseEntity.noContent().build();
         }
+        log.info("Ending method: getConfig");
         return ResponseEntity.ok(config);
     }
 
     @GetMapping("/logs/dates")
     public ResponseEntity<List<String>> getLogDates() {
-        return ResponseEntity.ok(monitorService.getAvailableDates());
+        log.info("Starting method: getLogDates");
+        ResponseEntity<List<String>> result = ResponseEntity.ok(monitorService.getAvailableDates());
+        log.info("Ending method: getLogDates");
+        return result;
     }
 
     @GetMapping("/logs")
     public ResponseEntity<List<LogEntryDTO>> getLogs(@RequestParam String date) {
-        return ResponseEntity.ok(monitorService.getLogsByDate(date));
+        log.info("Starting method: getLogs with arguments: date={}", date);
+        ResponseEntity<List<LogEntryDTO>> result = ResponseEntity.ok(monitorService.getLogsByDate(date));
+        log.info("Ending method: getLogs");
+        return result;
     }
 }
 
