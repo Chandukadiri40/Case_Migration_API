@@ -5,6 +5,7 @@ import com.migrationreport.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import com.migrationreport.util.EncryptionUtil;
 
 @Service
 public class AuthService {
@@ -23,9 +24,25 @@ public class AuthService {
         Optional<User> userOpt = userRepository.findById(username.trim());
         if (userOpt.isPresent()) {
             // Hash the incoming password and compare to the DB stored hash
-            String hashedInput = com.migrationreport.util.EncryptionUtil.hashPassword(password);
+            String hashedInput = EncryptionUtil.hashPassword(password);
             return hashedInput.equals(userOpt.get().getPassword());
         }
         return false;
+    }
+
+    public boolean register(String username, String password) {
+        if (username == null || username.trim().isEmpty() || password == null || password.trim().isEmpty()) {
+            return false;
+        }
+
+        if (userRepository.findById(username.trim()).isPresent()) {
+            return false; // User already exists
+        }
+
+        User newUser = new User();
+        newUser.setUsername(username.trim());
+        newUser.setPassword(EncryptionUtil.hashPassword(password));
+        userRepository.save(newUser);
+        return true;
     }
 }

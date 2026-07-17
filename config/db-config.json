@@ -1,0 +1,12 @@
+{
+  "activeDatabaseType": "postgres",
+  "databases": [
+    {
+      "databaseType": "postgres",
+      "url": "jdbc:postgresql://localhost:5432/P8Migration",
+      "username": "postgres",
+      "password": "ENC(97jSBpOpRyd/LjLHiqEklIz0RaGfqt7TlP4YOhFSdpB1IXMn)",
+      "driver": "org.postgresql.Driver"
+    }
+  ]
+}

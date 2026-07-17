@@ -4,46 +4,19 @@
     "appName" : "Ccol",
     "objectStore" : "FNOS",
     "schema" : "ccol",
-    "tables" : {
-      "source" : {
-        "tableName" : "docversion_source",
-        "columns" : {
-          "docId" : "object_id",
-          "classId" : "object_class_id"
-        }
-      },
-      "staging" : {
-        "tableName" : "docversion_staging",
-        "columns" : {
-          "docId" : "stg_object_id"
-        }
-      },
-      "target" : {
-        "tableName" : "docversion_target",
-        "columns" : {
-          "docId" : "p8_doc_id",
-          "classId" : "object_class_id"
-        }
-      },
-      "checksum" : {
-        "tableName" : "checksum",
-        "columns" : {
-          "docId" : "documentid"
-        }
-      }
+    "classifiedTables" : {
+      "source" : [ "docversion_source" ],
+      "staging" : [ "docversion_staging" ],
+      "target" : [ "docversion_target" ],
+      "product" : [ "annotation", "ischecksumtable", "globalpropertydef", "propertydefinition", "classdef", "content", "casefolder", "customobject", "columndefinition", "versionseries" ]
     },
+    "primaryColumns" : null,
     "systemColumns" : {
       "date" : "create_date",
       "status" : "migration_status",
       "doc-id" : "object_id",
       "content-size" : "content_size",
       "mime-type" : "mime_type"
-    },
-    "classifiedTables" : {
-      "source" : [ "docversion_source" ],
-      "staging" : [ "docversion_staging" ],
-      "target" : [ "docversion_target" ],
-      "product" : [ "annotation", "ischecksumtable", "globalpropertydef", "propertydefinition", "classdef", "content", "casefolder", "customobject", "columndefinition", "versionseries" ]
     },
     "propertyMappings" : [ {
       "sourceTable" : "docversion_source",
@@ -56,5 +29,51 @@
       "targetTable" : "docversion_target",
       "targetColumn" : "u3463_date"
     } ]
+  }, {
+    "appId" : "prontoclo",
+    "appName" : "Pronto Clo",
+    "objectStore" : "FNOS",
+    "schema" : "pronto_clo",
+    "classifiedTables" : {
+      "source" : [ "docversion_source" ],
+      "staging" : [ "docversion_staging" ],
+      "target" : [ "docversion_target" ],
+      "product" : [ "ischecksumtable", "globalpropertydef", "content_staging", "annotation_target", "casefolder_staging", "propertydefinition", "casefolder_source", "classdef", "customobject_source", "annotation_staging", "casefolder_target", "annotation_source", "customobject_target", "customobject", "content_target", "content_source", "customobject_staging", "columndefinition", "versionseries" ]
+    },
+    "primaryColumns" : {
+      "source" : "object_id",
+      "staging" : "stg_object_id",
+      "target" : "p8_doc_id"
+    },
+    "systemColumns" : {
+      "status" : "migration_status",
+      "date" : "create_date",
+      "content-size" : "content_size",
+      "mime-type" : "mime_type"
+    },
+    "propertyMappings" : [ ]
+  }, {
+    "appId" : "pronto_usl",
+    "appName" : "Pronto Usl",
+    "objectStore" : "Target",
+    "schema" : "pronto_usl",
+    "classifiedTables" : {
+      "source" : [ "docversion_source" ],
+      "staging" : [ "docversion_staging" ],
+      "target" : [ "docversion_target" ],
+      "product" : [ "ischecksumtable", "globalpropertydef", "content_staging", "annotation_target", "casefolder_staging", "propertydefinition", "casefolder_source", "classdef", "customobject_source", "annotation_staging", "casefolder_target", "annotation_source", "customobject_target", "content_target", "content_source", "customobject_staging", "columndefinition", "versionseries" ]
+    },
+    "primaryColumns" : {
+      "source" : "object_id",
+      "staging" : "stg_object_id",
+      "target" : "p8_doc_id"
+    },
+    "systemColumns" : {
+      "status" : "migration_status",
+      "date" : "create_date",
+      "content-size" : "content_size",
+      "mime-type" : "mime_type"
+    },
+    "propertyMappings" : [ ]
   } ]
 }

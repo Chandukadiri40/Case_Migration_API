@@ -15,6 +15,10 @@ import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import com.migrationreport.exception.ConfigurationException;
+import com.migrationreport.dto.config.DbConfigWrapper;
+import java.sql.Connection;
+import com.migrationreport.util.EncryptionUtil;
+import java.sql.DriverManager;
 
 @Slf4j
 @Service
@@ -25,6 +29,9 @@ public class ConfigurationService {
 
     @Value("${config.file.path:config/tenant-mappings.json}")
     private String configFilePath;
+
+    @Value("${db.config.file.path:config/db-config.json}")
+    private String dbConfigFilePath;
 
     private TenantConfig cachedConfig;
 
@@ -119,5 +126,85 @@ public class ConfigurationService {
             metadata.computeIfAbsent(tableName, k -> new ArrayList<>()).add(columnName);
         }
         return metadata;
+    }
+
+    public DbConfigWrapper getDbConfig() {
+        File dbConfigFile = new File(dbConfigFilePath);
+        if (!dbConfigFile.exists()) {
+            DbConfigWrapper empty = new DbConfigWrapper();
+            empty.setDatabases(new ArrayList<>());
+            return empty;
+        }
+        try {
+            DbConfigWrapper wrapper = objectMapper.readValue(dbConfigFile, DbConfigWrapper.class);
+            if (wrapper.getDatabases() != null) {
+                for (Map<String, String> dbConfig : wrapper.getDatabases()) {
+                    if (dbConfig.containsKey("password") && dbConfig.get("password") != null) {
+                        dbConfig.put("password", EncryptionUtil.decrypt(dbConfig.get("password")));
+                    }
+                }
+            } else {
+                wrapper.setDatabases(new ArrayList<>());
+            }
+            return wrapper;
+        } catch (IOException e) {
+            log.error("[CONFIG] Failed to load DB config file: {}", e.getMessage());
+            DbConfigWrapper empty = new DbConfigWrapper();
+            empty.setDatabases(new ArrayList<>());
+            return empty;
+        }
+    }
+
+    public DbConfigWrapper saveDbConfig(DbConfigWrapper wrapper) {
+        try {
+            File dbConfigFile = new File(dbConfigFilePath);
+            File parent = dbConfigFile.getParentFile();
+            if (parent != null && !parent.exists()) {
+                parent.mkdirs();
+            }
+            
+            DbConfigWrapper configToSave = new DbConfigWrapper();
+            configToSave.setActiveDatabaseType(wrapper.getActiveDatabaseType());
+            List<Map<String, String>> dbsToSave = new ArrayList<>();
+            
+            if (wrapper.getDatabases() != null) {
+                for (Map<String, String> db : wrapper.getDatabases()) {
+                    Map<String, String> configMap = new HashMap<>(db);
+                    if (configMap.containsKey("password") && configMap.get("password") != null && !configMap.get("password").trim().isEmpty()) {
+                        configMap.put("password", EncryptionUtil.encrypt(configMap.get("password")));
+                    }
+                    dbsToSave.add(configMap);
+                }
+            }
+            configToSave.setDatabases(dbsToSave);
+            
+            objectMapper.writerWithDefaultPrettyPrinter().writeValue(dbConfigFile, configToSave);
+            log.info("[CONFIG] Database Configuration successfully saved to {}", dbConfigFile.getAbsolutePath());
+            return configToSave;
+        } catch (IOException e) {
+            log.error("[CONFIG] Error saving DB configuration file: {}", e.getMessage());
+            throw new ConfigurationException("Failed to save DB configuration to disk: " + e.getMessage());
+        }
+    }
+
+    public boolean testDbConnection(Map<String, String> dbConfig) {
+        String url = dbConfig.get("url");
+        String username = dbConfig.get("username");
+        String password = dbConfig.get("password");
+        String driver = dbConfig.get("driver");
+        
+        if (url == null || username == null || password == null || driver == null) {
+            return false;
+        }
+        
+        try {
+            Class.forName(driver);
+            try (Connection conn = DriverManager.getConnection(url, username, password)) {
+                return conn.isValid(5);
+            }
+        } catch (Exception e) {
+            log.error("[CONFIG] Test connection failed: {}", e.getMessage());
+            return false;
+        }
     }
 }

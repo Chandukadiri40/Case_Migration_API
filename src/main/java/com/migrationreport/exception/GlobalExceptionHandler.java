@@ -13,15 +13,19 @@ import java.util.Map;
 @Slf4j
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    private static final String TIMESTAMP_KEY = "timestamp";
+    private static final String STATUS_KEY = "status";
+    private static final String ERROR_KEY = "error";
+    private static final String MESSAGE_KEY = "message";
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Map<String, Object>> handleIllegalArgumentException(IllegalArgumentException ex) {
         log.warn("Validation Error: {}", ex.getMessage());
         Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.BAD_REQUEST.value());
-        body.put("error", "Bad Request / Validation Error");
-        body.put("message", ex.getMessage());
+        body.put(TIMESTAMP_KEY, LocalDateTime.now());
+        body.put(STATUS_KEY, HttpStatus.BAD_REQUEST.value());
+        body.put(ERROR_KEY, "Bad Request / Validation Error");
+        body.put(MESSAGE_KEY, ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
     
@@ -29,10 +33,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleResourceNotFoundException(ResourceNotFoundException ex) {
         log.warn("Resource Not Found: {}", ex.getMessage());
         Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.NOT_FOUND.value());
-        body.put("error", "Not Found");
-        body.put("message", ex.getMessage());
+        body.put(TIMESTAMP_KEY, LocalDateTime.now());
+        body.put(STATUS_KEY, HttpStatus.NOT_FOUND.value());
+        body.put(ERROR_KEY, "Not Found");
+        body.put(MESSAGE_KEY, ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
     }
 
@@ -40,10 +44,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleConfigurationException(ConfigurationException ex) {
         log.error("Configuration Error: {}", ex.getMessage());
         Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        body.put("error", "Configuration Error");
-        body.put("message", ex.getMessage());
+        body.put(TIMESTAMP_KEY, LocalDateTime.now());
+        body.put(STATUS_KEY, HttpStatus.INTERNAL_SERVER_ERROR.value());
+        body.put(ERROR_KEY, "Configuration Error");
+        body.put(MESSAGE_KEY, ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
     
@@ -51,10 +55,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleDatabaseQueryException(DatabaseQueryException ex) {
         log.error("Database Query Error: ", ex);
         Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        body.put("error", "Database Query Error");
-        body.put("message", ex.getMessage());
+        body.put(TIMESTAMP_KEY, LocalDateTime.now());
+        body.put(STATUS_KEY, HttpStatus.INTERNAL_SERVER_ERROR.value());
+        body.put(ERROR_KEY, "Database Query Error");
+        body.put(MESSAGE_KEY, ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -62,10 +66,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String, Object>> handleGeneralException(Exception ex) {
         log.error("Internal Server Error: ", ex);
         Map<String, Object> body = new HashMap<>();
-        body.put("timestamp", LocalDateTime.now());
-        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        body.put("error", "Internal Server Error / Database Error");
-        body.put("message", ex.getMessage());
+        body.put(TIMESTAMP_KEY, LocalDateTime.now());
+        body.put(STATUS_KEY, HttpStatus.INTERNAL_SERVER_ERROR.value());
+        body.put(ERROR_KEY, "Internal Server Error");
+        body.put(MESSAGE_KEY, ex.getMessage());
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

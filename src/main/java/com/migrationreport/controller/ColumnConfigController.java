@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Exposes column and table configurations for the frontend dashboard.
  */
+@Slf4j
 @RestController
 @RequestMapping("/api/config")
 @CrossOrigin(origins = "*")
@@ -27,11 +29,14 @@ public class ColumnConfigController {
      */
     @GetMapping("/tables")
     public ResponseEntity<List<Map<String, String>>> getTablesConfig() {
-        return ResponseEntity.ok(List.of(
+        log.info("Starting method: getTablesConfig");
+        ResponseEntity<List<Map<String, String>>> result = ResponseEntity.ok(List.of(
                 Map.of("key", "source", "label", "Source Table"),
                 Map.of("key", "staging", "label", "Staging Table"),
                 Map.of("key", "target", "label", "Target Table")
         ));
+        log.info("Ending method: getTablesConfig");
+        return result;
     }
 
     /**
@@ -39,7 +44,10 @@ public class ColumnConfigController {
      */
     @GetMapping("/system-columns")
     public ResponseEntity<List<String>> getSystemColumns() {
-        return ResponseEntity.ok(List.of("doc-id", "created-date", "content-size", "mime-type"));
+        log.info("Starting method: getSystemColumns");
+        ResponseEntity<List<String>> result = ResponseEntity.ok(List.of("doc-id", "created-date", "content-size", "mime-type"));
+        log.info("Ending method: getSystemColumns");
+        return result;
     }
 
     /**
@@ -48,9 +56,12 @@ public class ColumnConfigController {
      */
     @GetMapping("/custom-columns")
     public ResponseEntity<List<String>> getCustomColumns(@RequestParam(value = "table", defaultValue = "staging") String table) {
-        return ResponseEntity.ok()
+        log.info("Starting method: getCustomColumns with arguments: table={}", table);
+        ResponseEntity<List<String>> result = ResponseEntity.ok()
             .header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
             .body(searchService.getCustomColumnsForTable(table));
+        log.info("Ending method: getCustomColumns");
+        return result;
     }
 
     /**
@@ -58,9 +69,12 @@ public class ColumnConfigController {
      */
     @GetMapping("/available-fields")
     public ResponseEntity<List<MetadataFieldDTO>> getAvailableFields() {
-        return ResponseEntity.ok()
+        log.info("Starting method: getAvailableFields");
+        ResponseEntity<List<MetadataFieldDTO>> result = ResponseEntity.ok()
             .header("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0")
             .body(searchService.getAvailableFields());
+        log.info("Ending method: getAvailableFields");
+        return result;
     }
 
     /**
@@ -68,10 +82,13 @@ public class ColumnConfigController {
      */
     @GetMapping("/reconciliation-properties")
     public ResponseEntity<Map<String, List<String>>> getReconciliationProperties() {
-        return ResponseEntity.ok(Map.of(
+        log.info("Starting method: getReconciliationProperties");
+        ResponseEntity<Map<String, List<String>>> result = ResponseEntity.ok(Map.of(
             "systemProperties", searchService.getReconciliationSystemProperties(),
             "customMetadata", searchService.getReconciliationCustomMetadata()
         ));
+        log.info("Ending method: getReconciliationProperties");
+        return result;
     }
 }
 

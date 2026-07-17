@@ -1,0 +1,25 @@
+[ {
+  "templateId" : "48772c98-f69b-4436-9848-dd0fcaf864de",
+  "templateName" : "Invoice",
+  "applicationId" : "ccol",
+  "sourceDocumentClass" : "ContentTransfer",
+  "targetDocumentClass" : "CollectionsNotice",
+  "mappings" : [ {
+    "sourceProperty" : "ContentTransfer_Prop1",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "CollectionsNotice_Prop1",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "ContentTransfer_Prop2",
+    "sourceDataType" : "INTEGER",
+    "targetProperty" : "CollectionsNotice_Prop2",
+    "targetDataType" : "INTEGER"
+  }, {
+    "sourceProperty" : "ContentTransfer_Prop3",
+    "sourceDataType" : "DATETIME",
+    "targetProperty" : "CollectionsNotice_Prop2",
+    "targetDataType" : "INTEGER"
+  } ],
+  "lastModifiedBy" : "Admin",
+  "lastModifiedDate" : "2026-07-17T11:06:08.074Z"
+} ]

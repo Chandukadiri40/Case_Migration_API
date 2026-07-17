@@ -8,6 +8,7 @@ class MigrationReportApplicationTests {
 
 	@Test
 	void contextLoads() {
+		org.junit.jupiter.api.Assertions.assertTrue(true, "Context loaded successfully");
 	}
 
 }

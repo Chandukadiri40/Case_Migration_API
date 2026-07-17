@@ -31,10 +31,18 @@ public class DiscoveryController {
     }
 
     @GetMapping("/doc-classes")
-    public ResponseEntity<List<String>> getDocumentClasses(@RequestParam String appId) {
-        log.info("Starting method: getDocumentClasses with arguments: appId={}", appId);
-        List<String> classes = discoveryService.getDocumentClasses(appId);
+    public ResponseEntity<List<String>> getDocumentClasses(@RequestParam String appId, @RequestParam(required = false, defaultValue = "source") String type) {
+        log.info("Starting method: getDocumentClasses with arguments: appId={}, type={}", appId, type);
+        List<String> classes = discoveryService.getDocumentClasses(appId, type);
         log.info("Ending method: getDocumentClasses");
         return ResponseEntity.ok(classes);
+    }
+
+    @GetMapping("/class-properties")
+    public ResponseEntity<List<Map<String, Object>>> getClassProperties(@RequestParam String appId, @RequestParam String docClass) {
+        log.info("Starting method: getClassProperties with arguments: appId={}, docClass={}", appId, docClass);
+        List<Map<String, Object>> properties = discoveryService.getClassProperties(appId, docClass);
+        log.info("Ending method: getClassProperties");
+        return ResponseEntity.ok(properties);
     }
 }

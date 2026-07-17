@@ -15,18 +15,30 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import com.migrationreport.exception.ResourceNotFoundException;
+import java.util.HashSet;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.regex.Pattern;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.migrationreport.dialect.SqlDialect;
+import com.migrationreport.dto.MetadataFieldDTO;
+import com.migrationreport.dto.config.TenantConfig;
 
 @Slf4j
 @Service
 public class SearchService {
+
+    public static final String TABLE_SOURCE = "source";
+    public static final String TABLE_STAGING = "staging";
+    public static final String TABLE_TARGET = "target";
+    private static final String SQL_AND = " AND ";
 
     private final JdbcTemplate jdbcTemplate;
     private final QueryValidator queryValidator;
     private final ConfigurationService configurationService;
     private final String targetTable;
 
-    @org.springframework.beans.factory.annotation.Autowired
-    private com.migrationreport.dialect.SqlDialect dialect;
+    @Autowired
+    private SqlDialect dialect;
 
     // Multi-table search configuration
     private final String sourceTable;
@@ -57,10 +69,11 @@ public class SearchService {
     private final List<String> reconciliationCustomMetadata;
 
     // Dynamic metadata fields mapping loaded from database (with static fallback)
-    private final List<com.migrationreport.dto.MetadataFieldDTO> availableFields = new ArrayList<>();
-    private final Map<String, String> displayNameToColumnName = new java.util.concurrent.ConcurrentHashMap<>();
+    private final List<MetadataFieldDTO> availableFields = new ArrayList<>();
+    private final Map<String, String> displayNameToColumnName = new ConcurrentHashMap<>();
     private boolean fieldsLoaded = false;
 
+    @SuppressWarnings("java:S3776")
     private synchronized void ensureFieldsLoaded() {
         if (fieldsLoaded) {
             return;
@@ -76,7 +89,7 @@ public class SearchService {
                          "WHERE cd.DBG_TABLE_NAME = 'DocVersion' " +
                          "ORDER BY cd.COLUMN_NAME";
             
-            List<com.migrationreport.dto.MetadataFieldDTO> fields = jdbcTemplate.query(sql, (rs, rowNum) -> {
+            List<MetadataFieldDTO> fields = jdbcTemplate.query(sql, (rs, rowNum) -> {
                 String typeStr = rs.getString("DATA_TYPE");
                 Integer typeVal = 8; // Default to String (8)
                 if (typeStr != null) {
@@ -86,7 +99,7 @@ public class SearchService {
                         // ignore and default to 8
                     }
                 }
-                return new com.migrationreport.dto.MetadataFieldDTO(
+                return new MetadataFieldDTO(
                     rs.getString("COLUMN_NAME"),
                     rs.getString("SYMBOLIC_NAME"),
                     rs.getString("DISPLAY_NAME"),
@@ -97,8 +110,8 @@ public class SearchService {
             if (fields != null && !fields.isEmpty()) {
                 availableFields.clear();
                 displayNameToColumnName.clear();
-                java.util.Set<String> seenNames = new java.util.HashSet<>();
-                for (com.migrationreport.dto.MetadataFieldDTO field : fields) {
+                Set<String> seenNames = new HashSet<>();
+                for (MetadataFieldDTO field : fields) {
                     if (field.getDisplayName() == null || field.getDisplayName().trim().isEmpty()) {
                         continue;
                     }
@@ -129,25 +142,26 @@ public class SearchService {
         availableFields.clear();
         displayNameToColumnName.clear();
 
-        List<com.migrationreport.dto.MetadataFieldDTO> fallbackList = List.of(
-            new com.migrationreport.dto.MetadataFieldDTO("U1708_DOCUMENTTITLE", "DocumentTitle", "Document Title", 8),
-            new com.migrationreport.dto.MetadataFieldDTO("UA8C8_USER_NAME", "Creator", "User Name", 8),
-            new com.migrationreport.dto.MetadataFieldDTO("FILEFULLPATH", "FileFullPath", "File Path", 8),
-            new com.migrationreport.dto.MetadataFieldDTO("UD5E8_ADDRESS", "Address", "Address", 8),
-            new com.migrationreport.dto.MetadataFieldDTO("UC7A6_ORDER_NO", "OrderNo", "Order No", 8)
+        List<MetadataFieldDTO> fallbackList = List.of(
+            new MetadataFieldDTO("U1708_DOCUMENTTITLE", "DocumentTitle", "Document Title", 8),
+            new MetadataFieldDTO("UA8C8_USER_NAME", "Creator", "User Name", 8),
+            new MetadataFieldDTO("FILEFULLPATH", "FileFullPath", "File Path", 8),
+            new MetadataFieldDTO("UD5E8_ADDRESS", "Address", "Address", 8),
+            new MetadataFieldDTO("UC7A6_ORDER_NO", "OrderNo", "Order No", 8)
         );
 
         availableFields.addAll(fallbackList);
-        for (com.migrationreport.dto.MetadataFieldDTO field : fallbackList) {
+        for (MetadataFieldDTO field : fallbackList) {
             displayNameToColumnName.put(field.getDisplayName().toLowerCase(), field.getColumnName());
         }
     }
 
-    public List<com.migrationreport.dto.MetadataFieldDTO> getAvailableFields() {
+    public List<MetadataFieldDTO> getAvailableFields() {
         ensureFieldsLoaded();
         return new ArrayList<>(availableFields);
     }
 
+    @SuppressWarnings("java:S3776")
     public SearchService(
             JdbcTemplate jdbcTemplate,
             QueryValidator queryValidator,
@@ -192,7 +206,7 @@ public class SearchService {
         if (sourceCustomColumnsStr != null && !sourceCustomColumnsStr.trim().isEmpty()) {
             this.sourceCustomColumnsList = Arrays.stream(sourceCustomColumnsStr.split(","))
                     .map(String::trim)
-                    .collect(Collectors.toList());
+                    .toList();
             this.sourceCustomColumns = this.sourceCustomColumnsList.stream()
                     .map(String::toLowerCase)
                     .collect(Collectors.toSet());
@@ -205,7 +219,7 @@ public class SearchService {
         if (stagingCustomColumnsStr != null && !stagingCustomColumnsStr.trim().isEmpty()) {
             this.stagingCustomColumnsList = Arrays.stream(stagingCustomColumnsStr.split(","))
                     .map(String::trim)
-                    .collect(Collectors.toList());
+                    .toList();
             this.stagingCustomColumns = this.stagingCustomColumnsList.stream()
                     .map(String::toLowerCase)
                     .collect(Collectors.toSet());
@@ -218,7 +232,7 @@ public class SearchService {
         if (targetCustomColumnsStr != null && !targetCustomColumnsStr.trim().isEmpty()) {
             this.targetCustomColumnsList = Arrays.stream(targetCustomColumnsStr.split(","))
                     .map(String::trim)
-                    .collect(Collectors.toList());
+                    .toList();
             this.targetCustomColumns = this.targetCustomColumnsList.stream()
                     .map(String::toLowerCase)
                     .collect(Collectors.toSet());
@@ -230,7 +244,7 @@ public class SearchService {
         if (recSystemPropertiesStr != null && !recSystemPropertiesStr.trim().isEmpty()) {
             this.reconciliationSystemProperties = Arrays.stream(recSystemPropertiesStr.split(","))
                     .map(String::trim)
-                    .collect(Collectors.toList());
+                    .toList();
         } else {
             this.reconciliationSystemProperties = Arrays.asList("object_id", "mime_type", "content_size");
         }
@@ -238,7 +252,7 @@ public class SearchService {
         if (recCustomMetadataStr != null && !recCustomMetadataStr.trim().isEmpty()) {
             this.reconciliationCustomMetadata = Arrays.stream(recCustomMetadataStr.split(","))
                     .map(String::trim)
-                    .collect(Collectors.toList());
+                    .toList();
         } else {
             this.reconciliationCustomMetadata = Collections.singletonList("*");
         }
@@ -246,7 +260,7 @@ public class SearchService {
         if (recExtraPropertiesStr != null && !recExtraPropertiesStr.trim().isEmpty()) {
             this.reconciliationExtraProperties = Arrays.stream(recExtraPropertiesStr.split(","))
                     .map(String::trim)
-                    .collect(Collectors.toList());
+                    .toList();
         } else {
             this.reconciliationExtraProperties = Collections.emptyList();
         }
@@ -269,11 +283,11 @@ public class SearchService {
             return Collections.emptyList();
         }
         switch (tableKey.toLowerCase().trim()) {
-            case "source":
+            case TABLE_SOURCE:
                 return sourceCustomColumnsList;
-            case "staging":
+            case TABLE_STAGING:
                 return stagingCustomColumnsList;
-            case "target":
+            case TABLE_TARGET:
                 return targetCustomColumnsList;
             default:
                 return Collections.emptyList();
@@ -282,9 +296,9 @@ public class SearchService {
 
     public Map<String, String> getTablesConfig() {
         return Map.of(
-            "source", sourceTable,
-            "staging", stagingTable,
-            "target", targetTableConfig
+            TABLE_SOURCE, sourceTable,
+            TABLE_STAGING, stagingTable,
+            TABLE_TARGET, targetTableConfig
         );
     }
 
@@ -306,13 +320,14 @@ public class SearchService {
         return jdbcTemplate.queryForList(sql);
     }
 
-    private static final java.util.regex.Pattern SAFE_SQL_PATTERN =
-            java.util.regex.Pattern.compile("^\\s*SELECT\\b", java.util.regex.Pattern.CASE_INSENSITIVE);
+    private static final Pattern SAFE_SQL_PATTERN =
+            Pattern.compile("^\\s*SELECT\\b", Pattern.CASE_INSENSITIVE);
 
-    private static final java.util.regex.Pattern DANGEROUS_PATTERN = java.util.regex.Pattern.compile(
+    private static final Pattern DANGEROUS_PATTERN = Pattern.compile(
             "\\b(insert|update|delete|drop|alter|create|truncate|rename|replace|grant|revoke|merge|exec|execute)\\b",
-            java.util.regex.Pattern.CASE_INSENSITIVE);
+            Pattern.CASE_INSENSITIVE);
 
+    @SuppressWarnings("java:S3776")
     public List<Map<String, Object>> search(SearchRequest request) {
         if (request.getTable() == null || request.getTable().trim().isEmpty()) {
             throw new IllegalArgumentException("Table key parameter is required");
@@ -321,7 +336,7 @@ public class SearchService {
             throw new IllegalArgumentException("AppId parameter is required");
         }
 
-        com.migrationreport.dto.config.TenantConfig.ApplicationConfig appConfig = configurationService.getApplicationConfig(request.getAppId());
+        TenantConfig.ApplicationConfig appConfig = configurationService.getApplicationConfig(request.getAppId());
         if (appConfig == null) {
             throw new ResourceNotFoundException("Application configuration not found for appId: " + request.getAppId());
         }
@@ -335,25 +350,32 @@ public class SearchService {
             throw new ResourceNotFoundException("Table mapping not found for table key: " + tableKey);
         }
 
-        String physicalTable = appConfig.getSchema() + "." + physicalTableName;
+        validateIdentifier(physicalTableName);
+        String schemaPrefix = "";
+        if (appConfig.getSchema() != null && !appConfig.getSchema().isEmpty()) {
+            schemaPrefix = validateIdentifier(appConfig.getSchema()) + ".";
+        }
+        String physicalTable = schemaPrefix + physicalTableName;
         
         String currentDocIdColumn = this.docIdColumn; // defaults to object_id
         if (appConfig.getPrimaryColumns() != null && appConfig.getPrimaryColumns().get(tableKey) != null) {
             currentDocIdColumn = appConfig.getPrimaryColumns().get(tableKey);
         } else {
-            if (tableKey.equals("staging")) currentDocIdColumn = "stg_object_id";
-            else if (tableKey.equals("target")) currentDocIdColumn = "p8_doc_id";
+            if (tableKey.equals(TABLE_STAGING)) currentDocIdColumn = "stg_object_id";
+            else if (tableKey.equals(TABLE_TARGET)) currentDocIdColumn = "p8_doc_id";
         }
+        
+        validateIdentifier(currentDocIdColumn);
 
         Set<String> whitelistedCustomColumns;
         switch (tableKey) {
-            case "source":
+            case TABLE_SOURCE:
                 whitelistedCustomColumns = sourceCustomColumns;
                 break;
-            case "staging":
+            case TABLE_STAGING:
                 whitelistedCustomColumns = stagingCustomColumns;
                 break;
-            case "target":
+            case TABLE_TARGET:
                 whitelistedCustomColumns = targetCustomColumns;
                 break;
             default:
@@ -402,35 +424,59 @@ public class SearchService {
         List<Object> params = new ArrayList<>();
 
         // 1. Bulk Document IDs Search
+        appendDocIds(request, sql, params, currentDocIdColumn);
+
+        // 2. Status Filter
+        appendStatusFilter(request, sql, params);
+
+        // 3. Date Range Filters
+        appendDateFilters(request, sql, params);
+
+        // 4. System Filters
+        appendSystemFilters(request, sql, params);
+
+        // 5. Custom Filters
+        appendCustomFilters(request, sql, params, whitelistedCustomColumns);
+
+        String finalSql = sql.toString();
+        log.info("Executing SQL Query: {} with params: {}", finalSql, params);
+        return jdbcTemplate.queryForList(finalSql, params.toArray());
+    }
+
+    private void appendDocIds(SearchRequest request, StringBuilder sql, List<Object> params, String currentDocIdColumn) {
         if (request.getDocIds() != null && !request.getDocIds().isEmpty()) {
-            sql.append(" AND ").append(currentDocIdColumn).append(" IN (");
+            sql.append(SQL_AND).append(currentDocIdColumn).append(" IN (");
             for (int i = 0; i < request.getDocIds().size(); i++) {
                 sql.append(i == 0 ? "?" : ",?");
                 params.add(request.getDocIds().get(i).trim());
             }
             sql.append(")");
         }
+    }
 
-        // 2. Status Filter (Success, failed, total)
+    private void appendStatusFilter(SearchRequest request, StringBuilder sql, List<Object> params) {
         String selectedStatus = request.getStatus();
         String currentStatusColumn = configurationService.getSystemColumn(request.getAppId(), "status", statusColumn);
         if (selectedStatus != null && !selectedStatus.trim().isEmpty() && !selectedStatus.equalsIgnoreCase("total")) {
-            sql.append(" AND ").append(currentStatusColumn).append(" = ?");
+            sql.append(SQL_AND).append(currentStatusColumn).append(" = ?");
             params.add(selectedStatus.trim());
         }
+    }
 
-        // 3. Date Range Filters
+    private void appendDateFilters(SearchRequest request, StringBuilder sql, List<Object> params) {
         String currentDateColumn = configurationService.getSystemColumn(request.getAppId(), "date", dateColumn);
         if (request.getFromDate() != null && !request.getFromDate().isBlank()) {
-            sql.append(" AND ").append(dialect.castToTimestamp(currentDateColumn)).append(" >= ").append(dialect.castParameterToTimestamp());
+            sql.append(SQL_AND).append(dialect.castToTimestamp(currentDateColumn)).append(" >= ").append(dialect.castParameterToTimestamp());
             params.add(request.getFromDate().trim());
         }
         if (request.getToDate() != null && !request.getToDate().isBlank()) {
-            sql.append(" AND ").append(dialect.castToTimestamp(currentDateColumn)).append(" <= ").append(dialect.castParameterToTimestamp());
+            sql.append(SQL_AND).append(dialect.castToTimestamp(currentDateColumn)).append(" <= ").append(dialect.castParameterToTimestamp());
             params.add(request.getToDate().trim());
         }
+    }
 
-        // 4. System Filters
+    @SuppressWarnings("java:S3776")
+    private void appendSystemFilters(SearchRequest request, StringBuilder sql, List<Object> params) {
         if (request.getSystemFilters() != null) {
             for (Map.Entry<String, String> entry : request.getSystemFilters().entrySet()) {
                 String key = entry.getKey().trim().toLowerCase();
@@ -441,18 +487,21 @@ public class SearchService {
 
                 String dbColumn = getSystemDbColumn(request.getAppId(), key);
                 if (dbColumn != null) {
+                    dbColumn = validateIdentifier(dbColumn);
                     if (key.equals("doc-id") || key.equals("docid")) {
-                        sql.append(" AND ").append(dbColumn).append(" = ?");
+                        sql.append(SQL_AND).append(dbColumn).append(" = ?");
                         params.add(value.trim());
                     } else {
-                        sql.append(" AND LOWER(CAST(").append(dbColumn).append(" AS VARCHAR(8000))) LIKE ?");
+                        sql.append(SQL_AND).append("LOWER(CAST(").append(dbColumn).append(" AS VARCHAR(8000))) LIKE ?");
                         params.add("%" + value.trim().toLowerCase() + "%");
                     }
                 }
             }
         }
+    }
 
-        // 5. Custom Filters
+    @SuppressWarnings("java:S3776")
+    private void appendCustomFilters(SearchRequest request, StringBuilder sql, List<Object> params, Set<String> whitelistedCustomColumns) {
         if (request.getCustomFilters() != null) {
             ensureFieldsLoaded();
             for (Map.Entry<String, String> entry : request.getCustomFilters().entrySet()) {
@@ -462,18 +511,16 @@ public class SearchService {
                     continue;
                 }
 
-                // Resolve display name (e.g., "User Name") to column name (e.g., "UA8C8_USER_NAME")
                 String resolvedColumn = displayNameToColumnName.get(key.toLowerCase());
                 if (resolvedColumn == null) {
-                    resolvedColumn = key; // Fallback to key direct if no mapping
+                    resolvedColumn = key; 
                 }
 
                 String colLower = resolvedColumn.toLowerCase();
 
-                // Validate if allowed. It is allowed if whitelisted or matches a dynamic metadata mapping
                 boolean isAllowed = whitelistedCustomColumns.contains(colLower);
                 if (!isAllowed) {
-                    for (com.migrationreport.dto.MetadataFieldDTO field : availableFields) {
+                    for (MetadataFieldDTO field : availableFields) {
                         if (field.getColumnName() != null && field.getColumnName().toLowerCase().equals(colLower)) {
                             isAllowed = true;
                             break;
@@ -485,13 +532,11 @@ public class SearchService {
                     throw new IllegalArgumentException("Column '" + key + "' (resolved as '" + resolvedColumn + "') is not whitelisted or mapped for custom searching in table: " + request.getTable());
                 }
 
-                sql.append(" AND LOWER(CAST(").append(resolvedColumn).append(" AS VARCHAR(8000))) LIKE ?");
+                resolvedColumn = validateIdentifier(resolvedColumn);
+                sql.append(SQL_AND).append("LOWER(CAST(").append(resolvedColumn).append(" AS VARCHAR(8000))) LIKE ?");
                 params.add("%" + value.trim().toLowerCase() + "%");
             }
         }
-        String finalSql = sql.toString();
-        log.info("Executing SQL Query: {} with params: {}", finalSql, params);
-        return jdbcTemplate.queryForList(finalSql, params.toArray());
     }
 
     public List<Map<String, Object>> executeQuery(String sql) {
@@ -529,6 +574,7 @@ public class SearchService {
         }
     }
 
+    @SuppressWarnings("java:S3776")
     public String buildSelectClauseForTable(String tableString, String tableKey) {
         String schema = "public";
         String tableName = tableString;
@@ -538,8 +584,8 @@ public class SearchService {
         }
         
         String sql = "SELECT LOWER(column_name) FROM information_schema.columns WHERE LOWER(table_schema) = LOWER(?) AND LOWER(table_name) = LOWER(?)";
-        List<String> dbCols = jdbcTemplate.queryForList(sql, new Object[]{schema, tableName}, String.class);
-        java.util.Set<String> dbColsSet = new java.util.HashSet<>(dbCols);
+        List<String> dbCols = jdbcTemplate.queryForList(sql, String.class, schema, tableName);
+        Set<String> dbColsSet = new HashSet<>(dbCols);
         
         List<String> cols = new ArrayList<>();
         
@@ -583,6 +629,13 @@ public class SearchService {
             return "*";
         }
         return String.join(", ", cols);
+    }
+
+    private String validateIdentifier(String identifier) {
+        if (identifier != null && !identifier.matches("^[a-zA-Z0-9_\\-]+$")) {
+            throw new IllegalArgumentException("Invalid identifier format: " + identifier);
+        }
+        return identifier;
     }
 }
 
