@@ -166,7 +166,7 @@ public class DiscoveryService {
                 break;
                 
             case "size-bucket":
-                sql = "SELECT CASE WHEN " + dialect.castToNumeric("dv.content_size") + " IS NULL THEN '0. No Content' " +
+                String sizeCaseExpr = "CASE WHEN " + dialect.castToNumeric("dv.content_size") + " IS NULL THEN '0. No Content' " +
                       "WHEN " + dialect.castToNumeric("dv.content_size") + " = 0 THEN '1. Zero Bytes' " +
                       "WHEN " + dialect.castToNumeric("dv.content_size") + " BETWEEN 1 AND 102399 THEN '2. Under 100 KB' " +
                       "WHEN " + dialect.castToNumeric("dv.content_size") + " BETWEEN 102400 AND 511999 THEN '3. 100 KB - 500 KB' " +
@@ -176,7 +176,8 @@ public class DiscoveryService {
                       "WHEN " + dialect.castToNumeric("dv.content_size") + " BETWEEN 10485760 AND 26214399 THEN '7. 10 MB - 25 MB' " +
                       "WHEN " + dialect.castToNumeric("dv.content_size") + " BETWEEN 26214400 AND 52428799 THEN '8. 25 MB - 50 MB' " +
                       "WHEN " + dialect.castToNumeric("dv.content_size") + " BETWEEN 52428800 AND 104857599 THEN '9. 50 MB - 100 MB' " +
-                      "ELSE '10. Over 100 MB' END AS size_range, " +
+                      "ELSE '10. Over 100 MB' END";
+                sql = "SELECT " + sizeCaseExpr + " AS size_range, " +
                       "COUNT(dv.object_id) AS total_documents, " +
                       "COALESCE(SUM(" + dialect.castToNumeric("dv.content_size") + "), 0) AS total_size_bytes, " +
                       "CAST(COALESCE(SUM(" + dialect.castToNumeric("dv.content_size") + "), 0) / 1048576.0 AS numeric(15, 6)) AS total_size_mb, " +
@@ -184,7 +185,7 @@ public class DiscoveryService {
                       "FROM " + sourceTable + " dv " +
                       "LEFT JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
                       where +
-                      " GROUP BY size_range ORDER BY size_range";
+                      " GROUP BY " + sizeCaseExpr + " ORDER BY size_range";
                 break;
                 
             case "no-content":
@@ -266,27 +267,27 @@ public class DiscoveryService {
                 break;
             case "version-distribution":
                 sql = "SELECT cd.symbolic_name AS class_name, " +
-                      "COALESCE(dv.major_version_number, '1') || '.' || COALESCE(dv.minor_version_number, '0') AS version_bucket, " +
+                      "CONCAT(COALESCE(dv.major_version_number, '1'), '.', COALESCE(dv.minor_version_number, '0')) AS version_bucket, " +
                       "COUNT(dv.object_id) AS doc_count " +
                       "FROM " + sourceTable + " dv " +
                       "INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id " +
                       where + " " +
-                      "GROUP BY cd.symbolic_name, COALESCE(dv.major_version_number, '1') || '.' || COALESCE(dv.minor_version_number, '0') " +
+                      "GROUP BY cd.symbolic_name, CONCAT(COALESCE(dv.major_version_number, '1'), '.', COALESCE(dv.minor_version_number, '0')) " +
                       "ORDER BY cd.symbolic_name, version_bucket";
                 break;
             case "retrieval-hex-blob":
-                sql = "SELECT SUM(CASE WHEN LENGTH(COALESCE(retrieval_names, '')) > 0 AND LENGTH(COALESCE(retrieval_names, '')) <= 500 THEN 1 ELSE 0 END) AS RN1_Hex_Format_Count, " +
-                      "SUM(CASE WHEN LENGTH(COALESCE(retrieval_names, '')) > 500 THEN 1 ELSE 0 END) AS RN1_Blob_Format_Count " +
+                sql = "SELECT SUM(CASE WHEN " + dialect.getLength("COALESCE(retrieval_names, '')") + " > 0 AND " + dialect.getLength("COALESCE(retrieval_names, '')") + " <= 500 THEN 1 ELSE 0 END) AS RN1_Hex_Format_Count, " +
+                      "SUM(CASE WHEN " + dialect.getLength("COALESCE(retrieval_names, '')") + " > 500 THEN 1 ELSE 0 END) AS RN1_Blob_Format_Count " +
                       "FROM " + sourceTable + " dv";
                 break;
                 
             case "component-hex-blob":
-                sql = "SELECT SUM(CASE WHEN LENGTH(COALESCE(component_types, '')) > 0 AND LENGTH(COALESCE(component_types, '')) <= 500 THEN 1 ELSE 0 END) AS CT1_Hex_Format_Count " +
+                sql = "SELECT SUM(CASE WHEN " + dialect.getLength("COALESCE(component_types, '')") + " > 0 AND " + dialect.getLength("COALESCE(component_types, '')") + " <= 500 THEN 1 ELSE 0 END) AS CT1_Hex_Format_Count " +
                       "FROM " + sourceTable + " dv";
                 break;
                 
             case "content-hex-blob":
-                sql = "SELECT SUM(CASE WHEN LENGTH(COALESCE(content_info, '')) > 0 AND LENGTH(COALESCE(content_info, '')) <= 500 THEN 1 ELSE 0 END) AS CI1_Hex_Format_Count " +
+                sql = "SELECT SUM(CASE WHEN " + dialect.getLength("COALESCE(content_info, '')") + " > 0 AND " + dialect.getLength("COALESCE(content_info, '')") + " <= 500 THEN 1 ELSE 0 END) AS CI1_Hex_Format_Count " +
                       "FROM " + sourceTable + " dv";
                 break;
                 

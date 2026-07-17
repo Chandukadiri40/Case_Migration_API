@@ -42,4 +42,9 @@ public class SqlServerDialect implements SqlDialect {
     public String castToDate(String column) {
         return "CAST(" + column + " AS DATE)";
     }
+
+    @Override
+    public String getLength(String column) {
+        return "LEN(" + column + ")";
+    }
 }

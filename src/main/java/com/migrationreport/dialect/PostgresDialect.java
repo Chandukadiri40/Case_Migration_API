@@ -41,4 +41,9 @@ public class PostgresDialect implements SqlDialect {
     public String castToDate(String column) {
         return "CAST(" + column + " AS DATE)";
     }
+
+    @Override
+    public String getLength(String column) {
+        return "LENGTH(" + column + ")";
+    }
 }
