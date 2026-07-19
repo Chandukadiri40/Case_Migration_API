@@ -19,10 +19,14 @@ import com.migrationreport.dto.config.DbConfigWrapper;
 import java.sql.Connection;
 import com.migrationreport.util.EncryptionUtil;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 @Slf4j
 @Service
 public class ConfigurationService {
+
+    private static final String PASSWORD = "password";
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final JdbcTemplate jdbcTemplate;
@@ -113,7 +117,55 @@ public class ConfigurationService {
         return defaultValue;
     }
 
+    public String getSystemTable(String appId, String tableKey, String defaultName) {
+        if (appId != null) {
+            TenantConfig.ApplicationConfig appConfig = getApplicationConfig(appId);
+            if (appConfig != null && appConfig.getClassifiedTables() != null) {
+                List<String> tables = appConfig.getClassifiedTables().get(tableKey);
+                if (tables != null && !tables.isEmpty()) {
+                    return tables.get(0);
+                }
+            }
+        }
+        return defaultName;
+    }
+
+
     public Map<String, List<String>> getDatabaseMetadata(String schemaName) {
+        DbConfigWrapper dbConfig = getDbConfig();
+        if (dbConfig != null && dbConfig.getDatabases() != null && !dbConfig.getDatabases().isEmpty()) {
+            Map<String, String> dbProps = dbConfig.getDatabases().get(0);
+            String url = dbProps.get("url");
+            String username = dbProps.get("username");
+            String password = dbProps.get(PASSWORD);
+            String driver = dbProps.get("driver");
+            
+            if (url != null && username != null && password != null && driver != null) {
+                try {
+                    Class.forName(driver);
+                    try (Connection conn = DriverManager.getConnection(url, username, password)) {
+                        String dynamicQuery = "SELECT table_name, column_name FROM information_schema.columns WHERE LOWER(table_schema) = LOWER(?)";
+                        try (PreparedStatement pstmt = conn.prepareStatement(dynamicQuery)) {
+                            pstmt.setString(1, schemaName);
+                            try (ResultSet rs = pstmt.executeQuery()) {
+                                Map<String, List<String>> metadata = new HashMap<>();
+                                while (rs.next()) {
+                                    String tableName = rs.getString("table_name");
+                                    String columnName = rs.getString("column_name");
+                                    metadata.computeIfAbsent(tableName, k -> new ArrayList<>()).add(columnName);
+                                }
+                                log.info("[CONFIG] Successfully fetched database metadata from configured dynamic database for schema: {}", schemaName);
+                                return metadata;
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    log.error("[CONFIG] Failed to fetch metadata from dynamic DB: {}. Falling back to internal DB.", e.getMessage());
+                }
+            }
+        }
+
+        // Fallback to internal application database
         String query = "SELECT table_name, column_name FROM information_schema.columns WHERE LOWER(table_schema) = LOWER(?)";
         
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(query, schemaName);
@@ -139,8 +191,8 @@ public class ConfigurationService {
             DbConfigWrapper wrapper = objectMapper.readValue(dbConfigFile, DbConfigWrapper.class);
             if (wrapper.getDatabases() != null) {
                 for (Map<String, String> dbConfig : wrapper.getDatabases()) {
-                    if (dbConfig.containsKey("password") && dbConfig.get("password") != null) {
-                        dbConfig.put("password", EncryptionUtil.decrypt(dbConfig.get("password")));
+                    if (dbConfig.containsKey(PASSWORD) && dbConfig.get(PASSWORD) != null) {
+                        dbConfig.put(PASSWORD, EncryptionUtil.decrypt(dbConfig.get(PASSWORD)));
                     }
                 }
             } else {
@@ -163,6 +215,12 @@ public class ConfigurationService {
                 parent.mkdirs();
             }
             
+            // Load existing config to preserve untouched passwords
+            DbConfigWrapper existingConfig = null;
+            if (dbConfigFile.exists()) {
+                existingConfig = objectMapper.readValue(dbConfigFile, DbConfigWrapper.class);
+            }
+            
             DbConfigWrapper configToSave = new DbConfigWrapper();
             configToSave.setActiveDatabaseType(wrapper.getActiveDatabaseType());
             List<Map<String, String>> dbsToSave = new ArrayList<>();
@@ -170,8 +228,23 @@ public class ConfigurationService {
             if (wrapper.getDatabases() != null) {
                 for (Map<String, String> db : wrapper.getDatabases()) {
                     Map<String, String> configMap = new HashMap<>(db);
-                    if (configMap.containsKey("password") && configMap.get("password") != null && !configMap.get("password").trim().isEmpty()) {
-                        configMap.put("password", EncryptionUtil.encrypt(configMap.get("password")));
+                    String incPwd = configMap.get(PASSWORD);
+                    
+                    if (incPwd == null || incPwd.trim().isEmpty() || "********".equals(incPwd)) {
+                        // Restore old encrypted password from disk
+                        if (existingConfig != null && existingConfig.getDatabases() != null) {
+                            for (Map<String, String> oldDb : existingConfig.getDatabases()) {
+                                if (oldDb.get("databaseType").equals(configMap.get("databaseType"))) {
+                                    if (oldDb.containsKey(PASSWORD)) {
+                                        configMap.put(PASSWORD, oldDb.get(PASSWORD));
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                    } else {
+                        // Encrypt new password
+                        configMap.put(PASSWORD, EncryptionUtil.encrypt(incPwd));
                     }
                     dbsToSave.add(configMap);
                 }
@@ -190,7 +263,7 @@ public class ConfigurationService {
     public boolean testDbConnection(Map<String, String> dbConfig) {
         String url = dbConfig.get("url");
         String username = dbConfig.get("username");
-        String password = dbConfig.get("password");
+        String password = dbConfig.get(PASSWORD);
         String driver = dbConfig.get("driver");
         
         if (url == null || username == null || password == null || driver == null) {

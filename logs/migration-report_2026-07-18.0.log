@@ -1,0 +1,1110 @@
+2026-07-18 00:11:13 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 00:11:13 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 00:11:13 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 00:11:13 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 00:11:13 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 00:11:13 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 00:11:13 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 00:11:13 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 00:11:13 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 00:11:13 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 00:11:13 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 00:11:13 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 00:15:30 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 00:15:30 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 00:15:30 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 00:15:30 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 00:15:30 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 00:15:30 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 00:15:30 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 00:15:30 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 00:15:30 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 00:15:30 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 00:15:30 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 00:15:30 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 00:15:33 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Starting method: getDatabaseMetadata with arguments: schema=ccol
+2026-07-18 00:15:33 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Ending method: getDatabaseMetadata
+2026-07-18 00:25:58 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 00:25:58 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 00:25:58 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 00:25:58 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 00:25:58 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 00:25:58 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 00:25:58 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 00:25:58 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 00:25:58 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 00:25:58 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 00:25:58 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 00:25:58 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 00:27:18 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 00:27:18 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 00:27:18 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 00:27:18 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 00:27:18 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 00:27:18 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 00:27:18 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 00:27:18 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 00:27:18 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 00:27:18 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 00:27:18 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 00:27:18 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 00:28:17 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Starting method: getDatabaseMetadata with arguments: schema=pronto_io
+2026-07-18 00:28:17 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Ending method: getDatabaseMetadata
+2026-07-18 00:29:28 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 00:29:28 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 00:29:28 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 00:29:28 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 00:29:28 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 00:29:28 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 00:37:31 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 00:37:31 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 00:37:31 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 00:37:31 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 00:37:31 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 00:37:31 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 00:37:54 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 00:37:54 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 00:37:54 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 00:37:54 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 00:37:54 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 00:37:54 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 00:54:42 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 00:54:42 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 00:54:42 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 00:54:42 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 00:54:42 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 00:54:42 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 01:08:55 [INFO ] [RMI TCP Connection(90)-127.0.0.1] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2026-07-18 01:08:55 [INFO ] [RMI TCP Connection(90)-127.0.0.1] o.s.boot.tomcat.GracefulShutdown : Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-18 01:08:55 [INFO ] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown : Graceful shutdown complete
+2026-07-18 01:08:55 [INFO ] [RMI TCP Connection(90)-127.0.0.1] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-18 01:08:55 [INFO ] [RMI TCP Connection(90)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-07-18 01:08:55 [INFO ] [RMI TCP Connection(90)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-07-18 01:09:36 [INFO ] [main] c.m.MigrationReportApplication : Starting MigrationReportApplication using Java 21.0.1 with PID 55144 (D:\MigrationReportTool\Backend\MigrationReport\target\classes started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
+2026-07-18 01:09:36 [INFO ] [main] c.m.MigrationReportApplication : No active profile set, falling back to 1 default profile: "default"
+2026-07-18 01:09:36 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-18 01:09:36 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 47 ms. Found 1 JPA repository interface.
+2026-07-18 01:09:37 [INFO ] [main] o.s.boot.tomcat.TomcatWebServer : Tomcat initialized with port 8080 (http)
+2026-07-18 01:09:37 [INFO ] [main] o.a.catalina.core.StandardService : Starting service [Tomcat]
+2026-07-18 01:09:37 [INFO ] [main] o.a.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-07-18 01:09:37 [INFO ] [main] o.s.b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1147 ms
+2026-07-18 01:09:37 [INFO ] [main] c.m.config.DataSourceConfig : [CONFIG] Loaded database configuration for active type postgres from D:\MigrationReportTool\Backend\MigrationReport\config\db-config.json
+2026-07-18 01:09:37 [INFO ] [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-18 01:09:37 [INFO ] [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-18 01:09:38 [INFO ] [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-18 01:09:38 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2026-07-18 01:09:38 [INFO ] [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@22854f2b
+2026-07-18 01:09:38 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2026-07-18 01:09:38 [INFO ] [main] o.hibernate.orm.connections.pooling : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/P8Migration]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.9
+	Default catalog/schema: P8Migration/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-18 01:09:40 [INFO ] [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-18 01:09:40 [INFO ] [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-18 01:09:40 [INFO ] [main] o.s.d.j.r.q.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-18 01:09:40 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loading tenant configuration from D:\MigrationReportTool\Backend\MigrationReport\config\tenant-mappings.json
+2026-07-18 01:09:40 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loaded 3 applications from config.
+2026-07-18 01:09:40 [INFO ] [main] c.m.dialect.DialectConfig : [DIALECT] Initializing PostgreSQL Dialect provider...
+2026-07-18 01:09:40 [INFO ] [main] c.m.service.PropertyMappingService : [MAPPING] Loading property mapping templates from D:\MigrationReportTool\Backend\MigrationReport\config\property-mapping-templates.json
+2026-07-18 01:09:40 [WARN ] [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-18 01:09:41 [INFO ] [main] o.s.boot.tomcat.TomcatWebServer : Tomcat started on port 8080 (http) with context path '/'
+2026-07-18 01:09:41 [INFO ] [main] c.m.MigrationReportApplication : Started MigrationReportApplication in 5.489 seconds (process running for 6.188)
+2026-07-18 01:16:26 [INFO ] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-18 01:16:26 [INFO ] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2026-07-18 01:16:26 [INFO ] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Completed initialization in 14 ms
+2026-07-18 01:16:27 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 01:16:27 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 01:16:27 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 01:16:27 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 01:16:27 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 01:16:27 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 01:16:27 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 01:16:27 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 01:16:27 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 01:16:27 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 01:16:27 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 01:16:27 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 01:17:30 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Starting method: getDatabaseMetadata with arguments: schema=pronto_io
+2026-07-18 01:17:30 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Ending method: getDatabaseMetadata
+2026-07-18 01:21:34 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 01:21:34 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 01:21:34 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 01:21:34 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 01:21:34 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 01:21:34 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 01:28:33 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 01:28:33 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 01:28:33 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 01:28:33 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 01:28:33 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 01:28:33 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 01:33:10 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 01:33:10 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 01:33:10 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 01:33:10 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 01:33:10 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 01:33:10 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 01:33:59 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Starting method: getDatabaseMetadata with arguments: schema=ytdu6d
+2026-07-18 01:33:59 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Ending method: getDatabaseMetadata
+2026-07-18 01:34:31 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Starting method: getDatabaseMetadata with arguments: schema=pront
+2026-07-18 01:34:31 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Ending method: getDatabaseMetadata
+2026-07-18 01:35:23 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 01:35:23 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 01:35:23 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 01:35:23 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 01:35:23 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 01:35:23 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 01:37:28 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 01:37:28 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 01:37:28 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 01:37:28 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 01:37:28 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 01:37:28 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 01:40:20 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 01:40:20 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 01:40:20 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 01:40:20 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 01:40:20 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 01:40:20 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 01:42:22 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 01:42:22 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 01:42:22 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 01:42:22 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 01:42:22 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 01:42:22 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 01:50:28 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 01:50:28 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 01:50:28 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 01:50:28 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 01:50:28 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 01:50:28 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 01:50:28 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 01:50:28 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 01:50:28 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 01:50:28 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 01:50:28 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 01:50:28 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 02:00:39 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 02:00:39 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 02:00:39 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 02:00:39 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 02:00:39 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 02:00:39 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 02:01:42 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 02:01:42 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 02:01:42 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 02:01:42 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 02:01:42 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 02:01:42 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 02:01:42 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 02:01:42 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 02:01:42 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 02:01:42 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 02:01:42 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 02:01:42 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 02:01:56 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Starting method: getDatabaseMetadata with arguments: schema=pronto_io
+2026-07-18 02:01:56 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Ending method: getDatabaseMetadata
+2026-07-18 02:12:59 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 02:12:59 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 02:12:59 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 02:12:59 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 02:12:59 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 02:12:59 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 02:19:13 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 02:19:13 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 02:19:13 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 02:19:13 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 02:19:13 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 02:19:13 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 02:22:32 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Starting method: saveConfig with arguments: config=com.migrationreport.dto.config.TenantConfig@73230b3f
+2026-07-18 02:22:32 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : [CONFIG] Saving new tenant configuration. Apps count: 4
+2026-07-18 02:22:33 [INFO ] [http-nio-8080-exec-3] c.m.service.ConfigurationService : [CONFIG] Configuration successfully saved to D:\MigrationReportTool\Backend\MigrationReport\config\tenant-mappings.json
+2026-07-18 02:22:33 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Ending method: saveConfig
+2026-07-18 02:24:31 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 02:24:31 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 02:24:31 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 02:24:31 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 02:24:31 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 02:24:31 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 02:25:27 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 02:25:27 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 02:25:27 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 02:25:27 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 02:25:27 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 02:25:27 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 02:25:27 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 02:25:27 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 02:25:27 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 02:25:27 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 02:25:27 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 02:25:27 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 02:26:25 [INFO ] [RMI TCP Connection(87)-127.0.0.1] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2026-07-18 02:26:25 [INFO ] [RMI TCP Connection(87)-127.0.0.1] o.s.boot.tomcat.GracefulShutdown : Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-18 02:26:25 [INFO ] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown : Graceful shutdown complete
+2026-07-18 02:26:25 [INFO ] [RMI TCP Connection(87)-127.0.0.1] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-18 02:26:25 [INFO ] [RMI TCP Connection(87)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-07-18 02:26:25 [INFO ] [RMI TCP Connection(87)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-07-18 11:20:32 [INFO ] [main] c.m.MigrationReportApplication : Starting MigrationReportApplication using Java 21.0.1 with PID 44400 (D:\MigrationReportTool\Backend\MigrationReport\target\classes started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
+2026-07-18 11:20:32 [INFO ] [main] c.m.MigrationReportApplication : No active profile set, falling back to 1 default profile: "default"
+2026-07-18 11:20:33 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-18 11:20:33 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 73 ms. Found 1 JPA repository interface.
+2026-07-18 11:20:34 [INFO ] [main] o.s.boot.tomcat.TomcatWebServer : Tomcat initialized with port 8080 (http)
+2026-07-18 11:20:34 [INFO ] [main] o.a.catalina.core.StandardService : Starting service [Tomcat]
+2026-07-18 11:20:34 [INFO ] [main] o.a.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-07-18 11:20:34 [INFO ] [main] o.s.b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1884 ms
+2026-07-18 11:20:34 [INFO ] [main] c.m.config.DataSourceConfig : [CONFIG] Loaded database configuration for active type postgres from D:\MigrationReportTool\Backend\MigrationReport\config\db-config.json
+2026-07-18 11:20:34 [INFO ] [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-18 11:20:34 [INFO ] [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-18 11:20:35 [INFO ] [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-18 11:20:35 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2026-07-18 11:20:35 [INFO ] [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@f6bc75c
+2026-07-18 11:20:35 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2026-07-18 11:20:35 [INFO ] [main] o.hibernate.orm.connections.pooling : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/P8Migration]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.9
+	Default catalog/schema: P8Migration/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-18 11:20:37 [INFO ] [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-18 11:20:37 [INFO ] [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-18 11:20:37 [INFO ] [main] o.s.d.j.r.q.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-18 11:20:37 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loading tenant configuration from D:\MigrationReportTool\Backend\MigrationReport\config\tenant-mappings.json
+2026-07-18 11:20:37 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loaded 4 applications from config.
+2026-07-18 11:20:37 [INFO ] [main] c.m.dialect.DialectConfig : [DIALECT] Initializing PostgreSQL Dialect provider...
+2026-07-18 11:20:37 [INFO ] [main] c.m.service.PropertyMappingService : [MAPPING] Loading property mapping templates from D:\MigrationReportTool\Backend\MigrationReport\config\property-mapping-templates.json
+2026-07-18 11:20:37 [WARN ] [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-18 11:20:37 [INFO ] [main] o.s.boot.tomcat.TomcatWebServer : Tomcat started on port 8080 (http) with context path '/'
+2026-07-18 11:20:37 [INFO ] [main] c.m.MigrationReportApplication : Started MigrationReportApplication in 6.069 seconds (process running for 8.419)
+2026-07-18 11:21:51 [INFO ] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-18 11:21:51 [INFO ] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2026-07-18 11:21:51 [INFO ] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Completed initialization in 0 ms
+2026-07-18 11:21:51 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 11:21:51 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 11:21:51 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 11:21:51 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 11:21:51 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 11:21:51 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 11:21:51 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 11:21:51 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 11:21:51 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 11:21:51 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 11:21:51 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 11:21:51 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 11:21:56 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Starting method: getDatabaseMetadata with arguments: schema=pronto_io
+2026-07-18 11:21:56 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Ending method: getDatabaseMetadata
+2026-07-18 11:22:06 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Starting method: getDatabaseMetadata with arguments: schema=pronto_usl
+2026-07-18 11:22:06 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Ending method: getDatabaseMetadata
+2026-07-18 11:23:22 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Starting method: saveConfig with arguments: config=com.migrationreport.dto.config.TenantConfig@227fb74a
+2026-07-18 11:23:22 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : [CONFIG] Saving new tenant configuration. Apps count: 3
+2026-07-18 11:23:22 [INFO ] [http-nio-8080-exec-4] c.m.service.ConfigurationService : [CONFIG] Configuration successfully saved to D:\MigrationReportTool\Backend\MigrationReport\config\tenant-mappings.json
+2026-07-18 11:23:22 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Ending method: saveConfig
+2026-07-18 11:23:29 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 11:23:29 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 11:23:29 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 11:23:29 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 11:23:29 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 11:23:29 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 11:23:29 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 11:23:29 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 11:23:29 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 11:23:29 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 11:23:29 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 11:23:29 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 11:23:33 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Starting method: getDatabaseMetadata with arguments: schema=pronto_io
+2026-07-18 11:23:33 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Ending method: getDatabaseMetadata
+2026-07-18 11:28:38 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 11:28:38 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 11:28:38 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 11:28:38 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 11:28:38 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 11:28:38 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 11:28:38 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 11:28:38 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 11:28:38 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 11:28:38 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 11:28:38 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 11:28:38 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 12:42:18 [INFO ] [RMI TCP Connection(92)-127.0.0.1] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2026-07-18 12:42:18 [INFO ] [RMI TCP Connection(92)-127.0.0.1] o.s.boot.tomcat.GracefulShutdown : Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-18 12:42:18 [INFO ] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown : Graceful shutdown complete
+2026-07-18 12:42:18 [INFO ] [RMI TCP Connection(92)-127.0.0.1] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-18 12:42:18 [INFO ] [RMI TCP Connection(92)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-07-18 12:42:18 [INFO ] [RMI TCP Connection(92)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-07-18 20:38:09 [INFO ] [main] c.m.MigrationReportApplication : Starting MigrationReportApplication using Java 21.0.1 with PID 58736 (D:\MigrationReportTool\Backend\MigrationReport\target\classes started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
+2026-07-18 20:38:09 [INFO ] [main] c.m.MigrationReportApplication : No active profile set, falling back to 1 default profile: "default"
+2026-07-18 20:38:10 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-18 20:38:10 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 68 ms. Found 1 JPA repository interface.
+2026-07-18 20:38:11 [INFO ] [main] o.s.boot.tomcat.TomcatWebServer : Tomcat initialized with port 8080 (http)
+2026-07-18 20:38:11 [INFO ] [main] o.a.catalina.core.StandardService : Starting service [Tomcat]
+2026-07-18 20:38:11 [INFO ] [main] o.a.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-07-18 20:38:11 [INFO ] [main] o.s.b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1705 ms
+2026-07-18 20:38:11 [INFO ] [main] c.m.config.DataSourceConfig : [CONFIG] Loaded database configuration for active type postgres from D:\MigrationReportTool\Backend\MigrationReport\config\db-config.json
+2026-07-18 20:38:12 [INFO ] [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-18 20:38:12 [INFO ] [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-18 20:38:13 [INFO ] [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-18 20:38:13 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2026-07-18 20:38:13 [INFO ] [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5b2c7186
+2026-07-18 20:38:13 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2026-07-18 20:38:13 [INFO ] [main] o.hibernate.orm.connections.pooling : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/P8Migration]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.9
+	Default catalog/schema: P8Migration/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-18 20:38:14 [INFO ] [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-18 20:38:14 [INFO ] [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-18 20:38:15 [INFO ] [main] o.s.d.j.r.q.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-18 20:38:15 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loading tenant configuration from D:\MigrationReportTool\Backend\MigrationReport\config\tenant-mappings.json
+2026-07-18 20:38:15 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loaded 3 applications from config.
+2026-07-18 20:38:15 [INFO ] [main] c.m.dialect.DialectConfig : [DIALECT] Initializing PostgreSQL Dialect provider...
+2026-07-18 20:38:15 [INFO ] [main] c.m.service.PropertyMappingService : [MAPPING] Loading property mapping templates from D:\MigrationReportTool\Backend\MigrationReport\config\property-mapping-templates.json
+2026-07-18 20:38:15 [WARN ] [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-18 20:38:15 [INFO ] [main] o.s.boot.tomcat.TomcatWebServer : Tomcat started on port 8080 (http) with context path '/'
+2026-07-18 20:38:15 [INFO ] [main] c.m.MigrationReportApplication : Started MigrationReportApplication in 6.892 seconds (process running for 8.107)
+2026-07-18 20:40:01 [INFO ] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-18 20:40:01 [INFO ] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2026-07-18 20:40:01 [INFO ] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Completed initialization in 4 ms
+2026-07-18 20:40:02 [INFO ] [http-nio-8080-exec-2] c.m.controller.AuthController : Starting method: login with arguments: username=firoz
+2026-07-18 20:40:02 [INFO ] [http-nio-8080-exec-2] c.m.controller.AuthController : Ending method: login (Success)
+2026-07-18 20:40:02 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 20:40:02 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 20:40:02 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 20:40:02 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 20:40:02 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 20:40:02 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 20:40:06 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 20:40:06 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 20:40:06 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 20:40:06 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 20:40:06 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 20:40:06 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 20:40:06 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 20:40:06 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 20:40:06 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 20:40:06 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 20:40:06 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 20:40:06 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 20:40:08 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Starting method: getDatabaseMetadata with arguments: schema=ccol
+2026-07-18 20:40:08 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Ending method: getDatabaseMetadata
+2026-07-18 20:40:59 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Starting method: saveConfig with arguments: config=com.migrationreport.dto.config.TenantConfig@6dcaa7ef
+2026-07-18 20:40:59 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : [CONFIG] Saving new tenant configuration. Apps count: 3
+2026-07-18 20:40:59 [INFO ] [http-nio-8080-exec-2] c.m.service.ConfigurationService : [CONFIG] Configuration successfully saved to D:\MigrationReportTool\Backend\MigrationReport\config\tenant-mappings.json
+2026-07-18 20:40:59 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Ending method: saveConfig
+2026-07-18 20:41:02 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 20:41:02 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 20:41:02 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 20:41:02 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 20:41:02 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 20:41:02 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 20:41:02 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 20:41:02 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 20:41:02 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 20:41:02 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 20:41:02 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 20:41:02 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 20:41:15 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Starting method: getDatabaseMetadata with arguments: schema=ccol
+2026-07-18 20:41:15 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Ending method: getDatabaseMetadata
+2026-07-18 20:41:23 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: saveConfig with arguments: config=com.migrationreport.dto.config.TenantConfig@454ca986
+2026-07-18 20:41:23 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Saving new tenant configuration. Apps count: 3
+2026-07-18 20:41:23 [INFO ] [http-nio-8080-exec-7] c.m.service.ConfigurationService : [CONFIG] Configuration successfully saved to D:\MigrationReportTool\Backend\MigrationReport\config\tenant-mappings.json
+2026-07-18 20:41:23 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: saveConfig
+2026-07-18 20:42:18 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Starting method: testDbConnection with arguments: dbConfig={databaseType=postgres, url=jdbc:postgresql://localhost:5432/Migration, username=postgres, password=postgres, driver=org.postgresql.Driver}
+2026-07-18 20:42:18 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : [CONFIG] Testing Database Connection
+2026-07-18 20:42:18 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Ending method: testDbConnection
+2026-07-18 20:42:20 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Starting method: saveDbConfig with arguments: dbConfig=com.migrationreport.dto.config.DbConfigWrapper@53178aa5
+2026-07-18 20:42:20 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : [CONFIG] Saving new Database Configuration
+2026-07-18 20:42:20 [INFO ] [http-nio-8080-exec-2] c.m.service.ConfigurationService : [CONFIG] Database Configuration successfully saved to D:\MigrationReportTool\Backend\MigrationReport\config\db-config.json
+2026-07-18 20:42:20 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Ending method: saveDbConfig
+2026-07-18 20:42:32 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Starting method: getDatabaseMetadata with arguments: schema=public
+2026-07-18 20:42:32 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Ending method: getDatabaseMetadata
+2026-07-18 20:45:55 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 20:45:55 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 20:45:55 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 20:45:55 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 20:45:55 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 20:45:56 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 20:45:58 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 20:45:58 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 20:45:58 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 20:45:58 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 20:45:58 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 20:45:58 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 20:45:58 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 20:45:58 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 20:45:58 [INFO ] [http-nio-8080-exec-10] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 20:45:58 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 20:45:58 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 20:45:58 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 20:46:24 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Starting method: getDatabaseMetadata with arguments: schema=public
+2026-07-18 20:46:24 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Ending method: getDatabaseMetadata
+2026-07-18 21:13:28 [INFO ] [RMI TCP Connection(37)-127.0.0.1] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2026-07-18 21:13:28 [INFO ] [RMI TCP Connection(37)-127.0.0.1] o.s.boot.tomcat.GracefulShutdown : Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-18 21:13:28 [INFO ] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown : Graceful shutdown complete
+2026-07-18 21:13:28 [INFO ] [RMI TCP Connection(37)-127.0.0.1] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-18 21:13:28 [INFO ] [RMI TCP Connection(37)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-07-18 21:13:28 [INFO ] [RMI TCP Connection(37)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-07-18 21:13:32 [INFO ] [main] c.m.MigrationReportApplication : Starting MigrationReportApplication using Java 21.0.1 with PID 34840 (D:\MigrationReportTool\Backend\MigrationReport\target\classes started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
+2026-07-18 21:13:32 [INFO ] [main] c.m.MigrationReportApplication : No active profile set, falling back to 1 default profile: "default"
+2026-07-18 21:13:32 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-18 21:13:32 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 38 ms. Found 1 JPA repository interface.
+2026-07-18 21:13:33 [INFO ] [main] o.s.boot.tomcat.TomcatWebServer : Tomcat initialized with port 8080 (http)
+2026-07-18 21:13:33 [INFO ] [main] o.a.catalina.core.StandardService : Starting service [Tomcat]
+2026-07-18 21:13:33 [INFO ] [main] o.a.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-07-18 21:13:33 [INFO ] [main] o.s.b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1087 ms
+2026-07-18 21:13:33 [INFO ] [main] c.m.config.DataSourceConfig : [CONFIG] Loaded database configuration for active type postgres from D:\MigrationReportTool\Backend\MigrationReport\config\db-config.json
+2026-07-18 21:13:33 [INFO ] [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-18 21:13:33 [INFO ] [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-18 21:13:34 [INFO ] [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-18 21:13:34 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2026-07-18 21:13:34 [INFO ] [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@22854f2b
+2026-07-18 21:13:34 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2026-07-18 21:13:34 [INFO ] [main] o.hibernate.orm.connections.pooling : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/Migration]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.9
+	Default catalog/schema: Migration/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-18 21:13:36 [INFO ] [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-18 21:13:36 [ERROR] [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: Unable to build Hibernate SessionFactory  [persistence unit: default] ; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema validation: missing table [users]
+2026-07-18 21:13:36 [WARN ] [main] o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Unable to build Hibernate SessionFactory  [persistence unit: default] ; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema validation: missing table [users]
+2026-07-18 21:13:36 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-07-18 21:13:36 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-07-18 21:13:36 [INFO ] [main] o.a.catalina.core.StandardService : Stopping service [Tomcat]
+2026-07-18 21:13:36 [INFO ] [main] o.s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-07-18 21:13:36 [ERROR] [main] o.s.boot.SpringApplication : Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Unable to build Hibernate SessionFactory  [persistence unit: default] ; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema validation: missing table [users]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1815)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:977)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621)
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354)
+	at com.migrationreport.MigrationReportApplication.main(MigrationReportApplication.java:9)
+Caused by: jakarta.persistence.PersistenceException: Unable to build Hibernate SessionFactory  [persistence unit: default] ; nested exception is org.hibernate.tool.schema.spi.SchemaManagementException: Schema validation: missing table [users]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:448)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:411)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:419)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1862)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1811)
+	... 15 common frames omitted
+Caused by: org.hibernate.tool.schema.spi.SchemaManagementException: Schema validation: missing table [users]
+	at org.hibernate.tool.schema.internal.AbstractSchemaValidator.validateTable(AbstractSchemaValidator.java:128)
+	at org.hibernate.tool.schema.internal.GroupedSchemaValidatorImpl.validateTables(GroupedSchemaValidatorImpl.java:42)
+	at org.hibernate.tool.schema.internal.AbstractSchemaValidator.performValidation(AbstractSchemaValidator.java:97)
+	at org.hibernate.tool.schema.internal.AbstractSchemaValidator.doValidation(AbstractSchemaValidator.java:75)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:278)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$1(SchemaManagementToolCoordinator.java:101)
+	at java.base/java.util.HashMap.forEach(HashMap.java:1429)
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:100)
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:35)
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:33)
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:327)
+	at org.hibernate.internal.SessionFactoryRegistry.instantiateSessionFactory(SessionFactoryRegistry.java:64)
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:458)
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1452)
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:93)
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:443)
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:436)
+	... 19 common frames omitted
+2026-07-18 21:15:07 [INFO ] [main] c.m.MigrationReportApplication : Starting MigrationReportApplication using Java 21.0.1 with PID 35244 (D:\MigrationReportTool\Backend\MigrationReport\target\classes started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
+2026-07-18 21:15:07 [INFO ] [main] c.m.MigrationReportApplication : No active profile set, falling back to 1 default profile: "default"
+2026-07-18 21:15:07 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-18 21:15:07 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 40 ms. Found 1 JPA repository interface.
+2026-07-18 21:15:08 [INFO ] [main] o.s.boot.tomcat.TomcatWebServer : Tomcat initialized with port 8080 (http)
+2026-07-18 21:15:08 [INFO ] [main] o.a.catalina.core.StandardService : Starting service [Tomcat]
+2026-07-18 21:15:08 [INFO ] [main] o.a.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-07-18 21:15:08 [INFO ] [main] o.s.b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1027 ms
+2026-07-18 21:15:08 [INFO ] [main] c.m.config.DataSourceConfig : [CONFIG] Loaded database configuration for active type postgres from D:\MigrationReportTool\Backend\MigrationReport\config\db-config.json
+2026-07-18 21:15:08 [INFO ] [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-18 21:15:08 [INFO ] [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-18 21:15:08 [INFO ] [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-18 21:15:08 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2026-07-18 21:15:09 [INFO ] [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4b240276
+2026-07-18 21:15:09 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2026-07-18 21:15:09 [INFO ] [main] o.hibernate.orm.connections.pooling : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/Migration]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.9
+	Default catalog/schema: Migration/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-18 21:15:09 [INFO ] [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-18 21:15:09 [INFO ] [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-18 21:15:09 [INFO ] [main] o.s.d.j.r.q.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-18 21:15:09 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loading tenant configuration from D:\MigrationReportTool\Backend\MigrationReport\config\tenant-mappings.json
+2026-07-18 21:15:09 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loaded 3 applications from config.
+2026-07-18 21:15:09 [INFO ] [main] c.m.dialect.DialectConfig : [DIALECT] Initializing PostgreSQL Dialect provider...
+2026-07-18 21:15:10 [INFO ] [main] c.m.service.PropertyMappingService : [MAPPING] Loading property mapping templates from D:\MigrationReportTool\Backend\MigrationReport\config\property-mapping-templates.json
+2026-07-18 21:15:10 [WARN ] [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-18 21:15:10 [INFO ] [main] o.s.boot.tomcat.TomcatWebServer : Tomcat started on port 8080 (http) with context path '/'
+2026-07-18 21:15:10 [INFO ] [main] c.m.MigrationReportApplication : Started MigrationReportApplication in 3.675 seconds (process running for 4.471)
+2026-07-18 21:15:16 [INFO ] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-18 21:15:16 [INFO ] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2026-07-18 21:15:16 [INFO ] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet : Completed initialization in 0 ms
+2026-07-18 21:15:17 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 21:15:17 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 21:15:17 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 21:15:17 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 21:15:17 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 21:15:17 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 21:15:17 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 21:15:17 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 21:15:17 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 21:15:17 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 21:15:17 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 21:15:17 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 21:15:31 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Starting method: getDatabaseMetadata with arguments: schema=public
+2026-07-18 21:15:31 [INFO ] [http-nio-8080-exec-9] c.m.service.ConfigurationService : [CONFIG] Successfully fetched database metadata from configured dynamic database for schema: public
+2026-07-18 21:15:31 [INFO ] [http-nio-8080-exec-9] c.m.c.ConfigurationController : Ending method: getDatabaseMetadata
+2026-07-18 21:41:53 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Starting method: saveConfig with arguments: config=com.migrationreport.dto.config.TenantConfig@5cba3ecc
+2026-07-18 21:41:53 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : [CONFIG] Saving new tenant configuration. Apps count: 4
+2026-07-18 21:41:53 [INFO ] [http-nio-8080-exec-1] c.m.service.ConfigurationService : [CONFIG] Configuration successfully saved to D:\MigrationReportTool\Backend\MigrationReport\config\tenant-mappings.json
+2026-07-18 21:41:53 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Ending method: saveConfig
+2026-07-18 21:41:55 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 21:41:55 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 21:41:55 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 21:41:55 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 21:41:55 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 21:41:55 [INFO ] [http-nio-8080-exec-4] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 21:41:55 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 21:41:55 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 21:41:55 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 21:41:55 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Starting method: getDbConfig
+2026-07-18 21:41:55 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : [CONFIG] Fetching Database Configuration
+2026-07-18 21:41:55 [INFO ] [http-nio-8080-exec-6] c.m.c.ConfigurationController : Ending method: getDbConfig
+2026-07-18 21:42:02 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 21:42:02 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 21:42:02 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 21:42:02 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 21:42:02 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 21:42:02 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 21:42:05 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : Starting method: getDocumentClasses with arguments: appId=ccol, type=source
+2026-07-18 21:42:05 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : Ending method: getDocumentClasses
+2026-07-18 21:42:27 [INFO ] [http-nio-8080-exec-2] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=doc-count, criteria=com.migrationreport.dto.DiscoveryCriteria@42e856f7
+2026-07-18 21:42:27 [INFO ] [http-nio-8080-exec-2] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'doc-count' report for App: 'ccol'
+2026-07-18 21:42:28 [INFO ] [http-nio-8080-exec-2] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'doc-count' | SQL: SELECT cd.symbolic_name AS class_name, MIN(dv.CREATE_DATE) AS earliest_created, MAX(dv.CREATE_DATE) AS latest_created, COUNT(dv.object_id) AS total_documents, COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) AS total_size_bytes, COALESCE(MIN(CAST(dv.content_size AS numeric)), 0) AS min_size_bytes, COALESCE(MAX(CAST(dv.content_size AS numeric)), 0) AS max_size_bytes, CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1073741824.0 AS numeric(15, 6)) AS total_size_gb  FROM public.docversion_source dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) AND dv.CREATE_DATE IS NOT NULL GROUP BY cd.symbolic_name ORDER BY class_name | Params: [BankAccount]
+2026-07-18 21:42:28 [INFO ] [http-nio-8080-exec-2] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 18ms. Found 1 records.
+2026-07-18 21:42:28 [INFO ] [http-nio-8080-exec-2] c.m.controller.DiscoveryController : [DISCOVERY] 'doc-count' report generated in 45ms. Found 1 records.
+2026-07-18 21:42:28 [INFO ] [http-nio-8080-exec-2] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 21:42:36 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=doc-mime, criteria=com.migrationreport.dto.DiscoveryCriteria@29b2f418
+2026-07-18 21:42:36 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'doc-mime' report for App: 'ccol'
+2026-07-18 21:42:36 [INFO ] [http-nio-8080-exec-5] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'doc-mime' | SQL: SELECT COALESCE(dv.mime_type, 'No MIME Type') AS mime_type, COUNT(*) AS doc_count FROM public.docversion_source dv LEFT JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) GROUP BY COALESCE(dv.mime_type, 'No MIME Type') ORDER BY doc_count DESC | Params: [BankAccount]
+2026-07-18 21:42:36 [INFO ] [http-nio-8080-exec-5] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 6ms. Found 6 records.
+2026-07-18 21:42:36 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : [DISCOVERY] 'doc-mime' report generated in 6ms. Found 6 records.
+2026-07-18 21:42:36 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 21:42:51 [INFO ] [http-nio-8080-exec-3] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=size-bucket, criteria=com.migrationreport.dto.DiscoveryCriteria@1f8c8011
+2026-07-18 21:42:51 [INFO ] [http-nio-8080-exec-3] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'size-bucket' report for App: 'ccol'
+2026-07-18 21:42:51 [INFO ] [http-nio-8080-exec-3] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'size-bucket' | SQL: SELECT CASE WHEN CAST(dv.content_size AS numeric) IS NULL THEN '0. No Content' WHEN CAST(dv.content_size AS numeric) = 0 THEN '1. Zero Bytes' WHEN CAST(dv.content_size AS numeric) BETWEEN 1 AND 102399 THEN '2. Under 100 KB' WHEN CAST(dv.content_size AS numeric) BETWEEN 102400 AND 511999 THEN '3. 100 KB - 500 KB' WHEN CAST(dv.content_size AS numeric) BETWEEN 512000 AND 1048575 THEN '4. 500 KB - 1 MB' WHEN CAST(dv.content_size AS numeric) BETWEEN 1048576 AND 5242879 THEN '5. 1 MB - 5 MB' WHEN CAST(dv.content_size AS numeric) BETWEEN 5242880 AND 10485759 THEN '6. 5 MB - 10 MB' WHEN CAST(dv.content_size AS numeric) BETWEEN 10485760 AND 26214399 THEN '7. 10 MB - 25 MB' WHEN CAST(dv.content_size AS numeric) BETWEEN 26214400 AND 52428799 THEN '8. 25 MB - 50 MB' WHEN CAST(dv.content_size AS numeric) BETWEEN 52428800 AND 104857599 THEN '9. 50 MB - 100 MB' ELSE '10. Over 100 MB' END AS size_range, COUNT(dv.object_id) AS total_documents, COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) AS total_size_bytes, CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1048576.0 AS numeric(15, 6)) AS total_size_mb, CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1073741824.0 AS numeric(15, 6)) AS total_size_gb  FROM public.docversion_source dv LEFT JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) GROUP BY size_range ORDER BY size_range | Params: [BankAccount]
+2026-07-18 21:42:51 [INFO ] [http-nio-8080-exec-3] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 21ms. Found 4 records.
+2026-07-18 21:42:51 [INFO ] [http-nio-8080-exec-3] c.m.controller.DiscoveryController : [DISCOVERY] 'size-bucket' report generated in 30ms. Found 4 records.
+2026-07-18 21:42:51 [INFO ] [http-nio-8080-exec-3] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 21:42:57 [INFO ] [http-nio-8080-exec-8] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=doc-year-wise, criteria=com.migrationreport.dto.DiscoveryCriteria@12cf6610
+2026-07-18 21:42:57 [INFO ] [http-nio-8080-exec-8] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'doc-year-wise' report for App: 'ccol'
+2026-07-18 21:42:57 [INFO ] [http-nio-8080-exec-8] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'doc-year-wise' | SQL: SELECT cd.symbolic_name AS class_name, EXTRACT(YEAR FROM CAST(dv.CREATE_DATE AS TIMESTAMP)) AS creation_year, COUNT(dv.object_id) AS total_documents FROM public.docversion_source dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) AND dv.CREATE_DATE IS NOT NULL GROUP BY cd.symbolic_name, EXTRACT(YEAR FROM CAST(dv.CREATE_DATE AS TIMESTAMP)) ORDER BY cd.symbolic_name, creation_year | Params: [BankAccount]
+2026-07-18 21:42:57 [INFO ] [http-nio-8080-exec-8] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 56ms. Found 1 records.
+2026-07-18 21:42:57 [INFO ] [http-nio-8080-exec-8] c.m.controller.DiscoveryController : [DISCOVERY] 'doc-year-wise' report generated in 71ms. Found 1 records.
+2026-07-18 21:42:57 [INFO ] [http-nio-8080-exec-8] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 21:43:02 [INFO ] [http-nio-8080-exec-10] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=doc-year-month, criteria=com.migrationreport.dto.DiscoveryCriteria@3a8b8042
+2026-07-18 21:43:02 [INFO ] [http-nio-8080-exec-10] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'doc-year-month' report for App: 'ccol'
+2026-07-18 21:43:02 [INFO ] [http-nio-8080-exec-10] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'doc-year-month' | SQL: SELECT cd.symbolic_name AS class_name, EXTRACT(YEAR FROM CAST(dv.CREATE_DATE AS TIMESTAMP)) AS creation_year, EXTRACT(MONTH FROM CAST(dv.CREATE_DATE AS TIMESTAMP)) AS creation_month, COUNT(dv.object_id) AS total_documents  FROM public.docversion_source dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) AND dv.CREATE_DATE IS NOT NULL GROUP BY cd.symbolic_name, EXTRACT(YEAR FROM CAST(dv.CREATE_DATE AS TIMESTAMP)), EXTRACT(MONTH FROM CAST(dv.CREATE_DATE AS TIMESTAMP)) ORDER BY cd.symbolic_name, creation_year, creation_month | Params: [BankAccount]
+2026-07-18 21:43:02 [INFO ] [http-nio-8080-exec-10] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 13ms. Found 1 records.
+2026-07-18 21:43:02 [INFO ] [http-nio-8080-exec-10] c.m.controller.DiscoveryController : [DISCOVERY] 'doc-year-month' report generated in 26ms. Found 1 records.
+2026-07-18 21:43:02 [INFO ] [http-nio-8080-exec-10] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 21:43:09 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 21:43:09 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 21:43:09 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 21:43:09 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 21:43:09 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 21:43:09 [INFO ] [http-nio-8080-exec-1] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 21:43:12 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : Starting method: getDocumentClasses with arguments: appId=ccol, type=source
+2026-07-18 21:43:12 [INFO ] [http-nio-8080-exec-4] c.m.controller.ExceptionController : Starting method: getMetadataFields with arguments: appId=ccol
+2026-07-18 21:43:12 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : Ending method: getDocumentClasses
+2026-07-18 21:43:12 [INFO ] [http-nio-8080-exec-4] c.m.controller.ExceptionController : Ending method: getMetadataFields
+2026-07-18 21:52:08 [INFO ] [http-nio-8080-exec-8] c.m.controller.ExceptionController : Starting method: checkExceptions with arguments: criteria=com.migrationreport.dto.ExceptionCriteria@57a8a3c3
+2026-07-18 21:52:08 [INFO ] [http-nio-8080-exec-8] c.m.controller.ExceptionController : [EXCEPTIONS] Checking exceptions for Application: 'ccol'
+2026-07-18 21:52:08 [INFO ] [http-nio-8080-exec-8] c.m.service.ExceptionService : [EXCEPTIONS] Executing lookup SQL: SELECT dv.object_id FROM public.docversion_source dv WHERE 1=1 AND LOWER(dv.object_id) = LOWER(?) | Params: [9659490000070CC6961BDCE908BBB79F]
+2026-07-18 21:52:08 [INFO ] [http-nio-8080-exec-8] c.m.service.ExceptionService : [EXCEPTIONS] Found 1 target IDs in 17ms
+2026-07-18 21:52:08 [INFO ] [http-nio-8080-exec-8] c.m.service.ExceptionService : [EXCEPTIONS] Querying Source, Staging, Target tables for 1 object IDs
+2026-07-18 21:52:08 [WARN ] [http-nio-8080-exec-8] c.m.service.ExceptionService : Failed to query staging table with id col stg_object_id: PreparedStatementCallback; bad SQL grammar [SELECT object_id, mime_type, content_size, u0448_cmacmmashupserveruri, u0528_cmacmdeploymentversionnu, u0cb8_bpayref, u1058_payeename, u12a8_targetobjectstorename, u1708_documenttitle, u1aa2_ignoreredirect, u1b08_layoutversionseriesid, u1bb6_loanterm, u1ce8_layoutid, u2672_cmacmregistered, u2918_entrytemplatedescription, u2a76_cmsearchschemaversion, u2d52_icnautorun, u2e28_componentbindinglabel, u3018_brokername, u3026_cmacmruletype, u3478_cmacmversionnumber, u3975_targetobjectclassid, u3a18_accno, u4176_cmacmvcscommitstatus, u46a8_accttype, u4ed4_txnamount, u5058_acctstatus, u5163_settledate, u5948_entrytemplatelaunchedwor, u5ce8_entrytemplateobjectstore, u6116_cmacmtype, u6173_cmacmvcsheartbeatdate, u6326_cmacmintegrationtype, u63a4_currentbalance, u63a8_preferencetype, u63b4_runbalance, u65d4_loanamount, u76f8_targetobjecttype, u7908_bsbnumber, u7ec8_applname, u8bd6_searchingobjecttype, u8ee3_txndate, u90b8_applno, u9528_txntype, u95a4_intrate, u9855_entrytemplateid, u9af8_propaddress, u9b28_txndesc, u9ba8_branchname, u9c18_txnstatus, ua0c2_icnshowintree, ua0d8_txnid, ua3a3_opendate, ua598_accholdername, uaa76_cmacmtargetenvironmentty, uaf94_availbalance, ub168_searchingobjectstores, ub376_cmacmworkflowconvertstat, ube06_searchtype, uc112_cmacmincludeswebapplicat, ud578_customobjecttype, ud818_applicationname, udf76_cmacmvcsdeliverstatus, ue148_applstatus, ue148_targetsiteid, ue4b8_description, uf8f8_custid, extracted_status, extracted_date, migrated_date, migration_status, error_info, filefullpath, folderpath, p8_doc_id FROM public.docversion_stagging WHERE stg_object_id IN (?)]
+2026-07-18 21:52:08 [WARN ] [http-nio-8080-exec-8] c.m.service.ExceptionService : Failed to query target table with id col p8_doc_id: PreparedStatementCallback; bad SQL grammar [SELECT object_id, mime_type, content_size, u0448_cmacmmashupserveruri, u0528_cmacmdeploymentversionnu, u0cb8_bpayref, u1058_payeename, u12a8_targetobjectstorename, u1708_documenttitle, u1aa2_ignoreredirect, u1b08_layoutversionseriesid, u1bb6_loanterm, u1ce8_layoutid, u2672_cmacmregistered, u2918_entrytemplatedescription, u2a76_cmsearchschemaversion, u2d52_icnautorun, u2e28_componentbindinglabel, u3018_brokername, u3026_cmacmruletype, u3478_cmacmversionnumber, u3975_targetobjectclassid, u3a18_accno, u4176_cmacmvcscommitstatus, u46a8_accttype, u4ed4_txnamount, u5058_acctstatus, u5163_settledate, u5948_entrytemplatelaunchedwor, u5ce8_entrytemplateobjectstore, u6116_cmacmtype, u6173_cmacmvcsheartbeatdate, u6326_cmacmintegrationtype, u63a4_currentbalance, u63a8_preferencetype, u63b4_runbalance, u65d4_loanamount, u76f8_targetobjecttype, u7908_bsbnumber, u7ec8_applname, u8bd6_searchingobjecttype, u8ee3_txndate, u90b8_applno, u9528_txntype, u95a4_intrate, u9855_entrytemplateid, u9af8_propaddress, u9b28_txndesc, u9ba8_branchname, u9c18_txnstatus, ua0c2_icnshowintree, ua0d8_txnid, ua3a3_opendate, ua598_accholdername, uaa76_cmacmtargetenvironmentty, uaf94_availbalance, ub168_searchingobjectstores, ub376_cmacmworkflowconvertstat, ube06_searchtype, uc112_cmacmincludeswebapplicat, ud578_customobjecttype, ud818_applicationname, udf76_cmacmvcsdeliverstatus, ue148_applstatus, ue148_targetsiteid, ue4b8_description, uf8f8_custid FROM public.docversion_target WHERE p8_doc_id IN (?)]
+2026-07-18 21:52:08 [INFO ] [http-nio-8080-exec-8] c.m.service.ExceptionService : [EXCEPTIONS] Data retrieval completed in 18ms. Source: 1, Staging: 0, Target: 0
+2026-07-18 21:52:08 [INFO ] [http-nio-8080-exec-8] c.m.controller.ExceptionController : [EXCEPTIONS] Exception check completed in 61ms.
+2026-07-18 21:52:08 [INFO ] [http-nio-8080-exec-8] c.m.controller.ExceptionController : Ending method: checkExceptions
+2026-07-18 22:04:44 [INFO ] [http-nio-8080-exec-10] c.m.controller.ExceptionController : Starting method: checkExceptions with arguments: criteria=com.migrationreport.dto.ExceptionCriteria@7b5ef2da
+2026-07-18 22:04:44 [INFO ] [http-nio-8080-exec-10] c.m.controller.ExceptionController : [EXCEPTIONS] Checking exceptions for Application: 'ccol'
+2026-07-18 22:04:45 [INFO ] [http-nio-8080-exec-10] c.m.service.ExceptionService : [EXCEPTIONS] Executing lookup SQL: SELECT dv.object_id FROM public.docversion_source dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id WHERE 1=1 AND LOWER(dv.object_id) = LOWER(?) AND cd.symbolic_name IN (?) | Params: [9659490000070CC6961BDCE908BBB79F, BankAccount]
+2026-07-18 22:04:45 [INFO ] [http-nio-8080-exec-10] c.m.service.ExceptionService : [EXCEPTIONS] Found 0 target IDs in 13ms
+2026-07-18 22:04:45 [INFO ] [http-nio-8080-exec-10] c.m.controller.ExceptionController : [EXCEPTIONS] Exception check completed in 30ms.
+2026-07-18 22:04:45 [INFO ] [http-nio-8080-exec-10] c.m.controller.ExceptionController : Ending method: checkExceptions
+2026-07-18 22:04:49 [INFO ] [http-nio-8080-exec-2] c.m.controller.ExceptionController : Starting method: checkExceptions with arguments: criteria=com.migrationreport.dto.ExceptionCriteria@16358a4
+2026-07-18 22:04:49 [INFO ] [http-nio-8080-exec-2] c.m.controller.ExceptionController : [EXCEPTIONS] Checking exceptions for Application: 'ccol'
+2026-07-18 22:04:49 [INFO ] [http-nio-8080-exec-2] c.m.service.ExceptionService : [EXCEPTIONS] Executing lookup SQL: SELECT dv.object_id FROM public.docversion_source dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id WHERE 1=1 AND LOWER(dv.object_id) = LOWER(?) AND cd.symbolic_name IN (?) | Params: [9659490000070CC6961BDCE908BBB79F, CmAcmConnectionDefinition]
+2026-07-18 22:04:49 [INFO ] [http-nio-8080-exec-2] c.m.service.ExceptionService : [EXCEPTIONS] Found 0 target IDs in 14ms
+2026-07-18 22:04:49 [INFO ] [http-nio-8080-exec-2] c.m.controller.ExceptionController : [EXCEPTIONS] Exception check completed in 15ms.
+2026-07-18 22:04:49 [INFO ] [http-nio-8080-exec-2] c.m.controller.ExceptionController : Ending method: checkExceptions
+2026-07-18 22:04:52 [INFO ] [http-nio-8080-exec-1] c.m.controller.ExceptionController : Starting method: checkExceptions with arguments: criteria=com.migrationreport.dto.ExceptionCriteria@6da54201
+2026-07-18 22:04:52 [INFO ] [http-nio-8080-exec-1] c.m.controller.ExceptionController : [EXCEPTIONS] Checking exceptions for Application: 'ccol'
+2026-07-18 22:04:52 [INFO ] [http-nio-8080-exec-1] c.m.service.ExceptionService : [EXCEPTIONS] Executing lookup SQL: SELECT dv.object_id FROM public.docversion_source dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id WHERE 1=1 AND LOWER(dv.object_id) = LOWER(?) AND cd.symbolic_name IN (?) | Params: [9659490000070CC6961BDCE908BBB79F, CmAcmPage]
+2026-07-18 22:04:52 [INFO ] [http-nio-8080-exec-1] c.m.service.ExceptionService : [EXCEPTIONS] Found 1 target IDs in 12ms
+2026-07-18 22:04:52 [INFO ] [http-nio-8080-exec-1] c.m.service.ExceptionService : [EXCEPTIONS] Querying Source, Staging, Target tables for 1 object IDs
+2026-07-18 22:04:52 [WARN ] [http-nio-8080-exec-1] c.m.service.ExceptionService : Failed to query staging table with id col stg_object_id: PreparedStatementCallback; bad SQL grammar [SELECT object_id, mime_type, content_size, u0448_cmacmmashupserveruri, u0528_cmacmdeploymentversionnu, u0cb8_bpayref, u1058_payeename, u12a8_targetobjectstorename, u1708_documenttitle, u1aa2_ignoreredirect, u1b08_layoutversionseriesid, u1bb6_loanterm, u1ce8_layoutid, u2672_cmacmregistered, u2918_entrytemplatedescription, u2a76_cmsearchschemaversion, u2d52_icnautorun, u2e28_componentbindinglabel, u3018_brokername, u3026_cmacmruletype, u3478_cmacmversionnumber, u3975_targetobjectclassid, u3a18_accno, u4176_cmacmvcscommitstatus, u46a8_accttype, u4ed4_txnamount, u5058_acctstatus, u5163_settledate, u5948_entrytemplatelaunchedwor, u5ce8_entrytemplateobjectstore, u6116_cmacmtype, u6173_cmacmvcsheartbeatdate, u6326_cmacmintegrationtype, u63a4_currentbalance, u63a8_preferencetype, u63b4_runbalance, u65d4_loanamount, u76f8_targetobjecttype, u7908_bsbnumber, u7ec8_applname, u8bd6_searchingobjecttype, u8ee3_txndate, u90b8_applno, u9528_txntype, u95a4_intrate, u9855_entrytemplateid, u9af8_propaddress, u9b28_txndesc, u9ba8_branchname, u9c18_txnstatus, ua0c2_icnshowintree, ua0d8_txnid, ua3a3_opendate, ua598_accholdername, uaa76_cmacmtargetenvironmentty, uaf94_availbalance, ub168_searchingobjectstores, ub376_cmacmworkflowconvertstat, ube06_searchtype, uc112_cmacmincludeswebapplicat, ud578_customobjecttype, ud818_applicationname, udf76_cmacmvcsdeliverstatus, ue148_applstatus, ue148_targetsiteid, ue4b8_description, uf8f8_custid, extracted_status, extracted_date, migrated_date, migration_status, error_info, filefullpath, folderpath, p8_doc_id FROM public.docversion_stagging WHERE stg_object_id IN (?)]
+2026-07-18 22:04:52 [WARN ] [http-nio-8080-exec-1] c.m.service.ExceptionService : Failed to query target table with id col p8_doc_id: PreparedStatementCallback; bad SQL grammar [SELECT object_id, mime_type, content_size, u0448_cmacmmashupserveruri, u0528_cmacmdeploymentversionnu, u0cb8_bpayref, u1058_payeename, u12a8_targetobjectstorename, u1708_documenttitle, u1aa2_ignoreredirect, u1b08_layoutversionseriesid, u1bb6_loanterm, u1ce8_layoutid, u2672_cmacmregistered, u2918_entrytemplatedescription, u2a76_cmsearchschemaversion, u2d52_icnautorun, u2e28_componentbindinglabel, u3018_brokername, u3026_cmacmruletype, u3478_cmacmversionnumber, u3975_targetobjectclassid, u3a18_accno, u4176_cmacmvcscommitstatus, u46a8_accttype, u4ed4_txnamount, u5058_acctstatus, u5163_settledate, u5948_entrytemplatelaunchedwor, u5ce8_entrytemplateobjectstore, u6116_cmacmtype, u6173_cmacmvcsheartbeatdate, u6326_cmacmintegrationtype, u63a4_currentbalance, u63a8_preferencetype, u63b4_runbalance, u65d4_loanamount, u76f8_targetobjecttype, u7908_bsbnumber, u7ec8_applname, u8bd6_searchingobjecttype, u8ee3_txndate, u90b8_applno, u9528_txntype, u95a4_intrate, u9855_entrytemplateid, u9af8_propaddress, u9b28_txndesc, u9ba8_branchname, u9c18_txnstatus, ua0c2_icnshowintree, ua0d8_txnid, ua3a3_opendate, ua598_accholdername, uaa76_cmacmtargetenvironmentty, uaf94_availbalance, ub168_searchingobjectstores, ub376_cmacmworkflowconvertstat, ube06_searchtype, uc112_cmacmincludeswebapplicat, ud578_customobjecttype, ud818_applicationname, udf76_cmacmvcsdeliverstatus, ue148_applstatus, ue148_targetsiteid, ue4b8_description, uf8f8_custid FROM public.docversion_target WHERE p8_doc_id IN (?)]
+2026-07-18 22:04:52 [INFO ] [http-nio-8080-exec-1] c.m.service.ExceptionService : [EXCEPTIONS] Data retrieval completed in 8ms. Source: 1, Staging: 0, Target: 0
+2026-07-18 22:04:52 [INFO ] [http-nio-8080-exec-1] c.m.controller.ExceptionController : [EXCEPTIONS] Exception check completed in 55ms.
+2026-07-18 22:04:52 [INFO ] [http-nio-8080-exec-1] c.m.controller.ExceptionController : Ending method: checkExceptions
+2026-07-18 23:01:29 [INFO ] [RMI TCP Connection(110)-127.0.0.1] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2026-07-18 23:01:29 [INFO ] [RMI TCP Connection(110)-127.0.0.1] o.s.boot.tomcat.GracefulShutdown : Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-18 23:01:29 [INFO ] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown : Graceful shutdown complete
+2026-07-18 23:01:29 [INFO ] [RMI TCP Connection(110)-127.0.0.1] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-18 23:01:29 [INFO ] [RMI TCP Connection(110)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-07-18 23:01:29 [INFO ] [RMI TCP Connection(110)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-07-18 23:01:39 [INFO ] [main] c.m.MigrationReportApplication : Starting MigrationReportApplication using Java 21.0.1 with PID 48556 (D:\MigrationReportTool\Backend\MigrationReport\target\classes started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
+2026-07-18 23:01:39 [INFO ] [main] c.m.MigrationReportApplication : No active profile set, falling back to 1 default profile: "default"
+2026-07-18 23:01:39 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-18 23:01:39 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 40 ms. Found 1 JPA repository interface.
+2026-07-18 23:01:40 [INFO ] [main] o.s.boot.tomcat.TomcatWebServer : Tomcat initialized with port 8080 (http)
+2026-07-18 23:01:40 [INFO ] [main] o.a.catalina.core.StandardService : Starting service [Tomcat]
+2026-07-18 23:01:40 [INFO ] [main] o.a.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-07-18 23:01:40 [INFO ] [main] o.s.b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 960 ms
+2026-07-18 23:01:40 [INFO ] [main] c.m.config.DataSourceConfig : [CONFIG] Loaded database configuration for active type postgres from D:\MigrationReportTool\Backend\MigrationReport\config\db-config.json
+2026-07-18 23:01:40 [INFO ] [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-18 23:01:40 [INFO ] [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-18 23:01:40 [INFO ] [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-18 23:01:40 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2026-07-18 23:01:41 [INFO ] [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@3205610d
+2026-07-18 23:01:41 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2026-07-18 23:01:41 [INFO ] [main] o.hibernate.orm.connections.pooling : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/Migration]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.9
+	Default catalog/schema: Migration/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-18 23:01:42 [INFO ] [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-18 23:01:42 [INFO ] [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-18 23:01:42 [INFO ] [main] o.s.d.j.r.q.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-18 23:01:42 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loading tenant configuration from D:\MigrationReportTool\Backend\MigrationReport\config\tenant-mappings.json
+2026-07-18 23:01:42 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loaded 4 applications from config.
+2026-07-18 23:01:42 [INFO ] [main] c.m.dialect.DialectConfig : [DIALECT] Initializing PostgreSQL Dialect provider...
+2026-07-18 23:01:42 [INFO ] [main] c.m.service.PropertyMappingService : [MAPPING] Loading property mapping templates from D:\MigrationReportTool\Backend\MigrationReport\config\property-mapping-templates.json
+2026-07-18 23:01:42 [WARN ] [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-18 23:01:42 [INFO ] [main] o.s.boot.tomcat.TomcatWebServer : Tomcat started on port 8080 (http) with context path '/'
+2026-07-18 23:01:42 [INFO ] [main] c.m.MigrationReportApplication : Started MigrationReportApplication in 3.883 seconds (process running for 4.55)
+2026-07-18 23:01:55 [INFO ] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-18 23:01:55 [INFO ] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2026-07-18 23:01:55 [INFO ] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Completed initialization in 13 ms
+2026-07-18 23:01:56 [INFO ] [http-nio-8080-exec-2] c.m.controller.ExceptionController : Starting method: checkExceptions with arguments: criteria=com.migrationreport.dto.ExceptionCriteria@3a662088
+2026-07-18 23:01:56 [INFO ] [http-nio-8080-exec-2] c.m.controller.ExceptionController : [EXCEPTIONS] Checking exceptions for Application: 'ccol'
+2026-07-18 23:01:56 [INFO ] [http-nio-8080-exec-2] c.m.service.ExceptionService : [EXCEPTIONS] Executing lookup SQL: SELECT dv.object_id FROM public.docversion_source dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id WHERE 1=1 AND LOWER(dv.object_id) = LOWER(?) AND cd.symbolic_name IN (?) | Params: [9659490000070CC6961BDCE908BBB79F, CmAcmPage]
+2026-07-18 23:01:56 [INFO ] [http-nio-8080-exec-2] c.m.service.ExceptionService : [EXCEPTIONS] Found 1 target IDs in 21ms
+2026-07-18 23:01:56 [INFO ] [http-nio-8080-exec-2] c.m.service.ExceptionService : [EXCEPTIONS] Querying Source, Staging, Target tables for 1 object IDs
+2026-07-18 23:01:56 [INFO ] [http-nio-8080-exec-2] c.m.service.ExceptionService : [EXCEPTIONS] Data retrieval completed in 16ms. Source: 1, Staging: 1, Target: 1
+2026-07-18 23:01:56 [INFO ] [http-nio-8080-exec-2] c.m.controller.ExceptionController : [EXCEPTIONS] Exception check completed in 68ms.
+2026-07-18 23:01:56 [INFO ] [http-nio-8080-exec-2] c.m.controller.ExceptionController : Ending method: checkExceptions
+2026-07-18 23:04:08 [INFO ] [http-nio-8080-exec-3] c.m.controller.ExceptionController : Starting method: checkExceptions with arguments: criteria=com.migrationreport.dto.ExceptionCriteria@13aff132
+2026-07-18 23:04:08 [INFO ] [http-nio-8080-exec-3] c.m.controller.ExceptionController : [EXCEPTIONS] Checking exceptions for Application: 'ccol'
+2026-07-18 23:04:08 [INFO ] [http-nio-8080-exec-3] c.m.service.ExceptionService : [EXCEPTIONS] Executing lookup SQL: SELECT dv.object_id FROM public.docversion_source dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id WHERE 1=1 AND cd.symbolic_name IN (?) AND (dv.u1708_documenttitle = ?) | Params: [CmAcmPage, CmAcmCASES_DEFAULT_PAGE]
+2026-07-18 23:04:08 [INFO ] [http-nio-8080-exec-3] c.m.service.ExceptionService : [EXCEPTIONS] Found 7 target IDs in 3ms
+2026-07-18 23:04:08 [INFO ] [http-nio-8080-exec-3] c.m.service.ExceptionService : [EXCEPTIONS] Querying Source, Staging, Target tables for 7 object IDs
+2026-07-18 23:04:08 [INFO ] [http-nio-8080-exec-3] c.m.service.ExceptionService : [EXCEPTIONS] Data retrieval completed in 15ms. Source: 7, Staging: 7, Target: 7
+2026-07-18 23:04:08 [INFO ] [http-nio-8080-exec-3] c.m.controller.ExceptionController : [EXCEPTIONS] Exception check completed in 43ms.
+2026-07-18 23:04:08 [INFO ] [http-nio-8080-exec-3] c.m.controller.ExceptionController : Ending method: checkExceptions
+2026-07-18 23:04:42 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 23:04:42 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 23:04:42 [INFO ] [http-nio-8080-exec-7] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 23:04:42 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Starting method: getConfig
+2026-07-18 23:04:42 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : [CONFIG] Fetching cached tenant configuration
+2026-07-18 23:04:42 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Ending method: getConfig
+2026-07-18 23:04:45 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : Starting method: getDocumentClasses with arguments: appId=ccol, type=source
+2026-07-18 23:04:45 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : Ending method: getDocumentClasses
+2026-07-18 23:04:53 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=custom-object-trend, criteria=com.migrationreport.dto.DiscoveryCriteria@66630423
+2026-07-18 23:04:53 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'custom-object-trend' report for App: 'ccol'
+2026-07-18 23:04:53 [INFO ] [http-nio-8080-exec-1] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'custom-object-trend' | SQL: SELECT cd.symbolic_name AS class_name, EXTRACT(YEAR FROM CAST(dv.CREATE_DATE AS TIMESTAMP)) AS creation_year, EXTRACT(MONTH FROM CAST(dv.CREATE_DATE AS TIMESTAMP)) AS creation_month, COUNT(dv.object_id) AS total_documents  FROM public.generic dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) AND dv.CREATE_DATE IS NOT NULL GROUP BY cd.symbolic_name, EXTRACT(YEAR FROM CAST(dv.CREATE_DATE AS TIMESTAMP)), EXTRACT(MONTH FROM CAST(dv.CREATE_DATE AS TIMESTAMP)) ORDER BY cd.symbolic_name, creation_year, creation_month | Params: [BankAccount]
+2026-07-18 23:04:53 [INFO ] [http-nio-8080-exec-1] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 9ms. Found 0 records.
+2026-07-18 23:04:53 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : [DISCOVERY] 'custom-object-trend' report generated in 16ms. Found 0 records.
+2026-07-18 23:04:53 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 23:06:28 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=doc-count, criteria=com.migrationreport.dto.DiscoveryCriteria@56f3f770
+2026-07-18 23:06:28 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'doc-count' report for App: 'ccol'
+2026-07-18 23:06:28 [INFO ] [http-nio-8080-exec-5] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'doc-count' | SQL: SELECT cd.symbolic_name AS class_name, MIN(dv.CREATE_DATE) AS earliest_created, MAX(dv.CREATE_DATE) AS latest_created, COUNT(dv.object_id) AS total_documents, COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) AS total_size_bytes, COALESCE(MIN(CAST(dv.content_size AS numeric)), 0) AS min_size_bytes, COALESCE(MAX(CAST(dv.content_size AS numeric)), 0) AS max_size_bytes, CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1073741824.0 AS numeric(15, 6)) AS total_size_gb  FROM public.docversion_source dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) AND dv.CREATE_DATE IS NOT NULL GROUP BY cd.symbolic_name ORDER BY class_name | Params: [BankAccount]
+2026-07-18 23:06:28 [INFO ] [http-nio-8080-exec-5] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 19ms. Found 1 records.
+2026-07-18 23:06:28 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : [DISCOVERY] 'doc-count' report generated in 38ms. Found 1 records.
+2026-07-18 23:06:28 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 23:06:31 [INFO ] [http-nio-8080-exec-7] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=doc-mime, criteria=com.migrationreport.dto.DiscoveryCriteria@625f671e
+2026-07-18 23:06:31 [INFO ] [http-nio-8080-exec-7] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'doc-mime' report for App: 'ccol'
+2026-07-18 23:06:31 [INFO ] [http-nio-8080-exec-7] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'doc-mime' | SQL: SELECT COALESCE(dv.mime_type, 'No MIME Type') AS mime_type, COUNT(*) AS doc_count FROM public.docversion_source dv LEFT JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) GROUP BY COALESCE(dv.mime_type, 'No MIME Type') ORDER BY doc_count DESC | Params: [BankAccount]
+2026-07-18 23:06:31 [INFO ] [http-nio-8080-exec-7] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 7ms. Found 6 records.
+2026-07-18 23:06:31 [INFO ] [http-nio-8080-exec-7] c.m.controller.DiscoveryController : [DISCOVERY] 'doc-mime' report generated in 7ms. Found 6 records.
+2026-07-18 23:06:31 [INFO ] [http-nio-8080-exec-7] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 23:06:36 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=size-bucket, criteria=com.migrationreport.dto.DiscoveryCriteria@5d74a264
+2026-07-18 23:06:36 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'size-bucket' report for App: 'ccol'
+2026-07-18 23:06:36 [INFO ] [http-nio-8080-exec-9] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'size-bucket' | SQL: SELECT CASE WHEN CAST(dv.content_size AS numeric) IS NULL THEN '0. No Content' WHEN CAST(dv.content_size AS numeric) = 0 THEN '1. Zero Bytes' WHEN CAST(dv.content_size AS numeric) BETWEEN 1 AND 102399 THEN '2. Under 100 KB' WHEN CAST(dv.content_size AS numeric) BETWEEN 102400 AND 511999 THEN '3. 100 KB - 500 KB' WHEN CAST(dv.content_size AS numeric) BETWEEN 512000 AND 1048575 THEN '4. 500 KB - 1 MB' WHEN CAST(dv.content_size AS numeric) BETWEEN 1048576 AND 5242879 THEN '5. 1 MB - 5 MB' WHEN CAST(dv.content_size AS numeric) BETWEEN 5242880 AND 10485759 THEN '6. 5 MB - 10 MB' WHEN CAST(dv.content_size AS numeric) BETWEEN 10485760 AND 26214399 THEN '7. 10 MB - 25 MB' WHEN CAST(dv.content_size AS numeric) BETWEEN 26214400 AND 52428799 THEN '8. 25 MB - 50 MB' WHEN CAST(dv.content_size AS numeric) BETWEEN 52428800 AND 104857599 THEN '9. 50 MB - 100 MB' ELSE '10. Over 100 MB' END AS size_range, COUNT(dv.object_id) AS total_documents, COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) AS total_size_bytes, CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1048576.0 AS numeric(15, 6)) AS total_size_mb, CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1073741824.0 AS numeric(15, 6)) AS total_size_gb  FROM public.docversion_source dv LEFT JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) GROUP BY size_range ORDER BY size_range | Params: [BankAccount]
+2026-07-18 23:06:36 [INFO ] [http-nio-8080-exec-9] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 22ms. Found 4 records.
+2026-07-18 23:06:36 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : [DISCOVERY] 'size-bucket' report generated in 22ms. Found 4 records.
+2026-07-18 23:06:36 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 23:06:46 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=doc-year-wise, criteria=com.migrationreport.dto.DiscoveryCriteria@4dd6c9d4
+2026-07-18 23:06:46 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'doc-year-wise' report for App: 'ccol'
+2026-07-18 23:06:46 [INFO ] [http-nio-8080-exec-1] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'doc-year-wise' | SQL: SELECT cd.symbolic_name AS class_name, EXTRACT(YEAR FROM CAST(dv.CREATE_DATE AS TIMESTAMP)) AS creation_year, COUNT(dv.object_id) AS total_documents FROM public.docversion_source dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) AND dv.CREATE_DATE IS NOT NULL GROUP BY cd.symbolic_name, EXTRACT(YEAR FROM CAST(dv.CREATE_DATE AS TIMESTAMP)) ORDER BY cd.symbolic_name, creation_year | Params: [BankAccount]
+2026-07-18 23:06:46 [INFO ] [http-nio-8080-exec-1] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 15ms. Found 1 records.
+2026-07-18 23:06:46 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : [DISCOVERY] 'doc-year-wise' report generated in 15ms. Found 1 records.
+2026-07-18 23:06:46 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 23:06:51 [INFO ] [http-nio-8080-exec-4] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=doc-year-month, criteria=com.migrationreport.dto.DiscoveryCriteria@72633419
+2026-07-18 23:06:51 [INFO ] [http-nio-8080-exec-4] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'doc-year-month' report for App: 'ccol'
+2026-07-18 23:06:51 [INFO ] [http-nio-8080-exec-4] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'doc-year-month' | SQL: SELECT cd.symbolic_name AS class_name, EXTRACT(YEAR FROM CAST(dv.CREATE_DATE AS TIMESTAMP)) AS creation_year, EXTRACT(MONTH FROM CAST(dv.CREATE_DATE AS TIMESTAMP)) AS creation_month, COUNT(dv.object_id) AS total_documents  FROM public.docversion_source dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) AND dv.CREATE_DATE IS NOT NULL GROUP BY cd.symbolic_name, EXTRACT(YEAR FROM CAST(dv.CREATE_DATE AS TIMESTAMP)), EXTRACT(MONTH FROM CAST(dv.CREATE_DATE AS TIMESTAMP)) ORDER BY cd.symbolic_name, creation_year, creation_month | Params: [BankAccount]
+2026-07-18 23:06:51 [INFO ] [http-nio-8080-exec-4] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 0ms. Found 1 records.
+2026-07-18 23:06:51 [INFO ] [http-nio-8080-exec-4] c.m.controller.DiscoveryController : [DISCOVERY] 'doc-year-month' report generated in 10ms. Found 1 records.
+2026-07-18 23:06:51 [INFO ] [http-nio-8080-exec-4] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 23:07:02 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=annotation-total, criteria=com.migrationreport.dto.DiscoveryCriteria@6acf4507
+2026-07-18 23:07:02 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'annotation-total' report for App: 'ccol'
+2026-07-18 23:07:02 [INFO ] [http-nio-8080-exec-5] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'annotation-total' | SQL: SELECT cd.symbolic_name AS class_name, COUNT(DISTINCT a.annotated_id) AS total_documents_with_annotations, COUNT(a.object_id) AS total_annotations FROM public.annotation a INNER JOIN public.docversion_source dv ON a.annotated_id = dv.object_id INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) GROUP BY cd.symbolic_name ORDER BY total_annotations DESC | Params: [BankAccount]
+2026-07-18 23:07:02 [INFO ] [http-nio-8080-exec-5] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 9ms. Found 1 records.
+2026-07-18 23:07:02 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : [DISCOVERY] 'annotation-total' report generated in 9ms. Found 1 records.
+2026-07-18 23:07:02 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 23:07:08 [INFO ] [http-nio-8080-exec-7] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=annotation-mime, criteria=com.migrationreport.dto.DiscoveryCriteria@7652585f
+2026-07-18 23:07:08 [INFO ] [http-nio-8080-exec-7] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'annotation-mime' report for App: 'ccol'
+2026-07-18 23:07:08 [INFO ] [http-nio-8080-exec-7] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'annotation-mime' | SQL: SELECT COALESCE(dv.mime_type, 'No MIME Type') AS mime_type, COUNT(DISTINCT a.annotated_id) AS total_documents_with_annotations, COUNT(a.object_id) AS total_annotations FROM public.annotation a INNER JOIN public.docversion_source dv ON a.annotated_id = dv.object_id INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) GROUP BY COALESCE(dv.mime_type, 'No MIME Type') ORDER BY total_annotations DESC | Params: [BankAccount]
+2026-07-18 23:07:08 [INFO ] [http-nio-8080-exec-7] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 5ms. Found 3 records.
+2026-07-18 23:07:08 [INFO ] [http-nio-8080-exec-7] c.m.controller.DiscoveryController : [DISCOVERY] 'annotation-mime' report generated in 7ms. Found 3 records.
+2026-07-18 23:07:08 [INFO ] [http-nio-8080-exec-7] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 23:07:16 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=size-total, criteria=com.migrationreport.dto.DiscoveryCriteria@69603029
+2026-07-18 23:07:16 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'size-total' report for App: 'ccol'
+2026-07-18 23:07:16 [INFO ] [http-nio-8080-exec-9] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'size-total' | SQL: SELECT cd.symbolic_name AS class_name, COUNT(dv.object_id) AS total_documents, COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) AS total_size_bytes, CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1048576.0 AS numeric(15, 2)) AS total_size_mb, CAST(COALESCE(SUM(CAST(dv.content_size AS numeric)), 0) / 1073741824.0 AS numeric(15, 6)) AS total_size_gb  FROM public.docversion_source dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) AND dv.CREATE_DATE IS NOT NULL GROUP BY cd.symbolic_name ORDER BY class_name | Params: [BankAccount]
+2026-07-18 23:07:16 [INFO ] [http-nio-8080-exec-9] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 4ms. Found 1 records.
+2026-07-18 23:07:16 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : [DISCOVERY] 'size-total' report generated in 4ms. Found 1 records.
+2026-07-18 23:07:16 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 23:07:24 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=no-content, criteria=com.migrationreport.dto.DiscoveryCriteria@6e45043a
+2026-07-18 23:07:24 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'no-content' report for App: 'ccol'
+2026-07-18 23:07:24 [INFO ] [http-nio-8080-exec-1] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'no-content' | SQL: SELECT cd.symbolic_name AS class_name, SUM(CASE WHEN dv.content_size IS NULL OR CAST(dv.content_size AS numeric) = 0 THEN 1 ELSE 0 END) AS docs_without_content  FROM public.docversion_source dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) GROUP BY cd.symbolic_name ORDER BY docs_without_content DESC | Params: [BankAccount]
+2026-07-18 23:07:24 [INFO ] [http-nio-8080-exec-1] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 6ms. Found 1 records.
+2026-07-18 23:07:24 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : [DISCOVERY] 'no-content' report generated in 8ms. Found 1 records.
+2026-07-18 23:07:24 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 23:07:33 [INFO ] [http-nio-8080-exec-4] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=element-total, criteria=com.migrationreport.dto.DiscoveryCriteria@789b5f69
+2026-07-18 23:07:33 [INFO ] [http-nio-8080-exec-4] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'element-total' report for App: 'ccol'
+2026-07-18 23:07:33 [INFO ] [http-nio-8080-exec-4] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'element-total' | SQL: SELECT COUNT(*) AS total_content_elements FROM public.content | Params: []
+2026-07-18 23:07:33 [INFO ] [http-nio-8080-exec-4] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 3ms. Found 1 records.
+2026-07-18 23:07:33 [INFO ] [http-nio-8080-exec-4] c.m.controller.DiscoveryController : [DISCOVERY] 'element-total' report generated in 4ms. Found 1 records.
+2026-07-18 23:07:33 [INFO ] [http-nio-8080-exec-4] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 23:07:36 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=element-class, criteria=com.migrationreport.dto.DiscoveryCriteria@26f7fb94
+2026-07-18 23:07:36 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'element-class' report for App: 'ccol'
+2026-07-18 23:07:36 [INFO ] [http-nio-8080-exec-5] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'element-class' | SQL: SELECT cd.symbolic_name AS class_name, COUNT(DISTINCT dv.object_id) AS total_documents, COUNT(c.doc_id) AS total_content_elements  FROM public.content c INNER JOIN public.docversion_source dv ON c.doc_id = dv.object_id INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) GROUP BY cd.symbolic_name ORDER BY total_content_elements DESC | Params: [BankAccount]
+2026-07-18 23:07:36 [INFO ] [http-nio-8080-exec-5] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 0ms. Found 0 records.
+2026-07-18 23:07:36 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : [DISCOVERY] 'element-class' report generated in 6ms. Found 0 records.
+2026-07-18 23:07:36 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 23:07:39 [INFO ] [http-nio-8080-exec-7] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=element-properties, criteria=com.migrationreport.dto.DiscoveryCriteria@5007ad3e
+2026-07-18 23:07:39 [INFO ] [http-nio-8080-exec-7] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'element-properties' report for App: 'ccol'
+2026-07-18 23:07:39 [INFO ] [http-nio-8080-exec-7] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'element-properties' | SQL: SELECT 'No List Tables' AS list_table, 0 AS row_count WHERE 1=0 | Params: []
+2026-07-18 23:07:39 [INFO ] [http-nio-8080-exec-7] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 1ms. Found 0 records.
+2026-07-18 23:07:39 [INFO ] [http-nio-8080-exec-7] c.m.controller.DiscoveryController : [DISCOVERY] 'element-properties' report generated in 16ms. Found 0 records.
+2026-07-18 23:07:39 [INFO ] [http-nio-8080-exec-7] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 23:07:45 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=version-distribution, criteria=com.migrationreport.dto.DiscoveryCriteria@4cbfbe49
+2026-07-18 23:07:45 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'version-distribution' report for App: 'ccol'
+2026-07-18 23:07:45 [INFO ] [http-nio-8080-exec-9] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'version-distribution' | SQL: SELECT cd.symbolic_name AS class_name, COALESCE(dv.major_version_number, '1') || '.' || COALESCE(dv.minor_version_number, '0') AS version_bucket, COUNT(dv.object_id) AS doc_count  FROM public.docversion_source dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) GROUP BY cd.symbolic_name, COALESCE(dv.major_version_number, '1') || '.' || COALESCE(dv.minor_version_number, '0') ORDER BY cd.symbolic_name, version_bucket | Params: [BankAccount]
+2026-07-18 23:07:45 [INFO ] [http-nio-8080-exec-9] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 3ms. Found 1 records.
+2026-07-18 23:07:45 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : [DISCOVERY] 'version-distribution' report generated in 4ms. Found 1 records.
+2026-07-18 23:07:45 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 23:07:51 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=property-defs, criteria=com.migrationreport.dto.DiscoveryCriteria@161f1c88
+2026-07-18 23:07:51 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'property-defs' report for App: 'ccol'
+2026-07-18 23:07:51 [INFO ] [http-nio-8080-exec-1] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'property-defs' | SQL: SELECT pd.dbg_class_name AS class_name, gpd.symbolic_name AS property_name, pd.dbg_display_name AS display_name, CASE CAST(pd.datatype AS VARCHAR) WHEN '0' THEN 'Unspecified' WHEN '1' THEN 'Binary' WHEN '2' THEN 'Boolean' WHEN '3' THEN 'DateTime' WHEN '4' THEN 'Float64' WHEN '5' THEN 'ID' WHEN '6' THEN 'Integer32' WHEN '7' THEN 'Object' WHEN '8' THEN 'String' ELSE CONCAT('Unknown (', CAST(pd.datatype AS VARCHAR), ')') END AS type, gpd.max_length_string AS data_length  FROM public.propertydef pd INNER JOIN public.globalpropertydef gpd ON pd.global_prop_id = gpd.object_id  WHERE 1=1AND pd.dbg_class_name IN (?) ORDER BY class_name, property_name | Params: [BankAccount]
+2026-07-18 23:07:51 [ERROR] [http-nio-8080-exec-1] c.m.service.DiscoveryService : Error executing dynamic SQL: SELECT pd.dbg_class_name AS class_name, gpd.symbolic_name AS property_name, pd.dbg_display_name AS display_name, CASE CAST(pd.datatype AS VARCHAR) WHEN '0' THEN 'Unspecified' WHEN '1' THEN 'Binary' WHEN '2' THEN 'Boolean' WHEN '3' THEN 'DateTime' WHEN '4' THEN 'Float64' WHEN '5' THEN 'ID' WHEN '6' THEN 'Integer32' WHEN '7' THEN 'Object' WHEN '8' THEN 'String' ELSE CONCAT('Unknown (', CAST(pd.datatype AS VARCHAR), ')') END AS type, gpd.max_length_string AS data_length  FROM public.propertydef pd INNER JOIN public.globalpropertydef gpd ON pd.global_prop_id = gpd.object_id  WHERE 1=1AND pd.dbg_class_name IN (?) ORDER BY class_name, property_name
+org.springframework.jdbc.BadSqlGrammarException: PreparedStatementCallback; bad SQL grammar [SELECT pd.dbg_class_name AS class_name, gpd.symbolic_name AS property_name, pd.dbg_display_name AS display_name, CASE CAST(pd.datatype AS VARCHAR) WHEN '0' THEN 'Unspecified' WHEN '1' THEN 'Binary' WHEN '2' THEN 'Boolean' WHEN '3' THEN 'DateTime' WHEN '4' THEN 'Float64' WHEN '5' THEN 'ID' WHEN '6' THEN 'Integer32' WHEN '7' THEN 'Object' WHEN '8' THEN 'String' ELSE CONCAT('Unknown (', CAST(pd.datatype AS VARCHAR), ')') END AS type, gpd.max_length_string AS data_length  FROM public.propertydef pd INNER JOIN public.globalpropertydef gpd ON pd.global_prop_id = gpd.object_id  WHERE 1=1AND pd.dbg_class_name IN (?) ORDER BY class_name, property_name]
+	at org.springframework.jdbc.support.SQLStateSQLExceptionTranslator.doTranslate(SQLStateSQLExceptionTranslator.java:134)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:102)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:111)
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1549)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:689)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:732)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:757)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:809)
+	at org.springframework.jdbc.core.JdbcTemplate.queryForList(JdbcTemplate.java:948)
+	at com.migrationreport.service.DiscoveryService.executeReport(DiscoveryService.java:179)
+	at com.migrationreport.controller.DiscoveryController.generateReport(DiscoveryController.java:27)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:132)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:59)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:347)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:406)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2036)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:949)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:483)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:74)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.postgresql.util.PSQLException: ERROR: trailing junk after numeric literal at or near "1AND"
+  Position: 587
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2904)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2589)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:431)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:534)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:437)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:196)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:139)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeQuery(ProxyPreparedStatement.java:52)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeQuery(HikariProxyPreparedStatement.java)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:738)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:670)
+	... 49 common frames omitted
+2026-07-18 23:07:52 [ERROR] [http-nio-8080-exec-1] c.m.exception.GlobalExceptionHandler : Database Query Error: 
+com.migrationreport.exception.DatabaseQueryException: Failed to generate discovery report: PreparedStatementCallback; bad SQL grammar [SELECT pd.dbg_class_name AS class_name, gpd.symbolic_name AS property_name, pd.dbg_display_name AS display_name, CASE CAST(pd.datatype AS VARCHAR) WHEN '0' THEN 'Unspecified' WHEN '1' THEN 'Binary' WHEN '2' THEN 'Boolean' WHEN '3' THEN 'DateTime' WHEN '4' THEN 'Float64' WHEN '5' THEN 'ID' WHEN '6' THEN 'Integer32' WHEN '7' THEN 'Object' WHEN '8' THEN 'String' ELSE CONCAT('Unknown (', CAST(pd.datatype AS VARCHAR), ')') END AS type, gpd.max_length_string AS data_length  FROM public.propertydef pd INNER JOIN public.globalpropertydef gpd ON pd.global_prop_id = gpd.object_id  WHERE 1=1AND pd.dbg_class_name IN (?) ORDER BY class_name, property_name]
+	at com.migrationreport.service.DiscoveryService.executeReport(DiscoveryService.java:184)
+	at com.migrationreport.controller.DiscoveryController.generateReport(DiscoveryController.java:27)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:252)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:184)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:934)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:853)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:86)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:963)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:866)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1000)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:903)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:649)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:874)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:710)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:132)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:59)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:199)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:111)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:165)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:77)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:535)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:86)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:71)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:347)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:406)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:71)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:1307)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:2036)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:74)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:949)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:483)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:74)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+Caused by: org.springframework.jdbc.BadSqlGrammarException: PreparedStatementCallback; bad SQL grammar [SELECT pd.dbg_class_name AS class_name, gpd.symbolic_name AS property_name, pd.dbg_display_name AS display_name, CASE CAST(pd.datatype AS VARCHAR) WHEN '0' THEN 'Unspecified' WHEN '1' THEN 'Binary' WHEN '2' THEN 'Boolean' WHEN '3' THEN 'DateTime' WHEN '4' THEN 'Float64' WHEN '5' THEN 'ID' WHEN '6' THEN 'Integer32' WHEN '7' THEN 'Object' WHEN '8' THEN 'String' ELSE CONCAT('Unknown (', CAST(pd.datatype AS VARCHAR), ')') END AS type, gpd.max_length_string AS data_length  FROM public.propertydef pd INNER JOIN public.globalpropertydef gpd ON pd.global_prop_id = gpd.object_id  WHERE 1=1AND pd.dbg_class_name IN (?) ORDER BY class_name, property_name]
+	at org.springframework.jdbc.support.SQLStateSQLExceptionTranslator.doTranslate(SQLStateSQLExceptionTranslator.java:134)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:102)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:111)
+	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1549)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:689)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:732)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:757)
+	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:809)
+	at org.springframework.jdbc.core.JdbcTemplate.queryForList(JdbcTemplate.java:948)
+	at com.migrationreport.service.DiscoveryService.executeReport(DiscoveryService.java:179)
+	... 44 common frames omitted
+Caused by: org.postgresql.util.PSQLException: ERROR: trailing junk after numeric literal at or near "1AND"
+  Position: 587
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2904)
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2589)
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:431)
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:534)
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:437)
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:196)
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:139)
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeQuery(ProxyPreparedStatement.java:52)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeQuery(HikariProxyPreparedStatement.java)
+	at org.springframework.jdbc.core.JdbcTemplate.lambda$query$0(JdbcTemplate.java:738)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:670)
+	... 49 common frames omitted
+2026-07-18 23:48:44 [INFO ] [main] c.m.MigrationReportApplication : Starting MigrationReportApplication using Java 21.0.1 with PID 43184 (D:\MigrationReportTool\Backend\MigrationReport\target\classes started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
+2026-07-18 23:48:44 [INFO ] [main] c.m.MigrationReportApplication : No active profile set, falling back to 1 default profile: "default"
+2026-07-18 23:48:45 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-18 23:48:45 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 51 ms. Found 1 JPA repository interface.
+2026-07-18 23:48:45 [INFO ] [main] o.s.boot.tomcat.TomcatWebServer : Tomcat initialized with port 8080 (http)
+2026-07-18 23:48:45 [INFO ] [main] o.a.catalina.core.StandardService : Starting service [Tomcat]
+2026-07-18 23:48:45 [INFO ] [main] o.a.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-07-18 23:48:46 [INFO ] [main] o.s.b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1553 ms
+2026-07-18 23:48:46 [INFO ] [main] c.m.config.DataSourceConfig : [CONFIG] Loaded database configuration for active type postgres from D:\MigrationReportTool\Backend\MigrationReport\config\db-config.json
+2026-07-18 23:48:46 [INFO ] [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-18 23:48:46 [INFO ] [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-18 23:48:47 [INFO ] [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-18 23:48:47 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2026-07-18 23:48:47 [INFO ] [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@19ce19b7
+2026-07-18 23:48:47 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2026-07-18 23:48:47 [INFO ] [main] o.hibernate.orm.connections.pooling : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/Migration]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.9
+	Default catalog/schema: Migration/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-18 23:48:48 [INFO ] [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-18 23:48:49 [INFO ] [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-18 23:48:49 [INFO ] [main] o.s.d.j.r.q.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-18 23:48:49 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loading tenant configuration from D:\MigrationReportTool\Backend\MigrationReport\config\tenant-mappings.json
+2026-07-18 23:48:49 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loaded 4 applications from config.
+2026-07-18 23:48:49 [INFO ] [main] c.m.dialect.DialectConfig : [DIALECT] Initializing PostgreSQL Dialect provider...
+2026-07-18 23:48:49 [INFO ] [main] c.m.service.PropertyMappingService : [MAPPING] Loading property mapping templates from D:\MigrationReportTool\Backend\MigrationReport\config\property-mapping-templates.json
+2026-07-18 23:48:49 [WARN ] [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-18 23:48:49 [WARN ] [main] o.s.b.w.s.s.c.AnnotationConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-07-18 23:48:49 [INFO ] [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-18 23:48:49 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-07-18 23:48:49 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-07-18 23:48:49 [INFO ] [main] o.s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-07-18 23:48:49 [ERROR] [main] o.s.b.d.LoggingFailureAnalysisReporter : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2026-07-18 23:51:53 [INFO ] [RMI TCP Connection(52)-127.0.0.1] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2026-07-18 23:51:53 [INFO ] [RMI TCP Connection(52)-127.0.0.1] o.s.boot.tomcat.GracefulShutdown : Commencing graceful shutdown. Waiting for active requests to complete
+2026-07-18 23:51:53 [INFO ] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown : Graceful shutdown complete
+2026-07-18 23:51:53 [INFO ] [RMI TCP Connection(52)-127.0.0.1] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-18 23:51:53 [INFO ] [RMI TCP Connection(52)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-07-18 23:51:53 [INFO ] [RMI TCP Connection(52)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-07-18 23:54:43 [INFO ] [main] c.m.MigrationReportApplication : Starting MigrationReportApplication using Java 21.0.1 with PID 54728 (D:\MigrationReportTool\Backend\MigrationReport\target\classes started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
+2026-07-18 23:54:43 [INFO ] [main] c.m.MigrationReportApplication : No active profile set, falling back to 1 default profile: "default"
+2026-07-18 23:54:44 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-18 23:54:44 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 45 ms. Found 1 JPA repository interface.
+2026-07-18 23:54:44 [INFO ] [main] o.s.boot.tomcat.TomcatWebServer : Tomcat initialized with port 8080 (http)
+2026-07-18 23:54:45 [INFO ] [main] o.a.catalina.core.StandardService : Starting service [Tomcat]
+2026-07-18 23:54:45 [INFO ] [main] o.a.catalina.core.StandardEngine : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-07-18 23:54:45 [INFO ] [main] o.s.b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1130 ms
+2026-07-18 23:54:45 [INFO ] [main] c.m.config.DataSourceConfig : [CONFIG] Loaded database configuration for active type postgres from D:\MigrationReportTool\Backend\MigrationReport\config\db-config.json
+2026-07-18 23:54:45 [INFO ] [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-07-18 23:54:45 [INFO ] [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
+2026-07-18 23:54:45 [INFO ] [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-18 23:54:45 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
+2026-07-18 23:54:46 [INFO ] [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7ae0a26
+2026-07-18 23:54:46 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
+2026-07-18 23:54:46 [INFO ] [main] o.hibernate.orm.connections.pooling : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5432/Migration]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.9
+	Default catalog/schema: Migration/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-18 23:54:47 [INFO ] [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-18 23:54:47 [INFO ] [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-18 23:54:47 [INFO ] [main] o.s.d.j.r.q.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-07-18 23:54:47 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loading tenant configuration from D:\MigrationReportTool\Backend\MigrationReport\config\tenant-mappings.json
+2026-07-18 23:54:47 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loaded 4 applications from config.
+2026-07-18 23:54:47 [INFO ] [main] c.m.dialect.DialectConfig : [DIALECT] Initializing PostgreSQL Dialect provider...
+2026-07-18 23:54:47 [INFO ] [main] c.m.service.PropertyMappingService : [MAPPING] Loading property mapping templates from D:\MigrationReportTool\Backend\MigrationReport\config\property-mapping-templates.json
+2026-07-18 23:54:47 [WARN ] [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-18 23:54:47 [INFO ] [main] o.s.boot.tomcat.TomcatWebServer : Tomcat started on port 8080 (http) with context path '/'
+2026-07-18 23:54:47 [INFO ] [main] c.m.MigrationReportApplication : Started MigrationReportApplication in 4.424 seconds (process running for 5.343)
+2026-07-18 23:54:58 [INFO ] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-18 23:54:58 [INFO ] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2026-07-18 23:54:58 [INFO ] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Completed initialization in 6 ms
+2026-07-18 23:54:58 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=property-defs, criteria=com.migrationreport.dto.DiscoveryCriteria@6a1ce539
+2026-07-18 23:54:58 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'property-defs' report for App: 'ccol'
+2026-07-18 23:54:58 [INFO ] [http-nio-8080-exec-1] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'property-defs' | SQL: SELECT pd.dbg_class_name AS class_name, gpd.symbolic_name AS property_name, pd.dbg_display_name AS display_name, CASE CAST(pd.datatype AS VARCHAR) WHEN '0' THEN 'Unspecified' WHEN '1' THEN 'Binary' WHEN '2' THEN 'Boolean' WHEN '3' THEN 'DateTime' WHEN '4' THEN 'Float64' WHEN '5' THEN 'ID' WHEN '6' THEN 'Integer32' WHEN '7' THEN 'Object' WHEN '8' THEN 'String' ELSE CONCAT('Unknown (', CAST(pd.datatype AS VARCHAR), ')') END AS type, gpd.max_length_string AS data_length  FROM public.propertydef pd INNER JOIN public.globalpropertydef gpd ON pd.global_prop_id = gpd.object_id  WHERE 1=1 AND pd.dbg_class_name IN (?) ORDER BY class_name, property_name | Params: [BankAccount]
+2026-07-18 23:54:58 [INFO ] [http-nio-8080-exec-1] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 47ms. Found 80 records.
+2026-07-18 23:54:58 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : [DISCOVERY] 'property-defs' report generated in 51ms. Found 80 records.
+2026-07-18 23:54:58 [INFO ] [http-nio-8080-exec-1] c.m.controller.DiscoveryController : Ending method: generateReport
+2026-07-18 23:55:26 [INFO ] [http-nio-8080-exec-3] c.m.controller.DiscoveryController : Starting method: generateReport with arguments: endpoint=custom-object-trend, criteria=com.migrationreport.dto.DiscoveryCriteria@7d30602
+2026-07-18 23:55:26 [INFO ] [http-nio-8080-exec-3] c.m.controller.DiscoveryController : [DISCOVERY] Generating 'custom-object-trend' report for App: 'ccol'
+2026-07-18 23:55:26 [INFO ] [http-nio-8080-exec-3] c.m.service.DiscoveryService : [DISCOVERY] Executing Report Endpoint: 'custom-object-trend' | SQL: SELECT cd.symbolic_name AS class_name, COUNT(dv.object_id) AS total_documents  FROM public.generic dv INNER JOIN public.classdef cd ON dv.object_class_id = cd.object_id  WHERE 1=1 AND cd.symbolic_name IN (?) GROUP BY cd.symbolic_name ORDER BY cd.symbolic_name | Params: [BankAccount]
+2026-07-18 23:55:26 [INFO ] [http-nio-8080-exec-3] c.m.service.DiscoveryService : [DISCOVERY] Report executed in 33ms. Found 0 records.
+2026-07-18 23:55:26 [INFO ] [http-nio-8080-exec-3] c.m.controller.DiscoveryController : [DISCOVERY] 'custom-object-trend' report generated in 36ms. Found 0 records.
+2026-07-18 23:55:26 [INFO ] [http-nio-8080-exec-3] c.m.controller.DiscoveryController : Ending method: generateReport

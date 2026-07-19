@@ -31,6 +31,10 @@ public class SearchService {
     public static final String TABLE_STAGING = "staging";
     public static final String TABLE_TARGET = "target";
     private static final String SQL_AND = " AND ";
+    private static final String DOC_ID = "doc-id";
+    private static final String CREATED_DATE = "created-date";
+    private static final String CONTENT_SIZE = "content-size";
+    private static final String MIME_TYPE = "mime-type";
 
     private final JdbcTemplate jdbcTemplate;
     private final QueryValidator queryValidator;
@@ -65,8 +69,6 @@ public class SearchService {
     private final Set<String> targetCustomColumns;
     private final List<String> targetCustomColumnsList;
 
-    private final List<String> reconciliationSystemProperties;
-    private final List<String> reconciliationCustomMetadata;
 
     // Dynamic metadata fields mapping loaded from database (with static fallback)
     private final List<MetadataFieldDTO> availableFields = new ArrayList<>();
@@ -79,13 +81,35 @@ public class SearchService {
             return;
         }
         try {
+            String propDefTable = "PROPERTYDEFINITION";
+            String colDefTable = "COLUMNDEFINITION";
+            String globalPropDefTable = "GLOBALPROPERTYDEF";
+            
+            if (configurationService.loadConfig() != null && configurationService.loadConfig().getApplications() != null) {
+                for (var app : configurationService.loadConfig().getApplications()) {
+                    if (app.getClassifiedTables() != null) {
+                        var ct = app.getClassifiedTables();
+                        if (ct.get("propertydefinition") != null && !ct.get("propertydefinition").isEmpty() &&
+                            ct.get("columndefinition") != null && !ct.get("columndefinition").isEmpty() &&
+                            ct.get("globalpropertydef") != null && !ct.get("globalpropertydef").isEmpty()) {
+                            
+                            String schema = app.getSchema() != null && !app.getSchema().trim().isEmpty() ? app.getSchema().trim() + "." : "";
+                            propDefTable = schema + ct.get("propertydefinition").get(0);
+                            colDefTable = schema + ct.get("columndefinition").get(0);
+                            globalPropDefTable = schema + ct.get("globalpropertydef").get(0);
+                            break;
+                        }
+                    }
+                }
+            }
+
             String sql = "SELECT distinct cd.COLUMN_NAME       AS COLUMN_NAME, " +
                          "       gpd.SYMBOLIC_NAME    AS SYMBOLIC_NAME, " +
                          "       pd.DBG_DISPLAY_NAME  AS DISPLAY_NAME, " +
                          "       pd.datatype          AS DATA_TYPE " +
-                         "FROM PROPERTYDEFINITION pd " +
-                         "JOIN COLUMNDEFINITION cd ON pd.COLUMN_ID = cd.OBJECT_ID " +
-                         "JOIN GLOBALPROPERTYDEF gpd ON pd.GLOBAL_PROP_ID = gpd.OBJECT_ID " +
+                         "FROM " + propDefTable + " pd " +
+                         "JOIN " + colDefTable + " cd ON pd.COLUMN_ID = cd.OBJECT_ID " +
+                         "JOIN " + globalPropDefTable + " gpd ON pd.GLOBAL_PROP_ID = gpd.OBJECT_ID " +
                          "WHERE cd.DBG_TABLE_NAME = 'DocVersion' " +
                          "ORDER BY cd.COLUMN_NAME";
             
@@ -112,18 +136,14 @@ public class SearchService {
                 displayNameToColumnName.clear();
                 Set<String> seenNames = new HashSet<>();
                 for (MetadataFieldDTO field : fields) {
-                    if (field.getDisplayName() == null || field.getDisplayName().trim().isEmpty()) {
-                        continue;
-                    }
-                    String normName = field.getDisplayName().toLowerCase().trim().replaceAll("\\s+", " ");
-                    if (seenNames.contains(normName)) {
-                        continue;
-                    }
-                    seenNames.add(normName);
-                    
-                    availableFields.add(field);
-                    if (field.getColumnName() != null) {
-                        displayNameToColumnName.put(normName, field.getColumnName().trim());
+                    if (field.getDisplayName() != null && !field.getDisplayName().trim().isEmpty()) {
+                        String normName = field.getDisplayName().toLowerCase().trim().replaceAll("\\s+", " ");
+                        if (seenNames.add(normName)) {
+                            availableFields.add(field);
+                            if (field.getColumnName() != null) {
+                                displayNameToColumnName.put(normName, field.getColumnName().trim());
+                            }
+                        }
                     }
                 }
                 log.info("Loaded {} unique metadata fields mapping from database.", availableFields.size());
@@ -179,8 +199,6 @@ public class SearchService {
             @Value("${search.tables.staging.custom-columns}") String stagingCustomColumnsStr,
             @Value("${search.tables.target.custom-columns}") String targetCustomColumnsStr,
             @Value("${search.date-column:CREATE_DATE}") String dateColumn,
-            @Value("${search.report.system-properties:object_id,mime_type,content_size}") String recSystemPropertiesStr,
-            @Value("${search.report.custom-metadata:*}") String recCustomMetadataStr,
             @Value("${search.report.extra-properties:}") String recExtraPropertiesStr) {
         this.jdbcTemplate = jdbcTemplate;
         this.queryValidator = queryValidator;
@@ -241,22 +259,6 @@ public class SearchService {
             this.targetCustomColumns = Collections.emptySet();
         }
 
-        if (recSystemPropertiesStr != null && !recSystemPropertiesStr.trim().isEmpty()) {
-            this.reconciliationSystemProperties = Arrays.stream(recSystemPropertiesStr.split(","))
-                    .map(String::trim)
-                    .toList();
-        } else {
-            this.reconciliationSystemProperties = Arrays.asList("object_id", "mime_type", "content_size");
-        }
-
-        if (recCustomMetadataStr != null && !recCustomMetadataStr.trim().isEmpty()) {
-            this.reconciliationCustomMetadata = Arrays.stream(recCustomMetadataStr.split(","))
-                    .map(String::trim)
-                    .toList();
-        } else {
-            this.reconciliationCustomMetadata = Collections.singletonList("*");
-        }
-
         if (recExtraPropertiesStr != null && !recExtraPropertiesStr.trim().isEmpty()) {
             this.reconciliationExtraProperties = Arrays.stream(recExtraPropertiesStr.split(","))
                     .map(String::trim)
@@ -267,16 +269,6 @@ public class SearchService {
     }
 
     private List<String> reconciliationExtraProperties;
-
-    public List<String> getReconciliationSystemProperties() {
-        return reconciliationSystemProperties;
-    }
-
-    public List<String> getReconciliationCustomMetadata() {
-        return reconciliationCustomMetadata;
-    }
-
-
 
     public List<String> getCustomColumnsForTable(String tableKey) {
         if (tableKey == null) {
@@ -304,10 +296,10 @@ public class SearchService {
 
     public Map<String, String> getSystemColumnsConfig() {
         return Map.of(
-            "doc-id", docIdColumn,
-            "created-date", createdDateColumn,
-            "content-size", contentSizeColumn,
-            "mime-type", mimeTypeColumn
+            DOC_ID, docIdColumn,
+            CREATED_DATE, createdDateColumn,
+            CONTENT_SIZE, contentSizeColumn,
+            MIME_TYPE, mimeTypeColumn
         );
     }
 
@@ -487,8 +479,8 @@ public class SearchService {
 
                 String dbColumn = getSystemDbColumn(request.getAppId(), key);
                 if (dbColumn != null) {
-                    dbColumn = validateIdentifier(dbColumn);
-                    if (key.equals("doc-id") || key.equals("docid")) {
+                    validateIdentifier(dbColumn);
+                    if (key.equals(DOC_ID) || key.equals("docid")) {
                         sql.append(SQL_AND).append(dbColumn).append(" = ?");
                         params.add(value.trim());
                     } else {
@@ -557,18 +549,14 @@ public class SearchService {
 
     private String getSystemDbColumn(String appId, String systemKey) {
         switch (systemKey.toLowerCase().trim()) {
-            case "doc-id":
-            case "docid":
-                return configurationService.getSystemColumn(appId, "doc-id", docIdColumn);
-            case "created-date":
-            case "createddate":
-                return configurationService.getSystemColumn(appId, "created-date", createdDateColumn);
-            case "content-size":
-            case "contentsize":
-                return configurationService.getSystemColumn(appId, "content-size", contentSizeColumn);
-            case "mime-type":
-            case "mimetype":
-                return configurationService.getSystemColumn(appId, "mime-type", mimeTypeColumn);
+            case DOC_ID, "docid":
+                return configurationService.getSystemColumn(appId, DOC_ID, docIdColumn);
+            case CREATED_DATE, "createddate":
+                return configurationService.getSystemColumn(appId, CREATED_DATE, createdDateColumn);
+            case CONTENT_SIZE, "contentsize":
+                return configurationService.getSystemColumn(appId, CONTENT_SIZE, contentSizeColumn);
+            case MIME_TYPE, "mimetype":
+                return configurationService.getSystemColumn(appId, MIME_TYPE, mimeTypeColumn);
             default:
                 return null;
         }
@@ -585,50 +573,29 @@ public class SearchService {
         
         String sql = "SELECT LOWER(column_name) FROM information_schema.columns WHERE LOWER(table_schema) = LOWER(?) AND LOWER(table_name) = LOWER(?)";
         List<String> dbCols = jdbcTemplate.queryForList(sql, String.class, schema, tableName);
-        Set<String> dbColsSet = new HashSet<>(dbCols);
         
-        List<String> cols = new ArrayList<>();
-        
-        if (reconciliationSystemProperties != null) {
-            for (String prop : reconciliationSystemProperties) {
-                if (dbColsSet.contains(prop.toLowerCase())) {
-                    cols.add(prop);
-                }
-            }
-        }
-        
-        if (reconciliationCustomMetadata != null && !reconciliationCustomMetadata.isEmpty()) {
-            if (reconciliationCustomMetadata.contains("*")) {
-                if (tableKey != null) {
-                    List<String> mappedCols = getCustomColumnsForTable(tableKey);
-                    for (String mc : mappedCols) {
-                        if (dbColsSet.contains(mc.toLowerCase())) cols.add(mc);
-                    }
-                } else {
-                     dbColsSet.stream()
-                              .filter(dbCol -> dbCol != null && dbCol.matches("(?i)u[0-9a-f]+_.*"))
-                             .sorted()
-                             .forEach(cols::add);
-                }
-            } else {
-                for (String cmd : reconciliationCustomMetadata) {
-                    if (dbColsSet.contains(cmd.toLowerCase())) cols.add(cmd);
-                }
-            }
-        }
-        
-        if (reconciliationExtraProperties != null) {
-            for (String prop : reconciliationExtraProperties) {
-                if (dbColsSet.contains(prop.toLowerCase())) {
-                    cols.add(prop);
-                }
-            }
-        }
-        
-        if (cols.isEmpty()) {
+        if (dbCols == null || dbCols.isEmpty()) {
             return "*";
         }
-        return String.join(", ", cols);
+        return String.join(", ", dbCols);
+    }
+
+    public String buildSelectClauseForTable(String tableString, String tableKey, java.util.Map<String, String> columnAliases) {
+        String sql = buildSelectClauseForTable(tableString, tableKey);
+        if (sql.equals("*") || columnAliases == null || columnAliases.isEmpty()) {
+            return sql;
+        }
+        String[] columns = sql.split(",\\s*");
+        List<String> aliasedColumns = new ArrayList<>();
+        for (String col : columns) {
+            String lowerCol = col.toLowerCase();
+            if (columnAliases.containsKey(lowerCol)) {
+                aliasedColumns.add(col + " AS " + columnAliases.get(lowerCol));
+            } else {
+                aliasedColumns.add(col);
+            }
+        }
+        return String.join(", ", aliasedColumns);
     }
 
     private String validateIdentifier(String identifier) {

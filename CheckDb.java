@@ -3,33 +3,36 @@ import java.sql.*;
 public class CheckDb {
     public static void main(String[] args) {
         String searchId = "AE4848F6E84530C1898A5792F7D3B64C9";
-        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/P8Migration", "postgres", "postgres")) {
+        try (Connection conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Migration", "postgres", "postgres")) {
             
-            System.out.println("Searching for: " + searchId);
+            System.out.println("Finding Custom Object Classes...");
             
-            String[] tables = {"docversion_source", "docversion_staging", "docversion_target"};
-            for (String t : tables) {
-                try (PreparedStatement stmt = conn.prepareStatement("SELECT COUNT(*) FROM ccol." + t + " WHERE LOWER(object_id) = LOWER(?)")) {
-                    stmt.setString(1, searchId);
-                    try (ResultSet rs = stmt.executeQuery()) {
-                        if (rs.next()) {
-                            System.out.println("Table: " + t + " -> Found: " + rs.getInt(1));
-                        }
+            System.out.println("Checking columns in docversion_source...");
+            try (PreparedStatement stmt = conn.prepareStatement(
+                "SELECT column_name, data_type FROM information_schema.columns WHERE table_name = 'docversion_source' AND table_schema = 'public'")) {
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        System.out.println("docversion_source: " + rs.getString("column_name") + " (" + rs.getString("data_type") + ")");
                     }
                 }
             }
             
-            System.out.println("\nChecking classdef for this object:");
+            System.out.println("Checking columns in propertydef...");
             try (PreparedStatement stmt = conn.prepareStatement(
-                "SELECT cd.symbolic_name FROM ccol.docversion_source dv " + 
-                "JOIN ccol.classdef cd ON dv.object_class_id = cd.object_id " + 
-                "WHERE LOWER(dv.object_id) = LOWER(?)")) {
-                stmt.setString(1, searchId);
+                "SELECT column_name, data_type FROM information_schema.columns WHERE table_name = 'propertydef' AND table_schema = 'public'")) {
                 try (ResultSet rs = stmt.executeQuery()) {
-                    if (rs.next()) {
-                        System.out.println("Found class: " + rs.getString("symbolic_name"));
-                    } else {
-                        System.out.println("No matching classdef found for this object_id in source table.");
+                    while (rs.next()) {
+                        System.out.println("propertydef: " + rs.getString("column_name") + " (" + rs.getString("data_type") + ")");
+                    }
+                }
+            }
+            
+            System.out.println("Checking columns in globalpropertydef...");
+            try (PreparedStatement stmt = conn.prepareStatement(
+                "SELECT column_name, data_type FROM information_schema.columns WHERE table_name = 'globalpropertydef' AND table_schema = 'public'")) {
+                try (ResultSet rs = stmt.executeQuery()) {
+                    while (rs.next()) {
+                        System.out.println("globalpropertydef: " + rs.getString("column_name") + " (" + rs.getString("data_type") + ")");
                     }
                 }
             }

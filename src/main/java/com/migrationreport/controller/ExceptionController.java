@@ -31,22 +31,11 @@ public class ExceptionController {
         return result;
     }
 
-    @GetMapping("/test-logs")
-    public ResponseEntity<String> testLogging() {
-        log.info("Starting method: testLogging");
-        log.info("[TEST] This is an INFO level log.");
-        log.debug("[TEST] This is a DEBUG level log. (You will only see this because com.migrationreport is set to DEBUG)");
-        log.warn("[TEST] This is a WARN level log.");
-        log.error("[TEST] This is an ERROR level log! Simulating a failure.", new RuntimeException("Simulated exception"));
-        log.info("Ending method: testLogging");
-        return ResponseEntity.ok("Check the console and migration-report.log for INFO, DEBUG, WARN, and ERROR logs!");
-    }
-
     @GetMapping("/metadata-fields")
-    public List<String> getMetadataFields(@RequestParam String appId) {
-        log.info("Starting method: getMetadataFields with arguments: appId={}", appId);
-        log.debug("[EXCEPTIONS] Fetching metadata fields for Application: '{}'", appId);
-        List<String> result = exceptionService.getMetadataFields(appId);
+    public List<String> getMetadataFields(@RequestParam String appId, @RequestParam(required = false) String documentClass) {
+        log.info("Starting method: getMetadataFields with arguments: appId={}, documentClass={}", appId, documentClass);
+        log.debug("[EXCEPTIONS] Fetching metadata fields for Application: '{}', DocumentClass: '{}'", appId, documentClass);
+        List<String> result = exceptionService.getMetadataFields(appId, documentClass);
         log.info("Ending method: getMetadataFields");
         return result;
     }

@@ -22,13 +22,14 @@ import java.io.IOException;
 @Service
 public class MonitorService {
 
+    private static final String USER_DIR = "user.dir";
     private final AtomicReference<LogConfigDTO> currentConfig = new AtomicReference<>();
 
     private static final Pattern LOG_PATTERN = Pattern.compile("^(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?) +([A-Z]+) +.*? --- \\[(.*?)\\] +(.*?) : (.*)$");
     private static final Pattern CUSTOM_LOG_PATTERN = Pattern.compile("^(\\d{2}-\\d{2}-\\d{4} \\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})? [AP]M) - (.*)$");
 
     public LogConfigDTO saveConfig(LogConfigDTO config) {
-        Path path = PathValidator.validateAndNormalize(config.getLogPath(), System.getProperty("user.dir"));
+        Path path = PathValidator.validateAndNormalize(config.getLogPath(), System.getProperty(USER_DIR));
         LogConfigDTO validatedConfig = new LogConfigDTO(path.toString());
         this.currentConfig.set(validatedConfig);
         return validatedConfig;
@@ -44,7 +45,7 @@ public class MonitorService {
             return new ArrayList<>();
         }
         
-        Path dirPath = PathValidator.validateAndNormalize(cfg.getLogPath(), System.getProperty("user.dir"));
+        Path dirPath = PathValidator.validateAndNormalize(cfg.getLogPath(), System.getProperty(USER_DIR));
         
         try (Stream<Path> paths = Files.list(dirPath)) {
             return paths
@@ -66,7 +67,7 @@ public class MonitorService {
             return new ArrayList<>();
         }
         
-        Path dirPath = PathValidator.validateAndNormalize(cfg.getLogPath(), System.getProperty("user.dir"));
+        Path dirPath = PathValidator.validateAndNormalize(cfg.getLogPath(), System.getProperty(USER_DIR));
         
         if (date == null || date.contains("/") || date.contains("\\") || date.contains("..")) {
             throw new IllegalArgumentException("Invalid date format");

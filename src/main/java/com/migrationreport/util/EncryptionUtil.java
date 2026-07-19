@@ -90,35 +90,31 @@ public class EncryptionUtil {
         try {
             String base64Cipher = encryptedText.substring(4, encryptedText.length() - 1);
             byte[] cipherMessage = Base64.getDecoder().decode(base64Cipher);
-            
-            try {
-                return doDecrypt(cipherMessage, AES_SECRET_BYTES);
-            } catch (Exception newKeyEx) {
-                throw new EncryptionException("Error decrypting text with current key. The data might have been encrypted with a different key.", newKeyEx);
-            }
+            return decryptWithKey(cipherMessage);
+        } catch (EncryptionException e) {
+            throw e;
         } catch (Exception e) {
-            if (e instanceof EncryptionException) throw (EncryptionException) e;
             throw new EncryptionException("Error decrypting text", e);
         }
     }
 
-    private static String doDecrypt(byte[] cipherMessage, byte[] keyBytes) throws Exception {
-        SecretKeySpec secretKey = new SecretKeySpec(keyBytes, "AES");
+    private static String decryptWithKey(byte[] cipherMessage) {
         try {
-            // Try GCM first
-            Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
-            byte[] iv = new byte[12];
-            System.arraycopy(cipherMessage, 0, iv, 0, 12);
-            GCMParameterSpec parameterSpec = new GCMParameterSpec(128, iv);
-            cipher.init(Cipher.DECRYPT_MODE, secretKey, parameterSpec);
-            byte[] plainBytes = cipher.doFinal(cipherMessage, 12, cipherMessage.length - 12);
-            return new String(plainBytes, StandardCharsets.UTF_8);
-        } catch (Exception gcmEx) {
-            // Fallback to ECB for backward compatibility
-            Cipher cipher = Cipher.getInstance("AES");
-            cipher.init(Cipher.DECRYPT_MODE, secretKey);
-            byte[] plainBytes = cipher.doFinal(cipherMessage);
-            return new String(plainBytes, StandardCharsets.UTF_8);
+            return doDecrypt(cipherMessage, AES_SECRET_BYTES);
+        } catch (java.security.GeneralSecurityException e) {
+            throw new EncryptionException("Error decrypting text with current key.", e);
         }
+    }
+
+    private static String doDecrypt(byte[] cipherMessage, byte[] keyBytes) throws java.security.GeneralSecurityException {
+        SecretKeySpec secretKey = new SecretKeySpec(keyBytes, "AES");
+        // Use GCM
+        Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+        byte[] iv = new byte[12];
+        System.arraycopy(cipherMessage, 0, iv, 0, 12);
+        GCMParameterSpec parameterSpec = new GCMParameterSpec(128, iv);
+        cipher.init(Cipher.DECRYPT_MODE, secretKey, parameterSpec);
+        byte[] plainBytes = cipher.doFinal(cipherMessage, 12, cipherMessage.length - 12);
+        return new String(plainBytes, StandardCharsets.UTF_8);
     }
 }

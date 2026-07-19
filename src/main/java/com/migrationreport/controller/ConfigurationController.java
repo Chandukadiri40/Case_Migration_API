@@ -47,7 +47,15 @@ public class ConfigurationController {
     public ResponseEntity<DbConfigWrapper> getDbConfig() {
         log.info("Starting method: getDbConfig");
         log.info("[CONFIG] Fetching Database Configuration");
-        ResponseEntity<DbConfigWrapper> result = ResponseEntity.ok(configurationService.getDbConfig());
+        DbConfigWrapper wrapper = configurationService.getDbConfig();
+        if (wrapper != null && wrapper.getDatabases() != null) {
+            for (Map<String, String> db : wrapper.getDatabases()) {
+                if (db.containsKey("password") && db.get("password") != null && !db.get("password").isEmpty()) {
+                    db.put("password", "********");
+                }
+            }
+        }
+        ResponseEntity<DbConfigWrapper> result = ResponseEntity.ok(wrapper);
         log.info("Ending method: getDbConfig");
         return result;
     }

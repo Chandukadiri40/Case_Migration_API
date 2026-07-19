@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
         body.put(TIMESTAMP_KEY, LocalDateTime.now());
         body.put(STATUS_KEY, HttpStatus.INTERNAL_SERVER_ERROR.value());
         body.put(ERROR_KEY, "Configuration Error");
-        body.put(MESSAGE_KEY, ex.getMessage());
+        body.put(MESSAGE_KEY, "A configuration error occurred.");
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
     
@@ -58,7 +58,7 @@ public class GlobalExceptionHandler {
         body.put(TIMESTAMP_KEY, LocalDateTime.now());
         body.put(STATUS_KEY, HttpStatus.INTERNAL_SERVER_ERROR.value());
         body.put(ERROR_KEY, "Database Query Error");
-        body.put(MESSAGE_KEY, ex.getMessage());
+        body.put(MESSAGE_KEY, "An error occurred while executing a database query.");
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -69,7 +69,7 @@ public class GlobalExceptionHandler {
         body.put(TIMESTAMP_KEY, LocalDateTime.now());
         body.put(STATUS_KEY, HttpStatus.INTERNAL_SERVER_ERROR.value());
         body.put(ERROR_KEY, "Internal Server Error");
-        body.put(MESSAGE_KEY, ex.getMessage());
+        body.put(MESSAGE_KEY, "An unexpected internal error occurred.");
         return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

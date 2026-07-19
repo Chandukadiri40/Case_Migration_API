@@ -1,12 +1,10 @@
 {
-  "activeDatabaseType": "postgres",
-  "databases": [
-    {
-      "databaseType": "postgres",
-      "url": "jdbc:postgresql://localhost:5432/P8Migration",
-      "username": "postgres",
-      "password": "ENC(97jSBpOpRyd/LjLHiqEklIz0RaGfqt7TlP4YOhFSdpB1IXMn)",
-      "driver": "org.postgresql.Driver"
-    }
-  ]
+  "activeDatabaseType" : "postgres",
+  "databases" : [ {
+    "databaseType" : "postgres",
+    "password" : "ENC(Xv2j6/HM6I6xuVpsXYWNJi+F7hiyv+dCb3EaztKcuqZRKGJ3)",
+    "driver" : "org.postgresql.Driver",
+    "url" : "jdbc:postgresql://localhost:5432/Migration",
+    "username" : "postgres"
+  } ]
 }

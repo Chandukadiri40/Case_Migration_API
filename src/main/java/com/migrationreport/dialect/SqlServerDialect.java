@@ -2,6 +2,8 @@ package com.migrationreport.dialect;
 
 public class SqlServerDialect implements SqlDialect {
 
+    private static final String CAST_PREFIX = "CAST(";
+
     @Override
     public String getLimitSql(int limit) {
         return " ORDER BY (SELECT NULL) OFFSET 0 ROWS FETCH NEXT " + limit + " ROWS ONLY";
@@ -9,12 +11,12 @@ public class SqlServerDialect implements SqlDialect {
 
     @Override
     public String castToTimestamp(String column) {
-        return "CAST(" + column + " AS DATETIME2)";
+        return CAST_PREFIX + column + " AS DATETIME2)";
     }
 
     @Override
     public String castParameterToTimestamp() {
-        return "CAST(? AS DATETIME2)";
+        return CAST_PREFIX + "? AS DATETIME2)";
     }
 
     @Override
@@ -35,11 +37,11 @@ public class SqlServerDialect implements SqlDialect {
 
     @Override
     public String castToNumeric(String column) {
-        return "CAST(" + column + " AS NUMERIC(18,2))";
+        return CAST_PREFIX + column + " AS NUMERIC(18,2))";
     }
 
     @Override
     public String castToDate(String column) {
-        return "CAST(" + column + " AS DATE)";
+        return CAST_PREFIX + column + " AS DATE)";
     }
 }

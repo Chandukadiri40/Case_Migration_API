@@ -24,6 +24,8 @@ public class ColumnConfigController {
         this.searchService = searchService;
     }
 
+    private static final String LABEL = "label";
+
     /**
      * Returns the selectable tables configuration for the UI dropdown.
      */
@@ -31,9 +33,9 @@ public class ColumnConfigController {
     public ResponseEntity<List<Map<String, String>>> getTablesConfig() {
         log.info("Starting method: getTablesConfig");
         ResponseEntity<List<Map<String, String>>> result = ResponseEntity.ok(List.of(
-                Map.of("key", "source", "label", "Source Table"),
-                Map.of("key", "staging", "label", "Staging Table"),
-                Map.of("key", "target", "label", "Target Table")
+                Map.of("key", "source", LABEL, "Source Table"),
+                Map.of("key", "staging", LABEL, "Staging Table"),
+                Map.of("key", "target", LABEL, "Target Table")
         ));
         log.info("Ending method: getTablesConfig");
         return result;
@@ -77,19 +79,6 @@ public class ColumnConfigController {
         return result;
     }
 
-    /**
-     * Returns the configured reconciliation system properties and custom metadata columns.
-     */
-    @GetMapping("/reconciliation-properties")
-    public ResponseEntity<Map<String, List<String>>> getReconciliationProperties() {
-        log.info("Starting method: getReconciliationProperties");
-        ResponseEntity<Map<String, List<String>>> result = ResponseEntity.ok(Map.of(
-            "systemProperties", searchService.getReconciliationSystemProperties(),
-            "customMetadata", searchService.getReconciliationCustomMetadata()
-        ));
-        log.info("Ending method: getReconciliationProperties");
-        return result;
-    }
 }
 
 

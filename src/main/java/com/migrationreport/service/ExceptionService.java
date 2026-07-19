@@ -2,6 +2,8 @@ package com.migrationreport.service;
 import com.migrationreport.dto.CustomMetadataFilter;
 import com.migrationreport.dto.ExceptionCriteria;
 import com.migrationreport.dto.config.TenantConfig;
+import com.migrationreport.dto.mapping.PropertyMappingTemplate;
+import com.migrationreport.dto.mapping.PropertyMappingTemplate.PropertyMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -46,6 +48,9 @@ public class ExceptionService {
     
     @Autowired
     private SqlDialect dialect;
+
+    @Autowired
+    private PropertyMappingService propertyMappingService;
 
     @SuppressWarnings("java:S3776")
     public Map<String, List<Map<String, Object>>> checkExceptions(ExceptionCriteria criteria) {
@@ -99,8 +104,12 @@ public class ExceptionService {
         }
         
         if (criteria.getDocumentClasses() != null && !criteria.getDocumentClasses().isEmpty()) {
-            fromClause += " INNER JOIN " + schema + "classdef cd ON dv.object_class_id = cd.object_id";
-            where.append(" AND cd.symbolic_name IN (");
+            String classdefTable = configurationService.getSystemTable(criteria.getAppId(), "classdef", "classdef");
+            String classIdCol = configurationService.getSystemColumn(criteria.getAppId(), "class-id-col", "object_class_id");
+            String symbolicNameCol = configurationService.getSystemColumn(criteria.getAppId(), "symbolic-name-col", "symbolic_name");
+            
+            fromClause += " INNER JOIN " + schema + classdefTable + " cd ON dv." + classIdCol + " = cd.object_id";
+            where.append(" AND cd.").append(symbolicNameCol).append(" IN (");
             where.append(criteria.getDocumentClasses().stream().map(c -> "?").collect(Collectors.joining(",")));
             where.append(")");
             params.addAll(criteria.getDocumentClasses());
@@ -129,17 +138,32 @@ public class ExceptionService {
         
         Map<String, List<Map<String, Object>>> result = new HashMap<>();
         if (objectIds.isEmpty()) {
-            result.put("source", new ArrayList<>());
-            result.put("staging", new ArrayList<>());
-            result.put("target", new ArrayList<>());
+            result.put(SOURCE_KEY, new ArrayList<>());
+            result.put(STAGING_KEY, new ArrayList<>());
+            result.put(TARGET_KEY, new ArrayList<>());
             return result;
         }
         
         String inClause = objectIds.stream().map(id -> "?").collect(Collectors.joining(","));
         Object[] inParams = objectIds.toArray();
+
+        Map<String, String> aliasMap = new HashMap<>();
+        List<PropertyMappingTemplate> templates = propertyMappingService.getTemplatesByAppId(criteria.getAppId());
+        if (templates != null) {
+            for (PropertyMappingTemplate t : templates) {
+                if (t.getMappings() != null) {
+                    for (PropertyMap pm : t.getMappings()) {
+                        if (pm.getTargetProperty() != null && pm.getSourceProperty() != null) {
+                            aliasMap.put(pm.getTargetProperty().toLowerCase(), pm.getSourceProperty().toLowerCase());
+                        }
+                    }
+                }
+            }
+        }
+
         String selectColsSource = searchService.buildSelectClauseForTable(sourceTable, null);
-        String selectColsStaging = searchService.buildSelectClauseForTable(stagingTable, null);
-        String selectColsTarget = searchService.buildSelectClauseForTable(targetTable, null);
+        String selectColsStaging = searchService.buildSelectClauseForTable(stagingTable, null, aliasMap);
+        String selectColsTarget = searchService.buildSelectClauseForTable(targetTable, null, aliasMap);
         
         log.info("[EXCEPTIONS] Querying Source, Staging, Target tables for {} object IDs", objectIds.size());
         long startData = System.currentTimeMillis();
@@ -177,64 +201,80 @@ public class ExceptionService {
         
         log.info("[EXCEPTIONS] Data retrieval completed in {}ms. Source: {}, Staging: {}, Target: {}", System.currentTimeMillis() - startData, sourceData.size(), stagingData.size(), targetData.size());
         
-        result.put("source", sourceData);
-        result.put("staging", stagingData);
-        result.put("target", targetData);
+        result.put(SOURCE_KEY, sourceData);
+        result.put(STAGING_KEY, stagingData);
+        result.put(TARGET_KEY, targetData);
         return result;
     }
 
-    public List<String> getMetadataFields(String appId) {
+    public List<String> getMetadataFields(String appId, String documentClass) {
         TenantConfig.ApplicationConfig appConfig = configurationService.getApplicationConfig(appId);
-        if (appConfig == null || appConfig.getClassifiedTables() == null || appConfig.getClassifiedTables().get(SOURCE_KEY) == null || appConfig.getClassifiedTables().get(SOURCE_KEY).isEmpty()) {
-            throw new ResourceNotFoundException("Source table configuration missing for application: " + appId);
+        if (appConfig == null) {
+            throw new ResourceNotFoundException("Configuration missing for application: " + appId);
         }
         
-        String schema = appConfig.getSchema() != null && !appConfig.getSchema().isEmpty() ? appConfig.getSchema() : "public";
-        String tableName = appConfig.getClassifiedTables().get(SOURCE_KEY).get(0);
-        String sql = "SELECT LOWER(column_name) FROM information_schema.columns WHERE LOWER(table_schema) = LOWER(?) AND LOWER(table_name) = LOWER(?)";
-        List<String> cols = jdbcTemplate.queryForList(sql, String.class, schema, tableName);
-        return cols.stream()
-                   .filter(c -> c != null && c.matches("(?i)u[0-9a-f]+_.*"))
-                   .map(c -> c.substring(c.indexOf('_') + 1))
-                   .sorted()
-                   .toList();
+        String schema = appConfig.getSchema() != null && !appConfig.getSchema().isEmpty() ? validateIdentifier(appConfig.getSchema()) + "." : "public.";
+        String propdefTable = configurationService.getSystemTable(appId, "propertydef", "propertydef");
+        String globalpropdefTable = configurationService.getSystemTable(appId, "globalpropertydef", "globalpropertydef");
+
+        List<Object> params = new ArrayList<>();
+        String sql = "SELECT DISTINCT gpd.symbolic_name FROM " + schema + propdefTable + " pd " +
+                     "INNER JOIN " + schema + globalpropdefTable + " gpd ON pd.global_prop_id = gpd.object_id " +
+                     "WHERE CAST(pd.sys_owned_bool AS VARCHAR) IN ('0', 'false', 'FALSE') ";
+
+        if (documentClass != null && !documentClass.isEmpty() && !documentClass.equalsIgnoreCase("All")) {
+            sql += " AND pd.dbg_class_name = ? ";
+            params.add(documentClass);
+        } else {
+            sql += " AND pd.dbg_class_name NOT LIKE 'CmAcm%' AND pd.dbg_class_name NOT LIKE 'CmXT%' AND pd.dbg_class_name NOT LIKE 'Cm%' " +
+                   " AND pd.dbg_class_name NOT LIKE 'Preferences%' " +
+                   " AND pd.dbg_class_name NOT IN ('EntryTemplate', 'StoredSearch', 'RecordsTemplate', 'WebContentTemplate', 'RelatedItems', 'P8AELink', " +
+                   "'Document', 'Folder', 'Custom Object', 'Code Module', 'Workflow Definition', 'XML Property Mapping Script', " +
+                   "'Annotation', 'Link', 'Choice List', 'Security Policy', 'Storage Area', 'Storage Policy') ";
+        }
+        sql += " ORDER BY gpd.symbolic_name";
+        
+        return jdbcTemplate.queryForList(sql, String.class, params.toArray());
     }
 
     @SuppressWarnings("java:S3776")
     private void appendCustomMetadataFilters(ExceptionCriteria criteria, String sourceTable, StringBuilder where, List<Object> params) {
-        Map<String, List<CustomMetadataFilter>> groupedFilters = criteria.getCustomMetadata().stream()
+        List<CustomMetadataFilter> validFilters = criteria.getCustomMetadata().stream()
             .filter(f -> f.getField() != null && !f.getField().isEmpty() && f.getValue() != null && !f.getValue().isEmpty())
-            .collect(Collectors.groupingBy(f -> {
-                String col = findColumnName(sourceTable, f.getField());
-                return col != null ? col : "";
-            }));
-            
-        for (Map.Entry<String, List<CustomMetadataFilter>> entry : groupedFilters.entrySet()) {
-            String colName = entry.getKey();
-            if (colName.isEmpty()) continue;
-            
-            List<CustomMetadataFilter> filters = entry.getValue();
-            where.append(" AND (");
-            
-            for (int i = 0; i < filters.size(); i++) {
-                if (i > 0) where.append(" OR ");
-                CustomMetadataFilter filter = filters.get(i);
-                String op = filter.getOperator();
-                
-                if ("CONTAINS".equalsIgnoreCase(op)) {
-                    where.append("dv.").append(colName).append(ILIKE_PARAM);
-                    params.add("%" + filter.getValue() + "%");
-                } else if ("STARTS_WITH".equalsIgnoreCase(op)) {
-                    where.append("dv.").append(colName).append(ILIKE_PARAM);
-                    params.add(filter.getValue() + "%");
-                } else if ("ENDS_WITH".equalsIgnoreCase(op)) {
-                    where.append("dv.").append(colName).append(ILIKE_PARAM);
-                    params.add("%" + filter.getValue());
-                } else {
-                    where.append("dv.").append(colName).append(" = ?");
-                    params.add(filter.getValue());
-                }
+            .toList();
+
+        if (validFilters.isEmpty()) return;
+
+        where.append(" AND (");
+        boolean first = true;
+        
+        for (CustomMetadataFilter filter : validFilters) {
+            String colName = findColumnName(sourceTable, filter.getField());
+            if (colName == null) continue;
+
+            if (!first) where.append(" OR ");
+            first = false;
+
+            String op = filter.getOperator();
+            if ("CONTAINS".equalsIgnoreCase(op)) {
+                where.append("dv.").append(colName).append(ILIKE_PARAM);
+                params.add("%" + filter.getValue() + "%");
+            } else if ("STARTS_WITH".equalsIgnoreCase(op)) {
+                where.append("dv.").append(colName).append(ILIKE_PARAM);
+                params.add(filter.getValue() + "%");
+            } else if ("ENDS_WITH".equalsIgnoreCase(op)) {
+                where.append("dv.").append(colName).append(ILIKE_PARAM);
+                params.add("%" + filter.getValue());
+            } else {
+                where.append("dv.").append(colName).append(" = ?");
+                params.add(filter.getValue());
             }
+        }
+        
+        if (first) {
+            // If no valid columns were found, we have an empty `AND (`. Remove it.
+            where.setLength(where.length() - 6);
+        } else {
             where.append(")");
         }
     }

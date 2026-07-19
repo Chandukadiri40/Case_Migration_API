@@ -106,16 +106,19 @@ public class DeliverableService {
         String sc = configurationService.getSystemColumn(appIdStr, "status", statusColumn);
         String cs = configurationService.getSystemColumn(appIdStr, "content-size", contentSizeColumn);
 
-        String sizeSum = "COALESCE(SUM(COALESCE(" + dialect.castToNumeric(cs) + ",0))/1073741824.0,0)";
-        String sizeOk  = "COALESCE(SUM(CASE WHEN LOWER(" + sc + ") IN ('success','migrated') THEN COALESCE(" + dialect.castToNumeric(cs) + ",0) ELSE 0 END)/1073741824.0,0)";
+        String csClean = "NULLIF(" + cs + ", '')";
+        String sizeSum = "COALESCE(SUM(COALESCE(" + dialect.castToNumeric(csClean) + ",0))/1073741824.0,0)";
+        String sizeOk  = "COALESCE(SUM(CASE WHEN LOWER(" + sc + ") IN ('success','migrated') THEN COALESCE(" + dialect.castToNumeric(csClean) + ",0) ELSE 0 END)/1073741824.0,0)";
 
         String runtimeExpr = "0.0 AS migrationruntimedays";
         if (req.getEndDate() != null && !req.getEndDate().trim().isEmpty()) {
             runtimeExpr = dialect.calculateEpochDifferenceDays("migrated_date", "migrated_date") + " AS migrationruntimedays";
         }
 
+        String classIdCol = configurationService.getSystemColumn(appIdStr, "class-id-col", "object_class_id");
+
         StringBuilder sql = new StringBuilder(
-            "SELECT object_class_id AS documentclass," +
+            "SELECT " + classIdCol + " AS documentclass," +
             " COUNT(*) AS totaldocuments," +
             " " + sizeSum + " AS totalfilesizegb," +
             SQL_COUNT_CASE_LOWER + sc + ") IN ('success','migrated') THEN 1 END) AS extractedfilenet," +
@@ -130,13 +133,13 @@ public class DeliverableService {
 
         List<Object> params = new ArrayList<>();
         appendFilters(sql, params, req, appIdStr, table.substring(0, table.indexOf(".")));
-        sql.append(" GROUP BY object_class_id ORDER BY object_class_id");
+        sql.append(" GROUP BY ").append(classIdCol).append(" ORDER BY ").append(classIdCol);
 
         log.info("[DELIVERABLE] Executing Aggregated Query | SQL: {} | Params: {}", sql.toString(), params);
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql.toString(), params.toArray());
         List<Map<String, Object>> result = new ArrayList<>();
-        String appId = table.substring(0, table.indexOf("."));
-        Map<String, String> classMap = getClassIdToSymbolicNameMap(appId);
+        String schemaStr = table.substring(0, table.indexOf("."));
+        Map<String, String> classMap = getClassIdToSymbolicNameMap(appIdStr, schemaStr);
         for (Map<String, Object> row : rows) {
             Map<String, Object> map = new HashMap<>();
             map.put("isAggregated", true);
@@ -181,10 +184,11 @@ public class DeliverableService {
         sql.append(dialect.getLimitSql(5000));
 
         log.info("[DELIVERABLE] Executing Detailed Query | SQL: {} | Params: {}", sql.toString(), params);
+        String classIdCol = configurationService.getSystemColumn(appIdStr, "class-id-col", "object_class_id");
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql.toString(), params.toArray());
         List<Map<String, Object>> result = new ArrayList<>();
-        String appId = table.substring(0, table.indexOf("."));
-        Map<String, String> classMap = getClassIdToSymbolicNameMap(appId);
+        String schemaStr = table.substring(0, table.indexOf("."));
+        Map<String, String> classMap = getClassIdToSymbolicNameMap(appIdStr, schemaStr);
         for (Map<String, Object> row : rows) {
             Map<String, Object> map = new HashMap<>();
             map.put("isAggregated", false);
@@ -192,7 +196,7 @@ public class DeliverableService {
             for (Map.Entry<String, Object> entry : row.entrySet()) {
                 String key = entry.getKey();
                 Object val = entry.getValue();
-                if (key.equalsIgnoreCase("object_class_id") && val != null) {
+                if (key.equalsIgnoreCase(classIdCol) && val != null) {
                     val = classMap.getOrDefault(val.toString().toUpperCase(), val.toString());
                 }
                 map.put(key.toLowerCase(), val);
@@ -203,10 +207,20 @@ public class DeliverableService {
         return result;
     }
 
-    private void appendFilters(StringBuilder sql, List<Object> params, DeliverableRequest req, String appIdStr, String appId) {
+    private void appendFilters(StringBuilder sql, List<Object> params, DeliverableRequest req, String appIdStr, String schemaStr) {
+        String classdefTable = configurationService.getSystemTable(appIdStr, "classdef", "classdef");
+        String symbolicNameCol = configurationService.getSystemColumn(appIdStr, "symbolic-name-col", "symbolic_name");
+        String classIdCol = configurationService.getSystemColumn(appIdStr, "class-id-col", "object_class_id");
+
         if (req.getDocumentClass() != null && !req.getDocumentClass().trim().isEmpty() && !req.getDocumentClass().equalsIgnoreCase("All")) {
-            sql.append(SQL_AND).append("object_class_id IN (SELECT object_id FROM ").append(appId).append(".classdef WHERE LOWER(symbolic_name) = LOWER(?))");
+            sql.append(SQL_AND).append(classIdCol).append(" IN (SELECT object_id FROM ").append(schemaStr).append(".").append(classdefTable).append(" WHERE LOWER(").append(symbolicNameCol).append(") = LOWER(?))");
             params.add(req.getDocumentClass().trim());
+        } else {
+            sql.append(SQL_AND).append(classIdCol).append(" IN (SELECT object_id FROM ").append(schemaStr).append(".").append(classdefTable)
+               .append(" WHERE CAST(sys_owned_bool AS VARCHAR) IN ('0', 'false', 'FALSE')")
+               .append(" AND LOWER(").append(symbolicNameCol).append(") NOT LIKE 'cm%'")
+               .append(" AND LOWER(").append(symbolicNameCol).append(") NOT LIKE 'cmxt%'")
+               .append(" AND LOWER(").append(symbolicNameCol).append(") NOT LIKE 'preferences%')");
         }
         if (req.getCreatedDate() != null && !req.getCreatedDate().trim().isEmpty()) {
             String currentCreatedDateColumn = configurationService.getSystemColumn(appIdStr, "created-date", createdDateColumn);
@@ -235,14 +249,17 @@ public class DeliverableService {
         if (v instanceof Number number) return number.doubleValue();
         try { return Double.parseDouble(v.toString()); } catch (Exception e) { return 0.0; }
     }
-    private Map<String, String> getClassIdToSymbolicNameMap(String appId) {
+    private Map<String, String> getClassIdToSymbolicNameMap(String appIdStr, String schemaStr) {
         Map<String, String> map = new HashMap<>();
         try {
-            String sql = "SELECT object_id, symbolic_name FROM " + appId + ".classdef";
+            String classdefTable = configurationService.getSystemTable(appIdStr, "classdef", "classdef");
+            String symbolicNameCol = configurationService.getSystemColumn(appIdStr, "symbolic-name-col", "symbolic_name");
+
+            String sql = "SELECT object_id, " + symbolicNameCol + " FROM " + schemaStr + "." + classdefTable;
             List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
             for (Map<String, Object> row : rows) {
                 String id = row.get("object_id") != null ? row.get("object_id").toString().toUpperCase() : "";
-                String name = row.get("symbolic_name") != null ? row.get("symbolic_name").toString() : "";
+                String name = row.get(symbolicNameCol) != null ? row.get(symbolicNameCol).toString() : (row.get(symbolicNameCol.toLowerCase()) != null ? row.get(symbolicNameCol.toLowerCase()).toString() : "");
                 if (!id.isEmpty() && !name.isEmpty()) {
                     map.put(id, name);
                 }

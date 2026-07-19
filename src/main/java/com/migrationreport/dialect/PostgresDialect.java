@@ -2,6 +2,8 @@ package com.migrationreport.dialect;
 
 public class PostgresDialect implements SqlDialect {
 
+    private static final String CAST_PREFIX = "CAST(";
+
     @Override
     public String getLimitSql(int limit) {
         return " LIMIT " + limit;
@@ -9,12 +11,12 @@ public class PostgresDialect implements SqlDialect {
 
     @Override
     public String castToTimestamp(String column) {
-        return "CAST(" + column + " AS TIMESTAMP)";
+        return CAST_PREFIX + column + " AS TIMESTAMP)";
     }
 
     @Override
     public String castParameterToTimestamp() {
-        return "CAST(? AS TIMESTAMP)";
+        return CAST_PREFIX + "? AS TIMESTAMP)";
     }
 
     @Override
@@ -34,11 +36,11 @@ public class PostgresDialect implements SqlDialect {
 
     @Override
     public String castToNumeric(String column) {
-        return "CAST(" + column + " AS numeric)";
+        return CAST_PREFIX + column + " AS numeric)";
     }
 
     @Override
     public String castToDate(String column) {
-        return "CAST(" + column + " AS DATE)";
+        return CAST_PREFIX + column + " AS DATE)";
     }
 }
