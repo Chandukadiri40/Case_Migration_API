@@ -40,4 +40,9 @@ public interface SqlDialect {
      * Safely casts a column to date (without time).
      */
     String castToDate(String column);
+    
+    /**
+     * Returns the string length function (LENGTH for PostgreSQL, LEN for SQL Server).
+     */
+    String getLength(String column);
 }
