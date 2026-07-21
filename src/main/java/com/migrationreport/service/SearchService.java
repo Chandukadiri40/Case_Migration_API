@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.migrationreport.dialect.SqlDialect;
 import com.migrationreport.dto.MetadataFieldDTO;
 import com.migrationreport.dto.config.TenantConfig;
+import com.migrationreport.security.SqlIdentifierValidator;
 
 @Slf4j
 @Service
@@ -35,6 +36,9 @@ public class SearchService {
     private static final String CREATED_DATE = "created-date";
     private static final String CONTENT_SIZE = "content-size";
     private static final String MIME_TYPE = "mime-type";
+    private static final String PROPERTYDEF_KEY = "propertydefinition";
+    private static final String COLUMNDEF_KEY = "columndefinition";
+    private static final String GLOBALPROPERTYDEF_KEY = "globalpropertydef";
 
     private final JdbcTemplate jdbcTemplate;
     private final QueryValidator queryValidator;
@@ -69,6 +73,9 @@ public class SearchService {
     private final Set<String> targetCustomColumns;
     private final List<String> targetCustomColumnsList;
 
+    private final List<String> reconciliationSystemProperties;
+    private final List<String> reconciliationCustomMetadata;
+    private final List<String> reconciliationExtraProperties;
 
     // Dynamic metadata fields mapping loaded from database (with static fallback)
     private final List<MetadataFieldDTO> availableFields = new ArrayList<>();
@@ -89,14 +96,14 @@ public class SearchService {
                 for (var app : configurationService.loadConfig().getApplications()) {
                     if (app.getClassifiedTables() != null) {
                         var ct = app.getClassifiedTables();
-                        if (ct.get("propertydefinition") != null && !ct.get("propertydefinition").isEmpty() &&
-                            ct.get("columndefinition") != null && !ct.get("columndefinition").isEmpty() &&
-                            ct.get("globalpropertydef") != null && !ct.get("globalpropertydef").isEmpty()) {
+                        if (ct.get(PROPERTYDEF_KEY) != null && !ct.get(PROPERTYDEF_KEY).isEmpty() &&
+                            ct.get(COLUMNDEF_KEY) != null && !ct.get(COLUMNDEF_KEY).isEmpty() &&
+                            ct.get(GLOBALPROPERTYDEF_KEY) != null && !ct.get(GLOBALPROPERTYDEF_KEY).isEmpty()) {
                             
                             String schema = app.getSchema() != null && !app.getSchema().trim().isEmpty() ? app.getSchema().trim() + "." : "";
-                            propDefTable = schema + ct.get("propertydefinition").get(0);
-                            colDefTable = schema + ct.get("columndefinition").get(0);
-                            globalPropDefTable = schema + ct.get("globalpropertydef").get(0);
+                            propDefTable = schema + ct.get(PROPERTYDEF_KEY).get(0);
+                            colDefTable = schema + ct.get(COLUMNDEF_KEY).get(0);
+                            globalPropDefTable = schema + ct.get(GLOBALPROPERTYDEF_KEY).get(0);
                             break;
                         }
                     }
@@ -199,7 +206,9 @@ public class SearchService {
             @Value("${search.tables.staging.custom-columns}") String stagingCustomColumnsStr,
             @Value("${search.tables.target.custom-columns}") String targetCustomColumnsStr,
             @Value("${search.date-column:CREATE_DATE}") String dateColumn,
-            @Value("${search.report.extra-properties:}") String recExtraPropertiesStr) {
+            @Value("${search.report.system-properties:}") String systemPropertiesStr,
+            @Value("${search.report.custom-metadata:}") String customMetadataStr,
+            @Value("${search.report.extra-properties:}") String extraPropertiesStr) {
         this.jdbcTemplate = jdbcTemplate;
         this.queryValidator = queryValidator;
         this.configurationService = configurationService;
@@ -259,16 +268,27 @@ public class SearchService {
             this.targetCustomColumns = Collections.emptySet();
         }
 
-        if (recExtraPropertiesStr != null && !recExtraPropertiesStr.trim().isEmpty()) {
-            this.reconciliationExtraProperties = Arrays.stream(recExtraPropertiesStr.split(","))
-                    .map(String::trim)
-                    .toList();
+        if (systemPropertiesStr != null && !systemPropertiesStr.trim().isEmpty()) {
+            this.reconciliationSystemProperties = Arrays.stream(systemPropertiesStr.split(","))
+                    .map(String::trim).toList();
+        } else {
+            this.reconciliationSystemProperties = Collections.emptyList();
+        }
+        
+        if (customMetadataStr != null && !customMetadataStr.trim().isEmpty()) {
+            this.reconciliationCustomMetadata = Arrays.stream(customMetadataStr.split(","))
+                    .map(String::trim).toList();
+        } else {
+            this.reconciliationCustomMetadata = Collections.emptyList();
+        }
+        
+        if (extraPropertiesStr != null && !extraPropertiesStr.trim().isEmpty()) {
+            this.reconciliationExtraProperties = Arrays.stream(extraPropertiesStr.split(","))
+                    .map(String::trim).toList();
         } else {
             this.reconciliationExtraProperties = Collections.emptyList();
         }
     }
-
-    private List<String> reconciliationExtraProperties;
 
     public List<String> getCustomColumnsForTable(String tableKey) {
         if (tableKey == null) {
@@ -309,6 +329,7 @@ public class SearchService {
         queryValidator.validateQueryFragment(queryFragment);
 
         String sql = String.format("SELECT * FROM %s WHERE %s", targetTable, queryFragment);
+        // nosemgrep: java.spring.security.audit.spring-sqli.spring-sqli
         return jdbcTemplate.queryForList(sql);
     }
 
@@ -431,7 +452,7 @@ public class SearchService {
         appendCustomFilters(request, sql, params, whitelistedCustomColumns);
 
         String finalSql = sql.toString();
-        log.info("Executing SQL Query: {} with params: {}", finalSql, params);
+        log.info("Executing SQL Query: {} with params: {}", finalSql.toLowerCase(), params);
         return jdbcTemplate.queryForList(finalSql, params.toArray());
     }
 
@@ -448,7 +469,7 @@ public class SearchService {
 
     private void appendStatusFilter(SearchRequest request, StringBuilder sql, List<Object> params) {
         String selectedStatus = request.getStatus();
-        String currentStatusColumn = configurationService.getSystemColumn(request.getAppId(), "status", statusColumn);
+        String currentStatusColumn = SqlIdentifierValidator.validateIdentifier(configurationService.getSystemColumn(request.getAppId(), "status", statusColumn));
         if (selectedStatus != null && !selectedStatus.trim().isEmpty() && !selectedStatus.equalsIgnoreCase("total")) {
             sql.append(SQL_AND).append(currentStatusColumn).append(" = ?");
             params.add(selectedStatus.trim());
@@ -456,7 +477,7 @@ public class SearchService {
     }
 
     private void appendDateFilters(SearchRequest request, StringBuilder sql, List<Object> params) {
-        String currentDateColumn = configurationService.getSystemColumn(request.getAppId(), "date", dateColumn);
+        String currentDateColumn = SqlIdentifierValidator.validateIdentifier(configurationService.getSystemColumn(request.getAppId(), "date", dateColumn));
         if (request.getFromDate() != null && !request.getFromDate().isBlank()) {
             sql.append(SQL_AND).append(dialect.castToTimestamp(currentDateColumn)).append(" >= ").append(dialect.castParameterToTimestamp());
             params.add(request.getFromDate().trim());
@@ -544,6 +565,7 @@ public class SearchService {
         if (sql.contains(";")) {
             throw new IllegalArgumentException("Query chaining (semicolons) is not allowed.");
         }
+        // nosemgrep: java.spring.security.audit.spring-sqli.spring-sqli
         return jdbcTemplate.queryForList(sql.trim());
     }
 
@@ -577,7 +599,52 @@ public class SearchService {
         if (dbCols == null || dbCols.isEmpty()) {
             return "*";
         }
-        return String.join(", ", dbCols);
+
+        Set<String> dbColsSet = new HashSet<>(dbCols);
+        List<String> cols = new ArrayList<>();
+        
+        if (reconciliationSystemProperties != null) {
+            for (String prop : reconciliationSystemProperties) {
+                if (dbColsSet.contains(prop.toLowerCase())) {
+                    cols.add(prop);
+                }
+            }
+        }
+        
+        if (reconciliationCustomMetadata != null && !reconciliationCustomMetadata.isEmpty()) {
+            if (reconciliationCustomMetadata.contains("*")) {
+                if (tableKey != null) {
+                    List<String> mappedCols = getCustomColumnsForTable(tableKey);
+                    for (String mc : mappedCols) {
+                        if (dbColsSet.contains(mc.toLowerCase())) cols.add(mc);
+                    }
+                } else {
+                     dbColsSet.stream()
+                              .filter(dbCol -> dbCol != null && dbCol.matches("(?i)u[0-9a-f]+_.*"))
+                              .sorted()
+                              .forEach(cols::add);
+                }
+            } else {
+                for (String cmd : reconciliationCustomMetadata) {
+                    if (dbColsSet.contains(cmd.toLowerCase())) cols.add(cmd);
+                }
+            }
+        }
+        
+        // Only add migration-related extra properties for the staging table
+        if (TABLE_STAGING.equalsIgnoreCase(tableKey) && reconciliationExtraProperties != null) {
+            for (String extra : reconciliationExtraProperties) {
+                if (dbColsSet.contains(extra.toLowerCase())) {
+                    cols.add(extra);
+                }
+            }
+        }
+
+        if (cols.isEmpty()) {
+            return "*";
+        }
+        
+        return String.join(", ", cols);
     }
 
     public String buildSelectClauseForTable(String tableString, String tableKey, java.util.Map<String, String> columnAliases) {

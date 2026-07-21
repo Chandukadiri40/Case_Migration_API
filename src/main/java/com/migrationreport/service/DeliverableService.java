@@ -25,6 +25,11 @@ public class DeliverableService {
     private static final String SQL_COUNT_CASE_LOWER = " COUNT(CASE WHEN LOWER(";
     private static final String SQL_AND_LOWER = " AND LOWER(";
     private static final String SQL_AND = " AND ";
+    private static final String MIGRATED_DATE_KEY = "migrated_date";
+    private static final String CLASSDEF_KEY = "classdef";
+    private static final String CLASS_ID_COL_KEY = "class-id-col";
+    private static final String OBJECT_CLASS_ID = "object_class_id";
+    private static final String SQL_FROM_SPACE = " FROM ";
 
     private final JdbcTemplate jdbcTemplate;
     private final ConfigurationService configurationService;
@@ -85,14 +90,14 @@ public class DeliverableService {
             }
             String stagingTableName = app.getClassifiedTables().get(KEY_STAGING).get(0);
             String table = schema + stagingTableName;
-            String appDisplayName = app.getAppName();
+            String objStoreName = (app.getObjectStore() != null) ? app.getObjectStore() : app.getAppName();
             
             try {
                 if (isAggregated) {
-                    List<Map<String, Object>> rows = queryAppAggregated(app.getAppId(), table, appDisplayName, req);
+                    List<Map<String, Object>> rows = queryAppAggregated(app.getAppId(), table, objStoreName, req);
                     result.addAll(rows);
                 } else {
-                    List<Map<String, Object>> rows = queryAppDetailed(app.getAppId(), table, appDisplayName, req);
+                    List<Map<String, Object>> rows = queryAppDetailed(app.getAppId(), table, objStoreName, req);
                     result.addAll(rows);
                 }
             } catch (Exception e) {
@@ -112,10 +117,10 @@ public class DeliverableService {
 
         String runtimeExpr = "0.0 AS migrationruntimedays";
         if (req.getEndDate() != null && !req.getEndDate().trim().isEmpty()) {
-            runtimeExpr = dialect.calculateEpochDifferenceDays("migrated_date", "migrated_date") + " AS migrationruntimedays";
+            runtimeExpr = dialect.calculateEpochDifferenceDays(MIGRATED_DATE_KEY, MIGRATED_DATE_KEY) + " AS migrationruntimedays";
         }
 
-        String classIdCol = configurationService.getSystemColumn(appIdStr, "class-id-col", "object_class_id");
+        String classIdCol = configurationService.getSystemColumn(appIdStr, CLASS_ID_COL_KEY, OBJECT_CLASS_ID);
 
         StringBuilder sql = new StringBuilder(
             "SELECT " + classIdCol + " AS documentclass," +
@@ -128,14 +133,14 @@ public class DeliverableService {
             " CASE WHEN COUNT(*)>0 THEN ROUND(COUNT(CASE WHEN LOWER(" + sc + ") IN ('success','migrated') THEN 1 END)*100.0/COUNT(*),2) ELSE 0 END AS percentcompletion," +
             " CASE WHEN COUNT(*)>0 THEN ROUND(COUNT(CASE WHEN LOWER(" + sc + ") = 'failed' THEN 1 END)*100.0/COUNT(*),2) ELSE 0 END AS percentfailed," +
             " " + runtimeExpr +
-            " FROM " + table + " WHERE 1=1"
+            SQL_FROM_SPACE + table + " WHERE 1=1"
         );
 
         List<Object> params = new ArrayList<>();
         appendFilters(sql, params, req, appIdStr, table.substring(0, table.indexOf(".")));
         sql.append(" GROUP BY ").append(classIdCol).append(" ORDER BY ").append(classIdCol);
 
-        log.info("[DELIVERABLE] Executing Aggregated Query | SQL: {} | Params: {}", sql.toString(), params);
+        log.info("[DELIVERABLE] Executing Aggregated Query | SQL: {} | Params: {}", sql.toString().toLowerCase(), params);
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql.toString(), params.toArray());
         List<Map<String, Object>> result = new ArrayList<>();
         String schemaStr = table.substring(0, table.indexOf("."));
@@ -161,11 +166,31 @@ public class DeliverableService {
         return result;
     }
 
+    private String resolveSelectCols(String baseSelectCols, String schemaStr, String tableName, String targetGuidCol) {
+        String sqlCols = "SELECT LOWER(column_name) FROM information_schema.columns WHERE LOWER(table_schema) = LOWER(?) AND LOWER(table_name) = LOWER(?)";
+        List<String> dbCols = jdbcTemplate.queryForList(sqlCols, String.class, schemaStr, tableName);
+        java.util.Set<String> dbColsSet = new java.util.HashSet<>(dbCols);
+
+        StringBuilder selectColsBuilder = new StringBuilder(baseSelectCols);
+        String[] extraCols = {"migration_status", MIGRATED_DATE_KEY, "error_message", "error_info", "extracted_status", "extracted_date", targetGuidCol};
+        for (String c : extraCols) {
+            if (dbColsSet.contains(c.toLowerCase()) && !selectColsBuilder.toString().toLowerCase().contains(c.toLowerCase())) {
+                selectColsBuilder.append(", ").append(c);
+            }
+        }
+        return selectColsBuilder.toString();
+    }
+
     private List<Map<String, Object>> queryAppDetailed(String appIdStr, String table, String appDisplayName, DeliverableRequest req) {
         String sc = configurationService.getSystemColumn(appIdStr, "status", statusColumn);
         String selectCols = searchService.buildSelectClauseForTable(table, null);
+        String targetGuidCol = configurationService.getSystemColumn(appIdStr, "target-guid-col", "p8_doc_id");
 
-        StringBuilder sql = new StringBuilder("SELECT " + selectCols + " FROM " + table + " WHERE 1=1");
+        String schemaStr = table.substring(0, table.indexOf("."));
+        String tableName = table.substring(table.indexOf(".") + 1);
+        selectCols = resolveSelectCols(selectCols, schemaStr, tableName, targetGuidCol);
+
+        StringBuilder sql = new StringBuilder("SELECT " + selectCols + SQL_FROM_SPACE + table + " WHERE 1=1");
         List<Object> params = new ArrayList<>();
         appendFilters(sql, params, req, appIdStr, table.substring(0, table.indexOf(".")));
 
@@ -183,11 +208,10 @@ public class DeliverableService {
 
         sql.append(dialect.getLimitSql(5000));
 
-        log.info("[DELIVERABLE] Executing Detailed Query | SQL: {} | Params: {}", sql.toString(), params);
-        String classIdCol = configurationService.getSystemColumn(appIdStr, "class-id-col", "object_class_id");
+        log.info("[DELIVERABLE] Executing Detailed Query | SQL: {} | Params: {}", sql.toString().toLowerCase(), params);
+        String classIdCol = configurationService.getSystemColumn(appIdStr, CLASS_ID_COL_KEY, OBJECT_CLASS_ID);
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql.toString(), params.toArray());
         List<Map<String, Object>> result = new ArrayList<>();
-        String schemaStr = table.substring(0, table.indexOf("."));
         Map<String, String> classMap = getClassIdToSymbolicNameMap(appIdStr, schemaStr);
         for (Map<String, Object> row : rows) {
             Map<String, Object> map = new HashMap<>();
@@ -208,9 +232,9 @@ public class DeliverableService {
     }
 
     private void appendFilters(StringBuilder sql, List<Object> params, DeliverableRequest req, String appIdStr, String schemaStr) {
-        String classdefTable = configurationService.getSystemTable(appIdStr, "classdef", "classdef");
+        String classdefTable = configurationService.getSystemTable(appIdStr, CLASSDEF_KEY, CLASSDEF_KEY);
         String symbolicNameCol = configurationService.getSystemColumn(appIdStr, "symbolic-name-col", "symbolic_name");
-        String classIdCol = configurationService.getSystemColumn(appIdStr, "class-id-col", "object_class_id");
+        String classIdCol = configurationService.getSystemColumn(appIdStr, CLASS_ID_COL_KEY, OBJECT_CLASS_ID);
 
         if (req.getDocumentClass() != null && !req.getDocumentClass().trim().isEmpty() && !req.getDocumentClass().equalsIgnoreCase("All")) {
             sql.append(SQL_AND).append(classIdCol).append(" IN (SELECT object_id FROM ").append(schemaStr).append(".").append(classdefTable).append(" WHERE LOWER(").append(symbolicNameCol).append(") = LOWER(?))");
@@ -218,9 +242,9 @@ public class DeliverableService {
         } else {
             sql.append(SQL_AND).append(classIdCol).append(" IN (SELECT object_id FROM ").append(schemaStr).append(".").append(classdefTable)
                .append(" WHERE CAST(sys_owned_bool AS VARCHAR) IN ('0', 'false', 'FALSE')")
-               .append(" AND LOWER(").append(symbolicNameCol).append(") NOT LIKE 'cm%'")
-               .append(" AND LOWER(").append(symbolicNameCol).append(") NOT LIKE 'cmxt%'")
-               .append(" AND LOWER(").append(symbolicNameCol).append(") NOT LIKE 'preferences%')");
+               .append(SQL_AND_LOWER).append(symbolicNameCol).append(") NOT LIKE 'cm%'")
+               .append(SQL_AND_LOWER).append(symbolicNameCol).append(") NOT LIKE 'cmxt%'")
+               .append(SQL_AND_LOWER).append(symbolicNameCol).append(") NOT LIKE 'preferences%')");
         }
         if (req.getCreatedDate() != null && !req.getCreatedDate().trim().isEmpty()) {
             String currentCreatedDateColumn = configurationService.getSystemColumn(appIdStr, "created-date", createdDateColumn);
@@ -252,14 +276,20 @@ public class DeliverableService {
     private Map<String, String> getClassIdToSymbolicNameMap(String appIdStr, String schemaStr) {
         Map<String, String> map = new HashMap<>();
         try {
-            String classdefTable = configurationService.getSystemTable(appIdStr, "classdef", "classdef");
+            String classdefTable = configurationService.getSystemTable(appIdStr, CLASSDEF_KEY, CLASSDEF_KEY);
             String symbolicNameCol = configurationService.getSystemColumn(appIdStr, "symbolic-name-col", "symbolic_name");
 
-            String sql = "SELECT object_id, " + symbolicNameCol + " FROM " + schemaStr + "." + classdefTable;
+            String sql = "SELECT object_id, " + symbolicNameCol + SQL_FROM_SPACE + schemaStr + "." + classdefTable;
             List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
             for (Map<String, Object> row : rows) {
                 String id = row.get("object_id") != null ? row.get("object_id").toString().toUpperCase() : "";
-                String name = row.get(symbolicNameCol) != null ? row.get(symbolicNameCol).toString() : (row.get(symbolicNameCol.toLowerCase()) != null ? row.get(symbolicNameCol.toLowerCase()).toString() : "");
+                
+                Object nameObj = row.get(symbolicNameCol);
+                if (nameObj == null) {
+                    nameObj = row.get(symbolicNameCol.toLowerCase());
+                }
+                String name = nameObj != null ? nameObj.toString() : "";
+                
                 if (!id.isEmpty() && !name.isEmpty()) {
                     map.put(id, name);
                 }

@@ -1,1 +1,60 @@
-[ ]
+[ {
+  "templateId" : "20c8ede1-08d4-436c-9440-bd7120473ef7",
+  "templateName" : "Home Loan Template",
+  "applicationId" : "ccol",
+  "sourceDocumentClass" : "HomeLoanApplication",
+  "targetDocumentClass" : "HomeLoanApplication",
+  "mappings" : [ {
+    "sourceProperty" : "ApplName",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "ApplName",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "ApplNo",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "ApplNo",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "ApplStatus",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "ApplStatus",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "BrokerName",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "BrokerName",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "DocumentTitle",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "DocumentTitle",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "IntRate",
+    "sourceDataType" : "FLOAT",
+    "targetProperty" : "IntRate",
+    "targetDataType" : "FLOAT"
+  }, {
+    "sourceProperty" : "LoanAmount",
+    "sourceDataType" : "FLOAT",
+    "targetProperty" : "LoanAmount",
+    "targetDataType" : "FLOAT"
+  }, {
+    "sourceProperty" : "LoanTerm",
+    "sourceDataType" : "INTEGER",
+    "targetProperty" : "LoanTerm",
+    "targetDataType" : "INTEGER"
+  }, {
+    "sourceProperty" : "PropAddress",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "PropAddress",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "SettleDate",
+    "sourceDataType" : "DATETIME",
+    "targetProperty" : "SettleDate",
+    "targetDataType" : "DATETIME"
+  } ],
+  "lastModifiedBy" : "Admin",
+  "lastModifiedDate" : "2026-07-20T08:38:48.197Z"
+} ]

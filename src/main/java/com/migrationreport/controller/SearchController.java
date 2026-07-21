@@ -57,7 +57,7 @@ public class SearchController {
     public ResponseEntity<List<Map<String, Object>>> executeQuery(@RequestBody Map<String, String> request) {
         log.info("Starting method: executeQuery with arguments: {}", request);
         String sql = request.get("sql");
-        log.info("[SEARCH] Executing raw SQL query: {}", sql);
+        log.info("[SEARCH] Executing raw SQL query: {}", sql.toLowerCase());
         long start = System.currentTimeMillis();
         List<Map<String, Object>> results = searchService.executeQuery(sql);
         log.info("Raw query executed in {}ms. Found {} records.", System.currentTimeMillis() - start, results.size());

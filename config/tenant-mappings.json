@@ -17,11 +17,6 @@
       "propertydefinition" : [ "propertydef" ],
       "globalpropertydef" : [ "globalpropertydef" ]
     },
-    "primaryColumns" : {
-      "source" : "object_id",
-      "staging" : "object_id",
-      "target" : "object_id"
-    },
     "systemColumns" : {
       "status" : "migration_status",
       "date" : "create_date",
@@ -30,7 +25,8 @@
       "doc-id" : "object_id",
       "class-id-col" : "object_class_id",
       "symbolic-name-col" : "symbolic_name",
-      "annotated-id-col" : "annotated_id"
+      "annotated-id-col" : "annotated_id",
+      "target-guid-col" : "p8_doc_id"
     }
   } ]
 }

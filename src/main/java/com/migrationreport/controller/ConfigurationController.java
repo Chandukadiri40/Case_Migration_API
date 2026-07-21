@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 import com.migrationreport.dto.config.DbConfigWrapper;
+import org.springframework.beans.factory.annotation.Value;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,6 +44,8 @@ public class ConfigurationController {
         return result;
     }
 
+    private static final String PASSWORD_KEY = "password";
+
     @GetMapping("/db")
     public ResponseEntity<DbConfigWrapper> getDbConfig() {
         log.info("Starting method: getDbConfig");
@@ -50,8 +53,8 @@ public class ConfigurationController {
         DbConfigWrapper wrapper = configurationService.getDbConfig();
         if (wrapper != null && wrapper.getDatabases() != null) {
             for (Map<String, String> db : wrapper.getDatabases()) {
-                if (db.containsKey("password") && db.get("password") != null && !db.get("password").isEmpty()) {
-                    db.put("password", "********");
+                if (db.containsKey(PASSWORD_KEY) && db.get(PASSWORD_KEY) != null && !db.get(PASSWORD_KEY).isEmpty()) {
+                    db.put(PASSWORD_KEY, "********");
                 }
             }
         }
@@ -92,5 +95,17 @@ public class ConfigurationController {
         ResponseEntity<Map<String, List<String>>> result = ResponseEntity.ok(configurationService.getDatabaseMetadata(schema));
         log.info("Ending method: getDatabaseMetadata");
         return result;
+    }
+
+    @Value("${exceptions.search.max-date-range-months:3}")
+    private int maxDateRangeMonths;
+
+    @GetMapping("/ui-settings")
+    public ResponseEntity<Map<String, Object>> getUiSettings() {
+        log.info("Starting method: getUiSettings");
+        Map<String, Object> settings = new HashMap<>();
+        settings.put("maxDateRangeMonths", maxDateRangeMonths);
+        log.info("Ending method: getUiSettings");
+        return ResponseEntity.ok(settings);
     }
 }

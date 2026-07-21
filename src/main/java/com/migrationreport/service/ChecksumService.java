@@ -15,6 +15,7 @@ import com.migrationreport.dto.config.TenantConfig;
 import com.migrationreport.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.migrationreport.dialect.SqlDialect;
+import com.migrationreport.security.SqlIdentifierValidator;
 
 @Slf4j
 @Service
@@ -25,6 +26,10 @@ public class ChecksumService {
     private final String dateColumn;
 
     private static final String STAGING_KEY = "staging";
+    private static final String CHECKSUM_KEY = "checksum";
+    private static final String MIGRATION_STATUS_KEY = "migration_status";
+    private static final String CLASSDEF_KEY = "classdef";
+    private static final String OBJECT_ID = "object_id";
 
     private final ConfigurationService configurationService;
 
@@ -55,26 +60,27 @@ public class ChecksumService {
 
         String targetStagingTable = schema + stagingTableName;
 
-        String docIdCol = configurationService.getSystemColumn(appId, "doc-id", "object_id");
-        String classIdCol = configurationService.getSystemColumn(appId, "class-id-col", "object_class_id");
+        String docIdCol = SqlIdentifierValidator.validateIdentifier(configurationService.getSystemColumn(appId, "doc-id", OBJECT_ID));
+        String classIdCol = SqlIdentifierValidator.validateIdentifier(configurationService.getSystemColumn(appId, "class-id-col", "object_class_id"));
 
         StringBuilder sql = buildBaseQuery(schema, currentChecksumTable, targetStagingTable, docIdCol);
         List<Object> params = new ArrayList<>();
         appendFilters(sql, params, request, schema);
 
         String finalSql = sql.toString();
-        log.info("[CHECKSUM] Executing SQL: {} | Params: {}", finalSql, params);
+        log.info("[CHECKSUM] Executing SQL: {} | Params: {}", finalSql.toLowerCase(), params);
         long start = System.currentTimeMillis();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(finalSql, params.toArray());
         log.info("[CHECKSUM] Query executed in {}ms. Found {} records.", System.currentTimeMillis() - start, rows.size());
 
-        return buildResponse(rows, appId, schema, classIdCol);
+        String objStore = (appConfig.getObjectStore() != null) ? appConfig.getObjectStore() : appConfig.getAppName();
+        return buildResponse(rows, appId, schema, classIdCol, objStore);
     }
 
     private String determineSchema(String appId, TenantConfig.ApplicationConfig appConfig) {
-        String schema = appId + ".";
+        String schema = SqlIdentifierValidator.validateIdentifier(appId) + ".";
         if (appConfig != null && appConfig.getSchema() != null && !appConfig.getSchema().trim().isEmpty()) {
-            schema = validateIdentifier(appConfig.getSchema().trim()) + ".";
+            schema = SqlIdentifierValidator.validateIdentifier(appConfig.getSchema().trim()) + ".";
         }
         return schema;
     }
@@ -83,28 +89,28 @@ public class ChecksumService {
         if (appConfig == null || appConfig.getClassifiedTables() == null || appConfig.getClassifiedTables().get(STAGING_KEY) == null || appConfig.getClassifiedTables().get(STAGING_KEY).isEmpty()) {
             throw new ResourceNotFoundException("Staging table configuration missing for application: " + appId);
         }
-        return validateIdentifier(appConfig.getClassifiedTables().get(STAGING_KEY).get(0));
+        return SqlIdentifierValidator.validateIdentifier(appConfig.getClassifiedTables().get(STAGING_KEY).get(0));
     }
 
     private String determineChecksumTableName(TenantConfig.ApplicationConfig appConfig) {
         String currentTable = checksumTable;
-        if (appConfig != null && appConfig.getClassifiedTables() != null && appConfig.getClassifiedTables().get("checksum") != null && !appConfig.getClassifiedTables().get("checksum").isEmpty()) {
-            currentTable = appConfig.getClassifiedTables().get("checksum").get(0);
+        if (appConfig != null && appConfig.getClassifiedTables() != null && appConfig.getClassifiedTables().get(CHECKSUM_KEY) != null && !appConfig.getClassifiedTables().get(CHECKSUM_KEY).isEmpty()) {
+            currentTable = appConfig.getClassifiedTables().get(CHECKSUM_KEY).get(0);
         }
-        return validateIdentifier(currentTable);
+        return SqlIdentifierValidator.validateIdentifier(currentTable);
     }
 
-    private ChecksumReportResponse buildResponse(List<Map<String, Object>> rows, String appId, String schema, String classIdCol) {
+    private ChecksumReportResponse buildResponse(List<Map<String, Object>> rows, String appId, String schema, String classIdCol, String objStore) {
         List<Map<String, Object>> records = new ArrayList<>();
         long completed = 0;
         long pending = 0;
         long migratedInStaging = 0;
 
         Map<String, String> classMap = getClassIdToSymbolicNameMap(appId, schema);
-        String statusCol = configurationService.getSystemColumn(appId, "status", "migration_status");
+        String statusCol = configurationService.getSystemColumn(appId, "status", MIGRATION_STATUS_KEY);
 
         for (Map<String, Object> row : rows) {
-            Map<String, Object> rec = processRow(row, classMap, classIdCol);
+            Map<String, Object> rec = processRow(row, classMap, classIdCol, objStore);
             records.add(rec);
 
             String chkStatus = (String) rec.get("checksum_status");
@@ -115,8 +121,8 @@ public class ChecksumService {
             }
 
             String migStatus = (String) rec.get(statusCol.toLowerCase());
-            if (migStatus == null && rec.get("migration_status") != null) {
-                migStatus = (String) rec.get("migration_status");
+            if (migStatus == null && rec.get(MIGRATION_STATUS_KEY) != null) {
+                migStatus = (String) rec.get(MIGRATION_STATUS_KEY);
             }
             if ("Migrated".equalsIgnoreCase(migStatus) || "Success".equalsIgnoreCase(migStatus)) {
                 migratedInStaging++;
@@ -135,8 +141,10 @@ public class ChecksumService {
         return response;
     }
 
-    private Map<String, Object> processRow(Map<String, Object> row, Map<String, String> classMap, String classIdCol) {
+    private Map<String, Object> processRow(Map<String, Object> row, Map<String, String> classMap, String classIdCol, String objStore) {
         Map<String, Object> rec = new HashMap<>();
+        rec.put("objectStore", objStore);
+        rec.put("object_store", objStore);
         for (Map.Entry<String, Object> entry : row.entrySet()) {
             String key = entry.getKey();
             Object val = entry.getValue();
@@ -152,14 +160,20 @@ public class ChecksumService {
     private Map<String, String> getClassIdToSymbolicNameMap(String appIdStr, String schemaStr) {
         Map<String, String> map = new java.util.HashMap<>();
         try {
-            String classdefTable = configurationService.getSystemTable(appIdStr, "classdef", "classdef");
+            String classdefTable = configurationService.getSystemTable(appIdStr, CLASSDEF_KEY, CLASSDEF_KEY);
             String symbolicNameCol = configurationService.getSystemColumn(appIdStr, "symbolic-name-col", "symbolic_name");
 
-            String sql = "SELECT object_id, " + symbolicNameCol + " FROM " + schemaStr + classdefTable;
+            String sql = "SELECT " + OBJECT_ID + ", " + symbolicNameCol + " FROM " + schemaStr + classdefTable;
             List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
             for (Map<String, Object> row : rows) {
-                String id = row.get("object_id") != null ? row.get("object_id").toString().toUpperCase() : "";
-                String name = row.get(symbolicNameCol) != null ? row.get(symbolicNameCol).toString() : (row.get(symbolicNameCol.toLowerCase()) != null ? row.get(symbolicNameCol.toLowerCase()).toString() : "");
+                String id = row.get(OBJECT_ID) != null ? row.get(OBJECT_ID).toString().toUpperCase() : "";
+                
+                Object nameObj = row.get(symbolicNameCol);
+                if (nameObj == null) {
+                    nameObj = row.get(symbolicNameCol.toLowerCase());
+                }
+                String name = nameObj != null ? nameObj.toString() : "";
+                
                 if (!id.isEmpty() && !name.isEmpty()) {
                     map.put(id, name);
                 }
@@ -171,10 +185,7 @@ public class ChecksumService {
     }
 
     private String validateIdentifier(String identifier) {
-        if (identifier != null && !identifier.matches("^[a-zA-Z0-9_\\-]+$")) {
-            throw new IllegalArgumentException("Invalid identifier format: " + identifier);
-        }
-        return identifier;
+        return SqlIdentifierValidator.validateIdentifier(identifier);
     }
 
     private StringBuilder buildBaseQuery(String schema, String currentChecksumTable, String targetStagingTable, String docIdCol) {
@@ -188,13 +199,13 @@ public class ChecksumService {
 
     private void appendFilters(StringBuilder sql, List<Object> params, ChecksumReportRequest request, String schema) {
         String appId = request.getAppId().trim();
-        String statusCol = configurationService.getSystemColumn(appId, "status", "migration_status");
+        String statusCol = SqlIdentifierValidator.validateIdentifier(configurationService.getSystemColumn(appId, "status", MIGRATION_STATUS_KEY));
         sql.append(" AND LOWER(s.").append(statusCol).append(") IN ('success', 'migrated')");
 
         if (request.getDocumentClass() != null && !request.getDocumentClass().trim().isEmpty() && !request.getDocumentClass().equalsIgnoreCase("All")) {
-            String classdefTable = configurationService.getSystemTable(appId, "classdef", "classdef");
-            String symbolicNameCol = configurationService.getSystemColumn(appId, "symbolic-name-col", "symbolic_name");
-            String classIdCol = configurationService.getSystemColumn(appId, "class-id-col", "object_class_id");
+            String classdefTable = SqlIdentifierValidator.validateIdentifier(configurationService.getSystemTable(appId, CLASSDEF_KEY, CLASSDEF_KEY));
+            String symbolicNameCol = SqlIdentifierValidator.validateIdentifier(configurationService.getSystemColumn(appId, "symbolic-name-col", "symbolic_name"));
+            String classIdCol = SqlIdentifierValidator.validateIdentifier(configurationService.getSystemColumn(appId, "class-id-col", "object_class_id"));
 
             sql.append(" AND s.").append(classIdCol).append(" IN (SELECT object_id FROM ").append(schema).append(classdefTable).append(" WHERE LOWER(").append(symbolicNameCol).append(") = LOWER(?))");
             params.add(request.getDocumentClass().trim());

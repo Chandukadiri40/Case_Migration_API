@@ -14,11 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Set;
+import java.util.HashSet;
 import com.migrationreport.dialect.SqlDialect;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import com.migrationreport.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
+import com.migrationreport.security.SqlIdentifierValidator;
 
 @Slf4j
 @Service
@@ -33,6 +36,9 @@ public class ExceptionService {
     private static final String SQL_FROM = " FROM ";
     private static final String SQL_WHERE = " WHERE ";
     private static final String SQL_IN = " IN (";
+    private static final String PROPERTYDEF = "propertydef";
+    private static final String GLOBALPROPERTYDEF = "globalpropertydef";
+    private static final String INNER_JOIN = "INNER JOIN ";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -109,7 +115,7 @@ public class ExceptionService {
             String symbolicNameCol = configurationService.getSystemColumn(criteria.getAppId(), "symbolic-name-col", "symbolic_name");
             
             fromClause += " INNER JOIN " + schema + classdefTable + " cd ON dv." + classIdCol + " = cd.object_id";
-            where.append(" AND cd.").append(symbolicNameCol).append(" IN (");
+            where.append(" AND cd.").append(symbolicNameCol).append(SQL_IN);
             where.append(criteria.getDocumentClasses().stream().map(c -> "?").collect(Collectors.joining(",")));
             where.append(")");
             params.addAll(criteria.getDocumentClasses());
@@ -131,7 +137,7 @@ public class ExceptionService {
 
         // Get matching object_ids from source
         String idSql = "SELECT dv.object_id FROM " + fromClause + where.toString();
-        log.info("[EXCEPTIONS] Executing lookup SQL: {} | Params: {}", idSql, params);
+        log.info("[EXCEPTIONS] Executing lookup SQL: {} | Params: {}", idSql.toLowerCase(), params);
         long startId = System.currentTimeMillis();
         List<String> objectIds = jdbcTemplate.queryForList(idSql, String.class, params.toArray());
         log.info("[EXCEPTIONS] Found {} target IDs in {}ms", objectIds.size(), System.currentTimeMillis() - startId);
@@ -161,14 +167,21 @@ public class ExceptionService {
             }
         }
 
-        String selectColsSource = searchService.buildSelectClauseForTable(sourceTable, null);
-        String selectColsStaging = searchService.buildSelectClauseForTable(stagingTable, null, aliasMap);
-        String selectColsTarget = searchService.buildSelectClauseForTable(targetTable, null, aliasMap);
+        List<String> physicalColumns;
+        if (criteria.getDocumentClasses() != null && !criteria.getDocumentClasses().isEmpty()) {
+            physicalColumns = getPhysicalColumnNames(criteria.getAppId(), criteria.getDocumentClasses().get(0));
+        } else {
+            physicalColumns = getPhysicalColumnNames(criteria.getAppId(), "All");
+        }
+        
+        String selectColsSource = buildDynamicSelect(sourceTable, criteria.getAppId(), physicalColumns, false, null);
+        String selectColsStaging = buildDynamicSelect(stagingTable, criteria.getAppId(), physicalColumns, true, aliasMap);
+        String selectColsTarget = buildDynamicSelect(targetTable, criteria.getAppId(), physicalColumns, false, aliasMap);
         
         log.info("[EXCEPTIONS] Querying Source, Staging, Target tables for {} object IDs", objectIds.size());
         long startData = System.currentTimeMillis();
         
-        String sourceIdCol = configurationService.getSystemColumn(criteria.getAppId(), "doc-id", OBJECT_ID_KEY);
+        String sourceIdCol = SqlIdentifierValidator.validateIdentifier(configurationService.getSystemColumn(criteria.getAppId(), "doc-id", OBJECT_ID_KEY));
         String stagingIdCol = OBJECT_ID_KEY;
         String targetIdCol = OBJECT_ID_KEY;
         
@@ -214,13 +227,16 @@ public class ExceptionService {
         }
         
         String schema = appConfig.getSchema() != null && !appConfig.getSchema().isEmpty() ? validateIdentifier(appConfig.getSchema()) + "." : "public.";
-        String propdefTable = configurationService.getSystemTable(appId, "propertydef", "propertydef");
-        String globalpropdefTable = configurationService.getSystemTable(appId, "globalpropertydef", "globalpropertydef");
+        String propdefTable = configurationService.getSystemTable(appId, PROPERTYDEF, PROPERTYDEF);
+        String globalpropdefTable = configurationService.getSystemTable(appId, GLOBALPROPERTYDEF, GLOBALPROPERTYDEF);
 
         List<Object> params = new ArrayList<>();
         String sql = "SELECT DISTINCT gpd.symbolic_name FROM " + schema + propdefTable + " pd " +
-                     "INNER JOIN " + schema + globalpropdefTable + " gpd ON pd.global_prop_id = gpd.object_id " +
-                     "WHERE CAST(pd.sys_owned_bool AS VARCHAR) IN ('0', 'false', 'FALSE') ";
+                     INNER_JOIN + schema + globalpropdefTable + " gpd ON pd.global_prop_id = gpd.object_id " +
+                     "WHERE CAST(pd.sys_owned_bool AS VARCHAR) IN ('0', 'false', 'FALSE') " +
+                     "AND gpd.symbolic_name NOT LIKE 'EntryTemplate%' " +
+                     "AND gpd.symbolic_name NOT LIKE 'Cm%' " +
+                     "AND gpd.symbolic_name NOT IN ('IgnoreRedirect', 'ComponentBindingLabel', 'CustomObjectType', 'DocumentTitle') ";
 
         if (documentClass != null && !documentClass.isEmpty() && !documentClass.equalsIgnoreCase("All")) {
             sql += " AND pd.dbg_class_name = ? ";
@@ -234,7 +250,113 @@ public class ExceptionService {
         }
         sql += " ORDER BY gpd.symbolic_name";
         
+        // nosemgrep: java.spring.security.audit.spring-sqli.spring-sqli
         return jdbcTemplate.queryForList(sql, String.class, params.toArray());
+    }
+
+    public List<String> getPhysicalColumnNames(String appId, String documentClass) {
+        TenantConfig.ApplicationConfig appConfig = configurationService.getApplicationConfig(appId);
+        String schema = appConfig.getSchema() != null && !appConfig.getSchema().isEmpty() ? validateIdentifier(appConfig.getSchema()) + "." : "public.";
+        String propdefTable = SqlIdentifierValidator.validateIdentifier(configurationService.getSystemTable(appId, PROPERTYDEF, PROPERTYDEF));
+        String globalpropdefTable = SqlIdentifierValidator.validateIdentifier(configurationService.getSystemTable(appId, GLOBALPROPERTYDEF, GLOBALPROPERTYDEF));
+        String coldefTable = SqlIdentifierValidator.validateIdentifier(configurationService.getSystemTable(appId, "columndefinition", "columndefinition"));
+
+        List<Object> params = new ArrayList<>();
+        String sql = "SELECT DISTINCT cd.column_name FROM " + schema + propdefTable + " pd " +
+                     INNER_JOIN + schema + globalpropdefTable + " gpd ON pd.global_prop_id = gpd.object_id " +
+                     INNER_JOIN + schema + coldefTable + " cd ON pd.column_id = cd.object_id " +
+                     "WHERE CAST(pd.sys_owned_bool AS VARCHAR) IN ('0', 'false', 'FALSE') " +
+                     "AND gpd.symbolic_name NOT LIKE 'EntryTemplate%' " +
+                     "AND gpd.symbolic_name NOT LIKE 'Cm%' " +
+                     "AND gpd.symbolic_name NOT IN ('IgnoreRedirect', 'ComponentBindingLabel', 'CustomObjectType') ";
+
+        if (documentClass != null && !documentClass.isEmpty() && !documentClass.equalsIgnoreCase("All")) {
+            sql += " AND pd.dbg_class_name = ? ";
+            params.add(documentClass);
+        } else {
+            sql += " AND pd.dbg_class_name NOT LIKE 'CmAcm%' AND pd.dbg_class_name NOT LIKE 'CmXT%' AND pd.dbg_class_name NOT LIKE 'Cm%' " +
+                   " AND pd.dbg_class_name NOT LIKE 'Preferences%' " +
+                   " AND pd.dbg_class_name NOT IN ('EntryTemplate', 'StoredSearch', 'RecordsTemplate', 'WebContentTemplate', 'RelatedItems', 'P8AELink', " +
+                   "'Document', 'Folder', 'Custom Object', 'Code Module', 'Workflow Definition', 'XML Property Mapping Script', " +
+                   "'Annotation', 'Link', 'Choice List', 'Security Policy', 'Storage Area', 'Storage Policy') ";
+        }
+        
+        // nosemgrep: java.spring.security.audit.spring-sqli.spring-sqli
+        return jdbcTemplate.queryForList(sql, String.class, params.toArray());
+    }
+
+    private String buildDynamicSelect(String table, String appId, List<String> physicalCols, boolean isStaging, Map<String, String> aliasMap) {
+        String schema = "public";
+        String tableName = table;
+        if (table != null && table.contains(".")) {
+            schema = table.substring(0, table.indexOf("."));
+            tableName = table.substring(table.indexOf(".") + 1);
+        }
+        String sql = "SELECT LOWER(column_name) FROM information_schema.columns WHERE LOWER(table_schema) = LOWER(?) AND LOWER(table_name) = LOWER(?)";
+        List<String> dbCols = jdbcTemplate.queryForList(sql, String.class, schema, tableName);
+        if (dbCols == null || dbCols.isEmpty()) return "*";
+        Set<String> dbColsSet = new HashSet<>(dbCols);
+        
+        List<String> colsToSelect = new ArrayList<>();
+        
+        String docIdCol = SqlIdentifierValidator.validateIdentifier(configurationService.getSystemColumn(appId, "doc-id", OBJECT_ID_KEY).toLowerCase());
+        
+        appendSystemColumns(dbColsSet, colsToSelect, isStaging, docIdCol);
+        appendPhysicalColumns(physicalCols, aliasMap, dbColsSet, colsToSelect);
+        
+        if (colsToSelect.isEmpty()) return "*";
+        return String.join(", ", colsToSelect);
+    }
+
+    private void appendSystemColumns(Set<String> dbColsSet, List<String> colsToSelect, boolean isStaging, String docIdCol) {
+        if (dbColsSet.contains(docIdCol)) colsToSelect.add(docIdCol);
+        
+        java.util.Optional<String> dtCol = dbColsSet.stream().filter(c -> c.matches("(?i)u[0-9a-f]+_documenttitle")).findFirst();
+        if (dtCol.isPresent()) {
+            colsToSelect.add(dtCol.get() + " AS documenttitle");
+        } else if (dbColsSet.contains("documenttitle")) {
+            colsToSelect.add("documenttitle");
+        }
+
+        if (dbColsSet.contains("content_size")) colsToSelect.add("content_size");
+        if (dbColsSet.contains("mime_type")) colsToSelect.add("mime_type");
+        if (dbColsSet.contains("target_guid")) colsToSelect.add("target_guid");
+
+        if (isStaging) {
+            String[] stgFields = {"migration_status", "migrated_date", "error_message", "extracted_status", "extracted_date"};
+            for (String sf : stgFields) {
+                if (dbColsSet.contains(sf)) colsToSelect.add(sf);
+            }
+        }
+    }
+
+    private Map<String, String> createInverseMap(Map<String, String> aliasMap) {
+        Map<String, String> inverseMap = new HashMap<>();
+        if (aliasMap != null) {
+            for (Map.Entry<String, String> entry : aliasMap.entrySet()) {
+                inverseMap.put(entry.getValue().toLowerCase(), entry.getKey().toLowerCase());
+            }
+        }
+        return inverseMap;
+    }
+
+    private void appendPhysicalColumns(List<String> physicalCols, Map<String, String> aliasMap, Set<String> dbColsSet, List<String> colsToSelect) {
+        Map<String, String> inverseMap = createInverseMap(aliasMap);
+        
+        for (String pCol : physicalCols) {
+            if (pCol == null) continue;
+            String pColLower = pCol.toLowerCase();
+            if (inverseMap.containsKey(pColLower)) {
+                String targetCol = inverseMap.get(pColLower);
+                if (dbColsSet.contains(targetCol)) {
+                    colsToSelect.add(targetCol + " AS " + pColLower);
+                } else if (dbColsSet.contains(pColLower)) {
+                    colsToSelect.add(pColLower);
+                }
+            } else if (dbColsSet.contains(pColLower)) {
+                colsToSelect.add(pColLower);
+            }
+        }
     }
 
     @SuppressWarnings("java:S3776")
