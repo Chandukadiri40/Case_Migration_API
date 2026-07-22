@@ -52,13 +52,10 @@ public class PropertyMappingService {
     public synchronized void saveTemplate(PropertyMappingTemplate template) {
         if (template.getTemplateId() == null || template.getTemplateId().isEmpty()) {
             template.setTemplateId(UUID.randomUUID().toString());
+        } else {
+            // Remove existing template if updating
+            cachedTemplates.removeIf(t -> t.getTemplateId().equals(template.getTemplateId()));
         }
-
-        // Replace existing template for same App & Source Class, or add new
-        cachedTemplates.removeIf(t -> 
-            t.getApplicationId().equals(template.getApplicationId()) && 
-            t.getSourceDocumentClass().equals(template.getSourceDocumentClass())
-        );
 
         cachedTemplates.add(template);
         saveToFile();

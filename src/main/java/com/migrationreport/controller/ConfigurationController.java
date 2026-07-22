@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@CrossOrigin(origins = "*")
+
 @RestController
 @RequestMapping("/api/config")
 public class ConfigurationController {
@@ -100,11 +100,15 @@ public class ConfigurationController {
     @Value("${exceptions.search.max-date-range-months:3}")
     private int maxDateRangeMonths;
 
+    @Value("${app.filenet.fixed-mapping:false}")
+    private boolean fixedFilenetMapping;
+
     @GetMapping("/ui-settings")
     public ResponseEntity<Map<String, Object>> getUiSettings() {
         log.info("Starting method: getUiSettings");
         Map<String, Object> settings = new HashMap<>();
         settings.put("maxDateRangeMonths", maxDateRangeMonths);
+        settings.put("fixedFilenetMapping", fixedFilenetMapping);
         log.info("Ending method: getUiSettings");
         return ResponseEntity.ok(settings);
     }

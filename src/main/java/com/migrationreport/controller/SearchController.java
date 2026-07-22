@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/api/search")
-@CrossOrigin(origins = "*")
+
 public class SearchController {
 
     private final SearchService searchService;
@@ -22,20 +22,6 @@ public class SearchController {
     public SearchController(SearchService searchService) {
         this.searchService = searchService;
     }
-    /**
-     * Performs a query-based search (looks for matches using custom SQL condition fragments).
-     */
-    @PostMapping("/query")
-    public ResponseEntity<List<Map<String, Object>>> searchByQuery(@RequestBody QuerySearchRequest request) {
-        log.info("Starting method: searchByQuery with arguments: {}", request);
-        log.info("[SEARCH] Incoming custom query request");
-        long start = System.currentTimeMillis();
-        List<Map<String, Object>> results = searchService.searchByCustomQuery(request.getQuery());
-        log.info("Custom query completed in {}ms. Found {} records.", System.currentTimeMillis() - start, results.size());
-        log.info("Ending method: searchByQuery");
-        return ResponseEntity.ok(results);
-    }
-
     /**
      * Performs a unified search using custom/system filters, status, date range, and table selection.
      */
@@ -47,6 +33,20 @@ public class SearchController {
         List<Map<String, Object>> results = searchService.search(request);
         log.info("Search completed in {}ms. Found {} records.", System.currentTimeMillis() - start, results.size());
         log.info("Ending method: search");
+        return ResponseEntity.ok(results);
+    }
+
+    /**
+     * Performs a query-based search (looks for matches using custom SQL condition fragments).
+     */
+    @PostMapping("/query")
+    public ResponseEntity<List<Map<String, Object>>> searchByQuery(@RequestBody QuerySearchRequest request) {
+        log.info("Starting method: searchByQuery with arguments: {}", request);
+        log.info("[SEARCH] Incoming custom query request");
+        long start = System.currentTimeMillis();
+        List<Map<String, Object>> results = searchService.searchByCustomQuery(request.getQuery());
+        log.info("Custom query completed in {}ms. Found {} records.", System.currentTimeMillis() - start, results.size());
+        log.info("Ending method: searchByQuery");
         return ResponseEntity.ok(results);
     }
 

@@ -13,7 +13,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/api/discovery")
-@CrossOrigin(origins = "*")
+
 public class DiscoveryController {
 
     @Autowired

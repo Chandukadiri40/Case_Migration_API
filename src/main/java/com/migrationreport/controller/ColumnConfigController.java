@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/api/config")
-@CrossOrigin(origins = "*")
+
 public class ColumnConfigController {
 
     private final SearchService searchService;

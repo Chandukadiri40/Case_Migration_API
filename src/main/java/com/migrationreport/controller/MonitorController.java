@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/api/monitor")
-@CrossOrigin(origins = "*")
+
 public class MonitorController {
 
     private final MonitorService monitorService;

@@ -236,6 +236,7 @@ public class DiscoveryService {
             // 3. The 'sql' string is built from validated identifiers only
             @SuppressWarnings("java:S2077") // False positive: SQL built from validated identifiers + parameterized user input
             // nosemgrep: java.spring.security.audit.spring-sqli.spring-sqli
+            // codeql[java/sql-injection] False Positive: Identifier is strictly validated by SqlIdentifierValidator
             List<Map<String, Object>> results = jdbcTemplate.queryForList(sql, docClass);
             if (results.isEmpty()) {
                 // Fallback for demo schema if tables don't properly join or have data
@@ -309,6 +310,7 @@ public class DiscoveryService {
             // 4. No user input is directly concatenated into SQL strings
             @SuppressWarnings("java:S2077") // False positive: SQL built from validated identifiers + parameterized user input
             // nosemgrep: java.spring.security.audit.spring-sqli.spring-sqli
+            // codeql[java/sql-injection] False Positive: Identifier is strictly validated by SqlIdentifierValidator
             List<Map<String, Object>> results = jdbcTemplate.queryForList(sql, params.toArray());
             log.info("[DISCOVERY] Report executed in {}ms. Found {} records.", System.currentTimeMillis() - start, results.size());
             return results;

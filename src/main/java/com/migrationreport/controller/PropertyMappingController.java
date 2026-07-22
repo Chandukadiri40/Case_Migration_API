@@ -11,7 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/property-mappings")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+
 public class PropertyMappingController {
 
     private final PropertyMappingService mappingService;

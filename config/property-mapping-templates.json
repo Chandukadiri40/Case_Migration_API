@@ -1,60 +1,159 @@
 [ {
-  "templateId" : "20c8ede1-08d4-436c-9440-bd7120473ef7",
-  "templateName" : "Home Loan Template",
+  "templateId" : "1f2945b1-ecea-408d-bd65-ff003601e39c",
+  "templateName" : "Invoice",
   "applicationId" : "ccol",
   "sourceDocumentClass" : "HomeLoanApplication",
   "targetDocumentClass" : "HomeLoanApplication",
   "mappings" : [ {
-    "sourceProperty" : "ApplName",
+    "sourceProperty" : "u7ec8_applname",
+    "sourceSymbolicName" : "ApplName",
     "sourceDataType" : "STRING",
-    "targetProperty" : "ApplName",
+    "targetProperty" : "u7ec8_applname",
+    "targetSymbolicName" : "ApplName",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "ApplNo",
+    "sourceProperty" : "u90b8_applno",
+    "sourceSymbolicName" : "ApplNo",
     "sourceDataType" : "STRING",
-    "targetProperty" : "ApplNo",
+    "targetProperty" : "u90b8_applno",
+    "targetSymbolicName" : "ApplNo",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "ApplStatus",
+    "sourceProperty" : "ue148_applstatus",
+    "sourceSymbolicName" : "ApplStatus",
     "sourceDataType" : "STRING",
-    "targetProperty" : "ApplStatus",
+    "targetProperty" : "ue148_applstatus",
+    "targetSymbolicName" : "ApplStatus",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "BrokerName",
+    "sourceProperty" : "u3018_brokername",
+    "sourceSymbolicName" : "BrokerName",
     "sourceDataType" : "STRING",
-    "targetProperty" : "BrokerName",
+    "targetProperty" : "u3018_brokername",
+    "targetSymbolicName" : "BrokerName",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "DocumentTitle",
-    "sourceDataType" : "STRING",
-    "targetProperty" : "DocumentTitle",
-    "targetDataType" : "STRING"
-  }, {
-    "sourceProperty" : "IntRate",
+    "sourceProperty" : "u95a4_intrate",
+    "sourceSymbolicName" : "IntRate",
     "sourceDataType" : "FLOAT",
-    "targetProperty" : "IntRate",
+    "targetProperty" : "u95a4_intrate",
+    "targetSymbolicName" : "IntRate",
     "targetDataType" : "FLOAT"
   }, {
-    "sourceProperty" : "LoanAmount",
+    "sourceProperty" : "u65d4_loanamount",
+    "sourceSymbolicName" : "LoanAmount",
     "sourceDataType" : "FLOAT",
-    "targetProperty" : "LoanAmount",
-    "targetDataType" : "FLOAT"
-  }, {
-    "sourceProperty" : "LoanTerm",
-    "sourceDataType" : "INTEGER",
-    "targetProperty" : "LoanTerm",
-    "targetDataType" : "INTEGER"
-  }, {
-    "sourceProperty" : "PropAddress",
-    "sourceDataType" : "STRING",
-    "targetProperty" : "PropAddress",
+    "targetProperty" : "element_value",
+    "targetSymbolicName" : "LoanPurpose",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "SettleDate",
+    "sourceProperty" : "element_value",
+    "sourceSymbolicName" : "LoanPurpose",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "u65d4_loanamount",
+    "targetSymbolicName" : "LoanAmount",
+    "targetDataType" : "FLOAT"
+  }, {
+    "sourceProperty" : "u1bb6_loanterm",
+    "sourceSymbolicName" : "LoanTerm",
+    "sourceDataType" : "OBJECT",
+    "targetProperty" : "u1bb6_loanterm",
+    "targetSymbolicName" : "LoanTerm",
+    "targetDataType" : "OBJECT"
+  }, {
+    "sourceProperty" : "u9af8_propaddress",
+    "sourceSymbolicName" : "PropAddress",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "u9af8_propaddress",
+    "targetSymbolicName" : "PropAddress",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "u5163_settledate",
+    "sourceSymbolicName" : "SettleDate",
     "sourceDataType" : "DATETIME",
-    "targetProperty" : "SettleDate",
+    "targetProperty" : "u5163_settledate",
+    "targetSymbolicName" : "SettleDate",
     "targetDataType" : "DATETIME"
   } ],
   "lastModifiedBy" : "Admin",
-  "lastModifiedDate" : "2026-07-20T08:38:48.197Z"
+  "lastModifiedDate" : "2026-07-21T10:55:58.574Z"
+}, {
+  "templateId" : "9c58bba9-9dd9-4205-8d41-12315308f599",
+  "templateName" : "Home Loan",
+  "applicationId" : "ccol",
+  "sourceDocumentClass" : "BankAccount",
+  "targetDocumentClass" : "BankAccount",
+  "mappings" : [ {
+    "sourceProperty" : "ua598_accholdername",
+    "sourceSymbolicName" : "AccHolderName",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "ua598_accholdername",
+    "targetSymbolicName" : "AccHolderName",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "u3a18_accno",
+    "sourceSymbolicName" : "AccNo",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "u3a18_accno",
+    "targetSymbolicName" : "AccNo",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "u5058_acctstatus",
+    "sourceSymbolicName" : "AcctStatus",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "u5058_acctstatus",
+    "targetSymbolicName" : "AcctStatus",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "u46a8_accttype",
+    "sourceSymbolicName" : "AcctType",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "u46a8_accttype",
+    "targetSymbolicName" : "AcctType",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "uaf94_availbalance",
+    "sourceSymbolicName" : "AvailBalance",
+    "sourceDataType" : "FLOAT",
+    "targetProperty" : "uaf94_availbalance",
+    "targetSymbolicName" : "AvailBalance",
+    "targetDataType" : "FLOAT"
+  }, {
+    "sourceProperty" : "u9ba8_branchname",
+    "sourceSymbolicName" : "BranchName",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "u9ba8_branchname",
+    "targetSymbolicName" : "BranchName",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "u7908_bsbnumber",
+    "sourceSymbolicName" : "BSBNumber",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "u7908_bsbnumber",
+    "targetSymbolicName" : "BSBNumber",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "u63a4_currentbalance",
+    "sourceSymbolicName" : "CurrentBalance",
+    "sourceDataType" : "FLOAT",
+    "targetProperty" : "u63a4_currentbalance",
+    "targetSymbolicName" : "CurrentBalance",
+    "targetDataType" : "FLOAT"
+  }, {
+    "sourceProperty" : "uf8f8_custid",
+    "sourceSymbolicName" : "CustID",
+    "sourceDataType" : "STRING",
+    "targetProperty" : "uf8f8_custid",
+    "targetSymbolicName" : "CustID",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "ua3a3_opendate",
+    "sourceSymbolicName" : "OpenDate",
+    "sourceDataType" : "DATETIME",
+    "targetProperty" : "ua3a3_opendate",
+    "targetSymbolicName" : "OpenDate",
+    "targetDataType" : "DATETIME"
+  } ],
+  "lastModifiedBy" : "Admin",
+  "lastModifiedDate" : "2026-07-21T10:56:11.208Z"
 } ]

@@ -41,18 +41,26 @@ public class PropertyMappingTemplate {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class PropertyMap {
         private String sourceProperty;
+        private String sourceSymbolicName;
         private String sourceDataType;
         private String targetProperty;
+        private String targetSymbolicName;
         private String targetDataType;
 
         public String getSourceProperty() { return sourceProperty; }
         public void setSourceProperty(String sourceProperty) { this.sourceProperty = sourceProperty; }
+
+        public String getSourceSymbolicName() { return sourceSymbolicName; }
+        public void setSourceSymbolicName(String sourceSymbolicName) { this.sourceSymbolicName = sourceSymbolicName; }
         
         public String getSourceDataType() { return sourceDataType; }
         public void setSourceDataType(String sourceDataType) { this.sourceDataType = sourceDataType; }
         
         public String getTargetProperty() { return targetProperty; }
         public void setTargetProperty(String targetProperty) { this.targetProperty = targetProperty; }
+
+        public String getTargetSymbolicName() { return targetSymbolicName; }
+        public void setTargetSymbolicName(String targetSymbolicName) { this.targetSymbolicName = targetSymbolicName; }
         
         public String getTargetDataType() { return targetDataType; }
         public void setTargetDataType(String targetDataType) { this.targetDataType = targetDataType; }

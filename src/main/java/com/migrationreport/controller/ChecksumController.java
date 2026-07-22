@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/api/checksum")
-@CrossOrigin(origins = "*")
+
 public class ChecksumController {
 
     private final ChecksumService checksumService;
