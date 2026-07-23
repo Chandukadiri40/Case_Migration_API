@@ -33,7 +33,7 @@ public class SearchService {
     public static final String TABLE_TARGET = "target";
     private static final String SQL_AND = " AND ";
     private static final String DOC_ID = "doc-id";
-    private static final String CREATED_DATE = "created-date";
+    private static final String CREATED_DATE = "date";
     private static final String CONTENT_SIZE = "content-size";
     private static final String MIME_TYPE = "mime-type";
     private static final String PROPERTYDEF_KEY = "propertydefinition";

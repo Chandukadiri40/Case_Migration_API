@@ -90,6 +90,9 @@ public class DiscoveryService {
 
     private String buildWhereClause(DiscoveryCriteria criteria, List<Object> params, String tableAlias) {
         StringBuilder where = new StringBuilder(WHERE_1_1);
+        String appId = criteria.getAppId();
+        String currentDateColumn = configurationService.getSystemColumn(appId, "date", createdDateColumn);
+        String currentMimeTypeCol = configurationService.getSystemColumn(appId, "mime-type", "mime_type");
         
         if (criteria.getDocumentClasses() != null && !criteria.getDocumentClasses().isEmpty()) {
             where.append(SQL_AND).append("cd.symbolic_name IN (");
@@ -99,17 +102,17 @@ public class DiscoveryService {
         }
         
         if (criteria.getCreatedFrom() != null) {
-            where.append(SQL_AND).append(dialect.castToTimestamp(tableAlias + "." + createdDateColumn)).append(" >= ?");
+            where.append(SQL_AND).append(dialect.castToTimestamp(tableAlias + "." + currentDateColumn)).append(" >= ?");
             params.add(Timestamp.valueOf(criteria.getCreatedFrom() + " 00:00:00"));
         }
         
         if (criteria.getCreatedTo() != null) {
-            where.append(SQL_AND).append(dialect.castToTimestamp(tableAlias + "." + createdDateColumn)).append(" <= ?");
+            where.append(SQL_AND).append(dialect.castToTimestamp(tableAlias + "." + currentDateColumn)).append(" <= ?");
             params.add(Timestamp.valueOf(criteria.getCreatedTo() + " 23:59:59"));
         }
         
         if (criteria.getMimeTypes() != null && !criteria.getMimeTypes().isEmpty()) {
-            where.append(SQL_AND).append(tableAlias).append(".mime_type IN (");
+            where.append(SQL_AND).append(tableAlias).append(".").append(currentMimeTypeCol).append(" IN (");
             where.append(criteria.getMimeTypes().stream().map(c -> "?").collect(Collectors.joining(",")));
             where.append(")");
             params.addAll(criteria.getMimeTypes());
@@ -330,6 +333,9 @@ public class DiscoveryService {
         String symbolicNameCol = configurationService.getSystemColumn(appId, SYMBOLIC_NAME_COL_KEY, SYMBOLIC_NAME_KEY);
         String contentSizeCol = configurationService.getSystemColumn(appId, "content-size", "content_size");
         String docIdCol = configurationService.getSystemColumn(appId, "doc-id", "object_id");
+        String mimeTypeCol = configurationService.getSystemColumn(appId, "mime-type", "mime_type");
+        String annotatedIdCol = configurationService.getSystemColumn(appId, "annotated-id-col", "annotated_id");
+
         String annotationTable = configurationService.getSystemTable(appId, "annotation", "annotation");
         String contentTable = configurationService.getSystemTable(appId, "content", "content");
         String customobjectTable = configurationService.getSystemTable(appId, "customobject", "customobject");
@@ -380,23 +386,23 @@ public class DiscoveryService {
                 break;
                 
             case "doc-mime":
-                sql = "SELECT COALESCE(dv.mime_type, 'No MIME Type') AS mime_type, COUNT(*) AS doc_count" + SQL_FROM + sourceTable + " dv " +
+                sql = "SELECT COALESCE(dv." + mimeTypeCol + ", 'No MIME Type') AS mime_type, COUNT(*) AS doc_count" + SQL_FROM + sourceTable + " dv " +
                       leftJoinClassDef +
-                      where + " GROUP BY COALESCE(dv.mime_type, 'No MIME Type') ORDER BY doc_count DESC";
+                      where + " GROUP BY COALESCE(dv." + mimeTypeCol + ", 'No MIME Type') ORDER BY doc_count DESC";
                 break;
                 
             case "annotation-total":
-                sql = sqlSelectClassName + "COUNT(DISTINCT a.annotated_id) AS total_documents_with_annotations, " +
+                sql = sqlSelectClassName + "COUNT(DISTINCT a." + annotatedIdCol + ") AS total_documents_with_annotations, " +
                       "COUNT(a.object_id) AS total_annotations" + SQL_FROM + schema + annotationTable + " a " +
-                      SQL_INNER_JOIN + sourceTable + " dv ON a.annotated_id = dv.object_id " + joinClassDef +
+                      SQL_INNER_JOIN + sourceTable + " dv ON a." + annotatedIdCol + " = dv." + docIdCol + " " + joinClassDef +
                       where + " " + GROUP_BY_CD + symbolicNameCol + " ORDER BY total_annotations DESC";
                 break;
 
             case "annotation-mime":
-                sql = "SELECT COALESCE(dv.mime_type, 'No MIME Type') AS mime_type, COUNT(DISTINCT a.annotated_id) AS total_documents_with_annotations, " +
+                sql = "SELECT COALESCE(dv." + mimeTypeCol + ", 'No MIME Type') AS mime_type, COUNT(DISTINCT a." + annotatedIdCol + ") AS total_documents_with_annotations, " +
                       "COUNT(a.object_id) AS total_annotations" + SQL_FROM + schema + annotationTable + " a " +
-                      SQL_INNER_JOIN + sourceTable + " dv ON a.annotated_id = dv.object_id " + joinClassDef +
-                      where + " GROUP BY COALESCE(dv.mime_type, 'No MIME Type') ORDER BY total_annotations DESC";
+                      SQL_INNER_JOIN + sourceTable + " dv ON a." + annotatedIdCol + " = dv." + docIdCol + " " + joinClassDef +
+                      where + " GROUP BY COALESCE(dv." + mimeTypeCol + ", 'No MIME Type') ORDER BY total_annotations DESC";
                 break;
                 
             case "size-total":

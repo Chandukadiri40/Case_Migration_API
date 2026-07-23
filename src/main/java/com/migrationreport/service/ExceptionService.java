@@ -36,7 +36,7 @@ public class ExceptionService {
     private static final String SQL_FROM = " FROM ";
     private static final String SQL_WHERE = " WHERE ";
     private static final String SQL_IN = " IN (";
-    private static final String PROPERTYDEF = "propertydef";
+    private static final String PROPERTYDEF = "propertydefinition";
     private static final String GLOBALPROPERTYDEF = "globalpropertydef";
     private static final String INNER_JOIN = "INNER JOIN ";
 
@@ -121,13 +121,15 @@ public class ExceptionService {
             params.addAll(criteria.getDocumentClasses());
         }
         
+        String currentDateColumn = configurationService.getSystemColumn(criteria.getAppId(), "date", createdDateColumn);
+        
         if (criteria.getCreatedFrom() != null) {
-            where.append(" AND ").append(dialect.castToDate("dv." + createdDateColumn)).append(" >= ?");
+            where.append(" AND ").append(dialect.castToDate("dv." + currentDateColumn)).append(" >= ?");
             params.add(Date.valueOf(criteria.getCreatedFrom()));
         }
         
         if (criteria.getCreatedTo() != null) {
-            where.append(" AND ").append(dialect.castToDate("dv." + createdDateColumn)).append(" <= ?");
+            where.append(" AND ").append(dialect.castToDate("dv." + currentDateColumn)).append(" <= ?");
             params.add(java.sql.Date.valueOf(criteria.getCreatedTo()));
         }
 

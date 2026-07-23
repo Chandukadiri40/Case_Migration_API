@@ -247,7 +247,7 @@ public class DeliverableService {
                .append(SQL_AND_LOWER).append(symbolicNameCol).append(") NOT LIKE 'preferences%')");
         }
         if (req.getCreatedDate() != null && !req.getCreatedDate().trim().isEmpty()) {
-            String currentCreatedDateColumn = configurationService.getSystemColumn(appIdStr, "created-date", createdDateColumn);
+            String currentCreatedDateColumn = configurationService.getSystemColumn(appIdStr, "date", createdDateColumn);
             sql.append(SQL_AND).append(dialect.castToDate(currentCreatedDateColumn)).append(" = ").append(dialect.castToDate("?"));
             params.add(req.getCreatedDate().trim());
         }

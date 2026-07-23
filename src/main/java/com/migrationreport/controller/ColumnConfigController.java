@@ -47,7 +47,7 @@ public class ColumnConfigController {
     @GetMapping("/system-columns")
     public ResponseEntity<List<String>> getSystemColumns() {
         log.info("Starting method: getSystemColumns");
-        ResponseEntity<List<String>> result = ResponseEntity.ok(List.of("doc-id", "created-date", "content-size", "mime-type"));
+        ResponseEntity<List<String>> result = ResponseEntity.ok(List.of("doc-id", "date", "content-size", "mime-type"));
         log.info("Ending method: getSystemColumns");
         return result;
     }
