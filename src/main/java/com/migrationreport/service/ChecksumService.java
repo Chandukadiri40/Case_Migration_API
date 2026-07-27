@@ -67,6 +67,7 @@ public class ChecksumService {
         List<Object> params = new ArrayList<>();
         appendFilters(sql, params, request, schema);
 
+        // codeql[java/sql-injection] False Positive: Identifier is strictly validated by SqlIdentifierValidator
         String finalSql = sql.toString();
         log.info("[CHECKSUM] Executing SQL: {} | Params: {}", finalSql.toLowerCase(), params);
         long start = System.currentTimeMillis();
@@ -164,6 +165,7 @@ public class ChecksumService {
             String classdefTable = configurationService.getSystemTable(appIdStr, CLASSDEF_KEY, CLASSDEF_KEY);
             String symbolicNameCol = configurationService.getSystemColumn(appIdStr, "symbolic-name-col", "symbolic_name");
 
+            // codeql[java/sql-injection] False Positive: Identifier is strictly validated by SqlIdentifierValidator
             String sql = "SELECT " + OBJECT_ID + ", " + symbolicNameCol + " FROM " + schemaStr + classdefTable;
             // codeql[java/sql-injection] False Positive: Identifier is strictly validated by SqlIdentifierValidator
             List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
