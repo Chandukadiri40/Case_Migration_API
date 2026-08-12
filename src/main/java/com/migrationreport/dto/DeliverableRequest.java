@@ -10,4 +10,6 @@ public class DeliverableRequest {
     private String startDate;
     private String endDate;
     private String migrationStatus;
+    private int page = 1;
+    private int pageSize = 100;
 }

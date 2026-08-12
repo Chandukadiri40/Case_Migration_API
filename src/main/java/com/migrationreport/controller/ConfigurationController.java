@@ -28,11 +28,18 @@ public class ConfigurationController {
 
     @GetMapping
     public ResponseEntity<TenantConfig> getConfig() {
-        log.info("Starting method: getConfig");
-        log.info("[CONFIG] Fetching cached tenant configuration");
-        ResponseEntity<TenantConfig> result = ResponseEntity.ok(configurationService.getCachedConfig());
-        log.info("Ending method: getConfig");
-        return result;
+        TenantConfig config = configurationService.getCachedConfig();
+        int appCount = (config != null && config.getApplications() != null) ? config.getApplications().size() : 0;
+        
+        List<String> appNames = new java.util.ArrayList<>();
+        if (config != null && config.getApplications() != null) {
+            for (TenantConfig.ApplicationConfig app : config.getApplications()) {
+                appNames.add(app.getAppName());
+            }
+        }
+        
+        log.info("Application configuration loaded. Total Apps: {}. Apps: {}", appCount, appNames);
+        return ResponseEntity.ok(config);
     }
 
     @PostMapping
@@ -105,11 +112,11 @@ public class ConfigurationController {
 
     @GetMapping("/ui-settings")
     public ResponseEntity<Map<String, Object>> getUiSettings() {
-        log.info("Starting method: getUiSettings");
+        log.info("Fetching UI Settings for Dynamic date window");
         Map<String, Object> settings = new HashMap<>();
         settings.put("maxDateRangeMonths", maxDateRangeMonths);
         settings.put("fixedFilenetMapping", fixedFilenetMapping);
-        log.info("Ending method: getUiSettings");
+        log.info("Fetched UI Settings for Dynamic date window");
         return ResponseEntity.ok(settings);
     }
 }

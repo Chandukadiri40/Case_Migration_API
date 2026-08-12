@@ -1,81 +1,61 @@
-2026-07-24 10:14:02 [WARN ] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15h57m15s891ms233µs100ns).
-2026-07-24 13:39:53 [WARN ] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m15s498ms416µs900ns).
-2026-07-24 14:30:43 [WARN ] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=50m50s193ms408µs400ns).
-2026-07-24 16:33:08 [INFO ] [RMI TCP Connection(757)-127.0.0.1] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
-2026-07-24 16:33:08 [INFO ] [RMI TCP Connection(757)-127.0.0.1] o.s.boot.tomcat.GracefulShutdown : Commencing graceful shutdown. Waiting for active requests to complete
-2026-07-24 16:33:08 [INFO ] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown : Graceful shutdown complete
-2026-07-24 16:33:08 [INFO ] [RMI TCP Connection(757)-127.0.0.1] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-07-24 16:33:08 [INFO ] [RMI TCP Connection(757)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
-2026-07-24 16:33:08 [INFO ] [RMI TCP Connection(757)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
-2026-07-24 18:08:12 [INFO ] [main] c.m.MigrationReportApplicationTests : Starting MigrationReportApplicationTests using Java 21.0.7 with PID 52276 (started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
-2026-07-24 18:08:12 [INFO ] [main] c.m.MigrationReportApplicationTests : No active profile set, falling back to 1 default profile: "default"
-2026-07-24 18:08:14 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-07-24 18:08:14 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 87 ms. Found 1 JPA repository interface.
-2026-07-24 18:08:15 [INFO ] [main] c.m.config.DataSourceConfig : [CONFIG] Loaded database configuration for active type postgres from D:\MigrationReportTool\Backend\MigrationReport\config\db-config.json
-2026-07-24 18:08:15 [INFO ] [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-07-24 18:08:15 [INFO ] [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
-2026-07-24 18:08:16 [INFO ] [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-07-24 18:08:16 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
-2026-07-24 18:08:17 [INFO ] [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@574f9e36
-2026-07-24 18:08:17 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
-2026-07-24 18:08:17 [INFO ] [main] o.hibernate.orm.connections.pooling : HHH10001005: Database info:	Database JDBC URL [jdbc:postgresql://localhost:5432/Migration]	Database driver: PostgreSQL JDBC Driver	Database dialect: PostgreSQLDialect	Database version: 16.9	Default catalog/schema: Migration/public	Autocommit mode: undefined/unknown	Isolation level: READ_COMMITTED [default READ_COMMITTED]	JDBC fetch size: none	Pool: DataSourceConnectionProvider	Minimum pool size: undefined/unknown	Maximum pool size: undefined/unknown
-2026-07-24 18:08:18 [INFO ] [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-07-24 18:08:19 [INFO ] [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-07-24 18:08:19 [INFO ] [main] o.s.d.j.r.q.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-07-24 18:08:19 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loading tenant configuration from D:\MigrationReportTool\Backend\MigrationReport\config\tenant-mappings.json
-2026-07-24 18:08:19 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loaded 1 applications from config.
-2026-07-24 18:08:19 [INFO ] [main] c.m.dialect.DialectConfig : [DIALECT] Initializing PostgreSQL Dialect provider...
-2026-07-24 18:08:19 [INFO ] [main] c.m.service.PropertyMappingService : [MAPPING] Loading property mapping templates from D:\MigrationReportTool\Backend\MigrationReport\config\property-mapping-templates.json
-2026-07-24 18:08:19 [WARN ] [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-07-24 18:08:20 [INFO ] [main] c.m.MigrationReportApplicationTests : Started MigrationReportApplicationTests in 8.753 seconds (process running for 10.577)
-2026-07-24 18:08:21 [INFO ] [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-07-24 18:08:21 [INFO ] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
-2026-07-24 18:08:21 [INFO ] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
-2026-07-24 20:51:31 [INFO ] [main] c.m.MigrationReportApplicationTests : Starting MigrationReportApplicationTests using Java 21.0.7 with PID 53788 (started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
-2026-07-24 20:51:31 [INFO ] [main] c.m.MigrationReportApplicationTests : No active profile set, falling back to 1 default profile: "default"
-2026-07-24 20:51:33 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-07-24 20:51:33 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 208 ms. Found 1 JPA repository interface.
-2026-07-24 20:51:36 [INFO ] [main] c.m.config.DataSourceConfig : [CONFIG] Loaded database configuration for active type postgres from D:\MigrationReportTool\Backend\MigrationReport\config\db-config.json
-2026-07-24 20:51:37 [INFO ] [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-07-24 20:51:37 [INFO ] [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
-2026-07-24 20:51:40 [INFO ] [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-07-24 20:51:40 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
-2026-07-24 20:51:42 [INFO ] [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1fd35a92
-2026-07-24 20:51:42 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
-2026-07-24 20:51:43 [INFO ] [main] o.hibernate.orm.connections.pooling : HHH10001005: Database info:	Database JDBC URL [jdbc:postgresql://localhost:5432/Migration]	Database driver: PostgreSQL JDBC Driver	Database dialect: PostgreSQLDialect	Database version: 16.9	Default catalog/schema: Migration/public	Autocommit mode: undefined/unknown	Isolation level: READ_COMMITTED [default READ_COMMITTED]	JDBC fetch size: none	Pool: DataSourceConnectionProvider	Minimum pool size: undefined/unknown	Maximum pool size: undefined/unknown
-2026-07-24 20:51:47 [INFO ] [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-07-24 20:51:47 [INFO ] [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-07-24 20:51:48 [INFO ] [main] o.s.d.j.r.q.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-07-24 20:51:48 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loading tenant configuration from D:\MigrationReportTool\Backend\MigrationReport\config\tenant-mappings.json
-2026-07-24 20:51:49 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loaded 1 applications from config.
-2026-07-24 20:51:49 [INFO ] [main] c.m.dialect.DialectConfig : [DIALECT] Initializing PostgreSQL Dialect provider...
-2026-07-24 20:51:49 [INFO ] [main] c.m.service.PropertyMappingService : [MAPPING] Loading property mapping templates from D:\MigrationReportTool\Backend\MigrationReport\config\property-mapping-templates.json
-2026-07-24 20:51:49 [WARN ] [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-07-24 20:51:52 [INFO ] [main] c.m.MigrationReportApplicationTests : Started MigrationReportApplicationTests in 22.013 seconds (process running for 24.69)
-2026-07-24 20:51:54 [INFO ] [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-07-24 20:51:54 [INFO ] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
-2026-07-24 20:51:54 [INFO ] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
-2026-07-24 20:59:25 [INFO ] [main] c.m.MigrationReportApplicationTests : Starting MigrationReportApplicationTests using Java 21.0.7 with PID 47916 (started by Shaik Firoz in D:\MigrationReportTool\Backend\MigrationReport)
-2026-07-24 20:59:25 [INFO ] [main] c.m.MigrationReportApplicationTests : No active profile set, falling back to 1 default profile: "default"
-2026-07-24 20:59:26 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-07-24 20:59:27 [INFO ] [main] o.s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 102 ms. Found 1 JPA repository interface.
-2026-07-24 20:59:28 [INFO ] [main] c.m.config.DataSourceConfig : [CONFIG] Loaded database configuration for active type postgres from D:\MigrationReportTool\Backend\MigrationReport\config\db-config.json
-2026-07-24 20:59:28 [INFO ] [main] org.hibernate.orm.jpa : HHH008540: Processing PersistenceUnitInfo [name: default]
-2026-07-24 20:59:28 [INFO ] [main] org.hibernate.orm.core : HHH000001: Hibernate ORM core version 7.4.1.Final
-2026-07-24 20:59:29 [INFO ] [main] o.s.o.j.p.SpringPersistenceUnitInfo : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-07-24 20:59:29 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Starting...
-2026-07-24 20:59:30 [INFO ] [main] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1fd35a92
-2026-07-24 20:59:30 [INFO ] [main] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Start completed.
-2026-07-24 20:59:30 [INFO ] [main] o.hibernate.orm.connections.pooling : HHH10001005: Database info:	Database JDBC URL [jdbc:postgresql://localhost:5432/Migration]	Database driver: PostgreSQL JDBC Driver	Database dialect: PostgreSQLDialect	Database version: 16.9	Default catalog/schema: Migration/public	Autocommit mode: undefined/unknown	Isolation level: READ_COMMITTED [default READ_COMMITTED]	JDBC fetch size: none	Pool: DataSourceConnectionProvider	Minimum pool size: undefined/unknown	Maximum pool size: undefined/unknown
-2026-07-24 20:59:31 [INFO ] [main] org.hibernate.orm.core : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-07-24 20:59:31 [INFO ] [main] o.s.o.j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-07-24 20:59:31 [INFO ] [main] o.s.d.j.r.q.QueryEnhancerFactories : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-07-24 20:59:31 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loading tenant configuration from D:\MigrationReportTool\Backend\MigrationReport\config\tenant-mappings.json
-2026-07-24 20:59:32 [INFO ] [main] c.m.service.ConfigurationService : [CONFIG] Loaded 1 applications from config.
-2026-07-24 20:59:32 [INFO ] [main] c.m.dialect.DialectConfig : [DIALECT] Initializing PostgreSQL Dialect provider...
-2026-07-24 20:59:32 [INFO ] [main] c.m.service.PropertyMappingService : [MAPPING] Loading property mapping templates from D:\MigrationReportTool\Backend\MigrationReport\config\property-mapping-templates.json
-2026-07-24 20:59:32 [WARN ] [main] o.s.b.j.a.JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-07-24 20:59:33 [INFO ] [main] c.m.MigrationReportApplicationTests : Started MigrationReportApplicationTests in 7.972 seconds (process running for 9.758)
-2026-07-24 20:59:33 [INFO ] [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2026-07-24 20:59:33 [INFO ] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
-2026-07-24 20:59:33 [INFO ] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.
+2026-08-07 10:23:28 [INFO ] [main] c.m.MigrationReportApplication : ==========Application Started ========
+2026-08-07 10:25:26 [INFO ] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-08-07 10:25:26 [INFO ] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Initializing Servlet 'dispatcherServlet'
+2026-08-07 10:25:26 [INFO ] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet : Completed initialization in 3 ms
+2026-08-07 10:25:27 [INFO ] [http-nio-8080-exec-2] c.m.controller.AuthController : Login request received for user : firoz
+2026-08-07 10:25:27 [INFO ] [http-nio-8080-exec-2] c.m.controller.AuthController : User 'firoz' authenticated successfully.
+2026-08-07 10:25:27 [INFO ] [http-nio-8080-exec-3] c.m.c.ConfigurationController : Application configuration loaded. Total Apps: 1. Apps: [Ccol]
+2026-08-07 10:25:51 [INFO ] [http-nio-8080-exec-7] c.m.controller.DiscoveryController : Retrieving document classes for App 'ccol'.
+2026-08-07 10:25:51 [INFO ] [http-nio-8080-exec-7] c.m.controller.DiscoveryController : Retrieved 3 document classes: [BankAccount, HomeLoanApplication, TransactionRecord]
+2026-08-07 10:25:58 [INFO ] [http-nio-8080-exec-4] c.m.controller.DiscoveryController : Generating 'Document Count (Category: Volume)' report for App 'ccol', Classes: [BankAccount]
+2026-08-07 10:25:58 [INFO ] [http-nio-8080-exec-4] c.m.service.DiscoveryService : Executing report 'doc-count'.
+2026-08-07 10:25:58 [INFO ] [http-nio-8080-exec-4] c.m.service.DiscoveryService : Report execution completed. Duration=25 ms, Records=1.
+2026-08-07 10:26:21 [INFO ] [http-nio-8080-exec-8] c.m.controller.DiscoveryController : Generating 'MIME Type Distribution (Category: Format)' report for App 'ccol', Classes: [BankAccount]
+2026-08-07 10:26:21 [INFO ] [http-nio-8080-exec-8] c.m.service.DiscoveryService : Executing report 'doc-mime'.
+2026-08-07 10:26:21 [INFO ] [http-nio-8080-exec-8] c.m.service.DiscoveryService : Report execution completed. Duration=12 ms, Records=6.
+2026-08-07 10:27:45 [INFO ] [http-nio-8080-exec-2] c.m.controller.DiscoveryController : Generating 'Size Buckets (Category: Size)' report for App 'ccol', Classes: [BankAccount]
+2026-08-07 10:27:45 [INFO ] [http-nio-8080-exec-2] c.m.service.DiscoveryService : Executing report 'size-bucket'.
+2026-08-07 10:27:45 [INFO ] [http-nio-8080-exec-2] c.m.service.DiscoveryService : Report execution completed. Duration=14 ms, Records=4.
+2026-08-07 10:28:10 [INFO ] [http-nio-8080-exec-3] c.m.controller.DiscoveryController : Generating 'Year-Wise Trend (Category: Volume)' report for App 'ccol', Classes: [BankAccount]
+2026-08-07 10:28:10 [INFO ] [http-nio-8080-exec-3] c.m.service.DiscoveryService : Executing report 'doc-year-wise'.
+2026-08-07 10:28:10 [INFO ] [http-nio-8080-exec-3] c.m.service.DiscoveryService : Report execution completed. Duration=16 ms, Records=1.
+2026-08-07 10:28:26 [INFO ] [http-nio-8080-exec-10] c.m.controller.DiscoveryController : Generating 'Year-Month Trend (Category: Volume)' report for App 'ccol', Classes: [BankAccount]
+2026-08-07 10:28:26 [INFO ] [http-nio-8080-exec-10] c.m.service.DiscoveryService : Executing report 'doc-year-month'.
+2026-08-07 10:28:26 [INFO ] [http-nio-8080-exec-10] c.m.service.DiscoveryService : Report execution completed. Duration=15 ms, Records=1.
+2026-08-07 10:29:00 [INFO ] [http-nio-8080-exec-6] c.m.controller.DiscoveryController : Generating 'Total Annotations (Category: Components)' report for App 'ccol', Classes: [BankAccount]
+2026-08-07 10:29:00 [INFO ] [http-nio-8080-exec-6] c.m.service.DiscoveryService : Executing report 'annotation-total'.
+2026-08-07 10:29:00 [INFO ] [http-nio-8080-exec-6] c.m.service.DiscoveryService : Report execution completed. Duration=12 ms, Records=1.
+2026-08-07 10:29:52 [INFO ] [http-nio-8080-exec-5] c.m.controller.DiscoveryController : Generating 'Annotations by MIME (Category: Components)' report for App 'ccol', Classes: [BankAccount]
+2026-08-07 10:29:52 [INFO ] [http-nio-8080-exec-5] c.m.service.DiscoveryService : Executing report 'annotation-mime'.
+2026-08-07 10:29:52 [INFO ] [http-nio-8080-exec-5] c.m.service.DiscoveryService : Report execution completed. Duration=8 ms, Records=3.
+2026-08-07 10:31:01 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Fetching UI Settings for Dynamic date window
+2026-08-07 10:31:01 [INFO ] [http-nio-8080-exec-2] c.m.c.ConfigurationController : Fetched UI Settings for Dynamic date window
+2026-08-07 10:31:03 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : Retrieving document classes for App 'ccol'.
+2026-08-07 10:31:03 [INFO ] [http-nio-8080-exec-9] c.m.controller.DiscoveryController : Retrieved 3 document classes: [BankAccount, HomeLoanApplication, TransactionRecord]
+2026-08-07 10:31:05 [INFO ] [http-nio-8080-exec-3] c.m.controller.ExceptionController : Fetching custom metadata fields for Application: 'ccol', DocumentClass: 'BankAccount'
+2026-08-07 10:31:37 [INFO ] [http-nio-8080-exec-10] c.m.controller.ExceptionController : Checking exceptions for App: 'ccol', Classes: [BankAccount], Custom Filters: [AccNo=ACC0B0EFA]
+2026-08-07 10:31:37 [INFO ] [http-nio-8080-exec-10] c.m.service.ExceptionService : Executing lookup SQL: select dv.object_id from public.docversion_source dv inner join public.classdef cd on dv.object_class_id = cd.object_id where 1=1 and cd.symbolic_name in (?) and (dv.u3a18_accno = ?) | Params: [BankAccount, ACC0B0EFA]
+2026-08-07 10:31:37 [INFO ] [http-nio-8080-exec-10] c.m.service.ExceptionService : Found 1 record(s) in Source for given criteria in 10ms. Object IDs: [9F69DC100001B1C5A1399A81F00B0EFA]. Now querying Staging and Target...
+2026-08-07 10:31:37 [INFO ] [http-nio-8080-exec-10] c.m.service.ExceptionService : Data retrieval completed in 24ms. Found records -> Source: 1, Staging: 1, Target: 1
+2026-08-07 10:31:37 [INFO ] [http-nio-8080-exec-10] c.m.controller.ExceptionController : Exception check completed in 141ms.
+2026-08-07 10:38:13 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Fetching UI Settings for Dynamic date window
+2026-08-07 10:38:13 [INFO ] [http-nio-8080-exec-8] c.m.c.ConfigurationController : Fetched UI Settings for Dynamic date window
+2026-08-07 10:38:13 [INFO ] [http-nio-8080-exec-5] c.m.c.ConfigurationController : Application configuration loaded. Total Apps: 1. Apps: [Ccol]
+2026-08-07 10:38:29 [INFO ] [http-nio-8080-exec-2] c.m.controller.DiscoveryController : Retrieving document classes for App 'ccol'.
+2026-08-07 10:38:29 [INFO ] [http-nio-8080-exec-1] c.m.controller.ExceptionController : Fetching custom metadata fields for Application: 'ccol', DocumentClass: 'null'
+2026-08-07 10:38:29 [INFO ] [http-nio-8080-exec-2] c.m.controller.DiscoveryController : Retrieved 3 document classes: [BankAccount, HomeLoanApplication, TransactionRecord]
+2026-08-07 10:38:30 [INFO ] [http-nio-8080-exec-9] c.m.controller.ExceptionController : Fetching custom metadata fields for Application: 'ccol', DocumentClass: 'BankAccount'
+2026-08-07 10:38:33 [INFO ] [http-nio-8080-exec-7] c.m.controller.DeliverableController : Generating migration report for App: 'Ccol', Class: BankAccount
+2026-08-07 10:38:33 [INFO ] [http-nio-8080-exec-7] c.m.service.DeliverableService : Executing Aggregated Query | SQL: select object_class_id as documentclass, count(*) as totaldocuments, coalesce(sum(coalesce(cast(nullif(content_size, '') as numeric),0))/1073741824.0,0) as totalfilesizegb, count(case when lower(migration_status) in ('success','migrated') then 1 end) as extractedfilenet, count(case when lower(migration_status) = 'failed' then 1 end) as extractionfailed, count(case when lower(migration_status) not in ('success','migrated','failed') then 1 end) as remaining, coalesce(sum(case when lower(migration_status) in ('success','migrated') then coalesce(cast(nullif(content_size, '') as numeric),0) else 0 end)/1073741824.0,0) as extractedfilesizegb, case when count(*)>0 then round(count(case when lower(migration_status) in ('success','migrated') then 1 end)*100.0/count(*),2) else 0 end as percentcompletion, case when count(*)>0 then round(count(case when lower(migration_status) = 'failed' then 1 end)*100.0/count(*),2) else 0 end as percentfailed, 0.0 as migrationruntimedays from public.docversion_stagging where 1=1 and object_class_id in (select object_id from public.classdef where lower(symbolic_name) = lower(?)) group by object_class_id order by object_class_id | Params: [BankAccount]
+2026-08-07 10:38:33 [INFO ] [http-nio-8080-exec-7] c.m.controller.DeliverableController : Migration report generated in 18ms. Rows: 1
+2026-08-07 10:39:32 [INFO ] [http-nio-8080-exec-6] c.m.controller.DeliverableController : Generating migration report for App: 'Ccol', Class: BankAccount, Status: Success
+2026-08-07 10:39:32 [INFO ] [http-nio-8080-exec-6] c.m.service.DeliverableService : Executing Detailed Query | SQL: select object_id, mime_type, content_size, u0448_cmacmmashupserveruri, u0528_cmacmdeploymentversionnu, u0cb8_bpayref, u1058_payeename, u12a8_targetobjectstorename, u1708_documenttitle, u1aa2_ignoreredirect, u1b08_layoutversionseriesid, u1bb6_loanterm, u1ce8_layoutid, u2672_cmacmregistered, u2918_entrytemplatedescription, u2a76_cmsearchschemaversion, u2d52_icnautorun, u2e28_componentbindinglabel, u3018_brokername, u3026_cmacmruletype, u3478_cmacmversionnumber, u3975_targetobjectclassid, u3a18_accno, u4176_cmacmvcscommitstatus, u46a8_accttype, u4ed4_txnamount, u5058_acctstatus, u5163_settledate, u5948_entrytemplatelaunchedwor, u5ce8_entrytemplateobjectstore, u6116_cmacmtype, u6173_cmacmvcsheartbeatdate, u6326_cmacmintegrationtype, u63a4_currentbalance, u63a8_preferencetype, u63b4_runbalance, u65d4_loanamount, u76f8_targetobjecttype, u7908_bsbnumber, u7ec8_applname, u8bd6_searchingobjecttype, u8ee3_txndate, u90b8_applno, u9528_txntype, u95a4_intrate, u9855_entrytemplateid, u9af8_propaddress, u9b28_txndesc, u9ba8_branchname, u9c18_txnstatus, ua0c2_icnshowintree, ua0d8_txnid, ua3a3_opendate, ua598_accholdername, uaa76_cmacmtargetenvironmentty, uaf94_availbalance, ub168_searchingobjectstores, ub376_cmacmworkflowconvertstat, ube06_searchtype, uc112_cmacmincludeswebapplicat, ud578_customobjecttype, ud818_applicationname, udf76_cmacmvcsdeliverstatus, ue148_applstatus, ue148_targetsiteid, ue4b8_description, uf8f8_custid, migration_status, migrated_date, error_info, extracted_status, extracted_date, p8_doc_id from public.docversion_stagging where 1=1 and object_class_id in (select object_id from public.classdef where lower(symbolic_name) = lower(?)) and lower(migration_status) in ('success', 'migrated') limit 5000 | Params: [BankAccount]
+2026-08-07 10:39:32 [INFO ] [http-nio-8080-exec-6] c.m.service.DeliverableService : Found 3062 record(s) in 216ms. Object IDs: [9F6A44F00000A5CEB8F11426BC590407, 9F6A45800002DECBB2BA521CE5517AF5, 9F6A48C0000114C6ADC9BE1EF764F4A0, 9F6A4AA000021ACAA1FA1E2C3A204FBF, 9F6A4AA00001BCC1AB0EDB8135953687, 9F6A4500000174CDB8D49BD99B7879E6, 9F6A449000006FC988AAF9F789FD2CEB, 9F6A465000035ECEA03BBE244E82E589, 9F6A4AD0000028CF91095F2B48604DDE, 9F6A49A0000141C1AA075BD1F97DF225] (showing first 10)
+2026-08-07 10:39:32 [INFO ] [http-nio-8080-exec-6] c.m.controller.DeliverableController : Migration report generated in 372ms. Rows: 3062
+2026-08-07 14:33:40 [WARN ] [HikariPool-1:housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m12s487ms603µs100ns).
+2026-08-07 15:55:32 [INFO ] [RMI TCP Connection(329)-127.0.0.1] o.s.b.a.SpringApplicationAdminMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2026-08-07 15:55:32 [INFO ] [RMI TCP Connection(329)-127.0.0.1] o.s.boot.tomcat.GracefulShutdown : Commencing graceful shutdown. Waiting for active requests to complete
+2026-08-07 15:55:32 [INFO ] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown : Graceful shutdown complete
+2026-08-07 15:55:32 [INFO ] [RMI TCP Connection(329)-127.0.0.1] o.s.o.j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-08-07 15:55:32 [INFO ] [RMI TCP Connection(329)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown initiated...
+2026-08-07 15:55:32 [INFO ] [RMI TCP Connection(329)-127.0.0.1] com.zaxxer.hikari.HikariDataSource : HikariPool-1 - Shutdown completed.

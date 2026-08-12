@@ -3,6 +3,7 @@ package com.migrationreport.service;
 import com.migrationreport.dto.DeliverableRequest;
 import com.migrationreport.dto.config.TenantConfig;
 import com.migrationreport.exception.ResourceNotFoundException;
+import com.migrationreport.dto.PaginatedResponse;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -60,7 +61,7 @@ public class DeliverableService {
     }
 
     @SuppressWarnings("java:S3776")
-    public List<Map<String, Object>> getMigrationReport(DeliverableRequest req) {
+    public PaginatedResponse<List<Map<String, Object>>> getMigrationReport(DeliverableRequest req) {
         List<Map<String, Object>> result = new ArrayList<>();
 
         // Determine which apps to query
@@ -83,6 +84,8 @@ public class DeliverableService {
                 || req.getMigrationStatus().trim().isEmpty() 
                 || req.getMigrationStatus().equalsIgnoreCase("All");
 
+        long totalRecords = 0;
+
         for (TenantConfig.ApplicationConfig app : appsToQuery) {
             String schema = app.getSchema() != null && !app.getSchema().isEmpty() ? app.getSchema() + "." : app.getAppId() + ".";
             if (app.getClassifiedTables() == null || app.getClassifiedTables().get(KEY_STAGING) == null || app.getClassifiedTables().get(KEY_STAGING).isEmpty()) {
@@ -96,15 +99,17 @@ public class DeliverableService {
                 if (isAggregated) {
                     List<Map<String, Object>> rows = queryAppAggregated(app.getAppId(), table, objStoreName, req);
                     result.addAll(rows);
+                    totalRecords += rows.size();
                 } else {
-                    List<Map<String, Object>> rows = queryAppDetailed(app.getAppId(), table, objStoreName, req);
-                    result.addAll(rows);
+                    PaginatedResponse<List<Map<String, Object>>> pageResult = queryAppDetailed(app.getAppId(), table, objStoreName, req);
+                    result.addAll(pageResult.getData());
+                    totalRecords += pageResult.getTotalRecords();
                 }
             } catch (Exception e) {
                 log.error("DeliverableService: skipping table {}: {}", table, e.getMessage());
             }
         }
-        return result;
+        return new PaginatedResponse<>(totalRecords, result);
     }
 
     private List<Map<String, Object>> queryAppAggregated(String appIdStr, String table, String appDisplayName, DeliverableRequest req) {
@@ -137,10 +142,12 @@ public class DeliverableService {
         );
 
         List<Object> params = new ArrayList<>();
-        appendFilters(sql, params, req, appIdStr, table.substring(0, table.indexOf(".")));
+        StringBuilder whereClause = new StringBuilder();
+        appendFilters(whereClause, params, req, appIdStr, table.substring(0, table.indexOf(".")));
+        sql.append(whereClause);
         sql.append(" GROUP BY ").append(classIdCol).append(" ORDER BY ").append(classIdCol);
 
-        log.info("[DELIVERABLE] Executing Aggregated Query | SQL: {} | Params: {}", sql.toString().toLowerCase(), params);
+        log.info("Executing Aggregated Query | SQL: {} | Params: {}", sql.toString().toLowerCase(), params);
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql.toString(), params.toArray());
         List<Map<String, Object>> result = new ArrayList<>();
         String schemaStr = table.substring(0, table.indexOf("."));
@@ -181,7 +188,7 @@ public class DeliverableService {
         return selectColsBuilder.toString();
     }
 
-    private List<Map<String, Object>> queryAppDetailed(String appIdStr, String table, String appDisplayName, DeliverableRequest req) {
+    private PaginatedResponse<List<Map<String, Object>>> queryAppDetailed(String appIdStr, String table, String appDisplayName, DeliverableRequest req) {
         String sc = configurationService.getSystemColumn(appIdStr, "status", statusColumn);
         String selectCols = searchService.buildSelectClauseForTable(table, null);
         String targetGuidCol = configurationService.getSystemColumn(appIdStr, "target-guid-col", "p8_doc_id");
@@ -191,26 +198,48 @@ public class DeliverableService {
         selectCols = resolveSelectCols(selectCols, schemaStr, tableName, targetGuidCol);
 
         StringBuilder sql = new StringBuilder("SELECT " + selectCols + SQL_FROM_SPACE + table + " WHERE 1=1");
+        StringBuilder countSql = new StringBuilder("SELECT COUNT(*) " + SQL_FROM_SPACE + table + " WHERE 1=1");
+        
         List<Object> params = new ArrayList<>();
-        appendFilters(sql, params, req, appIdStr, table.substring(0, table.indexOf(".")));
+        StringBuilder whereClause = new StringBuilder();
+        appendFilters(whereClause, params, req, appIdStr, schemaStr);
 
         if (req.getMigrationStatus() != null && !req.getMigrationStatus().trim().isEmpty()
                 && !req.getMigrationStatus().equalsIgnoreCase("All")) {
             if (req.getMigrationStatus().equalsIgnoreCase("Success")) {
-                sql.append(SQL_AND_LOWER).append(sc).append(") IN ('success', 'migrated')");
+                whereClause.append(SQL_AND_LOWER).append(sc).append(") IN ('success', 'migrated')");
             } else if (req.getMigrationStatus().equalsIgnoreCase("Failed")) {
-                sql.append(SQL_AND_LOWER).append(sc).append(") = 'failed'");
+                whereClause.append(SQL_AND_LOWER).append(sc).append(") = 'failed'");
             } else {
-                sql.append(SQL_AND_LOWER).append(sc).append(") = LOWER(?)");
+                whereClause.append(SQL_AND_LOWER).append(sc).append(") = LOWER(?)");
                 params.add(req.getMigrationStatus().trim());
             }
         }
 
-        sql.append(dialect.getLimitSql(5000));
+        sql.append(whereClause);
+        countSql.append(whereClause);
 
-        log.info("[DELIVERABLE] Executing Detailed Query | SQL: {} | Params: {}", sql.toString().toLowerCase(), params);
+        long totalRecords = jdbcTemplate.queryForObject(countSql.toString(), Long.class, params.toArray());
+
+        int limit = req.getPageSize();
+        int offset = (req.getPage() - 1) * limit;
+        sql.append(dialect.getPaginationSql(limit, offset));
+
+        log.info("Executing Detailed Query | SQL: {} | Params: {}", sql.toString().toLowerCase(), params);
         String classIdCol = configurationService.getSystemColumn(appIdStr, CLASS_ID_COL_KEY, OBJECT_CLASS_ID);
+        long startDetailed = System.currentTimeMillis();
         List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql.toString(), params.toArray());
+        
+        String objectIdCol = configurationService.getSystemColumn(appIdStr, "doc-id", "object_id").toLowerCase();
+        java.util.List<String> objectIds = new java.util.ArrayList<>();
+        for (Map<String, Object> row : rows) {
+             Object id = row.get(objectIdCol);
+             if (id == null) id = row.get("object_id");
+             if (id != null) objectIds.add(id.toString());
+        }
+        String idsToLog = objectIds.size() > 10 ? objectIds.subList(0, 10).toString() + " (showing first 10)" : objectIds.toString();
+        log.info("Found {} record(s) in {}ms. Object IDs: {}", rows.size(), System.currentTimeMillis() - startDetailed, idsToLog);
+        
         List<Map<String, Object>> result = new ArrayList<>();
         Map<String, String> classMap = getClassIdToSymbolicNameMap(appIdStr, schemaStr);
         for (Map<String, Object> row : rows) {
@@ -228,7 +257,7 @@ public class DeliverableService {
             }
             result.add(map);
         }
-        return result;
+        return new PaginatedResponse<>(totalRecords, result);
     }
 
     private void appendFilters(StringBuilder sql, List<Object> params, DeliverableRequest req, String appIdStr, String schemaStr) {

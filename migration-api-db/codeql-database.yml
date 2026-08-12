@@ -1,0 +1,13 @@
+---
+sourceLocationPrefix: D:\MigrationReportTool\Backend\MigrationReport
+baselineLinesOfCode: 3956
+unicodeNewlines: false
+columnKind: utf16
+primaryLanguage: java
+creationMetadata:
+  sha: 9ddbe593a412830ce9d18fae7dc1ccc466ce4359
+  cliVersion: 2.26.1
+  creationTime: 2026-07-27T07:08:57.734619700Z
+overlayBaseDatabase: false
+overlayDatabase: false
+finalised: true

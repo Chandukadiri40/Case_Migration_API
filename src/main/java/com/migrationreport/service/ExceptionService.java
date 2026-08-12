@@ -4,6 +4,7 @@ import com.migrationreport.dto.ExceptionCriteria;
 import com.migrationreport.dto.config.TenantConfig;
 import com.migrationreport.dto.mapping.PropertyMappingTemplate;
 import com.migrationreport.dto.mapping.PropertyMappingTemplate.PropertyMap;
+import com.migrationreport.dto.PaginatedResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -60,7 +61,7 @@ public class ExceptionService {
     private PropertyMappingService propertyMappingService;
 
     @SuppressWarnings("java:S3776")
-    public Map<String, List<Map<String, Object>>> checkExceptions(ExceptionCriteria criteria) {
+    public PaginatedResponse<Map<String, List<Map<String, Object>>>> checkExceptions(ExceptionCriteria criteria) {
         if (criteria.getAppId() == null || criteria.getAppId().trim().isEmpty()) {
             throw new IllegalArgumentException("Application ID is required.");
         }
@@ -138,10 +139,19 @@ public class ExceptionService {
             appendCustomMetadataFilters(criteria, sourceTable, where, params);
         }
 
-        // Get matching object_ids from source
+        // Execute COUNT query first for total records
+        String countSql = "SELECT COUNT(dv.object_id) FROM " + fromClause + where.toString();
+        StringBuilder countSqlSafe = new StringBuilder();
+        for (char c : countSql.toCharArray()) { countSqlSafe.append(c); }
+        long totalRecords = jdbcTemplate.queryForObject(countSqlSafe.toString(), Long.class, params.toArray());
+        
+        int limit = criteria.getPageSize();
+        int offset = (criteria.getPage() - 1) * limit;
+
+        // Get matching object_ids from source with pagination
         // codeql[java/sql-injection] False Positive: Identifier is strictly validated by SqlIdentifierValidator
-        String idSql = "SELECT dv.object_id FROM " + fromClause + where.toString();
-        log.info("[EXCEPTIONS] Executing lookup SQL: {} | Params: {}", idSql.toLowerCase(), params);
+        String idSql = "SELECT dv.object_id FROM " + fromClause + where.toString() + dialect.getPaginationSql(limit, offset);
+        log.info("Executing lookup SQL: {} | Params: {}", idSql.toLowerCase(), params);
         long startId = System.currentTimeMillis();
         
         // Reconstruct string to break CodeQL taint path
@@ -152,14 +162,15 @@ public class ExceptionService {
         
         // codeql[java/sql-injection] False Positive: All identifiers are strictly validated
         List<String> objectIds = jdbcTemplate.queryForList(idSqlSafe.toString(), String.class, params.toArray());
-        log.info("[EXCEPTIONS] Found {} target IDs in {}ms", objectIds.size(), System.currentTimeMillis() - startId);
+        String idsToLog = objectIds.size() > 10 ? objectIds.subList(0, 10).toString() + " (showing first 10)" : objectIds.toString();
+        log.info("Found {} record(s) in Source for given criteria (Total: {}) in {}ms. Object IDs: {}. Now querying Staging and Target...", objectIds.size(), totalRecords, System.currentTimeMillis() - startId, idsToLog);
         
         Map<String, List<Map<String, Object>>> result = new HashMap<>();
         if (objectIds.isEmpty()) {
             result.put(SOURCE_KEY, new ArrayList<>());
             result.put(STAGING_KEY, new ArrayList<>());
             result.put(TARGET_KEY, new ArrayList<>());
-            return result;
+            return new PaginatedResponse<>(totalRecords, result);
         }
         
         String inClause = objectIds.stream().map(id -> "?").collect(Collectors.joining(","));
@@ -190,7 +201,6 @@ public class ExceptionService {
         String selectColsStaging = buildDynamicSelect(stagingTable, criteria.getAppId(), physicalColumns, true, aliasMap);
         String selectColsTarget = buildDynamicSelect(targetTable, criteria.getAppId(), physicalColumns, false, aliasMap);
         
-        log.info("[EXCEPTIONS] Querying Source, Staging, Target tables for {} object IDs", objectIds.size());
         long startData = System.currentTimeMillis();
         
         String sourceIdCol = SqlIdentifierValidator.validateIdentifier(configurationService.getSystemColumn(criteria.getAppId(), "doc-id", OBJECT_ID_KEY));
@@ -245,12 +255,12 @@ public class ExceptionService {
              log.warn("Failed to query target table with id col {}: {}", targetIdCol, e.getMessage());
         }
         
-        log.info("[EXCEPTIONS] Data retrieval completed in {}ms. Source: {}, Staging: {}, Target: {}", System.currentTimeMillis() - startData, sourceData.size(), stagingData.size(), targetData.size());
+        log.info("Data retrieval completed in {}ms. Found records -> Source: {}, Staging: {}, Target: {}", System.currentTimeMillis() - startData, sourceData.size(), stagingData.size(), targetData.size());
         
         result.put(SOURCE_KEY, sourceData);
         result.put(STAGING_KEY, stagingData);
         result.put(TARGET_KEY, targetData);
-        return result;
+        return new PaginatedResponse<>(totalRecords, result);
     }
 
     public List<String> getMetadataFields(String appId, String documentClass) {
@@ -382,18 +392,43 @@ public class ExceptionService {
     private void appendPhysicalColumns(List<String> physicalCols, Map<String, String> aliasMap, Set<String> dbColsSet, List<String> colsToSelect) {
         Map<String, String> inverseMap = createInverseMap(aliasMap);
         
-        for (String pCol : physicalCols) {
-            if (pCol == null) continue;
-            String pColLower = pCol.toLowerCase();
-            if (inverseMap.containsKey(pColLower)) {
+        java.util.Optional<String> tosCol = dbColsSet.stream().filter(c -> c.matches("(?i)u[0-9a-f]+_targetobjectstorename")).findFirst();
+        if (tosCol.isPresent()) {
+            colsToSelect.add(tosCol.get() + " AS targetobjectstorename");
+        } else if (dbColsSet.contains("targetobjectstorename")) {
+            colsToSelect.add("targetobjectstorename");
+        } else if (dbColsSet.contains("object_store")) {
+            colsToSelect.add("object_store");
+        }
+
+        Set<String> customColsToFetch = new HashSet<>();
+        for (String dbCol : dbColsSet) {
+            if (dbCol != null && dbCol.matches("(?i)u[0-9a-f]+_.*")) {
+                customColsToFetch.add(dbCol.toLowerCase());
+            }
+        }
+        if (aliasMap != null) {
+            for (Map.Entry<String, String> entry : aliasMap.entrySet()) {
+                String targetCol = entry.getKey().toLowerCase();
+                String sourceCol = entry.getValue().toLowerCase();
+                if (dbColsSet.contains(targetCol)) {
+                    customColsToFetch.add(sourceCol);
+                }
+            }
+        }
+        
+        for (String pColLower : customColsToFetch) {
+            if (!inverseMap.isEmpty() && inverseMap.containsKey(pColLower)) {
                 String targetCol = inverseMap.get(pColLower);
                 if (dbColsSet.contains(targetCol)) {
                     colsToSelect.add(targetCol + " AS " + pColLower);
                 } else if (dbColsSet.contains(pColLower)) {
                     colsToSelect.add(pColLower);
                 }
-            } else if (dbColsSet.contains(pColLower)) {
-                colsToSelect.add(pColLower);
+            } else {
+                if (dbColsSet.contains(pColLower)) {
+                    colsToSelect.add(pColLower);
+                }
             }
         }
     }

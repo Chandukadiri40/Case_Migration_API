@@ -48,4 +48,9 @@ public class PostgresDialect implements SqlDialect {
     public String getLength(String column) {
         return "LENGTH(" + column + ")";
     }
+
+    @Override
+    public String getPaginationSql(int limit, int offset) {
+        return " LIMIT " + limit + " OFFSET " + offset;
+    }
 }

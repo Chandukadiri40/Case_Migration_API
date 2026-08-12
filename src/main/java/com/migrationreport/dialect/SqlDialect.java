@@ -45,4 +45,9 @@ public interface SqlDialect {
      * Returns the string length function (LENGTH for PostgreSQL, LEN for SQL Server).
      */
     String getLength(String column);
+
+    /**
+     * Appends pagination logic (LIMIT and OFFSET) to the end of a SQL string.
+     */
+    String getPaginationSql(int limit, int offset);
 }

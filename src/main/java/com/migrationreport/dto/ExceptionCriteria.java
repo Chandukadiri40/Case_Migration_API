@@ -10,6 +10,8 @@ public class ExceptionCriteria {
     private LocalDate createdFrom;
     private LocalDate createdTo;
     private List<CustomMetadataFilter> customMetadata;
+    private int page = 1;
+    private int pageSize = 50;
 
     public ExceptionCriteria() {
         // default constructor
@@ -32,4 +34,10 @@ public class ExceptionCriteria {
 
     public List<CustomMetadataFilter> getCustomMetadata() { return customMetadata; }
     public void setCustomMetadata(List<CustomMetadataFilter> customMetadata) { this.customMetadata = customMetadata; }
+
+    public int getPage() { return page; }
+    public void setPage(int page) { this.page = page; }
+
+    public int getPageSize() { return pageSize; }
+    public void setPageSize(int pageSize) { this.pageSize = pageSize; }
 }

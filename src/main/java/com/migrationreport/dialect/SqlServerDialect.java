@@ -49,4 +49,13 @@ public class SqlServerDialect implements SqlDialect {
     public String getLength(String column) {
         return "LEN(" + column + ")";
     }
+
+    @Override
+    public String getPaginationSql(int limit, int offset) {
+        // If there's no ORDER BY, OFFSET requires it in SQL Server. But some queries might already have an ORDER BY.
+        // For simplicity and since we append to the end of where clauses, we force an order if not present?
+        // Wait, Deliverables detail query has no ORDER BY. We will append " ORDER BY (SELECT NULL) OFFSET {offset} ROWS FETCH NEXT {limit} ROWS ONLY"
+        // just like the getLimitSql implementation.
+        return " ORDER BY (SELECT NULL) OFFSET " + offset + " ROWS FETCH NEXT " + limit + " ROWS ONLY";
+    }
 }

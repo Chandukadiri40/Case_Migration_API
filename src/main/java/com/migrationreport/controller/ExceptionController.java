@@ -1,6 +1,7 @@
 package com.migrationreport.controller;
 
 import com.migrationreport.dto.ExceptionCriteria;
+import com.migrationreport.dto.PaginatedResponse;
 import com.migrationreport.service.ExceptionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,23 +21,45 @@ public class ExceptionController {
     @Autowired
     private ExceptionService exceptionService;
 
+    private String buildFilterString(ExceptionCriteria criteria) {
+        StringBuilder filters = new StringBuilder();
+        
+        if (criteria.getDocumentClasses() != null && !criteria.getDocumentClasses().isEmpty()) {
+            filters.append("Classes: ").append(criteria.getDocumentClasses());
+        } else {
+            filters.append("Classes: [All]");
+        }
+        
+        if (criteria.getObjectId() != null && !criteria.getObjectId().trim().isEmpty()) {
+            filters.append(", ObjectId: '").append(criteria.getObjectId()).append("'");
+        }
+        
+        if (criteria.getCreatedFrom() != null || criteria.getCreatedTo() != null) {
+            filters.append(", Date: ").append(criteria.getCreatedFrom()).append(" to ").append(criteria.getCreatedTo());
+        }
+        
+        if (criteria.getCustomMetadata() != null && !criteria.getCustomMetadata().isEmpty()) {
+            java.util.List<String> customStrs = criteria.getCustomMetadata().stream()
+                .map(f -> f.getField() + "=" + f.getValue())
+                .collect(java.util.stream.Collectors.toList());
+            filters.append(", Custom Filters: ").append(customStrs);
+        }
+        
+        return filters.toString();
+    }
+
     @PostMapping("/check")
-    public Map<String, List<Map<String, Object>>> checkExceptions(@RequestBody ExceptionCriteria criteria) {
-        log.info("Starting method: checkExceptions with arguments: criteria={}", criteria);
-        log.info("[EXCEPTIONS] Checking exceptions for Application: '{}'", criteria.getAppId());
+    public PaginatedResponse<Map<String, List<Map<String, Object>>>> checkExceptions(@RequestBody ExceptionCriteria criteria) {
+        log.info("Checking exceptions for App: '{}', {}", criteria.getAppId(), buildFilterString(criteria));
         long start = System.currentTimeMillis();
-        Map<String, List<Map<String, Object>>> result = exceptionService.checkExceptions(criteria);
-        log.info("[EXCEPTIONS] Exception check completed in {}ms.", System.currentTimeMillis() - start);
-        log.info("Ending method: checkExceptions");
+        PaginatedResponse<Map<String, List<Map<String, Object>>>> result = exceptionService.checkExceptions(criteria);
+        log.info("Exception check completed in {}ms.", System.currentTimeMillis() - start);
         return result;
     }
 
     @GetMapping("/metadata-fields")
     public List<String> getMetadataFields(@RequestParam String appId, @RequestParam(required = false) String documentClass) {
-        log.info("Starting method: getMetadataFields with arguments: appId={}, documentClass={}", appId, documentClass);
-        log.debug("[EXCEPTIONS] Fetching metadata fields for Application: '{}', DocumentClass: '{}'", appId, documentClass);
-        List<String> result = exceptionService.getMetadataFields(appId, documentClass);
-        log.info("Ending method: getMetadataFields");
-        return result;
+        log.info("Fetching custom metadata fields for Application: '{}', DocumentClass: '{}'", appId, documentClass);
+        return exceptionService.getMetadataFields(appId, documentClass);
     }
 }

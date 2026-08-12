@@ -136,8 +136,16 @@ public class DiscoveryService {
         StringBuilder sqlBuilder = new StringBuilder();
         boolean first = true;
         
+        List<String> allowedDocumentTables = List.of("source", "staging", "target");
+
         for (Map.Entry<String, List<String>> entry : appConfig.getClassifiedTables().entrySet()) {
-            if (tableType != null && !tableType.equalsIgnoreCase("all") && !tableType.equalsIgnoreCase(entry.getKey())) {
+            String key = entry.getKey().toLowerCase();
+            
+            if (!allowedDocumentTables.contains(key)) {
+                continue;
+            }
+
+            if (tableType != null && !tableType.equalsIgnoreCase("all") && !tableType.equalsIgnoreCase(key)) {
                 continue;
             }
             if (entry.getValue() != null && !entry.getValue().isEmpty()) {
@@ -163,7 +171,7 @@ public class DiscoveryService {
                 // codeql[java/sql-injection] False Positive: All identifiers strictly validated via SqlIdentifierValidator
                 return jdbcTemplate.queryForList(sql, String.class);
             } catch (Exception e) {
-                log.warn("Failed to fetch classes from tables. Falling back to classdef. Error: {}", e.getMessage());
+                log.warn("Failed to retrieve document classes. Falling back to classdef.");
             }
         }
         return List.of();
@@ -183,7 +191,7 @@ public class DiscoveryService {
             List<String> result1 = jdbcTemplate.queryForList(sql, String.class);
             return result1;
         } catch (Exception e) {
-            log.warn("Error fetching classes dynamically. Returning unfiltered list. Error: {}", e.getMessage());
+            log.warn("Failed to retrieve document classes. Falling back to classdef.");
             // Security: Same validation as above applies
             @SuppressWarnings("java:S2077") // False positive: All identifiers validated via SqlIdentifierValidator
             // codeql[java/sql-injection] False Positive: All identifiers strictly validated via SqlIdentifierValidator
@@ -310,7 +318,7 @@ public class DiscoveryService {
             if (!sql.contains(WHERE_1_1)) {
                 params.clear();
             }
-            log.info("[DISCOVERY] Executing Report Endpoint: '{}' | SQL: {} | Params: {}", endpoint, sql.toLowerCase(), params);
+            log.info("Executing report '{}'.", endpoint);
             long start = System.currentTimeMillis();
             // Security Note: Dynamic SQL is unavoidable for flexible discovery reporting.
             // SQL Injection Prevention:
@@ -322,10 +330,10 @@ public class DiscoveryService {
             // nosemgrep: java.spring.security.audit.spring-sqli.spring-sqli
             // codeql[java/sql-injection] False Positive: Identifier is strictly validated by SqlIdentifierValidator
             List<Map<String, Object>> results = jdbcTemplate.queryForList(sql, params.toArray());
-            log.info("[DISCOVERY] Report executed in {}ms. Found {} records.", System.currentTimeMillis() - start, results.size());
+            log.info("Report execution completed. Duration={} ms, Records={}.", System.currentTimeMillis() - start, results.size());
             return results;
         } catch (Exception e) {
-            log.error("Error executing dynamic SQL: {}", sql, e);
+            log.error("Failed to generate report '{}'.", endpoint, e);
             throw new DatabaseQueryException("Failed to generate discovery report: " + e.getMessage(), e);
         }
     }
