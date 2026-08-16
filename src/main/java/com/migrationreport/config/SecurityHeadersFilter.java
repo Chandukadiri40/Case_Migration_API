@@ -22,14 +22,14 @@ public class SecurityHeadersFilter implements Filter {
         
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
         
-        // Anti-clickjacking
-        httpServletResponse.setHeader("X-Frame-Options", "DENY");
+        // Anti-clickjacking (permit sameorigin for preview modal)
+        httpServletResponse.setHeader("X-Frame-Options", "SAMEORIGIN");
         
         // Prevent MIME sniffing
         httpServletResponse.setHeader("X-Content-Type-Options", "nosniff");
         
         // Content Security Policy
-        httpServletResponse.setHeader("Content-Security-Policy", "default-src 'self' http://localhost:8080 http://localhost:5173; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; connect-src 'self' http://localhost:8080 http://localhost:5173;");
+        httpServletResponse.setHeader("Content-Security-Policy", "default-src 'self' http://localhost:8080 http://localhost:5173; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob:; frame-src 'self' http://localhost:8080 http://localhost:5173 blob: data:; frame-ancestors 'self' http://localhost:5173; connect-src 'self' http://localhost:8080 http://localhost:5173;");
         
         // XSS Protection
         httpServletResponse.setHeader("X-XSS-Protection", "1; mode=block");
