@@ -79,6 +79,13 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- JSch for Remote Linux SFTP Directory Browsing -->
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.55</version>
+		</dependency>
+
 		<!-- Spring Boot Starter Test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
