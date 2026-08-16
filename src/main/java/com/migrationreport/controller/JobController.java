@@ -88,6 +88,31 @@ public class JobController {
         }).orElse(ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/{id}/status")
+    public ResponseEntity<MigrationJob> updateJobStatus(@PathVariable Long id, @RequestBody java.util.Map<String, Object> updates) {
+        return jobRepository.findById(id).map(existing -> {
+            if (updates.containsKey("status")) existing.setStatus((String) updates.get("status"));
+            if (updates.containsKey("processPid")) {
+                Object pid = updates.get("processPid");
+                existing.setProcessPid(pid == null ? null : Long.valueOf(pid.toString()));
+            }
+            if (updates.containsKey("duration")) existing.setDuration((String) updates.get("duration"));
+            if (updates.containsKey("startTime")) {
+                existing.setStartTime(LocalDateTime.now()); // For simplicity
+            }
+            if (updates.containsKey("recordsProcessed")) {
+                Object rp = updates.get("recordsProcessed");
+                existing.setRecordsProcessed(rp == null ? 0L : Long.valueOf(rp.toString()));
+            }
+            if (updates.containsKey("records")) {
+                Object r = updates.get("records");
+                existing.setRecords(r == null ? 0L : Long.valueOf(r.toString()));
+            }
+            existing.setUpdatedAt(LocalDateTime.now());
+            return ResponseEntity.ok(jobRepository.save(existing));
+        }).orElse(ResponseEntity.notFound().build());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteJob(@PathVariable Long id) {
         log.info("[JOB API] Deleting job ID {}", id);
