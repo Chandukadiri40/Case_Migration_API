@@ -9,7 +9,7 @@
         {
           "sourceProperty": "F_docnumber",
           "sourceSymbolicName": "F_docnumber",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "DocumentNumber",
           "targetSymbolicName": "DocumentNumber",
           "targetDataType": "STRING"
@@ -17,7 +17,7 @@
         {
           "sourceProperty": "F_docclassnumber",
           "sourceSymbolicName": "F_docclassnumber",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "DocclassNumber",
           "targetSymbolicName": "DocclassNumber",
           "targetDataType": "STRING"
@@ -25,7 +25,7 @@
         {
           "sourceProperty": "f_entrydate",
           "sourceSymbolicName": "f_entrydate",
-          "sourceDataType": "character varying",
+          "sourceDataType": "DATE",
           "targetProperty": "ISEntryDate",
           "targetSymbolicName": "ISEntryDate",
           "targetDataType": "DATE"
@@ -33,7 +33,7 @@
         {
           "sourceProperty": "a70",
           "sourceSymbolicName": "a70",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "CIFNumber",
           "targetSymbolicName": "CIFNumber",
           "targetDataType": "STRING"
@@ -41,7 +41,7 @@
         {
           "sourceProperty": "a77",
           "sourceSymbolicName": "a77",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "AcountNumber",
           "targetSymbolicName": "AcountNumber",
           "targetDataType": "STRING"
@@ -49,7 +49,7 @@
         {
           "sourceProperty": "a95",
           "sourceSymbolicName": "a95",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "PolicyNumber",
           "targetSymbolicName": "PolicyNumber",
           "targetDataType": "STRING"
@@ -57,7 +57,7 @@
         {
           "sourceProperty": "a98",
           "sourceSymbolicName": "a98",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "PolicyStatus",
           "targetSymbolicName": "PolicyStatus",
           "targetDataType": "STRING"
@@ -65,7 +65,7 @@
         {
           "sourceProperty": "a97",
           "sourceSymbolicName": "a97",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "PolicyType",
           "targetSymbolicName": "PolicyType",
           "targetDataType": "STRING"
@@ -73,7 +73,7 @@
         {
           "sourceProperty": "a101",
           "sourceSymbolicName": "a101",
-          "sourceDataType": "character varying",
+          "sourceDataType": "FLOAT",
           "targetProperty": "PremiumAmount",
           "targetSymbolicName": "PremiumAmount",
           "targetDataType": "FLOAT"
@@ -81,7 +81,7 @@
         {
           "sourceProperty": "a99",
           "sourceSymbolicName": "a99",
-          "sourceDataType": "character varying",
+          "sourceDataType": "DATE",
           "targetProperty": "EffectiveDate",
           "targetSymbolicName": "EffectiveDate",
           "targetDataType": "DATE"
@@ -89,7 +89,7 @@
         {
           "sourceProperty": "a100",
           "sourceSymbolicName": "a100",
-          "sourceDataType": "character varying",
+          "sourceDataType": "DATE",
           "targetProperty": "ExpiryDate",
           "targetSymbolicName": "ExpiryDate",
           "targetDataType": "DATE"
@@ -97,7 +97,7 @@
         {
           "sourceProperty": "a102",
           "sourceSymbolicName": "a102",
-          "sourceDataType": "character varying",
+          "sourceDataType": "FLOAT",
           "targetProperty": "SumInsured",
           "targetSymbolicName": "SumInsured",
           "targetDataType": "FLOAT"
@@ -105,7 +105,7 @@
         {
           "sourceProperty": "a103",
           "sourceSymbolicName": "a103",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "BranchCode",
           "targetSymbolicName": "BranchCode",
           "targetDataType": "STRING"
@@ -113,7 +113,7 @@
         {
           "sourceProperty": "a104",
           "sourceSymbolicName": "a104",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "AgentID",
           "targetSymbolicName": "AgentID",
           "targetDataType": "STRING"
@@ -121,7 +121,7 @@
         {
           "sourceProperty": "a105",
           "sourceSymbolicName": "a105",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "CustomerID",
           "targetSymbolicName": "CustomerID",
           "targetDataType": "STRING"
@@ -129,7 +129,7 @@
         {
           "sourceProperty": "a106",
           "sourceSymbolicName": "a106",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "LineOfBusiness",
           "targetSymbolicName": "LineOfBusiness",
           "targetDataType": "STRING"
@@ -137,7 +137,7 @@
         {
           "sourceProperty": "a107",
           "sourceSymbolicName": "a107",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "Currency",
           "targetSymbolicName": "Currency",
           "targetDataType": "STRING"
@@ -145,7 +145,7 @@
         {
           "sourceProperty": "a108",
           "sourceSymbolicName": "a108",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "DocReceivedDate",
           "targetSymbolicName": "DocReceivedDate",
           "targetDataType": "STRING"
@@ -153,7 +153,7 @@
         {
           "sourceProperty": "a109",
           "sourceSymbolicName": "a109",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "UnderwriterName",
           "targetSymbolicName": "UnderwriterName",
           "targetDataType": "STRING"
@@ -161,7 +161,7 @@
         {
           "sourceProperty": "a96",
           "sourceSymbolicName": "a96",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "PolicyHolderName",
           "targetSymbolicName": "PolicyHolderName",
           "targetDataType": "STRING"
@@ -177,7 +177,7 @@
         {
           "sourceProperty": "case_id",
           "sourceSymbolicName": "case_id",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "CaseID",
           "targetSymbolicName": "CaseID",
           "targetDataType": "STRING"
@@ -185,7 +185,7 @@
         {
           "sourceProperty": "case_type",
           "sourceSymbolicName": "case_type",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "CaseType",
           "targetSymbolicName": "CaseType",
           "targetDataType": "STRING"
@@ -193,7 +193,7 @@
         {
           "sourceProperty": "case_status",
           "sourceSymbolicName": "case_status",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "CaseStatus",
           "targetSymbolicName": "CaseStatus",
           "targetDataType": "STRING"
@@ -201,7 +201,7 @@
         {
           "sourceProperty": "customer_id",
           "sourceSymbolicName": "customer_id",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "CustomerID",
           "targetSymbolicName": "CustomerID",
           "targetDataType": "STRING"
@@ -209,7 +209,7 @@
         {
           "sourceProperty": "customer_name",
           "sourceSymbolicName": "customer_name",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "CustName",
           "targetSymbolicName": "CustName",
           "targetDataType": "STRING"
@@ -217,7 +217,7 @@
         {
           "sourceProperty": "policy_number",
           "sourceSymbolicName": "policy_number",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "PolicyNum",
           "targetSymbolicName": "PolicyNum",
           "targetDataType": "STRING"
@@ -225,7 +225,7 @@
         {
           "sourceProperty": "case_description",
           "sourceSymbolicName": "case_description",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "CaseDescription",
           "targetSymbolicName": "CaseDescription",
           "targetDataType": "STRING"
@@ -233,7 +233,7 @@
         {
           "sourceProperty": "case_owner",
           "sourceSymbolicName": "case_owner",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "CaseOwner",
           "targetSymbolicName": "CaseOwner",
           "targetDataType": "STRING"
@@ -241,7 +241,7 @@
         {
           "sourceProperty": "department",
           "sourceSymbolicName": "department",
-          "sourceDataType": "character varying",
+          "sourceDataType": "STRING",
           "targetProperty": "Department",
           "targetSymbolicName": "Department",
           "targetDataType": "STRING"
@@ -249,7 +249,7 @@
         {
           "sourceProperty": "case_created_date",
           "sourceSymbolicName": "case_created_date",
-          "sourceDataType": "character varying",
+          "sourceDataType": "DATE",
           "targetProperty": "CaseCreatedDate",
           "targetSymbolicName": "CaseCreatedDate",
           "targetDataType": "DATE"
@@ -257,7 +257,7 @@
         {
           "sourceProperty": "case_closed_date",
           "sourceSymbolicName": "case_closed_date",
-          "sourceDataType": "character varying",
+          "sourceDataType": "DATE",
           "targetProperty": "CaseClosedDate",
           "targetSymbolicName": "CaseClosedDate",
           "targetDataType": "DATE"
