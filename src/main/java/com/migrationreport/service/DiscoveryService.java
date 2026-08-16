@@ -60,6 +60,9 @@ public class DiscoveryService {
     private ConfigurationService configurationService;
     
     @Autowired
+    private PropertyMappingService propertyMappingService;
+    
+    @Autowired
     private SqlDialect dialect;
 
     @Value("${search.system-columns.created-date:CREATE_DATE}")
@@ -257,12 +260,13 @@ public class DiscoveryService {
             // codeql[java/sql-injection] False Positive: Identifier is strictly validated by SqlIdentifierValidator
             List<Map<String, Object>> results = jdbcTemplate.queryForList(sql, docClass);
             if (results.isEmpty()) {
-                // Fallback for demo schema if tables don't properly join or have data
-                return List.of(
-                    Map.of(PROPERTY_NAME, docClass + "_Prop1", SYMBOLIC_NAME_PROP, "Prop1", DATA_TYPE, STRING_TYPE),
-                    Map.of(PROPERTY_NAME, docClass + "_Prop2", SYMBOLIC_NAME_PROP, "Prop2", DATA_TYPE, INTEGER_TYPE),
-                    Map.of(PROPERTY_NAME, docClass + "_Prop3", SYMBOLIC_NAME_PROP, "Prop3", DATA_TYPE, DATETIME_TYPE)
-                );
+                if (propertyMappingService != null) {
+                    List<Map<String, Object>> jsonProps = propertyMappingService.getClassProperties(docClass, "source");
+                    if (jsonProps != null && !jsonProps.isEmpty()) {
+                        return jsonProps;
+                    }
+                }
+                return List.of();
             }
             
             // Format datatypes
@@ -291,13 +295,14 @@ public class DiscoveryService {
             }
             return formattedResults;
         } catch (Exception e) {
-            log.error("Failed to fetch properties for class: " + docClass, e);
-            // Fallback for demo schema if tables don't properly join
-            return List.of(
-                Map.of(PROPERTY_NAME, docClass + "_Prop1", DATA_TYPE, STRING_TYPE),
-                Map.of(PROPERTY_NAME, docClass + "_Prop2", DATA_TYPE, INTEGER_TYPE),
-                Map.of(PROPERTY_NAME, docClass + "_Prop3", DATA_TYPE, DATETIME_TYPE)
-            );
+            log.warn("Failed to fetch properties from DB for class '{}', falling back to JSON configuration: {}", docClass, e.getMessage());
+            if (propertyMappingService != null) {
+                List<Map<String, Object>> jsonProps = propertyMappingService.getClassProperties(docClass, "source");
+                if (jsonProps != null && !jsonProps.isEmpty()) {
+                    return jsonProps;
+                }
+            }
+            return List.of();
         }
     }
 

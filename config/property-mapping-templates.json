@@ -1,159 +1,240 @@
 [ {
-  "templateId" : "1f2945b1-ecea-408d-bd65-ff003601e39c",
-  "templateName" : "Invoice",
-  "applicationId" : "ccol",
-  "sourceDocumentClass" : "HomeLoanApplication",
-  "targetDocumentClass" : "HomeLoanApplication",
+  "templateId" : "e8d2cbcf-c8dc-4598-a71b-437bb1a355b4",
+  "templateName" : "IS_POLICY_DOC",
+  "applicationId" : "doctaba",
+  "sourceObjectStore" : null,
+  "targetObjectStore" : null,
+  "sourceDocumentClass" : "PolicyDoc",
+  "targetDocumentClass" : "PolicyDocument",
   "mappings" : [ {
-    "sourceProperty" : "u7ec8_applname",
-    "sourceSymbolicName" : "ApplName",
-    "sourceDataType" : "STRING",
-    "targetProperty" : "u7ec8_applname",
-    "targetSymbolicName" : "ApplName",
+    "sourceProperty" : "F_docnumber",
+    "sourceSymbolicName" : "F_docnumber",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "DocumentNumber",
+    "targetSymbolicName" : "DocumentNumber",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "u90b8_applno",
-    "sourceSymbolicName" : "ApplNo",
-    "sourceDataType" : "STRING",
-    "targetProperty" : "u90b8_applno",
-    "targetSymbolicName" : "ApplNo",
+    "sourceProperty" : "F_docclassnumber",
+    "sourceSymbolicName" : "F_docclassnumber",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "DocclassNumber",
+    "targetSymbolicName" : "DocclassNumber",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "ue148_applstatus",
-    "sourceSymbolicName" : "ApplStatus",
-    "sourceDataType" : "STRING",
-    "targetProperty" : "ue148_applstatus",
-    "targetSymbolicName" : "ApplStatus",
+    "sourceProperty" : "f_entrydate",
+    "sourceSymbolicName" : "f_entrydate",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "ISEntryDate",
+    "targetSymbolicName" : "ISEntryDate",
+    "targetDataType" : "DATE"
+  }, {
+    "sourceProperty" : "a70",
+    "sourceSymbolicName" : "a70",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "CIFNumber",
+    "targetSymbolicName" : "CIFNumber",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "u3018_brokername",
-    "sourceSymbolicName" : "BrokerName",
-    "sourceDataType" : "STRING",
-    "targetProperty" : "u3018_brokername",
-    "targetSymbolicName" : "BrokerName",
+    "sourceProperty" : "a77",
+    "sourceSymbolicName" : "a77",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "AcountNumber",
+    "targetSymbolicName" : "AcountNumber",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "u95a4_intrate",
-    "sourceSymbolicName" : "IntRate",
-    "sourceDataType" : "FLOAT",
-    "targetProperty" : "u95a4_intrate",
-    "targetSymbolicName" : "IntRate",
+    "sourceProperty" : "a95",
+    "sourceSymbolicName" : "a95",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "PolicyNumber",
+    "targetSymbolicName" : "PolicyNumber",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "a98",
+    "sourceSymbolicName" : "a98",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "PolicyStatus",
+    "targetSymbolicName" : "PolicyStatus",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "a97",
+    "sourceSymbolicName" : "a97",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "PolicyType",
+    "targetSymbolicName" : "PolicyType",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "a101",
+    "sourceSymbolicName" : "a101",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "PremiumAmount",
+    "targetSymbolicName" : "PremiumAmount",
     "targetDataType" : "FLOAT"
   }, {
-    "sourceProperty" : "u65d4_loanamount",
-    "sourceSymbolicName" : "LoanAmount",
-    "sourceDataType" : "FLOAT",
-    "targetProperty" : "element_value",
-    "targetSymbolicName" : "LoanPurpose",
-    "targetDataType" : "STRING"
+    "sourceProperty" : "a99",
+    "sourceSymbolicName" : "a99",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "EffectiveDate",
+    "targetSymbolicName" : "EffectiveDate",
+    "targetDataType" : "DATE"
   }, {
-    "sourceProperty" : "element_value",
-    "sourceSymbolicName" : "LoanPurpose",
-    "sourceDataType" : "STRING",
-    "targetProperty" : "u65d4_loanamount",
-    "targetSymbolicName" : "LoanAmount",
+    "sourceProperty" : "a100",
+    "sourceSymbolicName" : "a100",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "ExpiryDate",
+    "targetSymbolicName" : "ExpiryDate",
+    "targetDataType" : "DATE"
+  }, {
+    "sourceProperty" : "a102",
+    "sourceSymbolicName" : "a102",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "SumInsured",
+    "targetSymbolicName" : "SumInsured",
     "targetDataType" : "FLOAT"
   }, {
-    "sourceProperty" : "u1bb6_loanterm",
-    "sourceSymbolicName" : "LoanTerm",
-    "sourceDataType" : "OBJECT",
-    "targetProperty" : "u1bb6_loanterm",
-    "targetSymbolicName" : "LoanTerm",
-    "targetDataType" : "OBJECT"
-  }, {
-    "sourceProperty" : "u9af8_propaddress",
-    "sourceSymbolicName" : "PropAddress",
-    "sourceDataType" : "STRING",
-    "targetProperty" : "u9af8_propaddress",
-    "targetSymbolicName" : "PropAddress",
+    "sourceProperty" : "a103",
+    "sourceSymbolicName" : "a103",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "BranchCode",
+    "targetSymbolicName" : "BranchCode",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "u5163_settledate",
-    "sourceSymbolicName" : "SettleDate",
-    "sourceDataType" : "DATETIME",
-    "targetProperty" : "u5163_settledate",
-    "targetSymbolicName" : "SettleDate",
-    "targetDataType" : "DATETIME"
+    "sourceProperty" : "a104",
+    "sourceSymbolicName" : "a104",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "AgentID",
+    "targetSymbolicName" : "AgentID",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "a105",
+    "sourceSymbolicName" : "a105",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "CustomerID",
+    "targetSymbolicName" : "CustomerID",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "a106",
+    "sourceSymbolicName" : "a106",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "LineOfBusiness",
+    "targetSymbolicName" : "LineOfBusiness",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "a107",
+    "sourceSymbolicName" : "a107",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "Currency",
+    "targetSymbolicName" : "Currency",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "a108",
+    "sourceSymbolicName" : "a108",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "DocReceivedDate",
+    "targetSymbolicName" : "DocReceivedDate",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "a109",
+    "sourceSymbolicName" : "a109",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "UnderwriterName",
+    "targetSymbolicName" : "UnderwriterName",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "a96",
+    "sourceSymbolicName" : "a96",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "PolicyHolderName",
+    "targetSymbolicName" : "PolicyHolderName",
+    "targetDataType" : "STRING"
   } ],
-  "lastModifiedBy" : "Admin",
-  "lastModifiedDate" : "2026-07-21T10:55:58.574Z"
+  "lastModifiedBy" : "migration_user",
+  "lastModifiedDate" : "2026-08-16T16:18:34.374Z"
 }, {
-  "templateId" : "9c58bba9-9dd9-4205-8d41-12315308f599",
-  "templateName" : "Home Loan",
-  "applicationId" : "ccol",
-  "sourceDocumentClass" : "BankAccount",
-  "targetDocumentClass" : "BankAccount",
+  "templateId" : "2f1a6c70-bc5a-4b2d-b283-ceedc19a3d71",
+  "templateName" : "CASE_CLAIM_DOC",
+  "applicationId" : "case_metadata",
+  "sourceObjectStore" : "FNIS",
+  "targetObjectStore" : "FNOS",
+  "sourceDocumentClass" : "Claim",
+  "targetDocumentClass" : "Claim",
   "mappings" : [ {
-    "sourceProperty" : "ua598_accholdername",
-    "sourceSymbolicName" : "AccHolderName",
-    "sourceDataType" : "STRING",
-    "targetProperty" : "ua598_accholdername",
-    "targetSymbolicName" : "AccHolderName",
+    "sourceProperty" : "case_id",
+    "sourceSymbolicName" : "case_id",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "CaseID",
+    "targetSymbolicName" : "CaseID",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "u3a18_accno",
-    "sourceSymbolicName" : "AccNo",
-    "sourceDataType" : "STRING",
-    "targetProperty" : "u3a18_accno",
-    "targetSymbolicName" : "AccNo",
+    "sourceProperty" : "case_type",
+    "sourceSymbolicName" : "case_type",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "CaseType",
+    "targetSymbolicName" : "CaseType",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "u5058_acctstatus",
-    "sourceSymbolicName" : "AcctStatus",
-    "sourceDataType" : "STRING",
-    "targetProperty" : "u5058_acctstatus",
-    "targetSymbolicName" : "AcctStatus",
+    "sourceProperty" : "case_status",
+    "sourceSymbolicName" : "case_status",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "CaseStatus",
+    "targetSymbolicName" : "CaseStatus",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "u46a8_accttype",
-    "sourceSymbolicName" : "AcctType",
-    "sourceDataType" : "STRING",
-    "targetProperty" : "u46a8_accttype",
-    "targetSymbolicName" : "AcctType",
+    "sourceProperty" : "customer_id",
+    "sourceSymbolicName" : "customer_id",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "CustomerID",
+    "targetSymbolicName" : "CustomerID",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "uaf94_availbalance",
-    "sourceSymbolicName" : "AvailBalance",
-    "sourceDataType" : "FLOAT",
-    "targetProperty" : "uaf94_availbalance",
-    "targetSymbolicName" : "AvailBalance",
-    "targetDataType" : "FLOAT"
-  }, {
-    "sourceProperty" : "u9ba8_branchname",
-    "sourceSymbolicName" : "BranchName",
-    "sourceDataType" : "STRING",
-    "targetProperty" : "u9ba8_branchname",
-    "targetSymbolicName" : "BranchName",
+    "sourceProperty" : "customer_name",
+    "sourceSymbolicName" : "customer_name",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "CustName",
+    "targetSymbolicName" : "CustName",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "u7908_bsbnumber",
-    "sourceSymbolicName" : "BSBNumber",
-    "sourceDataType" : "STRING",
-    "targetProperty" : "u7908_bsbnumber",
-    "targetSymbolicName" : "BSBNumber",
+    "sourceProperty" : "policy_number",
+    "sourceSymbolicName" : "policy_number",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "PolicyNum",
+    "targetSymbolicName" : "PolicyNum",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "u63a4_currentbalance",
-    "sourceSymbolicName" : "CurrentBalance",
-    "sourceDataType" : "FLOAT",
-    "targetProperty" : "u63a4_currentbalance",
-    "targetSymbolicName" : "CurrentBalance",
-    "targetDataType" : "FLOAT"
-  }, {
-    "sourceProperty" : "uf8f8_custid",
-    "sourceSymbolicName" : "CustID",
-    "sourceDataType" : "STRING",
-    "targetProperty" : "uf8f8_custid",
-    "targetSymbolicName" : "CustID",
+    "sourceProperty" : "case_description",
+    "sourceSymbolicName" : "case_description",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "CaseDescription",
+    "targetSymbolicName" : "CaseDescription",
     "targetDataType" : "STRING"
   }, {
-    "sourceProperty" : "ua3a3_opendate",
-    "sourceSymbolicName" : "OpenDate",
-    "sourceDataType" : "DATETIME",
-    "targetProperty" : "ua3a3_opendate",
-    "targetSymbolicName" : "OpenDate",
-    "targetDataType" : "DATETIME"
+    "sourceProperty" : "case_owner",
+    "sourceSymbolicName" : "case_owner",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "CaseOwner",
+    "targetSymbolicName" : "CaseOwner",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "department",
+    "sourceSymbolicName" : "department",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "Department",
+    "targetSymbolicName" : "Department",
+    "targetDataType" : "STRING"
+  }, {
+    "sourceProperty" : "case_created_date",
+    "sourceSymbolicName" : "case_created_date",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "CaseCreatedDate",
+    "targetSymbolicName" : "CaseCreatedDate",
+    "targetDataType" : "DATE"
+  }, {
+    "sourceProperty" : "case_closed_date",
+    "sourceSymbolicName" : "case_closed_date",
+    "sourceDataType" : "character varying",
+    "targetProperty" : "CaseClosedDate",
+    "targetSymbolicName" : "CaseClosedDate",
+    "targetDataType" : "DATE"
   } ],
-  "lastModifiedBy" : "Admin",
-  "lastModifiedDate" : "2026-07-21T10:56:11.208Z"
+  "lastModifiedBy" : "migration_user",
+  "lastModifiedDate" : "2026-08-16T17:23:55.566Z"
 } ]

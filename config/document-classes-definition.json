@@ -1,0 +1,268 @@
+{
+  "documentClasses": [
+    {
+      "className": "PolicyDoc",
+      "displayName": "Policy Document",
+      "tableName": "doctaba",
+      "targetClass": "PolicyDocument",
+      "properties": [
+        {
+          "sourceProperty": "F_docnumber",
+          "sourceSymbolicName": "F_docnumber",
+          "sourceDataType": "character varying",
+          "targetProperty": "DocumentNumber",
+          "targetSymbolicName": "DocumentNumber",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "F_docclassnumber",
+          "sourceSymbolicName": "F_docclassnumber",
+          "sourceDataType": "character varying",
+          "targetProperty": "DocclassNumber",
+          "targetSymbolicName": "DocclassNumber",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "f_entrydate",
+          "sourceSymbolicName": "f_entrydate",
+          "sourceDataType": "character varying",
+          "targetProperty": "ISEntryDate",
+          "targetSymbolicName": "ISEntryDate",
+          "targetDataType": "DATE"
+        },
+        {
+          "sourceProperty": "a70",
+          "sourceSymbolicName": "a70",
+          "sourceDataType": "character varying",
+          "targetProperty": "CIFNumber",
+          "targetSymbolicName": "CIFNumber",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "a77",
+          "sourceSymbolicName": "a77",
+          "sourceDataType": "character varying",
+          "targetProperty": "AcountNumber",
+          "targetSymbolicName": "AcountNumber",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "a95",
+          "sourceSymbolicName": "a95",
+          "sourceDataType": "character varying",
+          "targetProperty": "PolicyNumber",
+          "targetSymbolicName": "PolicyNumber",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "a98",
+          "sourceSymbolicName": "a98",
+          "sourceDataType": "character varying",
+          "targetProperty": "PolicyStatus",
+          "targetSymbolicName": "PolicyStatus",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "a97",
+          "sourceSymbolicName": "a97",
+          "sourceDataType": "character varying",
+          "targetProperty": "PolicyType",
+          "targetSymbolicName": "PolicyType",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "a101",
+          "sourceSymbolicName": "a101",
+          "sourceDataType": "character varying",
+          "targetProperty": "PremiumAmount",
+          "targetSymbolicName": "PremiumAmount",
+          "targetDataType": "FLOAT"
+        },
+        {
+          "sourceProperty": "a99",
+          "sourceSymbolicName": "a99",
+          "sourceDataType": "character varying",
+          "targetProperty": "EffectiveDate",
+          "targetSymbolicName": "EffectiveDate",
+          "targetDataType": "DATE"
+        },
+        {
+          "sourceProperty": "a100",
+          "sourceSymbolicName": "a100",
+          "sourceDataType": "character varying",
+          "targetProperty": "ExpiryDate",
+          "targetSymbolicName": "ExpiryDate",
+          "targetDataType": "DATE"
+        },
+        {
+          "sourceProperty": "a102",
+          "sourceSymbolicName": "a102",
+          "sourceDataType": "character varying",
+          "targetProperty": "SumInsured",
+          "targetSymbolicName": "SumInsured",
+          "targetDataType": "FLOAT"
+        },
+        {
+          "sourceProperty": "a103",
+          "sourceSymbolicName": "a103",
+          "sourceDataType": "character varying",
+          "targetProperty": "BranchCode",
+          "targetSymbolicName": "BranchCode",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "a104",
+          "sourceSymbolicName": "a104",
+          "sourceDataType": "character varying",
+          "targetProperty": "AgentID",
+          "targetSymbolicName": "AgentID",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "a105",
+          "sourceSymbolicName": "a105",
+          "sourceDataType": "character varying",
+          "targetProperty": "CustomerID",
+          "targetSymbolicName": "CustomerID",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "a106",
+          "sourceSymbolicName": "a106",
+          "sourceDataType": "character varying",
+          "targetProperty": "LineOfBusiness",
+          "targetSymbolicName": "LineOfBusiness",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "a107",
+          "sourceSymbolicName": "a107",
+          "sourceDataType": "character varying",
+          "targetProperty": "Currency",
+          "targetSymbolicName": "Currency",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "a108",
+          "sourceSymbolicName": "a108",
+          "sourceDataType": "character varying",
+          "targetProperty": "DocReceivedDate",
+          "targetSymbolicName": "DocReceivedDate",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "a109",
+          "sourceSymbolicName": "a109",
+          "sourceDataType": "character varying",
+          "targetProperty": "UnderwriterName",
+          "targetSymbolicName": "UnderwriterName",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "a96",
+          "sourceSymbolicName": "a96",
+          "sourceDataType": "character varying",
+          "targetProperty": "PolicyHolderName",
+          "targetSymbolicName": "PolicyHolderName",
+          "targetDataType": "STRING"
+        }
+      ]
+    },
+    {
+      "className": "Claim",
+      "displayName": "Claim",
+      "tableName": "case_metadata",
+      "targetClass": "Claim",
+      "properties": [
+        {
+          "sourceProperty": "case_id",
+          "sourceSymbolicName": "case_id",
+          "sourceDataType": "character varying",
+          "targetProperty": "CaseID",
+          "targetSymbolicName": "CaseID",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "case_type",
+          "sourceSymbolicName": "case_type",
+          "sourceDataType": "character varying",
+          "targetProperty": "CaseType",
+          "targetSymbolicName": "CaseType",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "case_status",
+          "sourceSymbolicName": "case_status",
+          "sourceDataType": "character varying",
+          "targetProperty": "CaseStatus",
+          "targetSymbolicName": "CaseStatus",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "customer_id",
+          "sourceSymbolicName": "customer_id",
+          "sourceDataType": "character varying",
+          "targetProperty": "CustomerID",
+          "targetSymbolicName": "CustomerID",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "customer_name",
+          "sourceSymbolicName": "customer_name",
+          "sourceDataType": "character varying",
+          "targetProperty": "CustName",
+          "targetSymbolicName": "CustName",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "policy_number",
+          "sourceSymbolicName": "policy_number",
+          "sourceDataType": "character varying",
+          "targetProperty": "PolicyNum",
+          "targetSymbolicName": "PolicyNum",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "case_description",
+          "sourceSymbolicName": "case_description",
+          "sourceDataType": "character varying",
+          "targetProperty": "CaseDescription",
+          "targetSymbolicName": "CaseDescription",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "case_owner",
+          "sourceSymbolicName": "case_owner",
+          "sourceDataType": "character varying",
+          "targetProperty": "CaseOwner",
+          "targetSymbolicName": "CaseOwner",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "department",
+          "sourceSymbolicName": "department",
+          "sourceDataType": "character varying",
+          "targetProperty": "Department",
+          "targetSymbolicName": "Department",
+          "targetDataType": "STRING"
+        },
+        {
+          "sourceProperty": "case_created_date",
+          "sourceSymbolicName": "case_created_date",
+          "sourceDataType": "character varying",
+          "targetProperty": "CaseCreatedDate",
+          "targetSymbolicName": "CaseCreatedDate",
+          "targetDataType": "DATE"
+        },
+        {
+          "sourceProperty": "case_closed_date",
+          "sourceSymbolicName": "case_closed_date",
+          "sourceDataType": "character varying",
+          "targetProperty": "CaseClosedDate",
+          "targetSymbolicName": "CaseClosedDate",
+          "targetDataType": "DATE"
+        }
+      ]
+    }
+  ]
+}

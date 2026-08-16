@@ -26,8 +26,21 @@ public class PropertyMappingController {
         return ResponseEntity.ok(mappingService.getTemplatesByAppId(appId));
     }
 
+    @GetMapping("/document-classes")
+    public ResponseEntity<List<String>> getDocumentClasses(@RequestParam(required = false, defaultValue = "source") String type) {
+        return ResponseEntity.ok(mappingService.getDocumentClasses(type));
+    }
+
+    @GetMapping("/class-properties")
+    public ResponseEntity<List<java.util.Map<String, Object>>> getClassProperties(@RequestParam String docClass, @RequestParam(required = false, defaultValue = "source") String type) {
+        return ResponseEntity.ok(mappingService.getClassProperties(docClass, type));
+    }
+
     @PostMapping
     public ResponseEntity<PropertyMappingTemplate> saveTemplate(@RequestBody PropertyMappingTemplate template) {
+        if (template.getApplicationId() == null || template.getApplicationId().isEmpty()) {
+            template.setApplicationId("doctaba");
+        }
         mappingService.saveTemplate(template);
         return ResponseEntity.ok(template);
     }

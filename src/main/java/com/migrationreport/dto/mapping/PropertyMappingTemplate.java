@@ -8,11 +8,19 @@ public class PropertyMappingTemplate {
     private String templateId;
     private String templateName;
     private String applicationId;
+    private String sourceObjectStore;
+    private String targetObjectStore;
     private String sourceDocumentClass;
     private String targetDocumentClass;
     private List<PropertyMap> mappings;
     private String lastModifiedBy;
     private String lastModifiedDate;
+
+    public String getSourceObjectStore() { return sourceObjectStore; }
+    public void setSourceObjectStore(String sourceObjectStore) { this.sourceObjectStore = sourceObjectStore; }
+
+    public String getTargetObjectStore() { return targetObjectStore; }
+    public void setTargetObjectStore(String targetObjectStore) { this.targetObjectStore = targetObjectStore; }
 
     public String getTemplateId() { return templateId; }
     public void setTemplateId(String templateId) { this.templateId = templateId; }
