@@ -150,8 +150,13 @@ public class ChecksumService {
         for (Map.Entry<String, Object> entry : row.entrySet()) {
             String key = entry.getKey();
             Object val = entry.getValue();
-            if (key.equalsIgnoreCase(classIdCol) && val != null) {
-                val = classMap.getOrDefault(val.toString().toUpperCase(), val.toString());
+            if ((key.equalsIgnoreCase(classIdCol) || key.equalsIgnoreCase("f_docclassnumber")) && val != null) {
+                String valStr = val.toString().trim();
+                if (classMap.containsKey(valStr)) {
+                    val = classMap.get(valStr);
+                } else if (classMap.containsKey(valStr.toUpperCase())) {
+                    val = classMap.get(valStr.toUpperCase());
+                }
             }
             rec.put(key.toLowerCase(), val);
             rec.put(key, val);
@@ -162,28 +167,50 @@ public class ChecksumService {
     private Map<String, String> getClassIdToSymbolicNameMap(String appIdStr, String schemaStr) {
         Map<String, String> map = new java.util.HashMap<>();
         try {
-            String classdefTable = configurationService.getSystemTable(appIdStr, CLASSDEF_KEY, CLASSDEF_KEY);
-            String symbolicNameCol = configurationService.getSystemColumn(appIdStr, "symbolic-name-col", "symbolic_name");
-
-            // codeql[java/sql-injection] False Positive: Identifier is strictly validated by SqlIdentifierValidator
-            String sql = "SELECT " + OBJECT_ID + ", " + symbolicNameCol + " FROM " + schemaStr + classdefTable;
-            // codeql[java/sql-injection] False Positive: Identifier is strictly validated by SqlIdentifierValidator
+            String sql = "SELECT f_docclassnumber, f_docclassname FROM public.document_class";
             List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
             for (Map<String, Object> row : rows) {
-                String id = row.get(OBJECT_ID) != null ? row.get(OBJECT_ID).toString().toUpperCase() : "";
-                
-                Object nameObj = row.get(symbolicNameCol);
-                if (nameObj == null) {
-                    nameObj = row.get(symbolicNameCol.toLowerCase());
+                Object numObj = row.get("f_docclassnumber");
+                Object nameObj = row.get("f_docclassname");
+                if (numObj == null) {
+                    numObj = row.get("F_DOCCLASSNUMBER");
                 }
-                String name = nameObj != null ? nameObj.toString() : "";
-                
-                if (!id.isEmpty() && !name.isEmpty()) {
-                    map.put(id, name);
+                if (nameObj == null) {
+                    nameObj = row.get("F_DOCCLASSNAME");
+                }
+                if (numObj != null && nameObj != null) {
+                    map.put(numObj.toString().trim(), nameObj.toString().trim());
                 }
             }
         } catch (Exception e) {
-            log.error("getClassIdToSymbolicNameMap error: {}", e.getMessage(), e);
+            log.warn("Failed to query public.document_class, trying classdef: {}", e.getMessage());
+        }
+
+        if (map.isEmpty()) {
+            try {
+                String classdefTable = configurationService.getSystemTable(appIdStr, CLASSDEF_KEY, CLASSDEF_KEY);
+                String symbolicNameCol = configurationService.getSystemColumn(appIdStr, "symbolic-name-col", "symbolic_name");
+
+                // codeql[java/sql-injection] False Positive: Identifier is strictly validated by SqlIdentifierValidator
+                String sql = "SELECT " + OBJECT_ID + ", " + symbolicNameCol + " FROM " + schemaStr + classdefTable;
+                // codeql[java/sql-injection] False Positive: Identifier is strictly validated by SqlIdentifierValidator
+                List<Map<String, Object>> rows = jdbcTemplate.queryForList(sql);
+                for (Map<String, Object> row : rows) {
+                    String id = row.get(OBJECT_ID) != null ? row.get(OBJECT_ID).toString().toUpperCase() : "";
+                    
+                    Object nameObj = row.get(symbolicNameCol);
+                    if (nameObj == null) {
+                        nameObj = row.get(symbolicNameCol.toLowerCase());
+                    }
+                    String name = nameObj != null ? nameObj.toString() : "";
+                    
+                    if (!id.isEmpty() && !name.isEmpty()) {
+                        map.put(id, name);
+                    }
+                }
+            } catch (Exception ex) {
+                log.error("getClassIdToSymbolicNameMap fallback error: {}", ex.getMessage(), ex);
+            }
         }
         return map;
     }
