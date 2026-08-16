@@ -65,6 +65,13 @@ public class FolderController {
             fileName = (lastSep >= 0) ? filePath.substring(lastSep + 1) : filePath;
         }
 
+        if (download) {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+                    .body(resource);
+        }
+
         MediaType mediaType = MediaTypeFactory.getMediaType(fileName)
                 .orElse(MediaType.APPLICATION_OCTET_STREAM);
 
@@ -73,11 +80,9 @@ public class FolderController {
             mediaType = MediaType.TEXT_PLAIN;
         }
 
-        String dispositionType = download ? "attachment" : "inline";
-
         return ResponseEntity.ok()
                 .contentType(mediaType)
-                .header(HttpHeaders.CONTENT_DISPOSITION, dispositionType + "; filename=\"" + fileName + "\"")
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"")
                 .body(resource);
     }
 }
