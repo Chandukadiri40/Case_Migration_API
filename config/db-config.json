@@ -2,9 +2,9 @@
   "activeDatabaseType" : "postgres",
   "databases" : [ {
     "databaseType" : "postgres",
-    "password" : "ENC(Xv2j6/HM6I6xuVpsXYWNJi+F7hiyv+dCb3EaztKcuqZRKGJ3)",
+    "password" : "ENC(UfDKJKMEnD9iM2n5WFJzFzNuZp4URL6Jc+xxwBRH4Xs=)",
     "driver" : "org.postgresql.Driver",
-    "url" : "jdbc:postgresql://localhost:5432/Migration",
+    "url" : "jdbc:postgresql://192.168.1.145:5432/ISMigration",
     "username" : "postgres"
   } ]
 }
