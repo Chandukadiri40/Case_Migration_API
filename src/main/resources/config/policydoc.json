@@ -1,0 +1,128 @@
+{
+  "DBClassNames": "Policy Document",
+  "DocumentClass": "PolicyDocument",
+  "SourceDocumentClass": "PolicyDoc",
+  "TargetDocumentClass": "PolicyDocument",
+  "properties": [
+    {
+      "sourceProperty": "F_docnumber",
+      "sourceDataType": "character varying",
+      "targetProperty": "DocumentNumber",
+      "targetDataType": "STRING"
+    },
+    {
+      "sourceProperty": "F_docclassnumber",
+      "sourceDataType": "character varying",
+      "targetProperty": "DocclassNumber",
+      "targetDataType": "STRING"
+    },
+    {
+      "sourceProperty": "f_entrydate",
+      "sourceDataType": "character varying",
+      "targetProperty": "ISEntryDate",
+      "targetDataType": "DATE"
+    },
+    {
+      "sourceProperty": "a70",
+      "sourceDataType": "character varying",
+      "targetProperty": "CIFNumber",
+      "targetDataType": "STRING"
+    },
+    {
+      "sourceProperty": "a77",
+      "sourceDataType": "character varying",
+      "targetProperty": "AcountNumber",
+      "targetDataType": "STRING"
+    },
+    {
+      "sourceProperty": "a95",
+      "sourceDataType": "character varying",
+      "targetProperty": "PolicyNumber",
+      "targetDataType": "STRING"
+    },
+    {
+      "sourceProperty": "a98",
+      "sourceDataType": "character varying",
+      "targetProperty": "PolicyStatus",
+      "targetDataType": "STRING"
+    },
+    {
+      "sourceProperty": "a97",
+      "sourceDataType": "character varying",
+      "targetProperty": "PolicyType",
+      "targetDataType": "STRING"
+    },
+    {
+      "sourceProperty": "a101",
+      "sourceDataType": "character varying",
+      "targetProperty": "PremiumAmount",
+      "targetDataType": "FLOAT"
+    },
+    {
+      "sourceProperty": "a99",
+      "sourceDataType": "character varying",
+      "targetProperty": "EffectiveDate",
+      "targetDataType": "DATE"
+    },
+    {
+      "sourceProperty": "a100",
+      "sourceDataType": "character varying",
+      "targetProperty": "ExpiryDate",
+      "targetDataType": "DATE"
+    },
+    {
+      "sourceProperty": "a102",
+      "sourceDataType": "character varying",
+      "targetProperty": "SumInsured",
+      "targetDataType": "FLOAT"
+    },
+    {
+      "sourceProperty": "a103",
+      "sourceDataType": "character varying",
+      "targetProperty": "BranchCode",
+      "targetDataType": "STRING"
+    },
+    {
+      "sourceProperty": "a104",
+      "sourceDataType": "character varying",
+      "targetProperty": "AgentID",
+      "targetDataType": "STRING"
+    },
+    {
+      "sourceProperty": "a105",
+      "sourceDataType": "character varying",
+      "targetProperty": "CustomerID",
+      "targetDataType": "STRING"
+    },
+    {
+      "sourceProperty": "a106",
+      "sourceDataType": "character varying",
+      "targetProperty": "LineOfBusiness",
+      "targetDataType": "STRING"
+    },
+    {
+      "sourceProperty": "a107",
+      "sourceDataType": "character varying",
+      "targetProperty": "Currency",
+      "targetDataType": "STRING"
+    },
+    {
+      "sourceProperty": "a108",
+      "sourceDataType": "character varying",
+      "targetProperty": "DocReceivedDate",
+      "targetDataType": "STRING"
+    },
+    {
+      "sourceProperty": "a109",
+      "sourceDataType": "character varying",
+      "targetProperty": "UnderwriterName",
+      "targetDataType": "STRING"
+    },
+    {
+      "sourceProperty": "a96",
+      "sourceDataType": "character varying",
+      "targetProperty": "PolicyHolderName",
+      "targetDataType": "STRING"
+    }
+  ]
+}

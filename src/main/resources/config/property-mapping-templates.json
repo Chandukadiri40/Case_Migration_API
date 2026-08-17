@@ -150,91 +150,91 @@
   "lastModifiedBy" : "migration_user",
   "lastModifiedDate" : "2026-08-16T16:18:34.374Z"
 }, {
-  "templateId" : "2d8f6ac6-d3dd-461e-b8a0-a942110d8985",
+  "templateId" : "2f1a6c70-bc5a-4b2d-b283-ceedc19a3d71",
   "templateName" : "CASE_CLAIM_DOC",
   "applicationId" : "case_metadata",
   "sourceObjectStore" : "FNIS",
   "targetObjectStore" : "FNOS",
-  "sourceDocumentClass" : "CLAIMS_CASE_METADATA",
+  "sourceDocumentClass" : "Claim",
   "targetDocumentClass" : "Claim",
   "mappings" : [ {
     "sourceProperty" : "case_id",
     "sourceSymbolicName" : "case_id",
-    "sourceDataType" : "STRING",
+    "sourceDataType" : "character varying",
     "targetProperty" : "CaseID",
     "targetSymbolicName" : "CaseID",
     "targetDataType" : "STRING"
   }, {
     "sourceProperty" : "case_type",
     "sourceSymbolicName" : "case_type",
-    "sourceDataType" : "STRING",
+    "sourceDataType" : "character varying",
     "targetProperty" : "CaseType",
     "targetSymbolicName" : "CaseType",
     "targetDataType" : "STRING"
   }, {
     "sourceProperty" : "case_status",
     "sourceSymbolicName" : "case_status",
-    "sourceDataType" : "STRING",
+    "sourceDataType" : "character varying",
     "targetProperty" : "CaseStatus",
     "targetSymbolicName" : "CaseStatus",
     "targetDataType" : "STRING"
   }, {
     "sourceProperty" : "customer_id",
     "sourceSymbolicName" : "customer_id",
-    "sourceDataType" : "STRING",
+    "sourceDataType" : "character varying",
     "targetProperty" : "CustomerID",
     "targetSymbolicName" : "CustomerID",
     "targetDataType" : "STRING"
   }, {
     "sourceProperty" : "customer_name",
     "sourceSymbolicName" : "customer_name",
-    "sourceDataType" : "STRING",
+    "sourceDataType" : "character varying",
     "targetProperty" : "CustName",
     "targetSymbolicName" : "CustName",
     "targetDataType" : "STRING"
   }, {
     "sourceProperty" : "policy_number",
     "sourceSymbolicName" : "policy_number",
-    "sourceDataType" : "STRING",
+    "sourceDataType" : "character varying",
     "targetProperty" : "PolicyNum",
     "targetSymbolicName" : "PolicyNum",
     "targetDataType" : "STRING"
   }, {
     "sourceProperty" : "case_description",
     "sourceSymbolicName" : "case_description",
-    "sourceDataType" : "STRING",
+    "sourceDataType" : "character varying",
     "targetProperty" : "CaseDescription",
     "targetSymbolicName" : "CaseDescription",
     "targetDataType" : "STRING"
   }, {
     "sourceProperty" : "case_owner",
     "sourceSymbolicName" : "case_owner",
-    "sourceDataType" : "STRING",
+    "sourceDataType" : "character varying",
     "targetProperty" : "CaseOwner",
     "targetSymbolicName" : "CaseOwner",
     "targetDataType" : "STRING"
   }, {
     "sourceProperty" : "department",
     "sourceSymbolicName" : "department",
-    "sourceDataType" : "STRING",
+    "sourceDataType" : "character varying",
     "targetProperty" : "Department",
     "targetSymbolicName" : "Department",
     "targetDataType" : "STRING"
   }, {
     "sourceProperty" : "case_created_date",
     "sourceSymbolicName" : "case_created_date",
-    "sourceDataType" : "DATE",
+    "sourceDataType" : "character varying",
     "targetProperty" : "CaseCreatedDate",
     "targetSymbolicName" : "CaseCreatedDate",
     "targetDataType" : "DATE"
   }, {
     "sourceProperty" : "case_closed_date",
     "sourceSymbolicName" : "case_closed_date",
-    "sourceDataType" : "DATE",
+    "sourceDataType" : "character varying",
     "targetProperty" : "CaseClosedDate",
     "targetSymbolicName" : "CaseClosedDate",
     "targetDataType" : "DATE"
   } ],
   "lastModifiedBy" : "migration_user",
-  "lastModifiedDate" : "2026-08-17T12:03:30.382Z"
+  "lastModifiedDate" : "2026-08-16T17:23:55.566Z"
 } ]

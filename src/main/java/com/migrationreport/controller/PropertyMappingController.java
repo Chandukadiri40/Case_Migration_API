@@ -39,7 +39,7 @@ public class PropertyMappingController {
     @PostMapping
     public ResponseEntity<PropertyMappingTemplate> saveTemplate(@RequestBody PropertyMappingTemplate template) {
         if (template.getApplicationId() == null || template.getApplicationId().isEmpty()) {
-            template.setApplicationId("doctaba");
+            template.setApplicationId("doctaba_staging_table");
         }
         mappingService.saveTemplate(template);
         return ResponseEntity.ok(template);

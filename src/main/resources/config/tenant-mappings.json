@@ -1,0 +1,63 @@
+{
+  "applications" : [ {
+    "appId" : "ccol",
+    "appName" : "Ccol",
+    "objectStore" : "FNOS",
+    "schema" : "public",
+    "classifiedTables" : {
+      "source" : [ "docversion_source" ],
+      "staging" : [ "docversion_stagging" ],
+      "target" : [ "docversion_target" ],
+      "classdef" : [ "classdef" ],
+      "annotation" : [ "annotation" ],
+      "content" : [ "content" ],
+      "customobject" : [ "generic" ],
+      "checksum" : [ "checksum" ],
+      "columndefinition" : [ "columndef" ],
+      "propertydefinition" : [ "propertydef" ],
+      "globalpropertydef" : [ "globalpropertydef" ]
+    },
+    "primaryColumns" : null,
+    "systemColumns" : {
+      "status" : "migration_status",
+      "date" : "create_date",
+      "content-size" : "content_size",
+      "mime-type" : "mime_type",
+      "doc-id" : "object_id",
+      "class-id-col" : "object_class_id",
+      "symbolic-name-col" : "symbolic_name",
+      "annotated-id-col" : "annotated_id",
+      "target-guid-col" : "p8_doc_id"
+    }
+  }, {
+    "appId" : "prontotulo",
+    "appName" : "Pronto Tulo",
+    "objectStore" : "FNOS",
+    "schema" : "public",
+    "classifiedTables" : {
+      "source" : [ "docversion_source" ],
+      "staging" : [ "docversion_staging" ],
+      "target" : [ "docversion_target" ],
+      "classdef" : [ "classdeftable" ],
+      "annotation" : [ "annotations" ],
+      "content" : [ "containers" ],
+      "customobject" : [ "generic" ],
+      "checksum" : [ "checksumdetails" ],
+      "columndefinition" : [ "coldef" ],
+      "propertydefinition" : [ "propdef" ],
+      "globalpropertydef" : [ "global" ]
+    },
+    "primaryColumns" : null,
+    "systemColumns" : {
+      "status" : "migration_status",
+      "date" : "create_date",
+      "content-size" : "content_size",
+      "mime-type" : "mime_type",
+      "doc-id" : "object_id",
+      "class-id-col" : "object_class_id",
+      "symbolic-name-col" : "symbolic_name",
+      "annotated-id-col" : "annotated_id",
+      "target-guid-col" : "p8_doc_id"
+    }
+  } ]
+}

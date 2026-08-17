@@ -1,0 +1,10 @@
+{
+  "activeDatabaseType" : "postgres",
+  "databases" : [ {
+    "databaseType" : "postgres",
+    "password" : "ENC(MiGRpgNn1LipanvtIQ2fxq5q3nBlOII/Eh+hhP0t7/M=)",
+    "driver" : "org.postgresql.Driver",
+    "url" : "jdbc:postgresql://192.168.1.145:5432/ISMigration",
+    "username" : "postgres"
+  } ]
+}
