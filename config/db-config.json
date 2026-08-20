@@ -4,7 +4,7 @@
     "databaseType" : "postgres",
     "password" : "ENC(UfDKJKMEnD9iM2n5WFJzFzNuZp4URL6Jc+xxwBRH4Xs=)",
     "driver" : "org.postgresql.Driver",
-    "url" : "jdbc:postgresql://192.168.1.145:5432/ISMigration",
+    "url" : "jdbc:postgresql://192.168.1.143:5432/ISMigration",
     "username" : "postgres"
   } ]
 }

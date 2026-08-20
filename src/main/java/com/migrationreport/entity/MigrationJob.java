@@ -16,6 +16,9 @@ import java.time.LocalDateTime;
 @Table(name = "MIGRATION_JOBS")
 public class MigrationJob {
 
+    @Transient
+    private String modificationReason;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -61,6 +64,49 @@ public class MigrationJob {
 
     @Column(name = "log_path")
     private String logPath;
+
+    // Detailed Config Fields for Edit Modals
+    @Column(name = "import_target")
+    private String importTarget; // 'case' or 'is'
+
+    @Column(name = "start_date_param")
+    private String startDate;
+
+    @Column(name = "end_date_param")
+    private String endDate;
+
+    @Column(name = "doc_ids_param", length = 1000)
+    private String docIds;
+
+    @Column(name = "worker_threads")
+    private Integer workerThreads;
+
+    @Column(name = "batch_size")
+    private Integer batchSize;
+
+    @Column(name = "retry_count")
+    private Integer retryCount;
+
+    @Column(name = "retry_interval")
+    private Integer retryInterval;
+
+    @Column(name = "preserve_metadata")
+    private Boolean preserveMetadata;
+
+    @Column(name = "preserve_created_date")
+    private Boolean preserveCreatedDate;
+
+    @Column(name = "preserve_modified_date")
+    private Boolean preserveModifiedDate;
+
+    @Column(name = "validate_checksum")
+    private Boolean validateChecksum;
+
+    @Column(name = "continue_on_error")
+    private Boolean continueOnError;
+
+    @Column(name = "generate_audit")
+    private Boolean generateAudit;
 
     @Column(name = "process_pid")
     private Long processPid;

@@ -140,11 +140,32 @@ public class FolderService {
         result.put("basePath", basePath);
         result.put("hostIp", hostIp);
 
-        // 1. Try Local File System First (Native Linux Execution)
-        File localDir = new File(currentPath);
-        if (localDir.exists() && localDir.isDirectory()) {
+        // 1. Try Remote SFTP via JSch First
+        if (hostIp != null && !hostIp.trim().isEmpty() && !hostIp.equals("localhost") && !hostIp.equals("127.0.0.1")) {
             try {
-                List<Map<String, Object>> items = listLocalDirectory(localDir);
+                List<Map<String, Object>> sftpItems = listSftpDirectory(currentPath);
+                if (sftpItems != null) {
+                    long docCount = sftpItems.stream().filter(i -> !(Boolean) i.get("isDirectory")).count();
+                    long folderCount = sftpItems.stream().filter(i -> (Boolean) i.get("isDirectory")).count();
+
+                    result.put("items", sftpItems);
+                    result.put("documentCount", docCount);
+                    result.put("folderCount", folderCount);
+                    result.put("totalCount", sftpItems.size());
+                    result.put("source", "SFTP");
+                    result.put("pathExists", true);
+                    return result;
+                }
+            } catch (Exception e) {
+                log.warn("SFTP folder listing error for {}: {}. Falling back to local disk...", currentPath, e.getMessage());
+            }
+        }
+
+        // 2. Try Local File System Fallback
+        File dir = new File(currentPath);
+        if (dir.exists() && dir.isDirectory()) {
+            try {
+                List<Map<String, Object>> items = listLocalDirectory(dir);
                 long docCount = items.stream().filter(i -> !(Boolean) i.get("isDirectory")).count();
                 long folderCount = items.stream().filter(i -> (Boolean) i.get("isDirectory")).count();
                 
@@ -153,28 +174,11 @@ public class FolderService {
                 result.put("folderCount", folderCount);
                 result.put("totalCount", items.size());
                 result.put("source", "LOCAL");
+                result.put("pathExists", true);
                 return result;
             } catch (Exception e) {
                 log.warn("Error reading local directory {}: {}", currentPath, e.getMessage());
             }
-        }
-
-        // 2. Try Remote SFTP via JSch
-        try {
-            List<Map<String, Object>> sftpItems = listSftpDirectory(currentPath);
-            if (sftpItems != null && !sftpItems.isEmpty()) {
-                long docCount = sftpItems.stream().filter(i -> !(Boolean) i.get("isDirectory")).count();
-                long folderCount = sftpItems.stream().filter(i -> (Boolean) i.get("isDirectory")).count();
-
-                result.put("items", sftpItems);
-                result.put("documentCount", docCount);
-                result.put("folderCount", folderCount);
-                result.put("totalCount", sftpItems.size());
-                result.put("source", "SFTP");
-                return result;
-            }
-        } catch (Exception e) {
-            log.warn("SFTP folder listing error for {}: {}", currentPath, e.getMessage());
         }
 
         // 3. Path not found or SFTP unreachable: Return empty result
