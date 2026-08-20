@@ -12,6 +12,7 @@ import java.util.HashMap;
 import com.migrationreport.dto.config.DbConfigWrapper;
 import org.springframework.beans.factory.annotation.Value;
 
+import com.migrationreport.config.TruemigratePaths;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -21,9 +22,11 @@ import lombok.extern.slf4j.Slf4j;
 public class ConfigurationController {
 
     private final ConfigurationService configurationService;
+    private final TruemigratePaths truemigratePaths;
 
-    public ConfigurationController(ConfigurationService configurationService) {
+    public ConfigurationController(ConfigurationService configurationService, TruemigratePaths truemigratePaths) {
         this.configurationService = configurationService;
+        this.truemigratePaths = truemigratePaths;
     }
 
     @GetMapping
@@ -118,5 +121,11 @@ public class ConfigurationController {
         settings.put("fixedFilenetMapping", fixedFilenetMapping);
         log.info("Fetched UI Settings for Dynamic date window");
         return ResponseEntity.ok(settings);
+    }
+
+    @GetMapping("/env-paths")
+    public ResponseEntity<TruemigratePaths> getEnvPaths() {
+        log.info("Fetching truemigrate environment paths");
+        return ResponseEntity.ok(truemigratePaths);
     }
 }
