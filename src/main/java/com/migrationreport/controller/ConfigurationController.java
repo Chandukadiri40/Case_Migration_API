@@ -128,4 +128,44 @@ public class ConfigurationController {
         log.info("Fetching truemigrate environment paths");
         return ResponseEntity.ok(truemigratePaths);
     }
+
+    @GetMapping("/source-target")
+    public ResponseEntity<Map<String, Object>> getSourceTargetConfigs() {
+        log.info("Fetching Source and Target Configurations");
+        return ResponseEntity.ok(configurationService.getSourceTargetConfigs());
+    }
+
+    @PostMapping("/source-target")
+    public ResponseEntity<Map<String, Object>> saveSourceTargetConfigs(@RequestBody Map<String, Object> payload) {
+        log.info("Saving Source and Target Configurations");
+        return ResponseEntity.ok(configurationService.saveSourceTargetConfigs(payload));
+    }
+
+    @PostMapping("/test-source-connection")
+    public ResponseEntity<Map<String, Object>> testSourceConnection(@RequestBody Map<String, Object> params) {
+        log.info("[CONFIG] Dynamically testing Source Environment Connection with params: {}", params);
+        Map<String, Object> response = configurationService.testEnvironmentConnection(params);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/test-target-connection")
+    public ResponseEntity<Map<String, Object>> testTargetConnection(@RequestBody Map<String, Object> params) {
+        log.info("[CONFIG] Dynamically testing Target Environment Connection with params: {}", params);
+        Map<String, Object> response = configurationService.testEnvironmentConnection(params);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/test-storage-mount")
+    public ResponseEntity<Map<String, Object>> testStorageMount(@RequestBody Map<String, Object> params) {
+        log.info("[CONFIG] Dynamically testing Staging Storage Mount with params: {}", params);
+        Map<String, Object> response = configurationService.testStorageMount(params);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/test-execution-paths")
+    public ResponseEntity<Map<String, Object>> testExecutionPaths(@RequestBody Map<String, Object> params) {
+        log.info("[CONFIG] Dynamically testing Execution Paths with params: {}", params);
+        Map<String, Object> response = configurationService.testExecutionPaths(params);
+        return ResponseEntity.ok(response);
+    }
 }
