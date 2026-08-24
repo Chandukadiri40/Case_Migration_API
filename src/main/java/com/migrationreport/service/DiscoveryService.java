@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import com.migrationreport.exception.ResourceNotFoundException;
 import java.sql.Timestamp;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import com.migrationreport.dialect.SqlDialect;
 import com.migrationreport.security.SqlIdentifierValidator;
 
@@ -214,7 +215,7 @@ public class DiscoveryService {
             .sorted(String::compareTo)
             .toList();
     }
-
+    @Cacheable("discovery-classes")
     public List<String> getDocumentClasses(String appId, String tableType) {
         String schema = getSchema(appId);
         ApplicationConfig appConfig = configurationService.getApplicationConfig(appId);
@@ -233,7 +234,7 @@ public class DiscoveryService {
         
         return filterSystemClasses(classes);
     }
-
+    @Cacheable("discovery-properties")
     public List<Map<String, Object>> getClassProperties(String appId, String docClass) {
         String schema = getSchema(appId);
         String coldefTable = SqlIdentifierValidator.validateIdentifier(configurationService.getSystemTable(appId, COLUMNDEFINITION_KEY, COLUMNDEFINITION_KEY));
@@ -305,7 +306,7 @@ public class DiscoveryService {
             return List.of();
         }
     }
-
+    @Cacheable("discovery-reports")
     public List<Map<String, Object>> executeReport(String endpoint, DiscoveryCriteria criteria) {
         String schema = getSchema(criteria.getAppId());
         ApplicationConfig appConfig = configurationService.getApplicationConfig(criteria.getAppId());
@@ -382,7 +383,8 @@ public class DiscoveryService {
                 
             case "doc-year-wise":
                 sql = sqlSelectClassName + dialect.extractYear("dv." + createdDateColumn) + " AS creation_year, " +
-                      totalDocCount + SQL_FROM + sourceTable + " dv " + joinClassDef +
+                      totalDocCount + ", " + sumSizeBytesExpr + totalSizeGbExpr +
+                      SQL_FROM + sourceTable + " dv " + joinClassDef +
                       where + SQL_AND_DV + createdDateColumn + SQL_IS_NOT_NULL +
                       GROUP_BY_CD + symbolicNameCol + ", " + dialect.extractYear("dv." + createdDateColumn) + " " +
                       ORDER_BY_CD + symbolicNameCol + ", creation_year";
@@ -390,7 +392,8 @@ public class DiscoveryService {
                 
             case "doc-year-month":
                 sql = sqlSelectClassName + dialect.extractYear("dv." + createdDateColumn) + " AS creation_year, " +
-                      dialect.extractMonth("dv." + createdDateColumn) + " AS creation_month, " + totalDocCount + " " +
+                      dialect.extractMonth("dv." + createdDateColumn) + " AS creation_month, " + 
+                      totalDocCount + ", " + sumSizeBytesExpr + totalSizeGbExpr + " " +
                       SQL_FROM + sourceTable + " dv " + joinClassDef +
                       where + SQL_AND_DV + createdDateColumn + SQL_IS_NOT_NULL +
                       GROUP_BY_CD + symbolicNameCol + ", " + dialect.extractYear("dv." + createdDateColumn) + ", " + dialect.extractMonth("dv." + createdDateColumn) + " " +

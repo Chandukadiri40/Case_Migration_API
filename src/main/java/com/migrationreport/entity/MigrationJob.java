@@ -6,7 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.type.SqlTypes;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -53,8 +58,12 @@ public class MigrationJob {
     @Column(name = "created_by")
     private String createdBy;
 
-    @Column(name = "created_date")
-    private String createdDate;
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "failure_reason", columnDefinition = "text")
+    private String failureReason;
 
     @Column(name = "environment")
     private String env; // Ubuntu Server 24.04 LTS (192.168.1.105)
@@ -65,48 +74,15 @@ public class MigrationJob {
     @Column(name = "log_path")
     private String logPath;
 
-    // Detailed Config Fields for Edit Modals
-    @Column(name = "import_target")
-    private String importTarget; // 'case' or 'is'
+    // Detailed Config Fields stored as JSONB
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "job_configuration", columnDefinition = "jsonb")
+    private JobConfiguration configuration;
 
-    @Column(name = "start_date_param")
-    private String startDate;
-
-    @Column(name = "end_date_param")
-    private String endDate;
-
-    @Column(name = "doc_ids_param", length = 1000)
-    private String docIds;
-
-    @Column(name = "worker_threads")
-    private Integer workerThreads;
-
-    @Column(name = "batch_size")
-    private Integer batchSize;
-
-    @Column(name = "retry_count")
-    private Integer retryCount;
-
-    @Column(name = "retry_interval")
-    private Integer retryInterval;
-
-    @Column(name = "preserve_metadata")
-    private Boolean preserveMetadata;
-
-    @Column(name = "preserve_created_date")
-    private Boolean preserveCreatedDate;
-
-    @Column(name = "preserve_modified_date")
-    private Boolean preserveModifiedDate;
-
-    @Column(name = "validate_checksum")
-    private Boolean validateChecksum;
-
-    @Column(name = "continue_on_error")
-    private Boolean continueOnError;
-
-    @Column(name = "generate_audit")
-    private Boolean generateAudit;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "audit_history", columnDefinition = "jsonb")
+    @Builder.Default
+    private List<JobAuditEntry> auditHistory = new java.util.ArrayList<>();
 
     @Column(name = "process_pid")
     private Long processPid;

@@ -91,6 +91,7 @@ public class JobExecutionService {
                     } else {
                         if (!"Paused".equalsIgnoreCase(latestJob.getStatus())) {
                             latestJob.setStatus("Failed");
+                            latestJob.setFailureReason("Process terminated with exit code " + exitCode + ". Check logs for details.");
                         }
                         log.warn("[JOB EXECUTOR] Job ID {} ({}) failed after {} with exit code {}", jobId, latestJob.getName(), durationStr, exitCode);
                     }
@@ -108,6 +109,7 @@ public class JobExecutionService {
         } catch (Exception e) {
             log.error("[JOB EXECUTOR] Failed to launch process for job ID {}", jobId, e);
             job.setStatus("Failed");
+            job.setFailureReason("Failed to launch process: " + e.getMessage());
             job.setProcessPid(null);
             job.setUpdatedAt(LocalDateTime.now());
             return jobRepository.save(job);
@@ -127,6 +129,7 @@ public class JobExecutionService {
 
         LocalDateTime endTime = LocalDateTime.now();
         job.setStatus("Failed");
+        job.setFailureReason("Job was manually stopped by the user.");
         job.setProcessPid(null);
         job.setEndTime(endTime);
         if (job.getStartTime() != null) {

@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface MigrationJobRepository extends JpaRepository<MigrationJob, Long> {
     
-    List<MigrationJob> findByCategoryOrderByCreatedDateDesc(String category);
+    List<MigrationJob> findByCategoryOrderByCreatedAtDesc(String category);
 
     Optional<MigrationJob> findByName(String name);
 
