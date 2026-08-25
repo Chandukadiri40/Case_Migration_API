@@ -237,4 +237,127 @@
   } ],
   "lastModifiedBy" : "migration_user",
   "lastModifiedDate" : "2026-08-17T12:03:30.382Z"
+}, {
+  "templateId" : "eb4bd26e-270b-4e8c-aadd-ac969591fdf6",
+  "templateName" : "fax",
+  "applicationId" : "case_metadata",
+  "sourceObjectStore" : "src",
+  "targetObjectStore" : "trgt",
+  "sourceDocumentClass" : "Pronto_IO",
+  "targetDocumentClass" : "Pronto_TULO",
+  "mappings" : [ {
+    "sourceProperty" : "u04e8_sourcesystem",
+    "sourceSymbolicName" : "SourceSystem",
+    "sourceDataType" : "VARCHAR",
+    "targetProperty" : "BranchCode",
+    "targetSymbolicName" : "BranchCode",
+    "targetDataType" : "VARCHAR"
+  }, {
+    "sourceProperty" : "u1708_documenttitle",
+    "sourceSymbolicName" : "DocumentTitle",
+    "sourceDataType" : "VARCHAR",
+    "targetProperty" : "DocumentTitle",
+    "targetSymbolicName" : "DocumentTitle",
+    "targetDataType" : "VARCHAR"
+  }, {
+    "sourceProperty" : "u1aa2_ignoreredirect",
+    "sourceSymbolicName" : "IgnoreRedirect",
+    "sourceDataType" : "BOOLEAN",
+    "targetProperty" : "EntryTemplateId",
+    "targetSymbolicName" : "EntryTemplateId",
+    "targetDataType" : "VARCHAR"
+  }, {
+    "sourceProperty" : "u2668_productcategory",
+    "sourceSymbolicName" : "ProductCategory",
+    "sourceDataType" : "VARCHAR",
+    "targetProperty" : "CustomerID",
+    "targetSymbolicName" : "CustomerID",
+    "targetDataType" : "VARCHAR"
+  }, {
+    "sourceProperty" : "u28d8_applicationnumber",
+    "sourceSymbolicName" : "ApplicationNumber",
+    "sourceDataType" : "VARCHAR",
+    "targetProperty" : "LoanApplicationNumber",
+    "targetSymbolicName" : "LoanApplicationNumber",
+    "targetDataType" : "VARCHAR"
+  }, {
+    "sourceProperty" : "u2e28_componentbindinglabel",
+    "sourceSymbolicName" : "ComponentBindingLabel",
+    "sourceDataType" : "VARCHAR",
+    "targetProperty" : "ApprovalStatus",
+    "targetSymbolicName" : "ApprovalStatus",
+    "targetDataType" : "VARCHAR"
+  }, {
+    "sourceProperty" : "u42e3_effectivedate",
+    "sourceSymbolicName" : "EffectiveDate",
+    "sourceDataType" : "DATE",
+    "targetProperty" : "EntryTemplateId",
+    "targetSymbolicName" : "EntryTemplateId",
+    "targetDataType" : "VARCHAR"
+  }, {
+    "sourceProperty" : "u4814_coverageorincomeamount",
+    "sourceSymbolicName" : "CoverageOrIncomeAmount",
+    "sourceDataType" : "FLOAT",
+    "targetProperty" : "ApprovalStatus",
+    "targetSymbolicName" : "ApprovalStatus",
+    "targetDataType" : "VARCHAR"
+  }, {
+    "sourceProperty" : "u4e28_documentid",
+    "sourceSymbolicName" : "DocumentID",
+    "sourceDataType" : "VARCHAR",
+    "targetProperty" : "EntryTemplateId",
+    "targetSymbolicName" : "EntryTemplateId",
+    "targetDataType" : "VARCHAR"
+  }, {
+    "sourceProperty" : "u5948_entrytemplatelaunchedwor",
+    "sourceSymbolicName" : "EntryTemplateLaunchedWorkflowNumber",
+    "sourceDataType" : "VARCHAR",
+    "targetProperty" : "LoanAmount",
+    "targetSymbolicName" : "LoanAmount",
+    "targetDataType" : "FLOAT"
+  }, {
+    "sourceProperty" : "u5ce8_entrytemplateobjectstore",
+    "sourceSymbolicName" : "EntryTemplateObjectStoreName",
+    "sourceDataType" : "VARCHAR",
+    "targetProperty" : "IgnoreRedirect",
+    "targetSymbolicName" : "IgnoreRedirect",
+    "targetDataType" : "BOOLEAN"
+  }, {
+    "sourceProperty" : "u9788_customerid",
+    "sourceSymbolicName" : "CustomerID",
+    "sourceDataType" : "VARCHAR",
+    "targetProperty" : "CustomerID",
+    "targetSymbolicName" : "CustomerID",
+    "targetDataType" : "VARCHAR"
+  }, {
+    "sourceProperty" : "u9855_entrytemplateid",
+    "sourceSymbolicName" : "EntryTemplateId",
+    "sourceDataType" : "VARCHAR",
+    "targetProperty" : "ApprovalStatus",
+    "targetSymbolicName" : "ApprovalStatus",
+    "targetDataType" : "VARCHAR"
+  }, {
+    "sourceProperty" : "ua068_providername",
+    "sourceSymbolicName" : "ProviderName",
+    "sourceDataType" : "VARCHAR",
+    "targetProperty" : "CustomerID",
+    "targetSymbolicName" : "CustomerID",
+    "targetDataType" : "VARCHAR"
+  }, {
+    "sourceProperty" : "udc48_verificationstatus",
+    "sourceSymbolicName" : "VerificationStatus",
+    "sourceDataType" : "VARCHAR",
+    "targetProperty" : "DocumentTitle",
+    "targetSymbolicName" : "DocumentTitle",
+    "targetDataType" : "VARCHAR"
+  }, {
+    "sourceProperty" : "uf918_documenttype",
+    "sourceSymbolicName" : "DocumentType",
+    "sourceDataType" : "VARCHAR",
+    "targetProperty" : "EntryTemplateObjectStoreName",
+    "targetSymbolicName" : "EntryTemplateObjectStoreName",
+    "targetDataType" : "VARCHAR"
+  } ],
+  "lastModifiedBy" : "migration_user",
+  "lastModifiedDate" : "2026-08-24T11:56:10.763Z"
 } ]

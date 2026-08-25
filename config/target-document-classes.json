@@ -1,0 +1,1903 @@
+{
+  "documentClasses": [
+    {
+      "className": "BulkDownload",
+      "displayName": "BulkDownload",
+      "objectStore": "FNOS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "Vendor",
+          "displayName": "Vendor",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "InvoiceNo",
+          "displayName": "Invoice No",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "InvoiceDate",
+          "displayName": "Invoice Date",
+          "dataType": "DATE",
+          "length": ""
+        }
+      ]
+    },
+    {
+      "className": "BulkImporting",
+      "displayName": "BulkImporting",
+      "objectStore": "FNOS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "Amount",
+          "displayName": "Amount",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "BalanceDue",
+          "displayName": "Balance Due",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "BillTo",
+          "displayName": "Bill To",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "Date",
+          "displayName": "Date",
+          "dataType": "DATE",
+          "length": ""
+        },
+        {
+          "propertyName": "InvoiceNumber",
+          "displayName": "Invoice Number",
+          "dataType": "INTEGER",
+          "length": ""
+        },
+        {
+          "propertyName": "Item",
+          "displayName": "Item",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "OrderID",
+          "displayName": "Order ID",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "Quantity",
+          "displayName": "Quantity",
+          "dataType": "INTEGER",
+          "length": ""
+        },
+        {
+          "propertyName": "Rate",
+          "displayName": "Rate",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "ShipMode",
+          "displayName": "Ship Mode",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "ShipTo",
+          "displayName": "Ship To",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "Shipping",
+          "displayName": "Shipping",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "Subtotal",
+          "displayName": "Subtotal",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "Total",
+          "displayName": "Total",
+          "dataType": "FLOAT",
+          "length": ""
+        }
+      ]
+    },
+    {
+      "className": "ClaimDocument",
+      "displayName": "ClaimDocument",
+      "objectStore": "FNOS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "CaseClosedDate",
+          "displayName": "Case Closed Date",
+          "dataType": "DATE",
+          "length": ""
+        },
+        {
+          "propertyName": "CaseCreatedDate",
+          "displayName": "Case Created Date",
+          "dataType": "DATE",
+          "length": ""
+        },
+        {
+          "propertyName": "CaseDescription",
+          "displayName": "Case Description",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "CaseID",
+          "displayName": "Case ID",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "CaseOwner",
+          "displayName": "Case Owner",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "CaseType",
+          "displayName": "Case Type",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "Casestatus",
+          "displayName": "Case status",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "CustomerID",
+          "displayName": "Customer ID",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "CustomerName",
+          "displayName": "Customer Name",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "Department",
+          "displayName": "Department",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "PolicyNumber",
+          "displayName": "Policy Number",
+          "dataType": "STRING",
+          "length": "64"
+        }
+      ]
+    },
+    {
+      "className": "CodeModule",
+      "displayName": "CodeModule",
+      "objectStore": "FNOS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "Document",
+      "displayName": "Document",
+      "objectStore": "FNOS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "EntryTemplate",
+      "displayName": "EntryTemplate",
+      "objectStore": "FNOS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "EntryTemplateDescription",
+          "displayName": "Entry Template Description",
+          "dataType": "STRING",
+          "length": "300"
+        }
+      ]
+    },
+    {
+      "className": "InvoiceDocument",
+      "displayName": "InvoiceDocument",
+      "objectStore": "FNOS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "Amount",
+          "displayName": "Amount",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "BalanceDue",
+          "displayName": "Balance Due",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "BillTo",
+          "displayName": "Bill To",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "Date",
+          "displayName": "Date",
+          "dataType": "DATE",
+          "length": ""
+        },
+        {
+          "propertyName": "InvoiceNumber",
+          "displayName": "Invoice Number",
+          "dataType": "INTEGER",
+          "length": ""
+        },
+        {
+          "propertyName": "OrderID",
+          "displayName": "Order ID",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "Quantity",
+          "displayName": "Quantity",
+          "dataType": "INTEGER",
+          "length": ""
+        },
+        {
+          "propertyName": "Rate",
+          "displayName": "Rate",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "ShipMode",
+          "displayName": "Ship Mode",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "ShipTo",
+          "displayName": "Ship To",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "Shipping",
+          "displayName": "Shipping",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "Subtotal",
+          "displayName": "Subtotal",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "Total",
+          "displayName": "Total",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "Item",
+          "displayName": "Item",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "PolicyDocument",
+      "displayName": "PolicyDocument",
+      "objectStore": "FNOS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "AgentID",
+          "displayName": "Agent ID",
+          "dataType": "STRING",
+          "length": "8"
+        },
+        {
+          "propertyName": "BranchCode",
+          "displayName": "Branch Code",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "Currency",
+          "displayName": "Currency",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "CustomerID",
+          "displayName": "Customer ID",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "EffectiveDate",
+          "displayName": "Effective Date",
+          "dataType": "DATE",
+          "length": ""
+        },
+        {
+          "propertyName": "ExpiryDate",
+          "displayName": "Expiry Date",
+          "dataType": "DATE",
+          "length": ""
+        },
+        {
+          "propertyName": "LineofBusiness",
+          "displayName": "Line of Business",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "PolicyHolderName",
+          "displayName": "Policy Holder Name",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "PolicyNumber",
+          "displayName": "Policy Number",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "PolicyStatus",
+          "displayName": "Policy Status",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "PolicyType",
+          "displayName": "Policy Type",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "SumInsured",
+          "displayName": "Sum Insured",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "UnderwriterName",
+          "displayName": "Underwriter Name",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "ISEntryDate",
+          "displayName": "IS Entry Date",
+          "dataType": "DATE",
+          "length": ""
+        },
+        {
+          "propertyName": "DocumentNumber",
+          "displayName": "Document Number",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "DocReceivedDate",
+          "displayName": "Doc Received Date",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "PremiumAmount",
+          "displayName": "PremiumAmount",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "AcountNumber",
+          "displayName": "Acount Number",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "CIFNumber",
+          "displayName": "CIFNumber",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "DocclassNumber",
+          "displayName": "Docclass Number",
+          "dataType": "STRING",
+          "length": "64"
+        }
+      ]
+    },
+    {
+      "className": "PreferencesDocument",
+      "displayName": "PreferencesDocument",
+      "objectStore": "FNOS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "PreferenceType",
+          "displayName": "Preference Type",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "ApplicationName",
+          "displayName": "Application Name",
+          "dataType": "STRING",
+          "length": "64"
+        }
+      ]
+    },
+    {
+      "className": "RecordsTemplate",
+      "displayName": "RecordsTemplate",
+      "objectStore": "FNOS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "EntryTemplateDescription",
+          "displayName": "Entry Template Description",
+          "dataType": "STRING",
+          "length": "300"
+        }
+      ]
+    },
+    {
+      "className": "StoredSearch",
+      "displayName": "StoredSearch",
+      "objectStore": "FNOS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "Description",
+          "displayName": "Description",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "ApplicationName",
+          "displayName": "Application Name",
+          "dataType": "STRING",
+          "length": "64"
+        }
+      ]
+    },
+    {
+      "className": "WebContentTemplate",
+      "displayName": "WebContentTemplate",
+      "objectStore": "FNOS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "EntryTemplateDescription",
+          "displayName": "Entry Template Description",
+          "dataType": "STRING",
+          "length": "300"
+        }
+      ]
+    },
+    {
+      "className": "WorkflowDefinition",
+      "displayName": "WorkflowDefinition",
+      "objectStore": "FNOS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "XMLPropertyMappingScript",
+      "displayName": "XMLPropertyMappingScript",
+      "objectStore": "FNOS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "BankAccount",
+      "displayName": "BankAccount",
+      "objectStore": "DOCS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "AccHolderName",
+          "displayName": "Account Holder Name",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "AccNo",
+          "displayName": "Account Number",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "OpenDate",
+          "displayName": "Account Opening Date",
+          "dataType": "DATE",
+          "length": ""
+        },
+        {
+          "propertyName": "AcctStatus",
+          "displayName": "Account Status",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "AcctType",
+          "displayName": "Account Type",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "AvailBalance",
+          "displayName": "Available Balance",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "BSBNumber",
+          "displayName": "BSB Number",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "BranchName",
+          "displayName": "Branch Name",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "CurrentBalance",
+          "displayName": "Current Balance",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "CustID",
+          "displayName": "Customer ID",
+          "dataType": "STRING",
+          "length": "64"
+        }
+      ]
+    },
+    {
+      "className": "CodeModule",
+      "displayName": "CodeModule",
+      "objectStore": "DOCS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "Document",
+      "displayName": "Document",
+      "objectStore": "DOCS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "EntryTemplate",
+      "displayName": "EntryTemplate",
+      "objectStore": "DOCS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "EntryTemplateDescription",
+          "displayName": "Entry Template Description",
+          "dataType": "STRING",
+          "length": "300"
+        }
+      ]
+    },
+    {
+      "className": "HomeLoanApplication",
+      "displayName": "HomeLoanApplication",
+      "objectStore": "DOCS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "ApplName",
+          "displayName": "Applicant Name",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "ApplNo",
+          "displayName": "Application Number",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "ApplStatus",
+          "displayName": "Application Status",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "BrokerName",
+          "displayName": "Broker Name",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "IntRate",
+          "displayName": "Interest Rate",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "LoanAmount",
+          "displayName": "Loan Amount",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "LoanTerm",
+          "displayName": "Loan Term",
+          "dataType": "INTEGER",
+          "length": ""
+        },
+        {
+          "propertyName": "PropAddress",
+          "displayName": "Property Address",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "SettleDate",
+          "displayName": "Settlement Date",
+          "dataType": "DATE",
+          "length": ""
+        },
+        {
+          "propertyName": "LoanPurpose",
+          "displayName": "Loan Purpose",
+          "dataType": "STRING",
+          "length": "64"
+        }
+      ]
+    },
+    {
+      "className": "IBM_BPM_CodeModule",
+      "displayName": "IBM_BPM_CodeModule",
+      "objectStore": "DOCS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "IBM_BPM_Document",
+      "displayName": "IBM_BPM_Document",
+      "objectStore": "DOCS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "IBM_BPM_Document_DocumentId",
+          "displayName": "The identifier of the BPM document.",
+          "dataType": "INTEGER",
+          "length": ""
+        },
+        {
+          "propertyName": "IBM_BPM_Document_ParentDocumentId",
+          "displayName": "The identifier of the parent BPM document.",
+          "dataType": "INTEGER",
+          "length": ""
+        },
+        {
+          "propertyName": "IBM_BPM_Document_UserId",
+          "displayName": "The identifier of the user who created the BPM document.",
+          "dataType": "INTEGER",
+          "length": ""
+        },
+        {
+          "propertyName": "IBM_BPM_Document_FileType",
+          "displayName": "The type of the BPM document.",
+          "dataType": "STRING",
+          "length": "4"
+        },
+        {
+          "propertyName": "IBM_BPM_Document_HideInPortal",
+          "displayName": "A flag indicating whether the BPM document should be hidden in Process Portal.",
+          "dataType": "BOOLEAN",
+          "length": ""
+        },
+        {
+          "propertyName": "IBM_BPM_Document_ProcessInstanceId",
+          "displayName": "The identifier of the BPD instance that is associated with the BPM document.",
+          "dataType": "INTEGER",
+          "length": ""
+        },
+        {
+          "propertyName": "IBM_BPM_Document_ProcessInstanceIdString",
+          "displayName": "The identifier of the BPD instance that is associated with the BPM document.",
+          "dataType": "STRING",
+          "length": "19"
+        },
+        {
+          "propertyName": "IBM_BPM_Document_Properties",
+          "displayName": "The properties of the BPM document.",
+          "dataType": "STRING",
+          "length": "4000"
+        },
+        {
+          "propertyName": "IBM_BPM_Document_FileNameURL",
+          "displayName": "The file name or URL of the BPM document.",
+          "dataType": "STRING",
+          "length": "4000"
+        },
+        {
+          "propertyName": "IBM_BPM_Document_ContentMigrated",
+          "displayName": "A flag indicating whether the content of the document is migrated to the BPM document store.",
+          "dataType": "BOOLEAN",
+          "length": ""
+        }
+      ]
+    },
+    {
+      "className": "IcnSearch",
+      "displayName": "IcnSearch",
+      "objectStore": "DOCS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "Description",
+          "displayName": "Description",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "PreferencesDocument",
+      "displayName": "PreferencesDocument",
+      "objectStore": "DOCS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "PreferenceType",
+          "displayName": "Preference Type",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "ApplicationName",
+          "displayName": "Application Name",
+          "dataType": "STRING",
+          "length": "64"
+        }
+      ]
+    },
+    {
+      "className": "RecordsTemplate",
+      "displayName": "RecordsTemplate",
+      "objectStore": "DOCS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "EntryTemplateDescription",
+          "displayName": "Entry Template Description",
+          "dataType": "STRING",
+          "length": "300"
+        }
+      ]
+    },
+    {
+      "className": "StoredSearch",
+      "displayName": "StoredSearch",
+      "objectStore": "DOCS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "Description",
+          "displayName": "Description",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "ApplicationName",
+          "displayName": "Application Name",
+          "dataType": "STRING",
+          "length": "64"
+        }
+      ]
+    },
+    {
+      "className": "TransactionRecord",
+      "displayName": "TransactionRecord",
+      "objectStore": "DOCS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "BPAYRef",
+          "displayName": "BPAY Reference Number",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "PayeeName",
+          "displayName": "Payee Name",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "RunBalance",
+          "displayName": "Running Balance",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "TxnAmount",
+          "displayName": "Transaction Amount",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "TxnDate",
+          "displayName": "Transaction Date",
+          "dataType": "DATE",
+          "length": ""
+        },
+        {
+          "propertyName": "TxnDesc",
+          "displayName": "Transaction Description",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "TxnID",
+          "displayName": "Transaction ID",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "TxnStatus",
+          "displayName": "Transaction Status",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "TxnType",
+          "displayName": "Transaction Type",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "MerchCategory",
+          "displayName": "Merchant Category",
+          "dataType": "STRING",
+          "length": "64"
+        }
+      ]
+    },
+    {
+      "className": "WebContentTemplate",
+      "displayName": "WebContentTemplate",
+      "objectStore": "DOCS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "EntryTemplateDescription",
+          "displayName": "Entry Template Description",
+          "dataType": "STRING",
+          "length": "300"
+        }
+      ]
+    },
+    {
+      "className": "WorkflowDefinition",
+      "displayName": "WorkflowDefinition",
+      "objectStore": "DOCS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "XMLPropertyMappingScript",
+      "displayName": "XMLPropertyMappingScript",
+      "objectStore": "DOCS",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "CmAcmConnectionDefinition",
+      "displayName": "CmAcmConnectionDefinition",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "Description",
+          "displayName": "The description of the object.",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "CmAcmMashupServerURI",
+          "displayName": "The URI to a Mashup Server.",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "CmAcmPage",
+      "displayName": "CmAcmPage",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "Description",
+          "displayName": "The description of the object.",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "CmAcmType",
+          "displayName": "An integer choice list that defines the type of a Page.",
+          "dataType": "INTEGER",
+          "length": ""
+        },
+        {
+          "propertyName": "CmAcmReferenceName",
+          "displayName": "Reference Name",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "CmAcmVersionNumber",
+          "displayName": "Version Number",
+          "dataType": "STRING",
+          "length": "48"
+        }
+      ]
+    },
+    {
+      "className": "CmAcmRule",
+      "displayName": "CmAcmRule",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "Description",
+          "displayName": "The description of the object.",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "CmAcmReferenceName",
+          "displayName": "Reference Name",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "CmAcmRuleType",
+          "displayName": "Rule Type",
+          "dataType": "INTEGER",
+          "length": ""
+        },
+        {
+          "propertyName": "CmAcmParametersDefinition",
+          "displayName": "Parameters Definition",
+          "dataType": "STRING",
+          "length": "65536"
+        }
+      ]
+    },
+    {
+      "className": "CmAcmVcsExecutionState",
+      "displayName": "CmAcmVcsExecutionState",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "CmAcmVcsCommitStatus",
+          "displayName": "An integer choice list property that defines the possible status states for the most recent commit operation for an associated solution.",
+          "dataType": "INTEGER",
+          "length": ""
+        },
+        {
+          "propertyName": "CmAcmVcsDeliverStatus",
+          "displayName": "An integer choice list property that defines the possible status states for the most recent deliver operation for an associated solution.",
+          "dataType": "INTEGER",
+          "length": ""
+        },
+        {
+          "propertyName": "CmAcmVcsHeartbeatDate",
+          "displayName": "The date when the heartbeat for the most recent commit or deliver operation was updated.",
+          "dataType": "DATE",
+          "length": ""
+        }
+      ]
+    },
+    {
+      "className": "CmAcmView",
+      "displayName": "CmAcmView",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "Description",
+          "displayName": "The description of the object.",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "CmAcmReferenceName",
+          "displayName": "Reference Name",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "CmAcmWidgetsPackage",
+      "displayName": "CmAcmWidgetsPackage",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "Description",
+          "displayName": "The description of the object.",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "CmAcmVersionNumber",
+          "displayName": "Version Number",
+          "dataType": "STRING",
+          "length": "12"
+        },
+        {
+          "propertyName": "CmAcmRegistered",
+          "displayName": "Registered",
+          "dataType": "BOOLEAN",
+          "length": ""
+        },
+        {
+          "propertyName": "CmAcmIncludesWebApplicationModule",
+          "displayName": "Includes Web Application Module",
+          "dataType": "BOOLEAN",
+          "length": ""
+        }
+      ]
+    },
+    {
+      "className": "CmAcmWorkflowConvertExecutionState",
+      "displayName": "CmAcmWorkflowConvertExecutionState",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "CmAcmWorkflowConvertStatus",
+          "displayName": "An integer choice list property that defines the possible status states for the most recent convert operation for an associated solution.",
+          "dataType": "INTEGER",
+          "length": ""
+        }
+      ]
+    },
+    {
+      "className": "CodeModule",
+      "displayName": "CodeModule",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "CmAcmDeploymentVersionNumber",
+          "displayName": "Deployment Version Number",
+          "dataType": "STRING",
+          "length": "48"
+        }
+      ]
+    },
+    {
+      "className": "Document",
+      "displayName": "Document",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "EntryTemplate",
+      "displayName": "EntryTemplate",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "EntryTemplateDescription",
+          "displayName": "Entry Template Description",
+          "dataType": "STRING",
+          "length": "300"
+        }
+      ]
+    },
+    {
+      "className": "PreferencesDocument",
+      "displayName": "PreferencesDocument",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "PreferenceType",
+          "displayName": "Preference Type",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "ApplicationName",
+          "displayName": "Application Name",
+          "dataType": "STRING",
+          "length": "64"
+        }
+      ]
+    },
+    {
+      "className": "RecordsTemplate",
+      "displayName": "RecordsTemplate",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "EntryTemplateDescription",
+          "displayName": "Entry Template Description",
+          "dataType": "STRING",
+          "length": "300"
+        }
+      ]
+    },
+    {
+      "className": "StoredSearch",
+      "displayName": "StoredSearch",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "Description",
+          "displayName": "The description of the object.",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "ApplicationName",
+          "displayName": "Application Name",
+          "dataType": "STRING",
+          "length": "64"
+        }
+      ]
+    },
+    {
+      "className": "WebContentTemplate",
+      "displayName": "WebContentTemplate",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "EntryTemplateDescription",
+          "displayName": "Entry Template Description",
+          "dataType": "STRING",
+          "length": "300"
+        }
+      ]
+    },
+    {
+      "className": "WorkflowDefinition",
+      "displayName": "WorkflowDefinition",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "XMLPropertyMappingScript",
+      "displayName": "XMLPropertyMappingScript",
+      "objectStore": "DESIGN",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "CodeModule",
+      "displayName": "CodeModule",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "CmAcmDeploymentVersionNumber",
+          "displayName": "Deployment Version Number",
+          "dataType": "STRING",
+          "length": "48"
+        }
+      ]
+    },
+    {
+      "className": "Document",
+      "displayName": "Document",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "EntryTemplate",
+      "displayName": "EntryTemplate",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "EntryTemplateDescription",
+          "displayName": "Entry Template Description",
+          "dataType": "STRING",
+          "length": "300"
+        }
+      ]
+    },
+    {
+      "className": "IcnExternalDocument",
+      "displayName": "IcnExternalDocument",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "IcnExternalRepositoryInfo",
+          "displayName": "External Repository Information",
+          "dataType": "STRING",
+          "length": "8000"
+        },
+        {
+          "propertyName": "IcnExternalRepositoryType",
+          "displayName": "External Repository Type",
+          "dataType": "INTEGER",
+          "length": ""
+        },
+        {
+          "propertyName": "IcnExternalDocumentId",
+          "displayName": "External Document Id",
+          "dataType": "STRING",
+          "length": "32000"
+        }
+      ]
+    },
+    {
+      "className": "PCOCS_ClientDocument",
+      "displayName": "PCOCS_ClientDocument",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "PCOCS_UtilityBill",
+      "displayName": "PCOCS_UtilityBill",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "PreferencesDocument",
+      "displayName": "PreferencesDocument",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "PreferenceType",
+          "displayName": "Preference Type",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "ApplicationName",
+          "displayName": "Application Name",
+          "dataType": "STRING",
+          "length": "64"
+        }
+      ]
+    },
+    {
+      "className": "RecordsTemplate",
+      "displayName": "RecordsTemplate",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "EntryTemplateDescription",
+          "displayName": "Entry Template Description",
+          "dataType": "STRING",
+          "length": "300"
+        }
+      ]
+    },
+    {
+      "className": "ScenarioDefinition",
+      "displayName": "ScenarioDefinition",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "ScenarioDescription",
+          "displayName": "Scenario Description",
+          "dataType": "STRING",
+          "length": "256"
+        }
+      ]
+    },
+    {
+      "className": "Simulation",
+      "displayName": "Simulation",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "SimulationDescription",
+          "displayName": "Simulation Description",
+          "dataType": "STRING",
+          "length": "256"
+        },
+        {
+          "propertyName": "PublishingEnabled",
+          "displayName": "Publishing Enabled",
+          "dataType": "BOOLEAN",
+          "length": ""
+        },
+        {
+          "propertyName": "SimulationLifeSpanInHours",
+          "displayName": "Simulation Life Span In Hours",
+          "dataType": "INTEGER",
+          "length": ""
+        }
+      ]
+    },
+    {
+      "className": "SM_AcademicCertificate",
+      "displayName": "SM_AcademicCertificate",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "SM_StudentID",
+          "displayName": "SM_StudentID",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "SM_CertificateType",
+          "displayName": "SM_CertificateType",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "SM_InstitutionName",
+          "displayName": "SM_InstitutionName",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "SM_PassingYear",
+          "displayName": "SM_PassingYear",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "SM_Percentage",
+          "displayName": "SM_Percentage",
+          "dataType": "FLOAT",
+          "length": ""
+        },
+        {
+          "propertyName": "SM_UploadDate",
+          "displayName": "SM_UploadDate",
+          "dataType": "DATE",
+          "length": ""
+        }
+      ]
+    },
+    {
+      "className": "SM_IdentityProof",
+      "displayName": "SM_IdentityProof",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "SM_StudentID",
+          "displayName": "SM_StudentID",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "SM_IDType",
+          "displayName": "SM_IDType",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "SM_IDNumber",
+          "displayName": "SM_IDNumber",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "SM_IssueDate",
+          "displayName": "SM_IssueDate",
+          "dataType": "DATE",
+          "length": ""
+        },
+        {
+          "propertyName": "SM_ExpiryDate",
+          "displayName": "SM_ExpiryDate",
+          "dataType": "DATE",
+          "length": ""
+        },
+        {
+          "propertyName": "SM_UploadDate",
+          "displayName": "SM_UploadDate",
+          "dataType": "DATE",
+          "length": ""
+        }
+      ]
+    },
+    {
+      "className": "SM_StudentApplication",
+      "displayName": "SM_StudentApplication",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "SM_CaseName",
+          "displayName": "SM_CaseName",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "SM_StudentName",
+          "displayName": "SM_StudentName",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "SM_StudentID",
+          "displayName": "SM_StudentID",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "SM_Status",
+          "displayName": "SM_Status",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "SM_ApplicationDate",
+          "displayName": "SM_ApplicationDate",
+          "dataType": "DATE",
+          "length": ""
+        },
+        {
+          "propertyName": "SM_MobileNumber",
+          "displayName": "SM_MobileNumber",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "SM_Email",
+          "displayName": "SM_Email",
+          "dataType": "STRING",
+          "length": "64"
+        },
+        {
+          "propertyName": "SM_DateOfBirth",
+          "displayName": "SM_DateOfBirth",
+          "dataType": "DATE",
+          "length": ""
+        }
+      ]
+    },
+    {
+      "className": "StoredSearch",
+      "displayName": "StoredSearch",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "Description",
+          "displayName": "The description of the object.",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "ApplicationName",
+          "displayName": "Application Name",
+          "dataType": "STRING",
+          "length": "64"
+        }
+      ]
+    },
+    {
+      "className": "T2_Test_Document",
+      "displayName": "T2_Test_Document",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "WebContentTemplate",
+      "displayName": "WebContentTemplate",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        },
+        {
+          "propertyName": "EntryTemplateDescription",
+          "displayName": "Entry Template Description",
+          "dataType": "STRING",
+          "length": "300"
+        }
+      ]
+    },
+    {
+      "className": "WorkflowDefinition",
+      "displayName": "WorkflowDefinition",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    },
+    {
+      "className": "XMLPropertyMappingScript",
+      "displayName": "XMLPropertyMappingScript",
+      "objectStore": "TARGET",
+      "properties": [
+        {
+          "propertyName": "DocumentTitle",
+          "displayName": "Document Title",
+          "dataType": "STRING",
+          "length": "255"
+        }
+      ]
+    }
+  ]
+}

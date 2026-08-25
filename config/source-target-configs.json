@@ -1,6 +1,8 @@
 {
-  "activeSourceId" : "src_sample_1",
-  "activeTargetId" : "",
+  "activeSourceId" : "src_p8_online_1",
+  "activeTargetId" : "tgt_p8_1",
+  "activeStorageId" : "",
+  "activeExecPathId" : "",
   "sourceConfigurations" : [ {
     "id" : "src_is_offline_1",
     "name" : "Image Services (IS) - Offline Staging",
@@ -25,11 +27,11 @@
     "mkfExportPath" : "",
     "msarDatPath" : "",
     "filePattern" : "",
-    "host" : "192.168.1.205",
+    "host" : "192.168.1.103",
     "libraryName" : "fnis",
     "username" : "fnadmin",
     "password" : "••••••••",
-    "connectionString" : "corba:iiop:192.168.1.205:2809#fnis",
+    "connectionString" : "corba:iiop:192.168.1.103:2809#fnis",
     "description" : "Direct CORBA IIOP connection to active Image Services server"
   }, {
     "id" : "src_sample_1",
@@ -47,6 +49,23 @@
     "connectionString" : "",
     "description" : "Sample offline extraction source configuration profile"
   }, {
+    "id" : "src_p8_online_1",
+    "name" : "FileNet P8 (Source)",
+    "sourceSystem" : "IBM FileNet P8",
+    "mode" : "online",
+    "indexDbTable" : "",
+    "mkfExportPath" : "",
+    "msarDatPath" : "",
+    "filePattern" : "",
+    "host" : "192.168.1.103",
+    "port" : "9443",
+    "protocol" : "https",
+    "libraryName" : "FNOS",
+    "username" : "p8admin",
+    "password" : "••••••••",
+    "connectionString" : "https://192.168.1.103:9443/wsi/FNCEWS40MTOM/",
+    "description" : "FileNet P8 Content Engine Web Services Source Object Store FNOS for FileNet to FileNet migration"
+  }, {
     "id" : "src_1787216464808",
     "name" : "Sorce_Sharepoint (Source)",
     "sourceSystem" : "Custom Repository",
@@ -55,18 +74,18 @@
     "mkfExportPath" : "/mnt/truemigrate/staging/mkf_db",
     "msarDatPath" : "/mnt/truemigrate/staging/msar-dat",
     "filePattern" : "*.dat",
-    "host" : "192.168.1.205",
+    "host" : "192.168.1.103",
     "libraryName" : "fnis",
     "username" : "fnadmin",
     "password" : "••••••••",
-    "connectionString" : "corba:iiop:192.168.1.205:2809#fnis",
+    "connectionString" : "corba:iiop:192.168.1.103:2809#fnis",
     "description" : "Image Services extraction source configuration"
   } ],
   "targetConfigurations" : [ {
     "id" : "tgt_p8_1",
     "name" : "FileNet P8 - Production (FNOS)",
     "targetSystem" : "FileNet P8",
-    "host" : "bawvm.skts.com",
+    "host" : "192.168.1.103",
     "port" : "9443",
     "protocol" : "https",
     "username" : "p8admin",
@@ -79,7 +98,7 @@
     "id" : "tgt_sample_1",
     "name" : "Sample Source (Target)",
     "targetSystem" : "FileNet P8",
-    "host" : "bawvm.skts.com",
+    "host" : "192.168.1.103",
     "port" : "9443",
     "protocol" : "https",
     "username" : "p8admin",
@@ -92,7 +111,7 @@
     "id" : "tgt_1787216464808",
     "name" : "Sorce_Sharepoint (Target)",
     "targetSystem" : "SharePoint",
-    "host" : "bawvm.skts.com",
+    "host" : "192.168.1.103",
     "port" : "9443",
     "protocol" : "https",
     "username" : "p8admin",
@@ -127,15 +146,12 @@
     "logDirectoryPath" : "/var/log/truemigrate",
     "description" : "TrueMigrator host machine tool execution and JAR paths"
   } ],
-  "databaseConfigurations" : [ {
-    "id" : "db_postgres_1",
-    "name" : "PostgreSQL Staging DB",
-    "databaseType" : "postgres",
-    "host" : "192.168.1.143:5432",
-    "url" : "jdbc:postgresql://192.168.1.143:5432/ISMigration",
-    "username" : "postgres",
-    "driver" : "org.postgresql.Driver",
-    "active" : true,
-    "description" : "Active Migration Staging Relational Database"
+  "tableConfigurations" : [ {
+    "id" : "tbl_cfg_1787562561901",
+    "name" : "Filenet to filenet",
+    "sourceTable" : "docversion",
+    "targetTable" : "docversion",
+    "targetSchema" : "public",
+    "description" : ""
   } ]
 }

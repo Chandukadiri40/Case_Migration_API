@@ -3,9 +3,9 @@
   "databases": [
     {
       "databaseType": "postgres",
-      "password": "ENC(Xv2j6/HM6I6xuVpsXYWNJi+F7hiyv+dCb3EaztKcuqZRKGJ3)",
+      "password": "ENC(8rpOnq4mWctXu6/e+lgrpqTAABtT5+aGfBuNNybkOzo=)",
       "driver": "org.postgresql.Driver",
-      "url": "jdbc:postgresql://localhost:5432/Migration",
+      "url": "jdbc:postgresql://192.168.1.143:5432/ISMigration",
       "username": "postgres"
     }
   ]

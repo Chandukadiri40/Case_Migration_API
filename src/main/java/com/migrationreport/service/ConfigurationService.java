@@ -46,6 +46,9 @@ public class ConfigurationService {
     @Value("${source.target.config.file.path:config/source-target-configs.json}")
     private String sourceTargetConfigFilePath;
 
+    @Value("${target.tables.config.file.path:config/target-tables.json}")
+    private String targetTablesConfigFilePath;
+
     @Value("${linux.documents.host-ip:192.168.19.182}")
     private String sshHostIp;
 
@@ -202,6 +205,57 @@ public class ConfigurationService {
             metadata.computeIfAbsent(tableName, k -> new ArrayList<>()).add(columnName);
         }
         return metadata;
+    }
+
+    public Map<String, List<String>> getFilenetDbMetadata(String schemaName) {
+        DbConfigWrapper dbConfig = getDbConfig();
+        String url = "jdbc:postgresql://192.168.1.143:5432/FilenetDB";
+        String username = "postgres";
+        String password = "123";
+        String driver = "org.postgresql.Driver";
+        
+        if (dbConfig != null && dbConfig.getDatabases() != null && !dbConfig.getDatabases().isEmpty()) {
+            Map<String, String> dbProps = dbConfig.getDatabases().get(0);
+            if (dbProps.get("username") != null) username = dbProps.get("username");
+            if (dbProps.get(PASSWORD) != null) password = dbProps.get(PASSWORD);
+            if (dbProps.get("driver") != null) driver = dbProps.get("driver");
+        }
+
+        try {
+            loadJdbcDriver(driver);
+            try (Connection conn = DriverManager.getConnection(url, username, password)) {
+                String dynamicQuery = "SELECT table_name, column_name FROM information_schema.columns WHERE LOWER(table_schema) = LOWER(?)";
+                try (PreparedStatement pstmt = conn.prepareStatement(dynamicQuery)) {
+                    pstmt.setString(1, schemaName);
+                    try (ResultSet rs = pstmt.executeQuery()) {
+                        Map<String, List<String>> metadata = new HashMap<>();
+                        while (rs.next()) {
+                            String tableName = rs.getString("table_name");
+                            String columnName = rs.getString("column_name");
+                            metadata.computeIfAbsent(tableName, k -> new ArrayList<>()).add(columnName);
+                        }
+                        log.info("[CONFIG] Successfully fetched FilenetDB database metadata for schema: {}", schemaName);
+                        return metadata;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            log.error("[CONFIG] Failed to fetch metadata from FilenetDB: {}.", e.getMessage());
+        }
+        return getDatabaseMetadata(schemaName);
+    }
+
+    public Map<String, Object> getTargetTablesConfig() {
+        File targetFile = new File(targetTablesConfigFilePath);
+        if (!targetFile.exists()) {
+            return new HashMap<>();
+        }
+        try {
+            return objectMapper.readValue(targetFile, Map.class);
+        } catch (IOException e) {
+            log.error("[CONFIG] Failed to load target-tables.json file: {}", e.getMessage());
+            return new HashMap<>();
+        }
     }
 
     public DbConfigWrapper getDbConfig() {

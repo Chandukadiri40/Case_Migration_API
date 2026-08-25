@@ -121,6 +121,18 @@ public class ConfigurationController {
         return result;
     }
 
+    @GetMapping("/filenet-db-metadata")
+    public ResponseEntity<Map<String, List<String>>> getFilenetDbMetadata(@RequestParam(value = "schema", defaultValue = "public") String schema) {
+        log.info("[CONFIG] Fetching FilenetDB database metadata for schema: '{}'", schema);
+        return ResponseEntity.ok(configurationService.getFilenetDbMetadata(schema));
+    }
+
+    @GetMapping("/target-tables")
+    public ResponseEntity<Map<String, Object>> getTargetTablesConfig() {
+        log.info("[CONFIG] Fetching Target Tables JSON Configuration");
+        return ResponseEntity.ok(configurationService.getTargetTablesConfig());
+    }
+
     @Value("${exceptions.search.max-date-range-months:3}")
     private int maxDateRangeMonths;
 
