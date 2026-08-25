@@ -24,6 +24,12 @@ public class ConfigurationController {
     private final ConfigurationService configurationService;
     private final TruemigratePaths truemigratePaths;
 
+    @Value("${migration.docsPerHour:50000}")
+    private int docsPerHour;
+
+    @Value("${migration.hoursPerDay:4}")
+    private int hoursPerDay;
+
     public ConfigurationController(ConfigurationService configurationService, TruemigratePaths truemigratePaths) {
         this.configurationService = configurationService;
         this.truemigratePaths = truemigratePaths;
@@ -43,6 +49,14 @@ public class ConfigurationController {
         
         log.info("Application configuration loaded. Total Apps: {}. Apps: {}", appCount, appNames);
         return ResponseEntity.ok(config);
+    }
+
+    @GetMapping("/migration-properties")
+    public ResponseEntity<Map<String, Integer>> getMigrationProperties() {
+        Map<String, Integer> props = new HashMap<>();
+        props.put("docsPerHour", docsPerHour);
+        props.put("hoursPerDay", hoursPerDay);
+        return ResponseEntity.ok(props);
     }
 
     @PostMapping
